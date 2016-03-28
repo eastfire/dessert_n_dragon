@@ -1,0 +1,1 @@
+var CUNNING_EFFECT = 5;

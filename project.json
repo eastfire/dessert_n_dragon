@@ -1,0 +1,38 @@
+{
+    "project_type": "javascript",
+
+    "debugMode" : 1,
+    "showFPS" : false,
+    "frameRate" : 60,
+    "id" : "gameCanvas",
+    "renderMode" : 0,
+    "engineDir":"frameworks/cocos2d-html5",
+
+    "modules" : ["cocos2d", "ccui"],
+
+    "jsList" : [
+        "src/libs/underscore-min.js",
+        "src/libs/backbone-min.js",
+        "src/libs/utils.js",
+        "src/resource.js",
+        "src/common.js",
+        "src/model/movable.js",
+        "src/model/enemy.js",
+        "src/model/hero.js",
+        "src/model/item.js",
+        "src/model/tile.js",
+        "src/model/condition.js",
+        "src/model/room.js",
+        "src/model/skill.js",
+        "src/view/base-sprite.js",
+        "src/view/movable-sprite.js",
+        "src/view/enemy-sprite.js",
+        "src/view/hero-sprite.js",
+        "src/view/tile-sprite.js",
+        "src/view/room-sprite.js",
+        "src/scene/intro.js",
+        "src/scene/select-room.js",
+        "src/scene/main-game.js",
+        "src/tutorial.js"
+    ]
+}
