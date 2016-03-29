@@ -10,12 +10,7 @@ var RoomModel = Backbone.Model.extend({
             winEveryConditions:[], // every pass to win
             loseAnyConditions: [], //any fail to lose
             loseEveryConditions: [], //every fail to lose
-            rules:{
-                heroCanLevelUp: true,
-                heroCanGetExp: true,
-                enemyCanAttack: true,
-                showHeroLevel: true
-            },
+            
             name: "",
             width: 7,
             height: 7,
@@ -44,6 +39,7 @@ var RoomModel = Backbone.Model.extend({
     },
     initialize:function(){
         this.__acceptInput = false;
+        this.initRules();
         this.initTiles();
         this.initMovables();
         this.initHero();
@@ -53,6 +49,15 @@ var RoomModel = Backbone.Model.extend({
         this.initEvents();
         this.initCondition();
         this.initGenEnemyStrategy();
+    },
+    initRules:function(){
+        var defaultRules = {
+                heroCanLevelUp: true,
+                heroCanGetExp: true,
+                enemyCanAttack: true,
+                showHeroLevel: true
+            };
+        this.set("rules", _.extend(defaultRules, this.get("rules")));
     },
     initTiles:function(){
         var tiles = this.__tiles = [];
