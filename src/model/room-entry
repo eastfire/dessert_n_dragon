@@ -1,0 +1,41 @@
+var RoomEntry = Backbone.Model.extend({
+    defaults:function(){
+        return {
+            difficulty: "normal", //normal , difficult, easy, na
+            winAnyConditions:[], // any pass to win
+            winEveryConditions:[], // every pass to win
+            loseAnyConditions: [], //any fail to lose
+            loseEveryConditions: [], //every fail to lose
+            rules:{
+                heroCanLevelUp: true,
+                heroCanGetExp: true,
+                enemyCanAttack: true,
+                showHeroLevel: true
+            },
+            name: "",
+            width: 7,
+            height: 7,
+            turnNumber: 0,
+            score: 0,
+            turnLimit: 0,
+            statistic:{},
+
+            genEnemyStrategy: [{
+                type:"random",
+                number: 2,
+                last: 0
+            }],
+            genEnemyStrategyIndex: 0,
+            genEnemyStrategyTurn: 0,
+            genItemStrategy: "",
+            genLevelUpStrategy: "",
+
+            initTiles: null,
+            initMovables: null,
+            enemyPool: [{type:"pudding",subtype:"red"}],
+            enemyLevelPool: [1],
+            initLevelUpPool: [],
+            initSkillHand: []
+        };
+    }
+});
