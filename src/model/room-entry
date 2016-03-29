@@ -1,41 +1,300 @@
-var RoomEntry = Backbone.Model.extend({
-    defaults:function(){
-        return {
-            difficulty: "normal", //normal , difficult, easy, na
-            winAnyConditions:[], // any pass to win
-            winEveryConditions:[], // every pass to win
-            loseAnyConditions: [], //any fail to lose
-            loseEveryConditions: [], //every fail to lose
-            rules:{
-                heroCanLevelUp: true,
-                heroCanGetExp: true,
-                enemyCanAttack: true,
-                showHeroLevel: true
-            },
-            name: "",
-            width: 7,
-            height: 7,
-            turnNumber: 0,
-            score: 0,
-            turnLimit: 0,
-            statistic:{},
+var room1 = {
+    turnLimit:6,
 
-            genEnemyStrategy: [{
-                type:"random",
-                number: 2,
-                last: 0
-            }],
-            genEnemyStrategyIndex: 0,
-            genEnemyStrategyTurn: 0,
-            genItemStrategy: "",
-            genLevelUpStrategy: "",
-
-            initTiles: null,
-            initMovables: null,
-            enemyPool: [{type:"pudding",subtype:"red"}],
-            enemyLevelPool: [1],
-            initLevelUpPool: [],
-            initSkillHand: []
-        };
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"pudding",
+            subtype: "red",
+            number: 5
+        },
+        {
+            conditionType:"kill-level",
+            type:"pudding",
+            subtype: "yellow",
+            number: 5
+        },
+        {
+            conditionType:"kill-level",
+            type:"pudding",
+            subtype: "blue",
+            number: 5
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{
+        type:"pudding",
+        subtype:"red"
+    },{
+        type:"pudding",
+        subtype:"yellow"
+    },{
+        type:"pudding",
+        subtype:"green"
+    },{
+        type:"pudding",
+        subtype:"blue"
+    }],
+    initTiles:[
+        [{
+            type:"wall",
+            subtype: "sw"
+        },{
+            type:"wall",
+            subtype: "w"
+        },{
+            type:"wall",
+            subtype: "w"
+        },{
+            type:"wall",
+            subtype: "w"
+        },{
+            type:"wall",
+            subtype: "w"
+        },{
+            type:"wall",
+            subtype: "w"
+        },{
+            type:"wall",
+            subtype: "nw"
+        } ],
+        [{
+            type:"wall",
+            subtype: "s"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"wall",
+            subtype: "n"
+        } ],
+        [{
+            type:"wall",
+            subtype: "s"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"wall",
+            subtype: "n"
+        } ],
+        [{
+            type:"wall",
+            subtype: "s"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"wall",
+            subtype: "n"
+        } ],
+        [{
+            type:"wall",
+            subtype: "s"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"wall",
+            subtype: "n"
+        } ],
+        [{
+            type:"wall",
+            subtype: "s"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"floor",
+            subtype: "normal"
+        },{
+            type:"wall",
+            subtype: "n"
+        } ],
+        [{
+            type:"wall",
+            subtype: "se"
+        },{
+            type:"wall",
+            subtype: "e"
+        },{
+            type:"wall",
+            subtype: "e"
+        },{
+            type:"wall",
+            subtype: "e"
+        },{
+            type:"wall",
+            subtype: "e"
+        },{
+            type:"wall",
+            subtype: "e"
+        },{
+            type:"wall",
+            subtype: "ne"
+        } ]
+    ],
+    initMovables:[
+        {
+            type:"cherrycake",
+            positions: [
+                {
+                    x:2,
+                    y:4
+                }
+            ]
+        },
+        {
+            type:"cherrycake",
+            positions: [
+                {
+                    x:4,
+                    y:4
+                }
+            ]
+        },
+        {
+            type:"pudding",
+            subtype:"yellow",
+            positions: [
+                {
+                    x:3,
+                    y:2
+                }
+            ]
+        },
+        {
+            type:"pudding",
+            subtype:"red",
+            positions: [
+                {
+                    x:2,
+                    y:2
+                }
+            ]
+        },
+        {
+            type:"pudding",
+            subtype:"blue",
+            positions: [
+                {
+                    x:1,
+                    y:2
+                }
+            ]
+        },
+        {
+            type:"pudding",
+            subtype:"yellow",
+            positions: [
+                {
+                    x:3,
+                    y:1
+                }
+            ]
+        },
+        {
+            type:"pudding",
+            subtype:"red",
+            positions: [
+                {
+                    x:2,
+                    y:1
+                }
+            ]
+        },
+        {
+            type:"pudding",
+            subtype:"blue",
+            positions: [
+                {
+                    x:1,
+                    y:1
+                }
+            ]
+        }
+    ],
+    name: "",
+    width: 7,
+    height: 7,
+    initHero: {
+        type:"normalHero",
+        positions: [
+            {
+                x:3,
+                y:3
+            }
+        ],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }, //normal, fix
+        isShowLevel: false
     }
-});
+};
+
+
+        
