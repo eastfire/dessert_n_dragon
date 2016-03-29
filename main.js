@@ -47,16 +47,28 @@
  *
  */
 var APP_NAME = "dessert_n_dragon"
+var score = {};
+var statistic = {}
 
 var loadStatistic = function() {
     var store = cc.sys.localStorage.getItem(APP_NAME+".statistic");
     if (store) {
         //cc.log(store)
         statistic = JSON.parse(store);
-    } else {
-        statistic = {
-        }
     }
+}
+
+
+
+var loadScore = function() {
+    var store = cc.sys.localStorage.getItem(APP_NAME+".score");
+    if (store) {
+        score = JSON.parse(store);
+    }
+}
+
+var saveScore = function(){
+    cc.sys.localStorage.setItem(APP_NAME+".score", score);
 }
 
 var initTexts = function(){
@@ -91,11 +103,11 @@ cc.game.onStart = function(){
         initTexts();
 
         loadStatistic();
-
+        loadScore();
 //        loadTutorial(); //TODO
 
         cc.spriteFrameCache.addSpriteFrames(res.game_plist);
-        cc.director.runScene(new RoomScene());
+        cc.director.runScene(new SelectRoomScene());
     }, this);
 };
 cc.game.run();

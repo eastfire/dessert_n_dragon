@@ -1,6 +1,6 @@
 var room1 = {
     turnLimit:6,
-
+    scoreCondition: [10, 20, 30],
     winEveryConditions:[
         {
             conditionType:"kill-level",
@@ -298,7 +298,7 @@ var room1 = {
 
 var room2 = {
     turnLimit:15,
-
+    scoreCondition: [100, 150, 200],
     winEveryConditions:[
         {
             conditionType:"kill-level",
@@ -382,7 +382,7 @@ var room2 = {
             type:"floor",
             subtype: "normal"
         },{
-            type:"floor",
+            type:"wall",
             subtype: "nwlong"
         },{
             type:"wall",
@@ -536,84 +536,6 @@ var room2 = {
         null]
     ],
     initMovables:[
-        {
-            type:"cherrycake",
-            positions: [
-                {
-                    x:2,
-                    y:4
-                }
-            ]
-        },
-        {
-            type:"cherrycake",
-            positions: [
-                {
-                    x:4,
-                    y:4
-                }
-            ]
-        },
-        {
-            type:"pudding",
-            subtype:"yellow",
-            positions: [
-                {
-                    x:3,
-                    y:2
-                }
-            ]
-        },
-        {
-            type:"pudding",
-            subtype:"red",
-            positions: [
-                {
-                    x:2,
-                    y:2
-                }
-            ]
-        },
-        {
-            type:"pudding",
-            subtype:"blue",
-            positions: [
-                {
-                    x:1,
-                    y:2
-                }
-            ]
-        },
-        {
-            type:"pudding",
-            subtype:"yellow",
-            positions: [
-                {
-                    x:3,
-                    y:1
-                }
-            ]
-        },
-        {
-            type:"pudding",
-            subtype:"red",
-            positions: [
-                {
-                    x:2,
-                    y:1
-                }
-            ]
-        },
-        {
-            type:"pudding",
-            subtype:"blue",
-            positions: [
-                {
-                    x:1,
-                    y:1
-                }
-            ]
-        }
     ],
     name: "",
     width: 8,
@@ -638,6 +560,6 @@ var room2 = {
     }
 };
 
-var rooms = [room1, room2]
+var rooms = [room1, room2, room1, room2, room1, room2, room1, room2, room1, room2, room1, room2]
 
         

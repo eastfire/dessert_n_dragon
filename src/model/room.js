@@ -138,13 +138,11 @@ var RoomModel = Backbone.Model.extend({
     __initCondition:function(conditions, conditionEntries){
         _.each(conditionEntries,function(conditionEntry){
             if ( typeof conditionEntry === "string" ) { //predefined condition
-                conditions.push(CONDITION_MAP[conditionEntry]);
+                conditions.push(CONDITION_FUN_FACTORY_MAP[conditionEntry](this));
             } else if ( typeof conditionEntry === "function") { //custom condition
                 conditions.push(conditionEntry);
             } else if ( typeof conditionEntry === "object") { //predefined condition with params
-                conditions.push(function(){
-                    CONDITION_MAP[conditionEntry.conditionType](this, conditionEntry );
-                });
+                conditions.push(CONDITION_FUN_FACTORY_MAP[conditionEntry.conditionType](this, conditionEntry ));
             }
         })
     },

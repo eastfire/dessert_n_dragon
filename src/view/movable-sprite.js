@@ -53,7 +53,6 @@ var MovableSprite = BaseSprite.extend({
             scaleX:0.1,
             scaleY:0.1
         })
-        cc.log("generateEnemy")
         this.runAction(cc.sequence(
             cc.scaleTo(times.generateEnemy, 1,1),
             cc.callFunc( movable.afterGenerate, movable)

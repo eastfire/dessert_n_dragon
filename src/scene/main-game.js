@@ -14,10 +14,9 @@ var SWIPE_THRESHOLD = 50;
 
 var MainLayer = cc.Layer.extend({
     sprite:null,
-    ctor:function () {
+    ctor:function (options) {
         this._super();
-
-        var room = new BasicRoom();
+        var room = new RoomModel(options.roomEntry);
 
         window.currentRoom = room;
         window.currentRoomSprite = new RoomSprite({
@@ -258,9 +257,13 @@ var MainLayer = cc.Layer.extend({
 });
 
 var RoomScene = cc.Scene.extend({
+    ctor:function(options){
+        this._super();
+        this.options = options;
+    },
     onEnter:function () {
         this._super();
-        var layer = new MainLayer();
+        var layer = new MainLayer(this.options);
         this.addChild(layer);
     }
 });

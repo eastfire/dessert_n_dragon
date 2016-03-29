@@ -24,6 +24,7 @@
         "src/model/condition.js",
         "src/model/room.js",
         "src/model/skill.js",
+        "src/model/room-entry.js",
         "src/view/base-sprite.js",
         "src/view/movable-sprite.js",
         "src/view/enemy-sprite.js",
