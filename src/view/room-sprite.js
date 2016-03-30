@@ -19,6 +19,7 @@ var RoomSprite = BaseSprite.extend({
     renderAllTile:function(){
         var totalWidth = (this.model.get("width"))*dimens.tileSize.width
         var totalHeight = (this.model.get("height"))*dimens.tileSize.height
+        var maxSize = Math.max(totalWidth, totalHeight)
         this.model.foreachTile(function(tileModel){
             var tileSprite = new TileSprite({
                 model: tileModel
@@ -26,7 +27,7 @@ var RoomSprite = BaseSprite.extend({
             this.addChild(tileSprite)
         },this)
 
-        var scaleRate = (cc.winSize.width - padding*2)/(totalWidth-2*dimens.tileSize.width);
+        var scaleRate = (cc.winSize.width - padding*2)/(maxSize-2*dimens.tileSize.width);
         this.attr({
             width: totalWidth,
             height: totalHeight,
