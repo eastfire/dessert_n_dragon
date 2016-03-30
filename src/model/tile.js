@@ -42,6 +42,17 @@ var FloorTileModel = RoomTileModel.extend({
     }
 })
 
+var PillarTileModel = RoomTileModel.extend({
+    defaults:function(){
+        return _.extend(RoomTileModel.prototype.defaults.apply(this),{
+            type: "pillar",
+            subtype: "normal",
+            isPassable: false,
+            canGenEnemy: false
+        });
+    }
+})
+
 var DoorTileModel = RoomTileModel.extend({
     defaults:function(){
         return _.extend(RoomTileModel.prototype.defaults.apply(this),{
@@ -54,5 +65,6 @@ var DoorTileModel = RoomTileModel.extend({
 
 var TILE_MODEL_MAP = {
     "wall": RoomWallTileModel,
-    "floor":FloorTileModel
+    "floor":FloorTileModel,
+    "pillar":PillarTileModel
 }

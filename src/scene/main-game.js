@@ -28,6 +28,7 @@ var MainLayer = cc.Layer.extend({
         })
         this.addChild(currentRoomSprite);
 
+        this.initMenu();
         this.initLabel();
         this.initConditionLabel();
         room.turnStart();
@@ -46,6 +47,24 @@ var MainLayer = cc.Layer.extend({
     onExit:function(){
         this._super();
         this.closeEvent();
+    },
+    initMenu:function(){
+        var closeItem = new cc.MenuItemImage(
+            cc.spriteFrameCache.getSpriteFrame("close-default.png"),
+            cc.spriteFrameCache.getSpriteFrame("close-press.png"),
+            function () {
+                //TODO show dialog
+                cc.director.runScene(new SelectRoomScene());
+            }, this);
+
+        closeItem.attr({
+            x: cc.winSize.width/2,
+            y: cc.winSize.height/2,
+            anchorX: 1,
+            anchorY: 1
+        });
+        var menu = new cc.Menu([closeItem]);
+        this.addChild(menu);
     },
     initLabel:function(){
         this.hpLabel = new ccui.Text("", "Arial", dimens.hpLabel.fontSize );

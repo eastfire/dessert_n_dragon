@@ -15,13 +15,15 @@ var SelectRoomLayer = cc.Layer.extend({
             })
             this.addChild(sprite);
             var selectable = false;
-            if ( score[stageNumber] >= roomEntry.scoreCondition[0] ) {
+            var roomScore = score[stageNumber] = 100;
+            var scoreCondition = roomEntry.scoreCondition;
+            if ( (!scoreCondition && roomScore ) || (scoreCondition && roomScore >= scoreCondition[0] )) {
                 selectable = true;
                 this.addStar(sprite, 0)
-                if ( score[stageNumber] >= roomEntry.scoreCondition[1] ) {
+                if ( (!scoreCondition && roomScore ) || (scoreCondition &&roomScore >= scoreCondition[1]) ) {
                     this.addStar(sprite, 1)
                 }
-                if ( score[stageNumber] >= roomEntry.scoreCondition[2] ) {
+                if ( (!scoreCondition && roomScore ) || (scoreCondition &&roomScore >= scoreCondition[2]) ) {
                     this.addStar(sprite, 2)
                 }
             } else {
@@ -39,7 +41,6 @@ var SelectRoomLayer = cc.Layer.extend({
                         swallowTouches: true,
                         onTouchBegan: function (touch, event) {
                             var target = event.getCurrentTarget();
-                            var locationInNode = target.convertToNodeSpace(touch.getLocation());
                             var locationInNode = target.convertToNodeSpace(touch.getLocation());
                             var s = target.getContentSize();
                             var rect = cc.rect(0, 0, s.width, s.height);

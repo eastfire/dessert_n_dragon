@@ -75,13 +75,13 @@ var dimens = {
         fontSize: 22
     },
     scoreLabel:{
-        x: 340,
+        x: 300,
         y: 780,
         outlineWidth: 2,
         fontSize: 22
     },
     turnNumberLabel:{
-        x: 340,
+        x: 300,
         y: 750,
         outlineWidth: 2,
         fontSize: 22
