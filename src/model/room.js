@@ -118,6 +118,10 @@ var RoomModel = Backbone.Model.extend({
         var heroEntry = this.get("initHero");
         this.__hero = new MOVABLE_MODEL_MAP[heroEntry.type](heroEntry);
         this.__movables.push(this.__hero);
+        
+        this.__hero.on("die",function(){
+            this.gameOver(false);
+        });
     },
     getHero:function(){
         return this.__hero
@@ -499,6 +503,7 @@ var RoomModel = Backbone.Model.extend({
     },
     gameOver:function(isWin){
         cc.log("game over: "+isWin);
+        this.trigger("game-over", this, isWin);
     },
     logEnemyDie:function(enemyModel){
         var subtype = enemyModel.get("subtype");
