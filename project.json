@@ -8,12 +8,13 @@
     "renderMode" : 0,
     "engineDir":"frameworks/cocos2d-html5",
 
-    "modules" : ["cocos2d", "ccui"],
+    "modules" : ["cocos2d", "ccui", "gui"],
 
     "jsList" : [
         "src/libs/underscore-min.js",
         "src/libs/backbone-min.js",
         "src/libs/utils.js",
+        "src/libs/cocos-utils.js",
         "src/resource.js",
         "src/common.js",
         "src/model/movable.js",

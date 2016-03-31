@@ -3,7 +3,6 @@ var SelectRoomLayer = cc.Layer.extend({
         this._super();
 
         var currentY = 40;
-        var stageNumber = 0;
         var isFirst = true;
         _.each(rooms,function(roomEntry){
             var sprite = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( "palace1.png" ))
@@ -15,7 +14,7 @@ var SelectRoomLayer = cc.Layer.extend({
             })
             this.addChild(sprite);
             var selectable = false;
-            var roomScore = score[stageNumber] = 100;
+            var roomScore = score[roomEntry.stageNumber];
             var scoreCondition = roomEntry.scoreCondition;
             if ( (!scoreCondition && roomScore ) || (scoreCondition && roomScore >= scoreCondition[0] )) {
                 selectable = true;
@@ -35,7 +34,7 @@ var SelectRoomLayer = cc.Layer.extend({
                 }
             }
             if ( selectable ) {
-                (function(stageNumber, roomEntry) {
+                (function( roomEntry) {
                     cc.eventManager.addListener({
                         event: cc.EventListener.TOUCH_ONE_BY_ONE,
                         swallowTouches: true,
@@ -59,14 +58,13 @@ var SelectRoomLayer = cc.Layer.extend({
                             }));
                         }
                     }, sprite);
-                })(stageNumber, roomEntry);
+                })( roomEntry);
             } else {
                 sprite.attr({
                     opacity: 64
                 })
             }
             currentY += 40;
-            stageNumber++;
         },this)
     },
     addStar:function(sprite, position){

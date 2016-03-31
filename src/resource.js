@@ -14,7 +14,9 @@ var times = {
 
     heroAttack: 0.15,
     enemyAttack: 0.15,
-    generateEnemy: 0.2
+    generateEnemy: 0.2,
+
+    gameOverDialog: 0.5
 }
 
 var animations = {
@@ -46,6 +48,9 @@ var colors = {
     conditionLabel:{
         outline: cc.color.BLACK,
         inside: cc.color.WHITE
+    },
+    gameOver:{
+        ok: cc.color.BLACK
     }
 }
 

@@ -1,4 +1,5 @@
 var room1 = {
+    stageNumber: 1,
     turnLimit:6,
     scoreCondition: null,
     winEveryConditions:[
@@ -68,6 +69,7 @@ var room1 = {
 };
 
 var room2 = {
+    stageNumber: 2,
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -135,6 +137,7 @@ var room2 = {
 };
 
 var room3 = {
+    stageNumber: 3,
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -202,6 +205,7 @@ var room3 = {
 };
 
 var room4 = {
+    stageNumber: 4,
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -268,6 +272,7 @@ var room4 = {
 };
 
 var room5 = {
+    stageNumber: 5,
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -335,6 +340,7 @@ var room5 = {
 };
 
 var room6 = {
+    stageNumber: 6,
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -402,6 +408,7 @@ var room6 = {
 };
 
 var room7 = {
+    stageNumber: 7,
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
