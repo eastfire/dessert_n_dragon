@@ -334,6 +334,140 @@ var room5 = {
     }
 };
 
-var rooms = [room1, room2, room3, room4, room5, room2, room1, room2, room1, room2, room1, room2]
+var room6 = {
+    turnLimit:15,
+    scoreCondition: [100, 150, 200],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "red",
+            number: 2
+        },
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "yellow",
+            number: 2
+        },
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "blue",
+            number: 2
+        },
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "green",
+            number: 2
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{
+        type:"pudding",subtype:"red"
+    },{
+        type:"pudding",subtype:"yellow"
+    },{
+        type:"pudding",subtype:"green"
+    },{
+        type:"pudding",subtype:"blue"
+    }],
+    initTiles:[
+        [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"},null,null],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"},null],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"},null],
+        [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null,null]
+    ],
+    initMovables:[
+    ],
+    name: "",
+    width: 8,
+    height: 8,
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:3}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }, //normal, fix
+        isShowLevel: false
+    }
+};
+
+var room7 = {
+    turnLimit:15,
+    scoreCondition: [100, 150, 200],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "red",
+            number: 2
+        },
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "yellow",
+            number: 2
+        },
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "blue",
+            number: 2
+        },
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "green",
+            number: 2
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{
+        type:"pudding",subtype:"red"
+    },{
+        type:"pudding",subtype:"yellow"
+    },{
+        type:"pudding",subtype:"green"
+    },{
+        type:"pudding",subtype:"blue"
+    }],
+    initTiles:[
+        [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"},null,null],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"},null],
+        [{type:"wall",subtype:"se"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"}],
+        [null,{type:"wall",subtype:"se"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"},null],
+        [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null,null]
+    ],
+    initMovables:[
+    ],
+    name: "",
+    width: 8,
+    height: 8,
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:3}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }, //normal, fix
+        isShowLevel: false
+    }
+};
+
+var rooms = [room1, room2, room3, room4, room5, room6, room7, room2, room1, room2, room1, room2]
 
         
