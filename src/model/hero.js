@@ -37,7 +37,13 @@ var HeroModel = MovableModel.extend({
     },
     loseHp:function(damage){
         cc.log("lose hp " + damage)
-        this.set("hp", Math.max(0, this.get("hp") - damage) )
+        this.set("hp", Math.max(0, this.get("hp") - damage) );
+        if ( this.get("hp") <= 0 ) {
+            this.onDie();
+        }
+    },
+    onDie:function(){
+        this.trigger("die",this);
     },
     gainHp:function(amount){
         this.set("hp", Math.min(this.get("maxHp"), this.get("hp") + amount) )
