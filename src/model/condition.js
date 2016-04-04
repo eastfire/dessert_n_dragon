@@ -6,6 +6,13 @@ var CONDITION_FUN_FACTORY_MAP = {
             return roomModel.get("turnNumber") >= turnLimit;
         }
     },
+    outOfTime:function(roomModel){
+        return function(roomModel) {
+            var timeLimit = roomModel.get("timeLimit");
+            if (timeLimit === 0) return false; //unlimited time
+            return roomModel.get("currentTime") >= timeLimit;
+        }
+    },
     kill:function(roomModel, opt){
         return function(roomModel) {
             var statistic = roomModel.get("statistic");

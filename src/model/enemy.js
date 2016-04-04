@@ -9,6 +9,7 @@ var EnemyModel = MovableModel.extend({
             baseAttack: 1,
             isAllFaceSame: true,
             exp: 1,
+            heroForwardAfterKillMe:true,
             score: SCORE_INFLATION_RATE
         } )
     },
@@ -62,9 +63,7 @@ var EnemyModel = MovableModel.extend({
         this.trigger("die",this, hero)
     },
     afterDie:function(hero){ //called by view
-        if ( currentRoom.get("rules").heroCanGetExp ) {
-            currentRoom.getHero().gainExp(this.get("exp"));
-        }
+        currentRoom.getHero().gainExp(this.get("exp"));
         currentRoom.getScore(this.get("score"));
 
         currentRoom.logEnemyDie(this);

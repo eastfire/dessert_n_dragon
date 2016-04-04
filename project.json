@@ -23,6 +23,7 @@
         "src/model/item.js",
         "src/model/tile.js",
         "src/model/condition.js",
+        "src/model/choice.js",
         "src/model/room.js",
         "src/model/skill.js",
         "src/model/room-entry.js",

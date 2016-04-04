@@ -3,7 +3,9 @@ var HeroModel = MovableModel.extend({
         return _.extend( MovableModel.prototype.defaults.call(this),{
             type: "normalHero",
             exp: 0,
+            unusedExp: 0,
 
+            choiceNumber: 3,
             forwardAfterKill: true,
             //inactive skill
             cunning: 0
@@ -49,20 +51,30 @@ var HeroModel = MovableModel.extend({
         this.set("hp", Math.min(this.get("maxHp"), this.get("hp") + amount) )
     },
     gainExp:function(amount){
-        this.useRemainExp(amount);
+        if ( currentRoom.get("rules").heroCanGetExp ) {
+            this.set("unusedExp", this.get("unusedExp") + amount);
+            this.useRemainExp();
+        }
     },
-    useRemainExp:function(amount){
+    useRemainExp:function(){
+        var amount = this.get("unusedExp");
         var remainExp = this.get("exp") + amount - this.get("requireExp");
         if ( remainExp < 0 ) {
-            this.set("exp", this.get("exp")+amount );
+            this.set({
+                exp: this.get("exp")+amount,
+                unusedExp: 0
+            });
+            return false;
         } else {
             if ( currentRoom.get("rules").heroCanLevelUp ) {
                 this.set({
                     exp: 0,
+                    unusedExp: remainExp,
                     level: this.get("level") + 1,
                     requireExp: this.requireExpOfLevel(this.get("level") + 1)
                 });
                 this.levelUp(this.get("level"));
+                return true;
             }
         }
     },
@@ -101,7 +113,7 @@ var HeroModel = MovableModel.extend({
     },
     hit:function(enemy){
         this.beforeHit(enemy);
-        if ( this.get("forwardAfterKill") ) {
+        if ( enemy.get("heroForwardAfterKillMe") ) {
             this.trigger("hitForward", this, enemy);
         } else {
             this.trigger("hitMoveBack", this, enemy);

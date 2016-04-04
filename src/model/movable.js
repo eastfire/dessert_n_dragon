@@ -52,7 +52,7 @@ var MovableModel = Backbone.Model.extend({
             },this).length;
         },this)
     },
-    isMovable:function(){
+    isMovable:function(direction){
         return this.get("isMovable")
     },
     canBeMergedBy:function(movable, direction){

@@ -4,6 +4,7 @@ var SelectRoomLayer = cc.Layer.extend({
 
         var currentY = 40;
         var isFirst = true;
+        var stageNumber = 1;
         _.each(rooms,function(roomEntry){
             var sprite = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( "palace1.png" ))
             sprite.attr({
@@ -14,7 +15,8 @@ var SelectRoomLayer = cc.Layer.extend({
             })
             this.addChild(sprite);
             var selectable = false;
-            var roomScore = score[roomEntry.stageNumber];
+            roomEntry.stageNumber = stageNumber;
+            var roomScore = score[stageNumber]// = 100;
             var scoreCondition = roomEntry.scoreCondition;
             if ( (!scoreCondition && roomScore ) || (scoreCondition && roomScore >= scoreCondition[0] )) {
                 selectable = true;
@@ -54,7 +56,8 @@ var SelectRoomLayer = cc.Layer.extend({
                         //Process the touch end event
                         onTouchEnded: function (touch, event) {
                             cc.director.runScene(new RoomScene({
-                                roomEntry: roomEntry
+                                roomEntry: roomEntry,
+                                maxScore: roomScore
                             }));
                         }
                     }, sprite);
@@ -65,6 +68,7 @@ var SelectRoomLayer = cc.Layer.extend({
                 })
             }
             currentY += 40;
+            stageNumber++;
         },this)
     },
     addStar:function(sprite, position){

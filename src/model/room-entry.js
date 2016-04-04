@@ -1,11 +1,13 @@
 var room1 = {
-    stageNumber: 1,
     turnLimit:6,
     scoreCondition: null,
     winEveryConditions:[
         "outOfTurn"
     ],
     loseAnyConditions:[],
+    rules:{
+        heroCanGetExp: false
+    },
     enemyPool:[{
         type:"pudding", subtype:"red"
     },{
@@ -69,9 +71,8 @@ var room1 = {
 };
 
 var room2 = {
-    stageNumber: 2,
     turnLimit:15,
-    scoreCondition: [100, 150, 200],
+    scoreCondition: [100, 200, 300],
     winEveryConditions:[
         {
             conditionType:"kill-level",
@@ -97,6 +98,9 @@ var room2 = {
     loseAnyConditions:[
         "outOfTurn"
     ],
+    rules:{
+        heroCanGetExp: false
+    },
     enemyPool:[{
         type:"pudding",subtype:"red"
     },{
@@ -137,7 +141,6 @@ var room2 = {
 };
 
 var room3 = {
-    stageNumber: 3,
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -165,6 +168,9 @@ var room3 = {
     loseAnyConditions:[
         "outOfTurn"
     ],
+    rules:{
+        canRefreshChoice: false
+    },
     enemyPool:[{
         type:"pudding",subtype:"red"
     },{
@@ -194,6 +200,7 @@ var room3 = {
         positions: [{x:3,y:3}],
         initHp: 100,
         initMaxHp: 100,
+        initRequireExp: 10,
         maxHpStrategy:{
             type: "normal"
         },
@@ -201,11 +208,14 @@ var room3 = {
             type: "normal"
         }, //normal, fix
         isShowLevel: false
-    }
+    },
+    choicePool:[
+        { type:"getScore", opt:{ number:300} },
+        { type:"getFullHp" }
+    ]
 };
 
 var room4 = {
-    stageNumber: 4,
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -272,7 +282,6 @@ var room4 = {
 };
 
 var room5 = {
-    stageNumber: 5,
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -340,7 +349,6 @@ var room5 = {
 };
 
 var room6 = {
-    stageNumber: 6,
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -408,7 +416,6 @@ var room6 = {
 };
 
 var room7 = {
-    stageNumber: 7,
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -476,7 +483,6 @@ var room7 = {
 };
 
 var room8 = {
-    stageNumber: 8,
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -515,12 +521,12 @@ var room8 = {
     }],
     initTiles:[
         [null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"},null],
-        [{type:"wall",subtype:"sw"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"}],
         [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"pillar",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"pillar",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
         [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
         [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
         [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"pillar",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"pillar",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"se"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"}],
         [null,{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null]
     ],
     initMovables:[
@@ -544,7 +550,6 @@ var room8 = {
 };
 
 var room9 = {
-    stageNumber: 9,
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -612,7 +617,6 @@ var room9 = {
 };
 
 var room10 = {
-    stageNumber: 10,
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -667,7 +671,7 @@ var room10 = {
     height: 9,
     initHero: {
         type:"normalHero",
-        positions: [{x:3,y:3}],
+        positions: [{x:4,y:4}],
         initHp: 100,
         initMaxHp: 100,
         maxHpStrategy:{
@@ -681,7 +685,6 @@ var room10 = {
 };
 
 var room11 = {
-    stageNumber: 11,
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -736,7 +739,7 @@ var room11 = {
     height: 9,
     initHero: {
         type:"normalHero",
-        positions: [{x:3,y:3}],
+        positions: [{x:4,y:4}],
         initHp: 100,
         initMaxHp: 100,
         maxHpStrategy:{
@@ -750,7 +753,6 @@ var room11 = {
 };
 
 var room12 = {
-    stageNumber: 12,
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -794,7 +796,7 @@ var room12 = {
         [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
         [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
         [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"ne"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
         [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
     ],
     initMovables:[
@@ -804,7 +806,7 @@ var room12 = {
     height: 8,
     initHero: {
         type:"normalHero",
-        positions: [{x:3,y:3}],
+        positions: [{x:3,y:2}],
         initHp: 100,
         initMaxHp: 100,
         maxHpStrategy:{

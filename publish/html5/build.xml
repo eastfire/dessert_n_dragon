@@ -236,6 +236,7 @@
                 <file name="src/model/item.js"/>
                 <file name="src/model/tile.js"/>
                 <file name="src/model/condition.js"/>
+                <file name="src/model/choice.js"/>
                 <file name="src/model/room.js"/>
                 <file name="src/model/skill.js"/>
                 <file name="src/model/room-entry.js"/>

@@ -26,15 +26,27 @@ var RoomModel = Backbone.Model.extend({
             }],
             genEnemyStrategyIndex: 0,
             genEnemyStrategyTurn: 0,
-            genItemStrategy: "",
-            genLevelUpStrategy: "",
+            genItemStrategy: null,
+            genChoiceStrategy: {
+                type: "random",
+                opt:{}
+            },
+            drawCardStrategy: {
+                type: "random"
+            },
 
             initTiles: null,
             initMovables: null,
-            enemyPool: [{type:"pudding",subtype:"red"}],
+            initHero:null,
+            initHand: [],
+            initDeck: [],
+
+            waitingTurn : 0,
+            enemyPool: null,
             enemyLevelPool: [1],
-            initLevelUpPool: [],
-            initSkillHand: []
+            choicePool: [],
+            currentChoices: [],
+            refreshCount:0
         }
     },
     initialize:function(){
@@ -45,17 +57,25 @@ var RoomModel = Backbone.Model.extend({
         this.initHero();
         this.__genMovableMap();
         this.initEnemyPool();
-        this.initLevelUpPool();
+        this.initSkill();
         this.initEvents();
         this.initCondition();
         this.initGenEnemyStrategy();
+    },
+    getJson:function(){
+        var tiles = [];
+        this.set("initTiles", tiles);
+        var movables = [];
+        this.set("initMovables", movables);
+        this.set("initHero", this.__hero.toJSON());
     },
     initRules:function(){
         var defaultRules = {
                 heroCanLevelUp: true,
                 heroCanGetExp: true,
                 enemyCanAttack: true,
-                showHeroLevel: true
+                showHeroLevel: true,
+                canRefreshChoice: true
             };
         this.set("rules", _.extend(defaultRules, this.get("rules")));
     },
@@ -95,8 +115,13 @@ var RoomModel = Backbone.Model.extend({
     },
     initEnemyPool:function(){
     },
-    initLevelUpPool:function(){
-        this.__levelUpPool = [];
+    initSkill:function(){
+        this.__hand = _.map(this.get("initHand"),function(cardEntry){
+            return new CARD_MODEL_MAP[cardEntry.type](cardEntry)
+        });
+        this.__deck = _.map(this.get("initDeck"),function(cardEntry){
+            return new CARD_MODEL_MAP[cardEntry.type](cardEntry)
+        });
     },
     initEvents:function(){
         this.on("turn-start-complete", this.generateEnemy, this)
@@ -274,7 +299,7 @@ var RoomModel = Backbone.Model.extend({
     generateOneEnemy:function(position, typeObj, level){
         var type = typeof typeObj === "string" ? typeObj: typeObj.type;
         if ( MOVABLE_MODEL_MAP[type] ) {
-            //FIXME : only single block enemy here
+            //FIXME : only single block enemy here. how to generate multi-block enemy?
             var model = new MOVABLE_MODEL_MAP[type]({
                 positions: [position],
                 level: level,
@@ -320,6 +345,17 @@ var RoomModel = Backbone.Model.extend({
     afterGenEnemy:function(){
         this.__acceptInput = true;
     },
+    genLevelUpChoices:function(){
+        var currentChoiceStrategy = this.get("genChoiceStrategy");
+
+        var strategy = GEN_CHOICE_STRATEGY_MAP[currentChoiceStrategy.type]
+
+        var choiceEntries = strategy.call(this, this, strategy.opt)
+        this.set("currentChoices", choiceEntries);
+        return _.map(choiceEntries,function(entry){
+            return CHOICE_FACTORY_MAP[entry.type].call(this, this, entry.opt);
+        },this);
+    },
     isAcceptInput:function(){
         return this.__acceptInput;
     },
@@ -349,7 +385,7 @@ var RoomModel = Backbone.Model.extend({
                 if ( movable.isEdgePosition(direction,x,y) ) {
 
                     var stepCount = 0;
-                    if ( movable.isMovable() ) {
+                    if ( movable.isMovable(direction) ) {
                         var stepX = x, stepY = y;
                         var increment = INCREMENTS[direction];
                         do {
@@ -528,307 +564,26 @@ var RoomModel = Backbone.Model.extend({
     },
     getScore:function(score){
         this.set("score",this.get("score")+score);
+    },
+    gainCard:function(opt){
+        var cardModel = new CARD_MODEL_MAP[opt.type](opt);
+        this.__hand.push(cardModel);
+        this.trigger("gainCard",this,cardModel);
     }
 })
 
-var BasicRoom = RoomModel.extend({
-    defaults:function(){
-        return _.extend(RoomModel.prototype.defaults.call(this), {
-            turnLimit:6,
+var saveRoom = function(){
+    cc.sys.localStorage.setItem(APP_NAME+".current", currentRoom.getJson());
+}
 
-            winEveryConditions:[
-                {
-                    conditionType:"kill-level",
-                    type:"pudding",
-                    subtype: "red",
-                    number: 5
-                },
-                {
-                    conditionType:"kill-level",
-                    type:"pudding",
-                    subtype: "yellow",
-                    number: 5
-                },
-                {
-                    conditionType:"kill-level",
-                    type:"pudding",
-                    subtype: "blue",
-                    number: 5
-                }
-            ],
-            loseAnyConditions:[
-                "outOfTurn"
-            ],
-            enemyPool:[{
-                type:"pudding",
-                subtype:"red"
-            },{
-                type:"pudding",
-                subtype:"yellow"
-            },{
-                type:"pudding",
-                subtype:"green"
-            },{
-                type:"pudding",
-                subtype:"blue"
-            }],
-            initTiles:[
-                [{
-                    type:"wall",
-                    subtype: "sw"
-                },{
-                    type:"wall",
-                    subtype: "w"
-                },{
-                    type:"wall",
-                    subtype: "w"
-                },{
-                    type:"wall",
-                    subtype: "w"
-                },{
-                    type:"wall",
-                    subtype: "w"
-                },{
-                    type:"wall",
-                    subtype: "w"
-                },{
-                    type:"wall",
-                    subtype: "nw"
-                } ],
-                [{
-                    type:"wall",
-                    subtype: "s"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"wall",
-                    subtype: "n"
-                } ],
-                [{
-                    type:"wall",
-                    subtype: "s"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"wall",
-                    subtype: "n"
-                } ],
-                [{
-                    type:"wall",
-                    subtype: "s"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"wall",
-                    subtype: "n"
-                } ],
-                [{
-                    type:"wall",
-                    subtype: "s"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"wall",
-                    subtype: "n"
-                } ],
-                [{
-                    type:"wall",
-                    subtype: "s"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"floor",
-                    subtype: "normal"
-                },{
-                    type:"wall",
-                    subtype: "n"
-                } ],
-                [{
-                    type:"wall",
-                    subtype: "se"
-                },{
-                    type:"wall",
-                    subtype: "e"
-                },{
-                    type:"wall",
-                    subtype: "e"
-                },{
-                    type:"wall",
-                    subtype: "e"
-                },{
-                    type:"wall",
-                    subtype: "e"
-                },{
-                    type:"wall",
-                    subtype: "e"
-                },{
-                    type:"wall",
-                    subtype: "ne"
-                } ]
-            ],
-            initMovables:[
-                {
-                    type:"cherrycake",
-                    positions: [
-                        {
-                            x:2,
-                            y:4
-                        }
-                    ]
-                },
-                {
-                    type:"cherrycake",
-                    positions: [
-                        {
-                            x:4,
-                            y:4
-                        }
-                    ]
-                },
-                {
-                    type:"pudding",
-                    subtype:"yellow",
-                    positions: [
-                        {
-                            x:3,
-                            y:2
-                        }
-                    ]
-                },
-                {
-                    type:"pudding",
-                    subtype:"red",
-                    positions: [
-                        {
-                            x:2,
-                            y:2
-                        }
-                    ]
-                },
-                {
-                    type:"pudding",
-                    subtype:"blue",
-                    positions: [
-                        {
-                            x:1,
-                            y:2
-                        }
-                    ]
-                },
-                {
-                    type:"pudding",
-                    subtype:"yellow",
-                    positions: [
-                        {
-                            x:3,
-                            y:1
-                        }
-                    ]
-                },
-                {
-                    type:"pudding",
-                    subtype:"red",
-                    positions: [
-                        {
-                            x:2,
-                            y:1
-                        }
-                    ]
-                },
-                {
-                    type:"pudding",
-                    subtype:"blue",
-                    positions: [
-                        {
-                            x:1,
-                            y:1
-                        }
-                    ]
-                }
-            ],
-            name: "",
-            width: 7,
-            height: 7,
-            initHero: {
-                type:"normalHero",
-                positions: [
-                    {
-                        x:3,
-                        y:3
-                    }
-                ],
-                initHp: 100,
-                initMaxHp: 100,
-                maxHpStrategy:{
-                    type: "normal"
-                },
-                expStrategy: {
-                    type: "normal"
-                }, //normal, fix
-                isShowLevel: false
-            }
-        })
+var clearRoom = function(){
+    cc.sys.localStorage.removeItem(APP_NAME+".current");
+}
+
+var loadRoom = function(){
+    var data = cc.sys.localStorage.getItem(APP_NAME+".current");
+    if (data) {
+        return JSON.parse(data);
     }
-})
+    return null;
+}

@@ -12,27 +12,7 @@ KEY_DIRECTION[KEY_LEFT] = 3;
 var SWIPE_THRESHOLD_WIDTH = 20;
 var SWIPE_THRESHOLD = 50;
 
-var ModalDialogLayer = cc.Layer.extend({
-    ctor:function(options) {
-        this._super();
-        var options = options || {}
-        cc.eventManager.addListener(cc.EventListener.create({
-            event: cc.EventListener.TOUCH_ONE_BY_ONE,
-            swallowTouches: true,
-            onTouchBegan: function (touch, event) {
-                return true;
-            },
-            onTouchMoved: function (touch, event) {
-            },
-            //Process the touch end event
-            onTouchEnded: function (touch, event) {
-                if ( options.clickSideCancel ) {
-                    event.getCurrentTarget().removeFromParent(true)
-                }
-            }
-        }), this);
-    }
-});
+
 
 var GameOverDialog = cc.Scale9Sprite.extend({
     ctor:function (options) {
@@ -61,6 +41,23 @@ var GameOverDialog = cc.Scale9Sprite.extend({
         });
         this.addChild(resultLabel);
 
+        if ( this.isWin ) {
+            var roomScore = this.model.get("score");
+            var scoreCondition = this.model.get("scoreCondition");
+            var scoreLabel = new cc.LabelTTF(roomScore, null, 25);
+            scoreLabel.attr({
+                color: colors.gameOver.ok,
+                x: (cc.winSize.width - 100) / 2,
+                y: 200,
+                anchorX: 0.5,
+                anchorY: 0.5
+            });
+            this.addChild(scoreLabel);
+            this.addStar((cc.winSize.width - 100)/2-60, 160, (!scoreCondition && roomScore ) || (scoreCondition && roomScore >= scoreCondition[0] ) )
+            this.addStar((cc.winSize.width - 100)/2, 160, (!scoreCondition && roomScore ) || (scoreCondition &&roomScore >= scoreCondition[1]))
+            this.addStar((cc.winSize.width - 100)/2+60, 160,(!scoreCondition && roomScore ) || (scoreCondition &&roomScore >= scoreCondition[2]))
+        }
+
         var okItem = new cc.MenuItemImage(
             cc.spriteFrameCache.getSpriteFrame("button-short-default.png"),
             cc.spriteFrameCache.getSpriteFrame("button-short-press.png"),
@@ -74,7 +71,7 @@ var GameOverDialog = cc.Scale9Sprite.extend({
             anchorX: 0.5,
             anchorY: 0.5
         });
-        var okLabel = new cc.LabelTTF("确定", null, 25 );
+        var okLabel = new cc.LabelTTF("继续", null, 25 );
         okLabel.attr({
             color: colors.gameOver.ok,
             x: 90,
@@ -88,6 +85,14 @@ var GameOverDialog = cc.Scale9Sprite.extend({
         menu.x = 0;
         menu.y = 0;
         this.addChild(menu);
+    },
+    addStar:function(x,y, pass){
+        var sprite = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame(pass?"star.png":"empty-star.png"));
+        sprite.attr({
+            x: x,
+            y: y
+        })
+        this.addChild(sprite);
     },
     appear:function(){
         this.runAction( cc.moveBy(times.gameOverDialog, 0, -cc.winSize.height).easing(cc.easeBounceOut())  )
@@ -184,10 +189,126 @@ var GameMenuDialog = cc.Scale9Sprite.extend({
     }
 })
 
+var ChoiceDialog = cc.Scale9Sprite.extend({
+    ctor:function (options) {
+        this._super(cc.spriteFrameCache.getSpriteFrame("game-over-dialog.png"));
+
+        this.model = options.model;
+        this.modalLayer = options.modalLayer;
+        this.level = options.level || this.model.getHero().get("level");
+
+        this.dialogWidth = cc.winSize.width - 50
+        this.attr({
+            x:-cc.winSize.width/2,
+            y:cc.winSize.height/2,
+            width: this.dialogWidth,
+            height: 650
+        })
+
+        var titleLabel = new cc.LabelTTF("嗝，吃饱了。升到第"+this.level+"级了\n请选择一个奖励", null, 25 );
+        titleLabel.attr({
+            color: colors.gameOver.ok,
+            x: this.dialogWidth/2,
+            y: 600,
+            anchorX: 0.5,
+            anchorY: 0.5
+        });
+        this.addChild(titleLabel);
+
+        this.initMenu();
+    },
+    initMenu:function(){
+        this.choices = this.model.genLevelUpChoices();
+        var stepY = 500/(this.choices.length+1);
+        var y = 560-stepY;
+        var menus = [];
+        _.each(this.choices,function(choice){
+            var menuItem = new cc.MenuItemImage(
+                cc.spriteFrameCache.getSpriteFrame("choice-default.png"),
+                cc.spriteFrameCache.getSpriteFrame("choice-press.png"),
+                function () {
+                    choice.onChosen(currentRoom, choice.opt);
+                    this.disappear();
+                }, this);
+
+            menuItem.attr({
+                x: this.dialogWidth/2,
+                y: y,
+                anchorX: 0.5,
+                anchorY: 0.5
+            });
+            var descLabel = new cc.LabelTTF(choice.description, null, 25 );
+            descLabel.attr({
+                color: colors.gameOver.ok,
+                x: this.dialogWidth/2,
+                y: 50,
+                anchorX: 0.5,
+                anchorY: 0.5
+            });
+            menuItem.addChild(descLabel);
+            menus.push(menuItem)
+
+            y -= stepY;
+        },this);
+
+        if ( this.model.get("rules").canRefreshChoice ) {
+            var menuItem = new cc.MenuItemImage(
+                cc.spriteFrameCache.getSpriteFrame("button-short-default.png"),
+                cc.spriteFrameCache.getSpriteFrame("button-short-press.png"),
+                function () {
+                    var value = (this.model.get("refreshCount") + 1) * 5;
+                    if (gameStatus.money >= value) {
+                        gameStatus.money -= value;
+                        saveGameStatus();
+                        this.model.set("refreshCount", this.model.get("refreshCount") + 1);
+                        this.menu.removeFromParent(true);
+                        this.initMenu();
+                    }
+                }, this);
+
+            menuItem.attr({
+                x: this.dialogWidth - 100,
+                y: 25,
+                anchorX: 0.5,
+                anchorY: 0.5
+            });
+            var descLabel = new cc.LabelTTF("换一换（" + (this.model.get("refreshCount") + 1) * 5 + "$）", null, 22);
+            descLabel.attr({
+                color: colors.gameOver.ok,
+                x: 90,
+                y: 18,
+                anchorX: 0.5,
+                anchorY: 0.5
+            });
+            menuItem.addChild(descLabel);
+            menus.push(menuItem)
+        }
+
+        this.menu = new cc.Menu(menus);
+        this.menu.x = 0;
+        this.menu.y = 0;
+        this.addChild(this.menu);
+    },
+    appear:function(){
+        this.runAction( cc.moveBy(times.gameOverDialog, cc.winSize.width, 0).easing(cc.easeBounceOut())  )
+    },
+    disappear:function(){
+        this.model.set("refreshCount", 0);
+        this.runAction(cc.sequence(
+            cc.moveBy(times.gameOverDialog, cc.winSize.width, 0),
+            cc.removeSelf(),
+            cc.callFunc(function(){
+                this.modalLayer.removeFromParent(true)
+            },this)
+        ))
+    }
+})
+
 var MainLayer = cc.Layer.extend({
     ctor:function (options) {
         this._super();
         var room = new RoomModel(options.roomEntry);
+        this.maxScore = options.maxScore;
 
         window.currentRoom = room;
         window.currentRoomSprite = new RoomSprite({
@@ -202,6 +323,9 @@ var MainLayer = cc.Layer.extend({
         this.initMenu();
         this.initLabel();
         this.initConditionLabel();
+
+        this.initScoreBar();
+
         room.turnStart();
         this.renderHp();
         this.renderScore();
@@ -268,6 +392,7 @@ var MainLayer = cc.Layer.extend({
             anchorX: 0
         });
         this.addChild(this.expLabel);
+        this.expLabel.setVisible(currentRoom.get("rules").heroCanGetExp );
 
         this.scoreLabel = new ccui.Text("", "Arial", dimens.scoreLabel.fontSize );
         this.scoreLabel.enableOutline(colors.scoreLabel.outline, dimens.scoreLabel.outlineWidth);
@@ -291,11 +416,32 @@ var MainLayer = cc.Layer.extend({
     },
     initConditionLabel:function(){
         this.conditionLabels = {};
+        var conditionType = null;
         var killConditions = _.filter(currentRoom.get("winEveryConditions"),function(condition){
-            return typeof condition === "object" &&
-                ( condition.conditionType === "kill" || condition.conditionType === "kill-level" || condition.conditionType === "kill-max-level") ;
+            if ( typeof condition === "object" &&
+                ( condition.conditionType === "kill" || condition.conditionType === "kill-level" || condition.conditionType === "kill-max-level") ){
+                conditionType = condition.conditionType;
+                return true;
+            } else return false;
         })
         if ( !killConditions.length ) return;
+
+        var conditionStrMap = {
+            "kill": "吃掉足够多数量的敌人",
+            "kill-level": "吃掉足够多等级的敌人",
+            "kill-max-level": "吃掉达到等级的敌人"
+        };
+
+        var label = new ccui.Text(conditionStrMap[conditionType], "Arial", dimens.conditionLabel.fontSize );
+        label.enableOutline(colors.conditionLabel.outline, dimens.conditionLabel.outlineWidth);
+        label.setTextColor(colors.conditionLabel.inside);
+        label.attr({
+            //color: colors.tableLabel,
+            x: cc.winSize.width/2 - 100,
+            y: dimens.condition.y +50
+        });
+        this.addChild(label);
+
         var stepX = cc.winSize.width / killConditions.length
         var x = stepX/2;
         _.each(killConditions,function(condition){
@@ -304,6 +450,44 @@ var MainLayer = cc.Layer.extend({
             x+=stepX;
         },this);
     },
+    initScoreBar:function() {
+        var scoreCondition = currentRoom.get("scoreCondition");
+        if ( !scoreCondition ) {
+            return;
+        }
+
+        if (this.maxScore < scoreCondition[2]) {
+            this.maxScore = scoreCondition[2];
+        }
+
+        this.scoreBar = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("score-bar.png"));
+        this.scoreBar.attr({
+            x: dimens.scoreBar.x,
+            y: dimens.scoreBar.y,
+            anchorX: 0,
+            scaleX: 0
+        })
+        this.addChild(this.scoreBar);
+
+        this.scoreBarFG = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("score-bar-fg.png"));
+        this.scoreBarFG.attr({
+            x: dimens.scoreBarFG.x,
+            y: dimens.scoreBarFG.y,
+            anchorX: 0
+        })
+        this.addChild(this.scoreBarFG,10);
+
+        this.scoreLine = [];
+        for ( var i = 0; i < 3; i++) {
+            this.scoreLine[i] = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("fill-score-line.png"));
+            this.scoreLine[i].attr({
+                x: scoreCondition[i] / this.maxScore * dimens.scoreBar.width + dimens.scoreBar.x,
+                y: dimens.scoreBar.y - 4
+            })
+            this.addChild(this.scoreLine[i],11)
+        }
+    },
+
     createConditionLabel:function(x, y, condition){
         var frameName = condition.type+( condition.subtype ? ("-"+condition.subtype) : "")+".png";
         var sprite = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( frameName ));
@@ -330,15 +514,26 @@ var MainLayer = cc.Layer.extend({
         if ( !label ) return;
         var statistic = currentRoom.get("statistic");
         var enemyType = condition.type+( condition.subtype ? ("_"+condition.subtype) : "");
-        var statisticItem = "kill-level-"+enemyType;
-        statistic[statisticItem] = statistic[statisticItem] || 0;
-        label.setString( Math.max(0, condition.number - statistic[statisticItem]) );
+        if ( condition.conditionType === "kill-level" || condition.conditionType === "kill" ) {
+            var statisticItem = condition.conditionType+"-" + enemyType;
+            statistic[statisticItem] = statistic[statisticItem] || 0;
+            label.setString(Math.max(0, condition.number - statistic[statisticItem]));
+        } else if (condition.conditionType === "kill-max-level") {
+            var statisticItem = condition.conditionType+"-" + enemyType;
+            statistic[statisticItem] = statistic[statisticItem] || 0;
+            label.setString( condition.number+ (condition.number > statistic[statisticItem] ? "": "√"));
+        }
     },
     renderHp:function(){
         this.hpLabel.setString("生命:"+currentRoom.getHero().get("hp")+"/"+currentRoom.getHero().get("maxHp"))
     },
     renderScore:function(){
-        this.scoreLabel.setString("分数:"+currentRoom.get("score"));
+        var score = currentRoom.get("score");
+        this.scoreLabel.setString("分数:"+score);
+        if ( this.scoreBar ) {
+            var scale = Math.min(1,score / this.maxScore) * dimens.scoreBar.width / dimens.scoreBar.resWidth
+            this.scoreBar.runAction(cc.scaleTo(times.scoreBar,scale,1));
+        }
     },
     renderExp:function(){
         this.expLabel.setString("卡路里:"+currentRoom.getHero().get("exp")+"/"+currentRoom.getHero().get("requireExp"))
@@ -389,9 +584,25 @@ var MainLayer = cc.Layer.extend({
         this.addChild(layer,200);
 
         var dialog = new GameOverDialog({
-            model: this.model,
+            model: currentRoom,
             modalLayer: layer,
             isWin: isWin
+        })
+        layer.addChild(dialog);
+        dialog.appear();
+    },
+    onLevelUp:function(){
+        this.showChoiceDialog();
+    },
+    showChoiceDialog:function(){
+        var layer = new ModalDialogLayer({
+
+        });
+        this.addChild(layer,200);
+
+        var dialog = new ChoiceDialog({
+            model: currentRoom,
+            modalLayer: layer
         })
         layer.addChild(dialog);
         dialog.appear();
@@ -402,6 +613,7 @@ var MainLayer = cc.Layer.extend({
         currentRoom.getHero().on("change:maxHp",this.onMaxHpChange, this);
         currentRoom.getHero().on("change:exp",this.onExpChange, this);
         currentRoom.getHero().on("change:requireExp",this.onRequireExpChange, this);
+        currentRoom.getHero().on("levelUp",this.onLevelUp, this);
         currentRoom.on("change:turnNumber",this.onTurnNumberChange,this);
         currentRoom.on("change:statistic",this.onStatisticChange,this);
         currentRoom.on("game-over",this.onGameOver,this)

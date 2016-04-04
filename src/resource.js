@@ -16,7 +16,8 @@ var times = {
     enemyAttack: 0.15,
     generateEnemy: 0.2,
 
-    gameOverDialog: 0.5
+    gameOverDialog: 0.5,
+    scoreBar: 0.1
 }
 
 var animations = {
@@ -86,18 +87,28 @@ var dimens = {
         fontSize: 22
     },
     turnNumberLabel:{
-        x: 300,
-        y: 750,
+        x: 360,
+        y: 700,
         outlineWidth: 2,
         fontSize: 22
     },
     condition:{
-        y: 700,
+        y: 650,
         scale: 0.4
     },
     conditionLabel:{
         outlineWidth: 2,
         fontSize: 22
+    },
+    scoreBar:{
+        x: 244,
+        y: 750,
+        width: 150,
+        resWidth: 5
+    },
+    scoreBarFG:{
+        x: 240,
+        y: 750
     }
 }
 
