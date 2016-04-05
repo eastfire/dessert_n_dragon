@@ -89,6 +89,9 @@ var EnemyModel = MovableModel.extend({
         }
         return false
     },
+    canBeAttack:function(){
+        return true;
+    },
     passAttack:function(){
         this.set("attackOver", true);
     },
