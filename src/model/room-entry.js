@@ -71,8 +71,79 @@ var room1 = {
 };
 
 var room2 = {
+    turnLimit:12,
+    scoreCondition: null,
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "red",
+            number: 1
+        },
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "yellow",
+            number: 1
+        },
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "blue",
+            number: 1
+        },
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "green",
+            number: 1
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    rules:{
+        heroCanGetExp: false
+    },
+    genEnemyStrategy: [{type:"random", number: 3, last: 0}],
+    enemyPool:[{
+        type:"pudding", subtype:"red"
+    },{
+        type:"pudding", subtype:"yellow"
+    },{
+        type:"pudding", subtype:"green"
+    },{
+        type:"pudding", subtype:"blue"
+    }],
+    initTiles:[
+        [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype: "w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    ],
+    initMovables:[],
+    name: "",
+    width: 9,
+    height: 6,
+    initHero: {
+        type:"normalHero",
+        positions: [{x:5,y:3}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }, //normal, fix
+        isShowLevel: false
+    }
+};
+
+var room3 = {
     turnLimit:15,
-    scoreCondition: [100, 200, 300],
+    scoreCondition: [200, 300, 400],
     winEveryConditions:[
         {
             conditionType:"kill-level",
@@ -97,6 +168,10 @@ var room2 = {
     ],
     loseAnyConditions:[
         "outOfTurn"
+    ],
+    loseEveryConditions:[
+        "outOfTurn".
+        "notEnoughScore"
     ],
     rules:{
         heroCanGetExp: false
@@ -140,7 +215,7 @@ var room2 = {
     }
 };
 
-var room3 = {
+var room4 = {
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -215,7 +290,7 @@ var room3 = {
     ]
 };
 
-var room4 = {
+var room5 = {
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -281,7 +356,7 @@ var room4 = {
     }
 };
 
-var room5 = {
+var room6 = {
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -348,7 +423,7 @@ var room5 = {
     }
 };
 
-var room6 = {
+var room7 = {
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -415,7 +490,7 @@ var room6 = {
     }
 };
 
-var room7 = {
+var room8 = {
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -482,7 +557,7 @@ var room7 = {
     }
 };
 
-var room8 = {
+var room9 = {
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -549,7 +624,7 @@ var room8 = {
     }
 };
 
-var room9 = {
+var room10 = {
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -616,7 +691,7 @@ var room9 = {
     }
 };
 
-var room10 = {
+var room11 = {
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -684,7 +759,7 @@ var room10 = {
     }
 };
 
-var room11 = {
+var room12 = {
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -752,7 +827,7 @@ var room11 = {
     }
 };
 
-var room12 = {
+var room13 = {
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -819,7 +894,7 @@ var room12 = {
     }
 };
 
-var room13 = {
+var room14 = {
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -894,7 +969,7 @@ var room13 = {
     ]
 };
 
-var room14 = {
+var room15 = {
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -969,7 +1044,7 @@ var room14 = {
     ]
 };
 
-var room15 = {
+var room16 = {
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
