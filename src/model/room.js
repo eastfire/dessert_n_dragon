@@ -470,7 +470,7 @@ var RoomModel = Backbone.Model.extend({
     },
     heroAttack:function(){
         var movable = this.getMovableByPosition(getIncrementPosition(this.__hero.get("positions")[0], this.__hero.get("face")));
-        if ( movable instanceof EnemyModel && this.__hero.canAttack(movable)){
+        if ( movable instanceof EnemyModel && this.__hero.canAttack(movable) && movable.canBeAttack()){
             this.__hero.normalAttack(movable);
         } else {
             this.trigger("hero-attack-complete",this)
