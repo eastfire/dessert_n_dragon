@@ -9,6 +9,27 @@ var CHOICE_FACTORY_MAP = {
             removeChoice: null
         }
     },
+    getMove:function(roomModel, opt){
+        return {
+            description:"加"+opt.number+"次移动",
+            onChosen:function(roomModel){
+                roomModel.set("turnLimit",roomModel.get("turnLimit")+opt.number);
+            },
+            unlockChoice: null,
+            removeChoice: null
+        }
+    },
+    getRandomMove:function(roomModel, opt){
+        var number = Math.round(Math.random()*(opt.to-opt.from)+opt.from);
+        return {
+            description:"加"+number+"次移动",
+            onChosen:function(roomModel){
+                roomModel.set("turnLimit",roomModel.get("turnLimit")+number);
+            },
+            unlockChoice: null,
+            removeChoice: null
+        }
+    },
     getFullHp:function(roomModel){
         return {
             description:"恢复所有生命",
