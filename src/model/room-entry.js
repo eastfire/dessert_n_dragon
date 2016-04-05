@@ -819,6 +819,230 @@ var room12 = {
     }
 };
 
-var rooms = [room1, room2, room3, room4, room5, room6, room7, room8, room9, room10, room11, room12]
+var room13 = {
+    turnLimit:15,
+    scoreCondition: [100, 150, 200],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "red",
+            number: 2
+        },
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "yellow",
+            number: 2
+        },
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "blue",
+            number: 2
+        },
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "green",
+            number: 2
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    rules:{
+        canRefreshChoice: false
+    },
+    enemyPool:[{
+        type:"pudding",subtype:"red"
+    },{
+        type:"pudding",subtype:"yellow"
+    },{
+        type:"pudding",subtype:"green"
+    },{
+        type:"pudding",subtype:"blue"
+    }],
+    initTiles:[
+        [null,null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"},null,null],
+        [null,null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,null],
+        [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}],
+        [null,null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,null],
+        [null,null,{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null,null]
+    ],
+    initMovables:[
+    ],
+    name: "",
+    width: 8,
+    height: 8,
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:3}],
+        initHp: 100,
+        initMaxHp: 100,
+        initRequireExp: 10,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }, //normal, fix
+        isShowLevel: false
+    },
+    choicePool:[
+        { type:"getScore", opt:{ number:300} },
+        { type:"getFullHp" }
+    ]
+};
+
+var room14 = {
+    turnLimit:15,
+    scoreCondition: [100, 150, 200],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "red",
+            number: 2
+        },
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "yellow",
+            number: 2
+        },
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "blue",
+            number: 2
+        },
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "green",
+            number: 2
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    rules:{
+        canRefreshChoice: false
+    },
+    enemyPool:[{
+        type:"pudding",subtype:"red"
+    },{
+        type:"pudding",subtype:"yellow"
+    },{
+        type:"pudding",subtype:"green"
+    },{
+        type:"pudding",subtype:"blue"
+    }],
+    initTiles:[
+        [null,null,null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"},null],
+        [{type:"wall",subtype:"sw"},{type:"wall",subtype:"s"},{type:"wall",subtype:"s"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"}],
+        [{type:"wall",subtype:"se"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}],
+        [null,{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null,null,null]
+    ],
+    initMovables:[
+    ],
+    name: "",
+    width: 8,
+    height: 8,
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:3}],
+        initHp: 100,
+        initMaxHp: 100,
+        initRequireExp: 10,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }, //normal, fix
+        isShowLevel: false
+    },
+    choicePool:[
+        { type:"getScore", opt:{ number:300} },
+        { type:"getFullHp" }
+    ]
+};
+
+var room15 = {
+    turnLimit:15,
+    scoreCondition: [100, 150, 200],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "red",
+            number: 2
+        },
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "yellow",
+            number: 2
+        },
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "blue",
+            number: 2
+        },
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "green",
+            number: 2
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    rules:{
+        canRefreshChoice: false
+    },
+    enemyPool:[{
+        type:"pudding",subtype:"red"
+    },{
+        type:"pudding",subtype:"yellow"
+    },{
+        type:"pudding",subtype:"green"
+    },{
+        type:"pudding",subtype:"blue"
+    }],
+    initTiles:[
+        [{type:"wall",subtype:"sw"},{type:"wall",subtype:"s"},{type:"wall",subtype:"nw"},null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"w"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"}],
+        [{type:"wall",subtype:"se"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null],
+        [null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"}],
+        [{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"e"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null,{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    ],
+    initMovables:[
+    ],
+    name: "",
+    width: 8,
+    height: 8,
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:3}],
+        initHp: 100,
+        initMaxHp: 100,
+        initRequireExp: 10,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }, //normal, fix
+        isShowLevel: false
+    },
+    choicePool:[
+        { type:"getScore", opt:{ number:300} },
+        { type:"getFullHp" }
+    ]
+};
+var rooms = [room1, room2, room3, room4, room5, room6, room7, room8, room9, room10, room11, room12,room13,room14,room15]
 
         
