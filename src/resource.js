@@ -17,7 +17,9 @@ var times = {
     generateEnemy: 0.2,
 
     gameOverDialog: 0.5,
-    scoreBar: 0.1
+    scoreBar: 0.1,
+
+    card_sort: 0.3
 }
 
 var animations = {
@@ -109,7 +111,15 @@ var dimens = {
     scoreBarFG:{
         x: 240,
         y: 750
-    }
+    },
+    hands:{
+        y: 100
+    },
+    card_size:{
+        width: 120,
+        height: 168
+    },
+    hand_line_card_padding: 0
 }
 
 var texts_locale = {

@@ -3,11 +3,14 @@ var CARD_NAME_MAP = {
     "tail-slash":"扫尾"
 };
 
+
+
 var CardModel = Backbone.Model.extend({
     defaults: function () {
         return {
             type: "",
             subtype: null,
+            name: "",
 
             level: 1,
 

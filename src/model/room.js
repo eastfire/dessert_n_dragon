@@ -568,7 +568,7 @@ var RoomModel = Backbone.Model.extend({
     gainCard:function(opt){
         var cardModel = new CARD_MODEL_MAP[opt.type](opt);
         this.__hand.push(cardModel);
-        this.trigger("gainCard",this,cardModel);
+        this.trigger("change:hands",this,cardModel);
     }
 })
 

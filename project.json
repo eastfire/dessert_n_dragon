@@ -33,6 +33,8 @@
         "src/view/hero-sprite.js",
         "src/view/tile-sprite.js",
         "src/view/room-sprite.js",
+        "src/view/card-sprite.js",
+        "src/view/hand-sprite.js",
         "src/scene/intro.js",
         "src/scene/select-room.js",
         "src/scene/main-game.js",
