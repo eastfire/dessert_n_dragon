@@ -44,5 +44,11 @@ var CONDITION_FUN_FACTORY_MAP = {
         return function(roomModel) {
             return roomModel.get("score") >= opt.number;
         }
+    },
+    notEnough:function(roomModel){
+        return function(roomModel) {
+            var scoreCondition = roomModel.get("scoreCondition");
+            return scoreCondition && roomModel.get("score") >= scoreCondition[0];
+        }
     }
 };
