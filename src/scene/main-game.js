@@ -456,7 +456,7 @@ var MainLayer = cc.Layer.extend({
             return;
         }
 
-        if (this.maxScore < scoreCondition[2]) {
+        if (!this.maxScore || this.maxScore < scoreCondition[2]) {
             this.maxScore = scoreCondition[2];
         }
 
