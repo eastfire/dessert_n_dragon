@@ -49,7 +49,11 @@ var RoomSprite = BaseSprite.extend({
         },this)
     },
     generateMovable:function(roomModel, movableModel){
-        var movableSprite = new MOVABLE_SPRITE_MAP[movableModel.get("type")]({
+        var spriteClass = MOVABLE_SPRITE_MAP[movableModel.get("type")];
+        if ( !spriteClass && movableModel instanceof EnemyModel ) {
+            spriteClass = EnemySprite; //default enemy sprite
+        }
+        var movableSprite = new spriteClass({
             model: movableModel
         });
         this.addChild(movableSprite)
