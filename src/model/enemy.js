@@ -166,9 +166,7 @@ var EnemyModel = MovableModel.extend({
 var PuddingModel = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
-            type: "pudding",
-            name:"布丁",
-            flavor:"几乎没有攻击力"
+            type: "pudding"
         } )
     }
 })
@@ -177,28 +175,31 @@ MOVABLE_MODEL_MAP.pudding = PuddingModel;
 var CherryCakeModel = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
-            type: "cherrycake",
-            name:"樱桃蛋糕",
-            flavor:"攻击力普通"
+            type: "cherrycake"
         } )
+    },
+    expOfLevel:function(l){
+        return l*EXP_INFLATION_RATE*2
     },
     attackOfLevel:function(l){
         return l;
     }
 })
+MOVABLE_MODEL_MAP.cherrycake = CherryCakeModel;
 
 var RiceCakeModel = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
             type: "ricecake",
-            name:"年糕",
-            flavor:"始终粘着不动。攻击力高。",
             isMovable: false
         } )
+    },
+    expOfLevel:function(l){
+        return l*EXP_INFLATION_RATE*3
     },
     attackOfLevel:function(l){
         return l*3;
     }
 })
+MOVABLE_MODEL_MAP.ricecake = RiceCakeModel;
 
-MOVABLE_MODEL_MAP.cherrycake = CherryCakeModel;

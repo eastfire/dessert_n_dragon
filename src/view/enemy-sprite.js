@@ -51,6 +51,3 @@ var EnemySprite = MovableSprite.extend({
         this.model.afterDie(hero);
     }
 });
-
-MOVABLE_SPRITE_MAP.pudding = EnemySprite
-MOVABLE_SPRITE_MAP.cherrycake = EnemySprite

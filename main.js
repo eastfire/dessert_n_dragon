@@ -49,7 +49,7 @@
 var APP_NAME = "dessert_n_dragon"
 var score = {};
 var statistic = {}
-var gameStatus = { money: 10 };
+var gameStatus = { money: 100 };
 
 var loadStatistic = function() {
     var store = cc.sys.localStorage.getItem(APP_NAME+".statistic");

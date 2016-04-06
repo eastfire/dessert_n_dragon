@@ -36,6 +36,9 @@
         "src/view/card-sprite.js",
         "src/view/hand-sprite.js",
         "src/scene/intro.js",
+        "src/scene/game-menu-dialog.js",
+        "src/scene/game-over-dialog.js",
+        "src/scene/choice-dialog.js",
         "src/scene/select-room.js",
         "src/scene/main-game.js",
         "src/tutorial.js"

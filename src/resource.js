@@ -32,6 +32,11 @@ var colors = {
         inside: cc.color.WHITE
     },
 
+    moneyLabel:{
+        outline: cc.color.BLACK,
+        inside: cc.color.WHITE
+    },
+
     hpLabel:{
         outline: cc.color.BLACK,
         inside: cc.color.WHITE
@@ -70,6 +75,12 @@ var dimens = {
         fontSize: 28
     },
 
+    moneyLabel:{
+        x: 64,
+        y: 785,
+        outlineWidth: 2,
+        fontSize: 18
+    },
     hpLabel:{
         x: 64,
         y: 780,
@@ -124,7 +135,20 @@ var dimens = {
 
 var texts_locale = {
     zh: {
-
+        movable:{
+            cherrycake: {
+                name: "樱桃蛋糕士兵",
+                flavor: "攻击力普通"
+            },
+            pudding:{
+                name:"布丁巡逻兵",
+                flavor:"攻击力始终为1"
+            },
+            ricecake:{
+                name:"年糕守卫",
+                flavor:"始终粘着不动。攻击力高。"
+            }
+        }
     },
     en: {
 

@@ -246,7 +246,12 @@
                 <file name="src/view/hero-sprite.js"/>
                 <file name="src/view/tile-sprite.js"/>
                 <file name="src/view/room-sprite.js"/>
+                <file name="src/view/card-sprite.js"/>
+                <file name="src/view/hand-sprite.js"/>
                 <file name="src/scene/intro.js"/>
+                <file name="src/scene/game-menu-dialog.js"/>
+                <file name="src/scene/game-over-dialog.js"/>
+                <file name="src/scene/choice-dialog.js"/>
                 <file name="src/scene/select-room.js"/>
                 <file name="src/scene/main-game.js"/>
                 <file name="src/tutorial.js"/>

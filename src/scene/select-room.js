@@ -5,6 +5,9 @@ var SelectRoomLayer = cc.Layer.extend({
         var currentY = 40;
         var isFirst = true;
         var stageNumber = 1;
+
+        this.initMoney();
+
         _.each(rooms,function(roomEntry){
             var sprite = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( "palace1.png" ))
             sprite.attr({
@@ -80,6 +83,32 @@ var SelectRoomLayer = cc.Layer.extend({
             scaleY: 0.7
         })
         sprite.addChild(star);
+    },
+    initMoney:function(){
+        this.moneyLabel = new ccui.Text("", "Arial", dimens.moneyLabel.fontSize );
+        this.moneyLabel.enableOutline(colors.moneyLabel.outline, dimens.moneyLabel.outlineWidth);
+        this.moneyLabel.setTextColor(colors.moneyLabel.inside);
+        this.moneyLabel.attr({
+            //color: colors.tableLabel,
+            x: dimens.moneyLabel.x,
+            y: dimens.moneyLabel.y,
+            anchorX: 0
+        });
+        this.addChild(this.moneyLabel);
+
+        var icon = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( "icon-money.png" ))
+        icon.attr({
+            //color: colors.tableLabel,
+            x: dimens.moneyLabel.x - 15,
+            y: dimens.moneyLabel.y,
+            scaleX: 0.5,
+            scaleY: 0.5
+        });
+        this.addChild(icon);
+        this.renderMoney();
+    },
+    renderMoney:function(){
+        this.moneyLabel.setString(gameStatus.money);
     }
 });
 

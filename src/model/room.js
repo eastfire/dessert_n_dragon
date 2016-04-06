@@ -314,7 +314,7 @@ var RoomModel = Backbone.Model.extend({
                 positions: [{ //copy position
                     x:position.x,
                     y:position.y
-                }}],
+                }],
                 level: level,
                 type: type,
                 subtype: typeof typeObj === "string" ? null: typeObj.subtype
