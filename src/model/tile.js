@@ -3,8 +3,6 @@ var RoomTileModel = Backbone.Model.extend({
         return {
             type: "",
             subtype: null,
-            x: 0,
-            y: 0,
             isPassable: true,
             isCapture: false,
             canGenEnemy: true,
