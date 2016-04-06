@@ -478,7 +478,7 @@ var MainLayer = cc.Layer.extend({
         var conditionStrMap = {
             "kill": "吃掉足够多数量的敌人",
             "kill-level": "吃掉足够多等级的敌人",
-            "kill-max-level": "吃掉达到等级的敌人"
+            "kill-max-level": "吃掉等级足够高的敌人"
         };
 
         var label = new ccui.Text(conditionStrMap[conditionType], "Arial", dimens.conditionLabel.fontSize );
