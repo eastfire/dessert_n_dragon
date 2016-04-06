@@ -311,7 +311,10 @@ var RoomModel = Backbone.Model.extend({
         if ( MOVABLE_MODEL_MAP[type] ) {
             //FIXME : only single block enemy here. how to generate multi-block enemy?
             var model = new MOVABLE_MODEL_MAP[type]({
-                positions: [position],
+                positions: [{ //copy position
+                    x:position.x,
+                    y:position.y
+                }}],
                 level: level,
                 type: type,
                 subtype: typeof typeObj === "string" ? null: typeObj.subtype
