@@ -13,8 +13,6 @@ var room1 = {
     },{
         type:"pudding", subtype:"yellow"
     },{
-        type:"pudding", subtype:"green"
-    },{
         type:"pudding", subtype:"blue"
     }],
     initTiles:[
@@ -122,7 +120,25 @@ var room2 = {
         [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
         [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
     ],
-    initMovables:[],
+    initMovables:[{
+        type:"pudding",subtype:"yellow",
+        positions: [{x:1,y:1}]
+    },{
+        type:"pudding",subtype:"yellow",
+        positions: [{x:2,y:1}]
+    },{
+        type:"pudding",subtype:"green",
+        positions: [{x:3,y:1}]
+    },{
+        type:"pudding",subtype:"green",
+        positions: [{x:4,y:1}]
+    },{
+        type:"pudding",subtype:"yellow",
+        positions: [{x:5,y:1}]
+    },{
+        type:"pudding",subtype:"yellow",
+        positions: [{x:6,y:1}]
+    }],
     name: "",
     width: 9,
     height: 6,
@@ -143,7 +159,7 @@ var room2 = {
 
 var room3 = {
     turnLimit:15,
-    scoreCondition: [200, 300, 400],
+    scoreCondition: [200, 400, 600],
     winEveryConditions:[
         {
             conditionType:"kill-level",
@@ -168,10 +184,6 @@ var room3 = {
     ],
     loseAnyConditions:[
         "outOfTurn"
-    ],
-    loseEveryConditions:[
-        "outOfTurn".
-        "notEnoughScore"
     ],
     rules:{
         heroCanGetExp: false

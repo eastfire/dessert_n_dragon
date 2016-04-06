@@ -23,10 +23,12 @@ var GameOverDialog = cc.Scale9Sprite.extend({
 
         this.isWin = options.isWin;
 
+        var dialogWidth = cc.winSize.width - 50;
+
         this.attr({
             x:cc.winSize.width/2,
             y:cc.winSize.height*3/2,
-            width: cc.winSize.width - 100,
+            width: dialogWidth,
             height: 300
         })
 
@@ -34,7 +36,7 @@ var GameOverDialog = cc.Scale9Sprite.extend({
         var resultLabel = new cc.LabelTTF(this.isWin?"成功":"失败", null, 25 );
         resultLabel.attr({
             color: colors.gameOver.ok,
-            x: (cc.winSize.width - 100)/2,
+            x: (dialogWidth)/2,
             y: 260,
             anchorX: 0.5,
             anchorY: 0.5
@@ -47,16 +49,44 @@ var GameOverDialog = cc.Scale9Sprite.extend({
             var scoreLabel = new cc.LabelTTF(roomScore, null, 25);
             scoreLabel.attr({
                 color: colors.gameOver.ok,
-                x: (cc.winSize.width - 100) / 2,
+                x: (dialogWidth) / 2,
                 y: 200,
                 anchorX: 0.5,
                 anchorY: 0.5
             });
             this.addChild(scoreLabel);
-            this.addStar((cc.winSize.width - 100)/2-60, 160, (!scoreCondition && roomScore ) || (scoreCondition && roomScore >= scoreCondition[0] ) )
-            this.addStar((cc.winSize.width - 100)/2, 160, (!scoreCondition && roomScore ) || (scoreCondition &&roomScore >= scoreCondition[1]))
-            this.addStar((cc.winSize.width - 100)/2+60, 160,(!scoreCondition && roomScore ) || (scoreCondition &&roomScore >= scoreCondition[2]))
+            this.addStar((dialogWidth)/2-60, 160, (!scoreCondition && roomScore ) || (scoreCondition && roomScore >= scoreCondition[0] ) )
+            this.addStar((dialogWidth)/2, 160, (!scoreCondition && roomScore ) || (scoreCondition &&roomScore >= scoreCondition[1]))
+            this.addStar((dialogWidth)/2+60, 160,(!scoreCondition && roomScore ) || (scoreCondition &&roomScore >= scoreCondition[2]))
         }
+
+        var retryItem = new cc.MenuItemImage(
+            cc.spriteFrameCache.getSpriteFrame("button-short-default.png"),
+            cc.spriteFrameCache.getSpriteFrame("button-short-press.png"),
+            function () {
+                this.disappear(function(){
+                    cc.director.runScene(new RoomScene({
+                        roomEntry: rooms[this.model.get("stageNumber")],
+                        maxScore: score[this.model.get("stageNumber")]
+                    }));
+                });
+            }, this);
+
+        retryItem.attr({
+            x: dialogWidth/2 - 100,
+            y: 50,
+            anchorX: 0.5,
+            anchorY: 0.5
+        });
+        var retryLabel = new cc.LabelTTF("重试", null, 25 );
+        retryLabel.attr({
+            color: colors.gameOver.ok,
+            x: 90,
+            y: 18,
+            anchorX: 0.5,
+            anchorY: 0.5
+        });
+        retryItem.addChild(retryLabel);
 
         var okItem = new cc.MenuItemImage(
             cc.spriteFrameCache.getSpriteFrame("button-short-default.png"),
@@ -66,12 +96,12 @@ var GameOverDialog = cc.Scale9Sprite.extend({
             }, this);
 
         okItem.attr({
-            x: (cc.winSize.width - 100)/2,
+            x: this.isWin ? dialogWidth/2 : (dialogWidth/2 - 100),
             y: 50,
             anchorX: 0.5,
             anchorY: 0.5
         });
-        var okLabel = new cc.LabelTTF("继续", null, 25 );
+        var okLabel = new cc.LabelTTF(this.isWin?"继续":"放弃", null, 25 );
         okLabel.attr({
             color: colors.gameOver.ok,
             x: 90,
@@ -81,7 +111,7 @@ var GameOverDialog = cc.Scale9Sprite.extend({
         });
         okItem.addChild(okLabel);
 
-        var menu = new cc.Menu([okItem]);
+        var menu = new cc.Menu(this.isWin?[okItem]:[okItem, retryItem]);
         menu.x = 0;
         menu.y = 0;
         this.addChild(menu);
@@ -371,6 +401,15 @@ var MainLayer = cc.Layer.extend({
         this.addChild(menu);
     },
     initLabel:function(){
+        var hpIcon = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("icon-hp.png"));
+        hpIcon.attr({
+            x: dimens.hpLabel.x - 26,
+            y: dimens.hpLabel.y,
+            scaleX: 0.8,
+            scaleY: 0.8
+        })
+        this.addChild(hpIcon);
+
         this.hpLabel = new ccui.Text("", "Arial", dimens.hpLabel.fontSize );
         this.hpLabel.enableOutline(colors.hpLabel.outline, dimens.hpLabel.outlineWidth);
         this.hpLabel.setTextColor(colors.hpLabel.inside);
@@ -382,6 +421,15 @@ var MainLayer = cc.Layer.extend({
         });
         this.addChild(this.hpLabel);
 
+        var expIcon = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("icon-stomach.png"))
+        expIcon.attr({
+            x: dimens.expLabel.x - 26,
+            y: dimens.expLabel.y,
+            scaleX: 0.8,
+            scaleY: 0.8
+        })
+        this.addChild(expIcon);
+
         this.expLabel = new ccui.Text("", "Arial", dimens.expLabel.fontSize );
         this.expLabel.enableOutline(colors.expLabel.outline, dimens.expLabel.outlineWidth);
         this.expLabel.setTextColor(colors.expLabel.inside);
@@ -392,6 +440,7 @@ var MainLayer = cc.Layer.extend({
             anchorX: 0
         });
         this.addChild(this.expLabel);
+        expIcon.setVisible(currentRoom.get("rules").heroCanGetExp );
         this.expLabel.setVisible(currentRoom.get("rules").heroCanGetExp );
 
         this.scoreLabel = new ccui.Text("", "Arial", dimens.scoreLabel.fontSize );
@@ -525,7 +574,7 @@ var MainLayer = cc.Layer.extend({
         }
     },
     renderHp:function(){
-        this.hpLabel.setString("生命:"+currentRoom.getHero().get("hp")+"/"+currentRoom.getHero().get("maxHp"))
+        this.hpLabel.setString(currentRoom.getHero().get("hp")+"/"+currentRoom.getHero().get("maxHp"))
     },
     renderScore:function(){
         var score = currentRoom.get("score");
@@ -536,7 +585,7 @@ var MainLayer = cc.Layer.extend({
         }
     },
     renderExp:function(){
-        this.expLabel.setString("卡路里:"+currentRoom.getHero().get("exp")+"/"+currentRoom.getHero().get("requireExp"))
+        this.expLabel.setString(currentRoom.getHero().get("exp")+"/"+currentRoom.getHero().get("requireExp"))
     },
     renderTurnNumber:function(){
         if ( currentRoom.get("turnLimit") ) {

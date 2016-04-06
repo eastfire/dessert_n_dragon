@@ -45,10 +45,16 @@ var CONDITION_FUN_FACTORY_MAP = {
             return roomModel.get("score") >= opt.number;
         }
     },
-    notEnough:function(roomModel){
+    enoughScore:function(roomModel){
         return function(roomModel) {
             var scoreCondition = roomModel.get("scoreCondition");
-            return scoreCondition && roomModel.get("score") >= scoreCondition[0];
+            return !scoreCondition || roomModel.get("score") >= scoreCondition[0];
+        }
+    },
+    notEnoughScore:function(roomModel){
+        return function(roomModel) {
+            var scoreCondition = roomModel.get("scoreCondition");
+            return scoreCondition && roomModel.get("score") < scoreCondition[0];
         }
     }
 };

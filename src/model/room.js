@@ -128,11 +128,13 @@ var RoomModel = Backbone.Model.extend({
         this.on("gen-enemy-complete", this.afterGenEnemy, this)
         this.on("all-move-complete", this.heroAttack, this)
         this.on("hero-attack-complete", function(){
+            cc.log("hero-attack-complete")
             if ( this.passCheckCondition() ) {
                 this.enemyAttack();
             }
         },this)
         this.on("enemy-attack-complete", function(){
+            cc.log("enemy-attack-complete")
             if ( this.passCheckCondition() ) {
                 this.turnEnd();
             }
@@ -156,6 +158,9 @@ var RoomModel = Backbone.Model.extend({
         this.__winEveryConditions = [];
         this.__loseAnyConditions = [];
         this.__loseEveryConditions = [];
+        if ( this.get("scoreCondition") ) {
+            this.get("winEveryConditions").push("enoughScore");
+        }
         this.__initCondition(this.__winAnyConditions, this.get("winAnyConditions"));
         this.__initCondition(this.__winEveryConditions, this.get("winEveryConditions"));
         this.__initCondition(this.__loseAnyConditions, this.get("loseAnyConditions"));
@@ -235,10 +240,14 @@ var RoomModel = Backbone.Model.extend({
     removeMovable:function(movable){
         _.each(movable.get("positions"),function(position) {
             if ( this.__movableMap[position.x][position.y] === movable )
-                this.__movableMap[position.x][position.y] = null;
+                delete this.__movableMap[position.x][position.y];
         },this);
         var index = this.__movables.indexOf(movable);
-        if ( index !== -1) this.__movables.splice(index,1)
+        if ( index !== -1) {
+            this.__movables.splice(index,1)
+        } else {
+            cc.warn("Cant find movable in this.__movables");
+        }
         this.trigger("remove:movables", this, movable);
         movable.destroy();
     },
@@ -277,6 +286,7 @@ var RoomModel = Backbone.Model.extend({
         return tiles;
     },
     turnStart:function(){
+        cc.log("turn-complete")
         //for hero
         this.__hero.onTurnStart();
         //for enemy
@@ -313,6 +323,7 @@ var RoomModel = Backbone.Model.extend({
         }
     },
     generateEnemy:function(){
+        cc.log("generateEnemy")
         var currentGenEnemyStrategy = this.get("genEnemyStrategy")[this.get("genEnemyStrategyIndex")]
         if ( currentGenEnemyStrategy ){
 
@@ -340,9 +351,16 @@ var RoomModel = Backbone.Model.extend({
                 this.set("genEnemyStrategyTurn",0);
                 this.set("genEnemyStrategyIndex", this.get("genEnemyStrategyIndex")+1);
             }
+            if ( !candidates.length ) {
+                cc.log("no enemy gen");
+                this.trigger("gen-enemy-complete",this)
+            }
+        } else {
+            this.trigger("gen-enemy-complete",this)
         }
     },
     afterGenEnemy:function(){
+        cc.log("afterGenEnemy")
         this.__acceptInput = true;
     },
     genLevelUpChoices:function(){
@@ -360,6 +378,7 @@ var RoomModel = Backbone.Model.extend({
         return this.__acceptInput;
     },
     shift:function(direction){
+        cc.log("shift"+direction);
         this.__acceptInput = false;
         var maxStep = 0;
 
@@ -469,6 +488,7 @@ var RoomModel = Backbone.Model.extend({
         this.trigger("all-move-complete",this)
     },
     heroAttack:function(){
+        cc.log("heroAttack")
         var movable = this.getMovableByPosition(getIncrementPosition(this.__hero.get("positions")[0], this.__hero.get("face")));
         if ( movable instanceof EnemyModel && this.__hero.canAttack(movable) && movable.canBeAttack()){
             this.__hero.normalAttack(movable);
@@ -499,6 +519,7 @@ var RoomModel = Backbone.Model.extend({
             this.trigger("enemy-attack-complete",this)
     },
     checkAllMovableGenerated:function(){
+        cc.log("checkAllMovableGenerated")
         if (_.every(this.__movables,function(movable){
             return movable.get("generateOver")
         },this))
@@ -538,7 +559,11 @@ var RoomModel = Backbone.Model.extend({
         },this);
     },
     gameOver:function(isWin){
-        cc.log("game over: "+isWin);
+        if ( isWin ) {
+            if ( this.get("turnLimit") ) {
+                this.getScore( ( this.get("turnLimit") - this.get("turnNumber") ) * 50 );
+            }
+        }
         this.trigger("game-over", this, isWin);
     },
     logEnemyDie:function(enemyModel){

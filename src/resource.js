@@ -71,13 +71,13 @@ var dimens = {
     },
 
     hpLabel:{
-        x: 14,
+        x: 64,
         y: 780,
         outlineWidth: 2,
         fontSize: 22
     },
     expLabel:{
-        x: 14,
+        x: 64,
         y: 750,
         outlineWidth: 2,
         fontSize: 22

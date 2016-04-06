@@ -4,6 +4,8 @@ var EXP_INFLATION_RATE = 10;
 var EnemyModel = MovableModel.extend({
     defaults:function(){
         return _.extend( MovableModel.prototype.defaults.call(this),{
+            name:"",
+            flavor:"",
             attackRage: 1,
             attackType: ATTACK_TYPE_MELEE,
             baseAttack: 1,
@@ -22,12 +24,16 @@ var EnemyModel = MovableModel.extend({
         var l = this.get("level");
         this.set("exp",this.expOfLevel(l))
         this.set("score", this.scoreOfLevel(l) );
+        this.set("baseAttack", this.attackOfLevel(l) );
     },
     expOfLevel:function(l){
         return l*EXP_INFLATION_RATE
     },
     scoreOfLevel:function(l){
         return (l+1)*l/2*SCORE_INFLATION_RATE
+    },
+    attackOfLevel:function(l){
+        return 1;
     },
     beforeBeAttacked:function(hero){
     },
@@ -160,7 +166,9 @@ var EnemyModel = MovableModel.extend({
 var PuddingModel = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
-            type: "pudding"
+            type: "pudding",
+            name:"布丁",
+            flavor:"几乎没有攻击力"
         } )
     }
 })
@@ -169,8 +177,27 @@ MOVABLE_MODEL_MAP.pudding = PuddingModel;
 var CherryCakeModel = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
-            type: "cherrycake"
+            type: "cherrycake",
+            name:"樱桃蛋糕",
+            flavor:"攻击力普通"
         } )
+    },
+    attackOfLevel:function(l){
+        return l;
     }
 })
+
+var RiceCakeModel = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "ricecake",
+            name:"年糕",
+            flavor:"始终粘着不动"
+        } )
+    },
+    attackOfLevel:function(l){
+        return l;
+    }
+})
+
 MOVABLE_MODEL_MAP.cherrycake = CherryCakeModel;
