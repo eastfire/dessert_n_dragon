@@ -192,11 +192,12 @@ var RiceCakeModel = EnemyModel.extend({
         return _.extend( EnemyModel.prototype.defaults.call(this),{
             type: "ricecake",
             name:"年糕",
-            flavor:"始终粘着不动"
+            flavor:"始终粘着不动。攻击力高。",
+            isMovable: false
         } )
     },
     attackOfLevel:function(l){
-        return l;
+        return l*3;
     }
 })
 
