@@ -59,6 +59,20 @@ var colors = {
     },
     gameOver:{
         ok: cc.color.BLACK
+    },
+    movableInfo:{
+        levelLabel:{
+            outline: cc.color.BLACK,
+            inside: cc.color.WHITE
+        },
+        descLabel:{
+            outline: cc.color.BLACK,
+            inside: cc.color.WHITE
+        },
+        nameLabel:{
+            outline: cc.color.BLACK,
+            inside: cc.color.WHITE
+        }
     }
 }
 
@@ -162,15 +176,15 @@ var texts_locale = {
         movable:{
             cherrycake: {
                 name: "樱桃蛋糕士兵",
-                flavor: "攻击力普通"
+                desc: "攻击力普通"
             },
             pudding:{
                 name:"布丁巡逻兵",
-                flavor:"攻击力始终为1"
+                desc:"攻击力始终为1"
             },
             ricecake:{
                 name:"年糕守卫",
-                flavor:"始终粘着不动。攻击力高。"
+                desc:"始终粘着不动。攻击力高。"
             }
         }
     },
