@@ -50,7 +50,6 @@ var room1 = {
             positions: [{x:1,y:1}]
         }
     ],
-    name: "",
     width: 7,
     height: 7,
     initHero: {
@@ -139,7 +138,6 @@ var room2 = {
         type:"pudding",subtype:"yellow",
         positions: [{x:6,y:1}]
     }],
-    name: "",
     width: 9,
     height: 6,
     initHero: {
@@ -209,7 +207,6 @@ var room3 = {
     ],
     initMovables:[
     ],
-    name: "",
     width: 8,
     height: 8,
     initHero: {
@@ -279,7 +276,6 @@ var room4 = {
     ],
     initMovables:[
     ],
-    name: "",
     width: 8,
     height: 8,
     initHero: {
@@ -345,7 +341,6 @@ var room5 = {
     ],
     initMovables:[
     ],
-    name: "",
     width: 7,
     height: 8,
     initHero: {
@@ -418,7 +413,6 @@ var room6 = {
             positions: [{x:5,y:5}]
         }
     ],
-    name: "",
     width: 8,
     height: 8,
     initHero: {
@@ -490,7 +484,6 @@ var room7 = {
     ],
     initMovables:[
     ],
-    name: "",
     width: 8,
     height: 8,
     initHero: {
@@ -562,7 +555,6 @@ var room8 = {
     ],
     initMovables:[
     ],
-    name: "",
     width: 8,
     height: 8,
     initHero: {
@@ -634,7 +626,6 @@ var room9 = {
     ],
     initMovables:[
     ],
-    name: "",
     width: 8,
     height: 8,
     initHero: {
@@ -706,7 +697,6 @@ var room10 = {
     ],
     initMovables:[
     ],
-    name: "",
     width: 8,
     height: 7,
     initHero: {
@@ -779,7 +769,6 @@ var room11 = {
     ],
     initMovables:[
     ],
-    name: "",
     width: 9,
     height: 9,
     initHero: {
@@ -852,7 +841,6 @@ var room12 = {
     ],
     initMovables:[
     ],
-    name: "",
     width: 9,
     height: 9,
     initHero: {
@@ -924,7 +912,6 @@ var room13 = {
     ],
     initMovables:[
     ],
-    name: "",
     width: 8,
     height: 8,
     initHero: {
@@ -999,7 +986,6 @@ var room14 = {
     ],
     initMovables:[
     ],
-    name: "",
     width: 8,
     height: 8,
     initHero: {
@@ -1079,7 +1065,6 @@ var room15 = {
     ],
     initMovables:[
     ],
-    name: "",
     width: 8,
     height: 8,
     initHero: {
@@ -1155,7 +1140,6 @@ var room16 = {
     ],
     initMovables:[
     ],
-    name: "",
     width: 8,
     height: 8,
     initHero: {
@@ -1230,7 +1214,6 @@ var room17 = {
         [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
     ],
     initMovables:[],
-    name: "",
     width: 7,
     height: 8,
     initHero: {
@@ -1305,7 +1288,6 @@ var room18 = {
         [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null,null,null,null]
     ],
     initMovables:[],
-    name: "",
     width: 8,
     height: 8,
     initHero: {
@@ -1380,7 +1362,6 @@ var room19 = {
         [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
     ],
     initMovables:[],
-    name: "",
     width: 8,
     height: 8,
     initHero: {
@@ -1452,7 +1433,6 @@ var room20 = {
     ],
     initMovables:[
     ],
-    name: "",
     width: 8,
     height: 8,
     initHero: {
@@ -1475,6 +1455,85 @@ var room20 = {
     ]
 };
 
-var rooms = [room1, room2, room3, room4, room5, room6, room7, room8, room9, room10, room11, room12,room13,room14,room15,room16,room17,room18,room19]
+var room21 = {
+    turnLimit:18,
+    scoreCondition: [300, 600, 1000],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"ricecake",
+            number: 8
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{
+        type:"pudding",subtype:"red"
+    },{
+        type:"pudding",subtype:"yellow"
+    },{
+        type:"pudding",subtype:"green"
+    }],
+    initTiles:[
+        [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+        [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    ],
+    initMovables:[
+        {
+            type:"ricecake",
+            positions: [{x:1,y:5}]
+        },{
+            type:"ricecake",
+            positions: [{x:2,y:1}]
+        },{
+            type:"ricecake",
+            positions: [{x:2,y:3}]
+        },{
+            type:"ricecake",
+            positions: [{x:3,y:5}]
+        },{
+            type:"ricecake",
+            positions: [{x:4,y:2}]
+        },{
+            type:"ricecake",
+            positions: [{x:5,y:4}]
+        },{
+            type:"ricecake",
+            positions: [{x:5,y:6}]
+        },{
+            type:"ricecake",
+            positions: [{x:6,y:2}]
+        }
+    ],
+    width: 8,
+    height: 8,
+    initHero: {
+        type:"normalHero",
+        positions: [{x:5,y:5}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }, //normal, fix
+        isShowLevel: false
+    },
+    choicePool:[
+        { type:"getScore", opt:{ number:300} },
+        { type:"getFullHp" },
+        { type:"getRandomMove", opt:{ from:3, to:5} }
+    ]
+};
+
+var rooms = [room1, room2, room3, room4, room5, room6, room7, room8, room9, room10, room11, room12,room13,room14,room15,room16,room17,room18,room19,room20,room21]
 
         
