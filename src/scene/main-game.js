@@ -11,6 +11,7 @@ KEY_DIRECTION[KEY_LEFT] = 3;
 
 var SWIPE_THRESHOLD_WIDTH = 20;
 var SWIPE_THRESHOLD = 50;
+var CLICK_THRESHOLD = 6;
 
 var MainLayer = cc.Layer.extend({
     ctor:function (options) {
@@ -334,6 +335,19 @@ var MainLayer = cc.Layer.extend({
         layer.addChild(dialog);
         dialog.appear();
     },
+    showMovableInfoDialog:function(movableModel){
+        var layer = new ModalDialogLayer({
+
+        });
+        this.addChild(layer,200);
+
+        var dialog = new MovableInfoDialog({
+            model: movableModel,
+            modalLayer: layer
+        })
+        layer.addChild(dialog);
+        dialog.appear();
+    },
     initEvent:function() {
         currentRoom.on("change:score",this.onScoreChange,this);
         currentRoom.getHero().on("change:hp",this.onHpChange, this);
@@ -360,6 +374,7 @@ var MainLayer = cc.Layer.extend({
                 }
             }, this);
         }
+        var self = this;
         cc.eventManager.addListener({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             swallowTouches: true,
@@ -398,6 +413,12 @@ var MainLayer = cc.Layer.extend({
                         window.currentRoomSprite.shift(DIRECTION_RIGHT)
                     } else if ( currentX < target.prevX - SWIPE_THRESHOLD ) {
                         window.currentRoomSprite.shift(DIRECTION_LEFT)
+                    }
+                }
+                if ( Math.abs(currentY - target.prevY) < CLICK_THRESHOLD && Math.abs(currentX - target.prevX) < CLICK_THRESHOLD ) {
+                    var movableModel = window.currentRoomSprite.getMovableByTouchPosition(currentX,currentY);
+                    if ( movableModel ) {
+                        self.showMovableInfoDialog(movableModel);
                     }
                 }
             }
