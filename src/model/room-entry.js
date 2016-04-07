@@ -1087,7 +1087,7 @@ var room15 = {
         positions: [{x:3,y:3}],
         initHp: 100,
         initMaxHp: 100,
-        initRequireExp: 10,
+        initRequireExp: 100,
         maxHpStrategy:{
             type: "normal"
         },
