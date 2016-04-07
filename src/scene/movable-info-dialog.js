@@ -15,22 +15,31 @@ var MovableInfoDialog = cc.Scale9Sprite.extend({
         })
         
         if ( this.model instanceof EnemyModel ) {
-            this.initMovableImage();
             this.initMovableLabel();
         }
     },
-    initMovableImage:function(){
+    initMovableLabel:function(){
         var frameName = this.model.get("type")+( this.model.get("subtype") ? ("-"+this.model.get("subtype") ) : "")+".png";
         var sprite = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( frameName ));
         sprite.attr({
-            x:80,
-            y:this.height - 80,
+            x:dimens.movableInfo.portrait.x,
+            y:dimens.movableInfo.portrait.y,
             scaleX: 1,
             scaleY: 1
         })
         this.addChild(sprite);
-    },
-    initMovableLabel:function(){
+        
+        if ( this.model.get("level") ) {
+            var label = new ccui.Text("lv:"+this.model.get("level"), "Arial", dimens.movableInfo.levelLabel.fontSize );
+            label.enableOutline(colors.movableInfo.levelLabel.outline, dimens.movableInfo.levelLabel.outlineWidth);
+            label.setTextColor(colors.movableInfo.levelLabel.inside);
+            label.attr({
+                x: dimens.movableInfo.levelLabel.x,
+                y: dimens.movableInfo.levelLabel.y
+            });
+            this.addChild(label);
+        }
+        
         var label = new ccui.Text(texts.movable[this.model.get("type")].name, "Arial", dimens.movableInfo.nameLabel.fontSize );
         label.enableOutline(colors.movableInfo.nameLabel.outline, dimens.movableInfo.nameLabel.outlineWidth);
         label.setTextColor(colors.movableInfo.nameLabel.inside);
