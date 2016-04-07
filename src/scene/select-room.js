@@ -7,7 +7,18 @@ var SelectRoomLayer = cc.Layer.extend({
         var stageNumber = 1;
 
         this.initMoney();
-
+        var stepY = 40；
+        
+        this.scrollView = new ccui.ScrollView();
+        this.scrollView.setDirection(ccui.ScrollView.DIR_VERTICAL);
+        this.scrollView.setTouchEnable(true);
+        this.scrollView.setContentSize(cc.size(cc.winSzie.width, cc.winSize.height));
+        
+        this.scrollView.x = cc.winSize.width/2;
+        this.scrollView.y = cc.winSize.height/2;
+        this.scrollView.setInnerContainerSize(cc.size(this.scrollView.width, Math.min(this.scrollView.height, rooms.length * stepY+currentY)));
+        this.addChild(this.scrollView);
+        
         _.each(rooms,function(roomEntry){
             var sprite = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( "palace1.png" ))
             sprite.attr({
@@ -16,7 +27,7 @@ var SelectRoomLayer = cc.Layer.extend({
                 anchorX: 0.5,
                 anchorY: 0.5
             })
-            this.addChild(sprite);
+            this.scrollView.addChild(sprite);
             var selectable = false;
             roomEntry.stageNumber = stageNumber;
             var roomScore = score[stageNumber]// = 100;
@@ -70,7 +81,7 @@ var SelectRoomLayer = cc.Layer.extend({
                     opacity: 64
                 })
             }
-            currentY += 40;
+            currentY += stepY;
             stageNumber++;
         },this)
     },
