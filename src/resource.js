@@ -130,7 +130,31 @@ var dimens = {
         width: 120,
         height: 168
     },
-    hand_line_card_padding: 0
+    hand_line_card_padding: 0,
+    movableInfo:{
+        nameLabel:{
+            x: 250,
+            y: 500,
+            fontSize: 24,
+            outlineWidth: 2
+        },
+        descLabel:{
+            x: 120,
+            y: 450,
+            fontSize: 24,
+            outlineWidth: 2
+        },
+        portrait:{
+            x: 80,
+            y: 450
+        },
+        levelLabel:{
+            x: 80,
+            y: 250,
+            fontSize: 20,
+            outlineWidth: 2
+        }
+    }
 }
 
 var texts_locale = {
