@@ -9,12 +9,18 @@ var RoomSprite = BaseSprite.extend({
     },
     getRect:function(){
         if ( !this.rect ) {
-            var realWidth = (this.model.get("width") - 2) * dimens.tileSize.width * this.scaleX;
-            var realHeight = (this.model.get("height") - 2) * dimens.tileSize.height * this.scaleY;
-            this.rect = cc.rect(this.x - realWidth / 2, this.y - realHeight / 2,
-                realWidth, realHeight);
+            this.rect = cc.rect(this.x - cc.winSize.width / 2, this.y - cc.winSize.width / 2,
+                cc.winSize.width, cc.winSize.width);
         }
         return this.rect;
+    },
+    getMovableByTouchPosition:function(x,y){
+        var px = Math.floor((x - this.x + cc.winSize.width/2 + dimens.tileSize.width - padding)/(dimens.tileSize.width*this.scaleX));
+        var py = Math.floor((y - this.y + cc.winSize.width/2 + dimens.tileSize.width - padding)/(dimens.tileSize.height*this.scaleX));
+        if ( px >= 0 && py >= 0 ) {
+            return this.model.getMovableByPosition(px,py);
+        }
+        return null;
     },
     renderAllTile:function(){
         var totalWidth = (this.model.get("width"))*dimens.tileSize.width
