@@ -2,7 +2,8 @@ var HandSprite = BaseSprite.extend({
     ctor: function (options) {
         this._super(options);
 
-        this.renderCards();
+        this.initCards();
+        this.onHandChange();
     },
     onEnter:function(){
         this._super();
@@ -18,9 +19,20 @@ var HandSprite = BaseSprite.extend({
     closeEvent:function(){
         this.model.off("change:hands",this.onHandChange);
     },
+    initCards:function(){
+        var cards = this.model.getCards();
+        _.each(cards,function(cardModel){
+            var cardSprite = new CardSprite({model:cardModel});
+            cardSprite.attr({
+                x:0,
+                y:0
+            })
+            this.addChild(cardSprite);
+        },this);
+    },
     onHandChange:function(){
         var needCurve = true;
-        var cards = this.model.get("hands");
+        var cards = this.model.getCards();
         var index = 0;
         if ( cards.length == 0 ) {
             return;
@@ -53,14 +65,15 @@ var HandSprite = BaseSprite.extend({
                 realY = y;
             }
             var sprite = this.getParent().getChildByName(cardModel.cid);
-            if ( sprite != null ) {
-                if ( sprite.x != x || sprite.y != y) {
-                    sprite.runAction(
-                        cc.spawn(
-                            cc.moveTo(times.card_sort, realX, realY),
-                            cc.rotateTo(times.card_sort, cardAngle, cardAngle)
-                        ));
-                }
+            if ( sprite === null ) {
+                sprite = new CardSprite({model:cardModel});
+            }
+            if ( sprite.x != x || sprite.y != y) {
+                sprite.runAction(
+                    cc.spawn(
+                        cc.moveTo(times.card_sort, realX, realY),
+                        cc.rotateTo(times.card_sort, cardAngle, cardAngle)
+                    ));
             }
             sprite.zIndex = i;
             i++;

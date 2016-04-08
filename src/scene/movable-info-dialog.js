@@ -5,6 +5,8 @@ var MovableInfoDialog = cc.Scale9Sprite.extend({
         this.model = options.model;
         this.modalLayer = options.modalLayer;
 
+        cc.log(this.model.get("type"))
+
         this.dialogWidth = cc.winSize.width - 50;
         this.dialogHeight = 400;
         this.attr({
@@ -30,7 +32,7 @@ var MovableInfoDialog = cc.Scale9Sprite.extend({
         this.addChild(sprite);
         
         if ( this.model.get("level") ) {
-            var label = new ccui.Text("lv:"+this.model.get("level"), "Arial", dimens.movableInfo.levelLabel.fontSize );
+            var label = new ccui.Text("lv"+this.model.get("level"), "Arial", dimens.movableInfo.levelLabel.fontSize );
             label.enableOutline(colors.movableInfo.levelLabel.outline, dimens.movableInfo.levelLabel.outlineWidth);
             label.setTextColor(colors.movableInfo.levelLabel.inside);
             label.attr({
@@ -49,12 +51,14 @@ var MovableInfoDialog = cc.Scale9Sprite.extend({
         });
         this.addChild(label);
         
-        var label = new ccui.Text(texts.movable[this.model.get("type")].desc, "Arial", dimens.movableInfo.descLabel.fontSize );
-        label.enableOutline(colors.movableInfo.descLabel.outline, dimens.movableInfo.descLabel.outlineWidth);
-        label.setTextColor(colors.movableInfo.descLabel.inside);
+        var label = new cc.LabelTTF(texts.movable[this.model.get("type")].desc, "Arial", dimens.movableInfo.descLabel.fontSize);
         label.attr({
+            color:colors.movableInfo.descLabel.inside,
             x: dimens.movableInfo.descLabel.x,
-            y: dimens.movableInfo.descLabel.y
+            y: dimens.movableInfo.descLabel.y,
+            anchorY: 1,
+            textAlign: cc.TEXT_ALIGNMENT_LEFT,
+            boundingWidth : dimens.movableInfo.descLabel.boundingWidth
         });
         this.addChild(label);
     },

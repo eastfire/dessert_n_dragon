@@ -1,4 +1,4 @@
-var room1 = {
+var room1 = { //初始
     turnLimit:6,
     scoreCondition: null,
     winEveryConditions:[
@@ -1055,7 +1055,7 @@ var room15 = {
     }],
     initTiles:[
         [null,null,null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"},null],
-        [{type:"wall",subtype:"sw"},{type:"wall",subtype:"s"},{type:"wall",subtype:"s"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null],
+        [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null],
         [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null],
         [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"}],
         [{type:"wall",subtype:"se"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
@@ -1165,7 +1165,7 @@ var room16 = {
 
 var room17 = {
     turnLimit:12,
-    scoreCondition: null,
+    scoreCondition: [100, 150, 200],
     winEveryConditions:[
         {
             conditionType:"kill-level",
@@ -1238,7 +1238,7 @@ var room17 = {
 
 var room18 = {
     turnLimit:12,
-    scoreCondition: null,
+    scoreCondition: [100, 150, 200],
     winEveryConditions:[
         {
             conditionType:"kill-level",
@@ -1312,7 +1312,7 @@ var room18 = {
 
 var room19 = {
     turnLimit:12,
-    scoreCondition: null,
+    scoreCondition: [100, 150, 200],
     winEveryConditions:[
         {
             conditionType:"kill-level",
@@ -1456,7 +1456,7 @@ var room20 = {
 };
 
 var room21 = {
-    turnLimit:18,
+    turnLimit:15,
     scoreCondition: [300, 600, 1000],
     winEveryConditions:[
         {
@@ -1486,37 +1486,20 @@ var room21 = {
         [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
     ],
     initMovables:[
-        {
-            type:"ricecake",
-            positions: [{x:1,y:5}]
-        },{
-            type:"ricecake",
-            positions: [{x:2,y:1}]
-        },{
-            type:"ricecake",
-            positions: [{x:2,y:3}]
-        },{
-            type:"ricecake",
-            positions: [{x:3,y:5}]
-        },{
-            type:"ricecake",
-            positions: [{x:4,y:2}]
-        },{
-            type:"ricecake",
-            positions: [{x:5,y:4}]
-        },{
-            type:"ricecake",
-            positions: [{x:5,y:6}]
-        },{
-            type:"ricecake",
-            positions: [{x:6,y:2}]
-        }
+        { type:"ricecake", positions: [{x:1,y:5}] },
+        { type:"ricecake", positions: [{x:2,y:1}] },
+        { type:"ricecake", positions: [{x:2,y:3}] },
+        { type:"ricecake", positions: [{x:3,y:5}] },
+        { type:"ricecake", positions: [{x:4,y:2}] },
+        { type:"ricecake", positions: [{x:5,y:4}] },
+        { type:"ricecake", positions: [{x:5,y:6}] },
+        { type:"ricecake", positions: [{x:6,y:2}] }
     ],
     width: 8,
     height: 8,
     initHero: {
         type:"normalHero",
-        positions: [{x:5,y:5}],
+        positions: [{x:3,y:4}],
         initHp: 100,
         initMaxHp: 100,
         maxHpStrategy:{
@@ -1534,6 +1517,8 @@ var room21 = {
     ]
 };
 
-var rooms = [room1, room2, room3, room4, room5, room6, room7, room8, room9, room10, room11, room12,room13,room14,room15,room16,room17,room18,room19,room20,room21]
+var rooms = [room1, room2, room3, room4, room5, room6, room7, room8, room9, room10,
+    room11, room12,room13,room14,room15,room16,room17,room18,room19,room20,
+    room21]
 
         

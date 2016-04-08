@@ -29,6 +29,15 @@ var MainLayer = cc.Layer.extend({
         })
         this.addChild(currentRoomSprite);
 
+        var handSprite = new HandSprite({
+            model: room
+        })
+        handSprite.attr({
+            x: cc.winSize.width/2,
+            y: 100
+        })
+        this.addChild(handSprite);
+
         this.initMenu();
         this.initLabel();
         this.initConditionLabel();
@@ -337,7 +346,7 @@ var MainLayer = cc.Layer.extend({
     },
     showMovableInfoDialog:function(movableModel){
         var layer = new ModalDialogLayer({
-
+            clickSideCancel: true
         });
         this.addChild(layer,200);
 
@@ -415,10 +424,16 @@ var MainLayer = cc.Layer.extend({
                         window.currentRoomSprite.shift(DIRECTION_LEFT)
                     }
                 }
+
                 if ( Math.abs(currentY - target.prevY) < CLICK_THRESHOLD && Math.abs(currentX - target.prevX) < CLICK_THRESHOLD ) {
                     var movableModel = window.currentRoomSprite.getMovableByTouchPosition(currentX,currentY);
                     if ( movableModel ) {
-                        self.showMovableInfoDialog(movableModel);
+                        if ( movableModel instanceof HeroModel ) {
+
+                        } else {
+                            cc.log("show " + movableModel.get("type"));
+                            self.showMovableInfoDialog(movableModel);
+                        }
                     }
                 }
             }

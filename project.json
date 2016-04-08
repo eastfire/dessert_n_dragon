@@ -16,6 +16,7 @@
         "src/libs/utils.js",
         "src/libs/cocos-utils.js",
         "src/resource.js",
+        "src/texts.js",
         "src/common.js",
         "src/model/movable.js",
         "src/model/enemy.js",
@@ -25,6 +26,7 @@
         "src/model/condition.js",
         "src/model/choice.js",
         "src/model/room.js",
+        "src/model/card.js",
         "src/model/skill.js",
         "src/model/room-entry.js",
         "src/view/base-sprite.js",
@@ -39,6 +41,7 @@
         "src/scene/game-menu-dialog.js",
         "src/scene/game-over-dialog.js",
         "src/scene/choice-dialog.js",
+        "src/scene/movable-info-dialog.js",
         "src/scene/select-room.js",
         "src/scene/main-game.js",
         "src/tutorial.js"

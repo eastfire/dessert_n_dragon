@@ -7,18 +7,20 @@ var SelectRoomLayer = cc.Layer.extend({
         var stageNumber = 1;
 
         this.initMoney();
-        var stepY = 40；
+        var stepY = 50;
         
         this.scrollView = new ccui.ScrollView();
         this.scrollView.setDirection(ccui.ScrollView.DIR_VERTICAL);
-        this.scrollView.setTouchEnable(true);
-        this.scrollView.setContentSize(cc.size(cc.winSzie.width, cc.winSize.height));
-        
-        this.scrollView.x = cc.winSize.width/2;
-        this.scrollView.y = cc.winSize.height/2;
-        this.scrollView.setInnerContainerSize(cc.size(this.scrollView.width, Math.min(this.scrollView.height, rooms.length * stepY+currentY)));
+        this.scrollView.setTouchEnabled(true);
+        this.scrollView.setContentSize(cc.size(cc.winSize.width, cc.winSize.height));
+
+        this.scrollView.x = 0;
+        this.scrollView.y = 0;
+        this.scrollView.setInnerContainerSize(cc.size(this.scrollView.width, Math.max(this.scrollView.height, rooms.length * stepY+currentY)));
+
         this.addChild(this.scrollView);
-        
+
+        var firstUnpassed = 0;
         _.each(rooms,function(roomEntry){
             var sprite = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( "palace1.png" ))
             sprite.attr({
@@ -43,12 +45,14 @@ var SelectRoomLayer = cc.Layer.extend({
                 }
             } else {
                 if (isFirst) {
+                    firstUnpassed = stageNumber;
                     selectable = true;
                     isFirst = false;
                 } else {
                     selectable = false;
                 }
             }
+//            selectable = true;
             if ( selectable ) {
                 (function( roomEntry) {
                     cc.eventManager.addListener({
@@ -84,6 +88,8 @@ var SelectRoomLayer = cc.Layer.extend({
             currentY += stepY;
             stageNumber++;
         },this)
+
+        this.scrollView.scrollToPercentVertical( 100*(1-firstUnpassed/rooms.length), 0.5,true);
     },
     addStar:function(sprite, position){
         var star = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( "star.png" ))

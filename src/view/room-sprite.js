@@ -15,8 +15,8 @@ var RoomSprite = BaseSprite.extend({
         return this.rect;
     },
     getMovableByTouchPosition:function(x,y){
-        var px = Math.floor((x - this.x + cc.winSize.width/2 + dimens.tileSize.width - padding)/(dimens.tileSize.width*this.scaleX));
-        var py = Math.floor((y - this.y + cc.winSize.width/2 + dimens.tileSize.width - padding)/(dimens.tileSize.height*this.scaleX));
+        var px = Math.floor((x - this.x + cc.winSize.width/2 + dimens.tileSize.width*this.scaleX - padding)/(dimens.tileSize.width*this.scaleX));
+        var py = Math.floor((y - this.y + cc.winSize.width/2 + dimens.tileSize.width*this.scaleX - padding)/(dimens.tileSize.height*this.scaleX));
         if ( px >= 0 && py >= 0 ) {
             return this.model.getMovableByPosition(px,py);
         }

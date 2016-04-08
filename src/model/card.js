@@ -1,27 +1,21 @@
-var CARD_NAME_MAP = {
-    heal:"治疗",
-    "tail-slash":"扫尾"
-};
-
-
-
 var CardModel = Backbone.Model.extend({
     defaults: function () {
         return {
             type: "",
-            subtype: null,
-            name: "",
 
             level: 1,
-
+            waitTurn: 1,
             isShowLevel: true
         }
     },
     initialize: function () {
-        this.set("name", CARD_NAME_MAP[this.get("type")] )
+
+    },
+    getName:function(){
+        return texts.card[this.get("type")].name;
     },
     getDescription:function(){
-
+        return texts.card[this.get("type")].desc;
     },
     onGain:function(){
     },
@@ -35,6 +29,23 @@ var CardModel = Backbone.Model.extend({
     }
 });
 
-var CARD_MODEL_MAP = {
+var CardHealModel = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "heal"
+        })
+    }
+})
 
+var CardTailSlashModel = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "tail-slash"
+        })
+    }
+})
+
+var CARD_MODEL_MAP = {
+    heal: CardHealModel,
+    "tail-slash":CardTailSlashModel
 }

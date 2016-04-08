@@ -66,8 +66,7 @@ var colors = {
             inside: cc.color.WHITE
         },
         descLabel:{
-            outline: cc.color.BLACK,
-            inside: cc.color.WHITE
+            inside: cc.color.BLACK
         },
         nameLabel:{
             outline: cc.color.BLACK,
@@ -147,20 +146,21 @@ var dimens = {
     hand_line_card_padding: 0,
     movableInfo:{
         nameLabel:{
-            x: 250,
-            y: 500,
-            fontSize: 24,
+            x: 260,
+            y: 340,
+            fontSize: 28,
             outlineWidth: 2
         },
         descLabel:{
-            x: 120,
-            y: 450,
-            fontSize: 24,
+            x: 260,
+            y: 300,
+            boundingWidth: 220,
+            fontSize: 22,
             outlineWidth: 2
         },
         portrait:{
             x: 80,
-            y: 450
+            y: 320
         },
         levelLabel:{
             x: 80,
@@ -171,24 +171,3 @@ var dimens = {
     }
 }
 
-var texts_locale = {
-    zh: {
-        movable:{
-            cherrycake: {
-                name: "樱桃蛋糕士兵",
-                desc: "攻击力普通"
-            },
-            pudding:{
-                name:"布丁巡逻兵",
-                desc:"攻击力始终为1"
-            },
-            ricecake:{
-                name:"年糕守卫",
-                desc:"始终粘着不动。攻击力高。"
-            }
-        }
-    },
-    en: {
-
-    }
-}
