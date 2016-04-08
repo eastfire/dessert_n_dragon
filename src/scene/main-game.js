@@ -72,7 +72,7 @@ var MainLayer = cc.Layer.extend({
                 this.addChild(layer,200);
 
                 var dialog = new GameMenuDialog({
-                    model: this.model,
+                    model: currentRoom,
                     modalLayer: layer
                 })
                 layer.addChild(dialog);

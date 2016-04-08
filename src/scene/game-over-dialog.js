@@ -7,20 +7,18 @@ var GameOverDialog = cc.Scale9Sprite.extend({
 
         this.isWin = options.isWin;
 
-        var dialogWidth = cc.winSize.width - 50;
-
         this.attr({
             x:cc.winSize.width/2,
             y:cc.winSize.height*3/2,
-            width: dialogWidth,
+            width: cc.winSize.width - 50,
             height: 300
         })
 
 
-        var resultLabel = new cc.LabelTTF(this.isWin?"成功":"失败", null, 25 );
+        var resultLabel = new cc.LabelTTF("第"+this.model.get("stageNumber")+"关 "+(this.isWin?"成功":"失败"), null, 25 );
         resultLabel.attr({
             color: colors.gameOver.ok,
-            x: (dialogWidth)/2,
+            x: this.width/2,
             y: 260,
             anchorX: 0.5,
             anchorY: 0.5
@@ -33,15 +31,15 @@ var GameOverDialog = cc.Scale9Sprite.extend({
             var scoreLabel = new cc.LabelTTF(roomScore, null, 25);
             scoreLabel.attr({
                 color: colors.gameOver.ok,
-                x: (dialogWidth) / 2,
+                x: (this.width) / 2,
                 y: 200,
                 anchorX: 0.5,
                 anchorY: 0.5
             });
             this.addChild(scoreLabel);
-            this.addStar((dialogWidth)/2-60, 160, (!scoreCondition && roomScore ) || (scoreCondition && roomScore >= scoreCondition[0] ) )
-            this.addStar((dialogWidth)/2, 160, (!scoreCondition && roomScore ) || (scoreCondition &&roomScore >= scoreCondition[1]))
-            this.addStar((dialogWidth)/2+60, 160,(!scoreCondition && roomScore ) || (scoreCondition &&roomScore >= scoreCondition[2]))
+            this.addStar((this.width)/2-60, 160, (!scoreCondition && roomScore ) || (scoreCondition && roomScore >= scoreCondition[0] ) )
+            this.addStar((this.width)/2, 160, (!scoreCondition && roomScore ) || (scoreCondition &&roomScore >= scoreCondition[1]))
+            this.addStar((this.width)/2+60, 160,(!scoreCondition && roomScore ) || (scoreCondition &&roomScore >= scoreCondition[2]))
         }
 
         var retryItem = new cc.MenuItemImage(
@@ -57,7 +55,7 @@ var GameOverDialog = cc.Scale9Sprite.extend({
             }, this);
 
         retryItem.attr({
-            x: dialogWidth/2 - 100,
+            x: this.width/2 - 100,
             y: 50,
             anchorX: 0.5,
             anchorY: 0.5
@@ -82,7 +80,7 @@ var GameOverDialog = cc.Scale9Sprite.extend({
             }, this);
 
         okItem.attr({
-            x: this.isWin ? dialogWidth/2 : (dialogWidth/2 + 100),
+            x: this.isWin ? this.width/2 : (this.width/2 + 100),
             y: 50,
             anchorX: 0.5,
             anchorY: 0.5
