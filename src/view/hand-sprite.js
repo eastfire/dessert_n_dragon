@@ -67,6 +67,11 @@ var HandSprite = BaseSprite.extend({
             var sprite = this.getParent().getChildByName(cardModel.cid);
             if ( sprite === null ) {
                 sprite = new CardSprite({model:cardModel});
+                sprite.attr({
+                    x: cc.winSize.width/2
+                    y: cc.winSize.height/2
+                })
+                this.addChild(srite);
             }
             if ( sprite.x != x || sprite.y != y) {
                 sprite.runAction(
