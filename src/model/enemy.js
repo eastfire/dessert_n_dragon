@@ -95,7 +95,7 @@ var EnemyModel = MovableModel.extend({
         }
         return false
     },
-    canBeAttack:function(){
+    canBeAttack:function(attackType){
         return true;
     },
     passAttack:function(){

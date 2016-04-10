@@ -16,10 +16,14 @@ var texts_locale = {
         },
         card:{
             heal:{
-                name:"治疗"
+                name:"治疗",
+                desc: function(level){
+                    return "恢复"+level+"点生命。"
+                }
             },
             "tail-slash":{
-                name:"扫尾"
+                name:"扫尾",
+                desc: "攻击尾部的一个敌人。"
             }
         }
     },

@@ -47,9 +47,10 @@ var GameOverDialog = cc.Scale9Sprite.extend({
             cc.spriteFrameCache.getSpriteFrame("button-short-press.png"),
             function () {
                 this.disappear(function(){
+                    var roomIndex = this.model.get("stageNumber")-1
                     cc.director.runScene(new RoomScene({
-                        roomEntry: rooms[this.model.get("stageNumber")],
-                        maxScore: score[this.model.get("stageNumber")]
+                        roomEntry: rooms[roomIndex],
+                        maxScore: score[roomIndex]
                     }));
                 });
             }, this);

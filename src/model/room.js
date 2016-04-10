@@ -41,12 +41,13 @@ var RoomModel = Backbone.Model.extend({
             initHand: [],
             initDeck: [],
 
-            waitingTurn : 0,
+            waitTurn : 0,
             enemyPool: null,
             enemyLevelPool: [1],
             choicePool: [],
             currentChoices: [],
             refreshCount:0
+
         }
     },
     initialize:function(){
@@ -126,7 +127,7 @@ var RoomModel = Backbone.Model.extend({
     initEvents:function(){
         this.on("turn-start-complete", this.generateEnemy, this)
         this.on("gen-enemy-complete", this.afterGenEnemy, this)
-        this.on("all-move-complete", this.heroAttack, this)
+        this.on("all-move-complete", this.heroNormalAttack, this)
         this.on("hero-attack-complete", function(){
             cc.log("hero-attack-complete")
             if ( this.passCheckCondition() ) {
@@ -299,6 +300,10 @@ var RoomModel = Backbone.Model.extend({
         if ( this.passCheckCondition() ) {
             this.trigger("turn-start-complete",this)
         }
+        if ( this.canDrawCard() ) {
+
+        }
+        this.loseWait(1);
     },
     generateOneEnemyType:function(){
         return _.sample( this.get("enemyPool"));
@@ -490,13 +495,25 @@ var RoomModel = Backbone.Model.extend({
     checkAllMovableMoved:function(){
         this.trigger("all-move-complete",this)
     },
-    heroAttack:function(){
-        cc.log("heroAttack")
+    heroNormalAttack:function(){
+        cc.log("heroNormalAttack")
+        if ( this.__hero.canAttack(movable) ) {
+            var movable = this.getMovableByPosition(getIncrementPosition(this.__hero.get("positions")[0], this.__hero.get("face")));
+            if (movable instanceof EnemyModel && movable.canBeAttack()) {
+                this.__hero.normalAttack(movable);
+            } else {
+                this.trigger("hero-attack-complete", this)
+            }
+        } else {
+            this.trigger("hero-attack-complete", this)
+        }
+    },
+    heroAttack:function(position, type, callback){
         var movable = this.getMovableByPosition(getIncrementPosition(this.__hero.get("positions")[0], this.__hero.get("face")));
-        if ( movable instanceof EnemyModel && this.__hero.canAttack(movable) && movable.canBeAttack()){
+        if (movable instanceof EnemyModel && movable.canBeAttack()) {
             this.__hero.normalAttack(movable);
         } else {
-            this.trigger("hero-attack-complete",this)
+            this.trigger("hero-attack-complete", this)
         }
     },
     enemyAttack:function(){
@@ -596,10 +613,33 @@ var RoomModel = Backbone.Model.extend({
     gainCard:function(opt){
         var cardModel = new CARD_MODEL_MAP[opt.type](opt);
         this.__hand.push(cardModel);
-        this.trigger("change:hands",this,cardModel);
+        this.trigger("change:hands",this);
+    },
+    discardCard:function(cardModel){
+        var index = this.__hand.indexOf(cardModel);
+        if ( index !== -1 ) {
+            cc.log(index)
+            this.__hand.splice(index, 1);
+        }
+        cardModel.restoreToOrigin();
+        this.__deck.push( cardModel.toJSON())
+        cardModel.destroy();
+        this.trigger("change:hands", this);
+    },
+    drawCard:function(){
+
+    },
+    canDrawCard:function(){
+        return !this.get("waitTurn")
     },
     getCards:function(){
         return this.__hand;
+    },
+    gainWait:function(amount){
+        this.set("waitTurn", this.get("waitTurn") + amount)
+    },
+    loseWait:function(amount){
+        this.set("waitTurn", Math.max(0, this.get("waitTurn") - amount))
     }
 })
 

@@ -295,7 +295,9 @@ var room4 = {
     choicePool:[
         { type:"getScore", opt:{ number:300} },
         { type:"getFullHp" },
-        { type:"getRandomMove", opt:{ from:3, to:5} }
+        { type:"getRandomMove", opt:{ from:3, to:5} },
+        { type:"getCard", opt:{type:"heal"}},
+        { type:"getCard", opt:{type:"tail-slash"}}
     ]
 };
 
@@ -570,10 +572,13 @@ var room8 = {
         }, //normal, fix
         isShowLevel: false
     },
+    initHand:[],
     choicePool:[
         { type:"getScore", opt:{ number:300} },
         { type:"getFullHp" },
-        { type:"getRandomMove", opt:{ from:3, to:5} }
+        { type:"getRandomMove", opt:{ from:3, to:5} },
+        { type:"getCard", opt:{type:"heal"}},
+        { type:"getCard", opt:{type:"tail-slash"}}
     ]
 };
 
@@ -1637,7 +1642,7 @@ var room24 = { //对远程兵种的生存3
         [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
         [{type:"wall",subtype:"sesw"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"selongnw"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelongsw"},{type:"wall",subtype:"welong"},{type:"wall",subtype:"nenw"}],
         [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-        [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"nese"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"nese"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}],
+        [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"nese"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"nese"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
     ],
     initMovables:[],
     width: 8,
@@ -1664,6 +1669,6 @@ var room24 = { //对远程兵种的生存3
 
 var rooms = [room1, room2, room3, room4, room5, room6, room7, room8, room9, room10,
     room11, room12,room13,room14,room15,room16,room17,room18,room19,room20,
-    room21，room22,room23,room24]
+    room21, room22,room23,room24]
 
         

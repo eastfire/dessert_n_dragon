@@ -10,8 +10,8 @@ var BaseSprite = cc.Sprite.extend({
     },
     onDestroy:function(){
         this.model.off();
-        this.model = null;
         this.removeFromParent(true);
+        this.model = null;
     },
     getInitFrame:function(){
         var frameName = this.getInitFrameName();

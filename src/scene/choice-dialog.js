@@ -25,6 +25,8 @@ var ChoiceDialog = cc.Scale9Sprite.extend({
         this.addChild(titleLabel);
 
         this.initMenu();
+
+        currentRoom.__acceptInput = false;
     },
     initMenu:function(){
         this.choices = this.model.genLevelUpChoices();
@@ -107,6 +109,7 @@ var ChoiceDialog = cc.Scale9Sprite.extend({
             cc.moveBy(times.gameOverDialog, cc.winSize.width, 0),
             cc.removeSelf(),
             cc.callFunc(function(){
+                currentRoom.__acceptInput = true;
                 this.modalLayer.removeFromParent(true)
             },this)
         ))

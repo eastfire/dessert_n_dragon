@@ -1,6 +1,8 @@
 var res = {
     game_plist : "res/game.plist",
-    game_png : "res/game.png"
+    game_png : "res/game.png",
+    card_plist : "res/card.plist",
+    card_png : "res/card.png"
 };
 
 var g_resources = [];
@@ -59,6 +61,16 @@ var colors = {
     },
     gameOver:{
         ok: cc.color.BLACK
+    },
+    card: {
+        waitLabel: {
+            outline: cc.color.BLACK,
+            inside: cc.color.WHITE
+        },
+        levelLabel: {
+            outline: cc.color.BLACK,
+            inside: cc.color.WHITE
+        }
     },
     movableInfo:{
         levelLabel:{
@@ -142,6 +154,28 @@ var dimens = {
     card_size:{
         width: 120,
         height: 168
+    },
+    card: {
+        waitIcon: {
+            x: 13,
+            y: 155
+        },
+        waitLabel: {
+            x: 33,
+            y: 155,
+            outlineWidth: 2,
+            fontSize: 24
+        },
+        levelIcon: {
+            x: 13,
+            y: 13
+        },
+        levelLabel: {
+            x: 13,
+            y: 13,
+            outlineWidth: 2,
+            fontSize: 24
+        }
     },
     hand_line_card_padding: 0,
     movableInfo:{

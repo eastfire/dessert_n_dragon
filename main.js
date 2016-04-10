@@ -118,6 +118,7 @@ cc.game.onStart = function(){
 //        loadTutorial(); //TODO
 
         cc.spriteFrameCache.addSpriteFrames(res.game_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.card_plist);
         cc.director.runScene(new SelectRoomScene());
     }, this);
 };

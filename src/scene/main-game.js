@@ -33,8 +33,8 @@ var MainLayer = cc.Layer.extend({
             model: room
         })
         handSprite.attr({
-            x: cc.winSize.width/2,
-            y: 100
+            x: 0,
+            y: 0
         })
         this.addChild(handSprite);
 

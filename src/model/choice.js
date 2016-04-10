@@ -41,9 +41,8 @@ var CHOICE_FACTORY_MAP = {
         }
     },
     getCard:function(roomModel,opt){
-        var cardModel = new CARD_MODEL_MAP[opt.type](opt);
         return {
-            description:"获得技能卡："+cardModel.get("name")+"\n"+cardModel.getDescription(),
+            description:"获得技能卡："+getCardName(opt.type)+"\n"+getCardDesc(opt.type, opt.level || 1),
             onChosen:function(roomModel){
                 roomModel.gainCard(opt);
             },
