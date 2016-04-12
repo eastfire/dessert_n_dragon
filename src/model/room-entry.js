@@ -226,7 +226,7 @@ var room3 = { //教学杀敌数过关，且有分数要求
 
 var room4 = { //教学获得经验和升级
     turnLimit:15,
-    scoreCondition: [100, 150, 200],
+    scoreCondition: [250, 450, 700],
     winEveryConditions:[
         {
             conditionType:"kill-level",

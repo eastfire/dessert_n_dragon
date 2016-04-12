@@ -92,23 +92,23 @@ var HeroModel = MovableModel.extend({
 
 
     },
-    beforeNormalAttack:function(enemy){
+    beforeAttack:function(enemy, options){
     },
-    normalAttack:function(enemy){
-        this.beforeNormalAttack(enemy)
-        enemy.beforeBeAttacked(this);
-        this.trigger("attack",this, enemy)
+    attack:function(enemy, options){
+        this.beforeAttack(enemy, options);
+        enemy.beforeBeAttacked(this, options);
+        this.trigger("attack",this, enemy, options)
     },
-    hitOrMiss:function(enemy){ //called by view
-        if ( enemy.checkHit(this) ) {
+    hitOrMiss:function(enemy, options){ //called by view
+        if ( enemy.checkHit(this, options) ) {
             //hit
-            this.hit(enemy);
-            enemy.beHit(this);
+            this.hit(enemy, options);
+            enemy.beHit(this, options);
             return true;
         } else {
             //miss
-            this.miss(enemy);
-            enemy.dodgeAttack(this);
+            this.miss(enemy, options);
+            enemy.dodgeAttack(this, options);
             return false;
         }
     },
@@ -117,15 +117,15 @@ var HeroModel = MovableModel.extend({
     },
     beforeHit:function(enemy){
     },
-    hit:function(enemy){
-        this.beforeHit(enemy);
+    hit:function(enemy, attackType){
+        this.beforeHit(enemy, attackType);
         if ( enemy.get("heroForwardAfterKillMe") ) {
             this.trigger("hitForward", this, enemy);
         } else {
             this.trigger("hitMoveBack", this, enemy);
         }
     },
-    afterHit:function(enemy){ //called by view
+    afterHit:function(enemy, attackType){ //called by view
         if ( this.get("forwardAfterKill") ) {
             //remove old mapping
             currentRoom.__movableMap[this.get("positions")[0].x][this.get("positions")[0].y] = null; //hero is only size 1

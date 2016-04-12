@@ -305,20 +305,20 @@ var RoomModel = Backbone.Model.extend({
                 break;
             case PHASE_ENEMY_ATTACK:
                 if ( this.getHero().checkLevelUp() ) {
-
+                    cc.log("hero level up, wait")
                 } else {
                     if (this.passCheckCondition()) {
                         this.turnEnd();
                     }
                 }
                 break;
-                var PHASE_TURN_END = 6;
             case PHASE_TURN_END:
                 this.turnStart();
                 break;
         }
     },
     turnStart:function(){
+        cc.log("turnStart");
         this.set("phase", PHASE_TURN_START);
         //for hero
         this.__hero.onTurnStart();
@@ -538,7 +538,10 @@ var RoomModel = Backbone.Model.extend({
         if ( this.__hero.canAttack(movable) ) {
             var movable = this.getMovableByPosition(getIncrementPosition(this.__hero.get("positions")[0], this.__hero.get("face")));
             if (movable instanceof EnemyModel && movable.canBeAttack("normal")) {
-                this.__hero.normalAttack(movable);
+                this.__hero.attack(movable, {
+                    attackType: "normal",
+                    moveType: "normal"
+                });
             } else {
                 this.nextPhase();
             }
@@ -549,9 +552,9 @@ var RoomModel = Backbone.Model.extend({
     heroAttack:function(position, type, callback){
         var movable = this.getMovableByPosition(position);
         if (movable instanceof EnemyModel && movable.canBeAttack(type)) {
-
+            this.__hero.specialAttack(movable, type, callback);
         } else {
-
+            callback.call(false)
         }
     },
     enemyAttack:function(){
@@ -585,6 +588,7 @@ var RoomModel = Backbone.Model.extend({
             this.nextPhase();
     },
     turnEnd:function(){
+        cc.log("turnEnd")
         this.set("phase",PHASE_TURN_END);
         this.set("turnNumber",this.get("turnNumber")+1);
         this.nextPhase();

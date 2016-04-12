@@ -14,13 +14,14 @@ var CardModel = Backbone.Model.extend({
             type: "",
 
             level: 1,
+            maxLevel: 1,
             waitTurn: 1,
             isShowLevel: true,
             isShowWait: true
         }
     },
     initialize: function () {
-
+        this.set("waitTurn",this.waitTurnOfLevel(this.get("level")));
     },
     getName:function(){
         return getCardName(this.get("type"));
@@ -61,32 +62,44 @@ var CardModel = Backbone.Model.extend({
     },
     restoreToOrigin:function(){
         //TODO restore status that card buff or debuff
+    },
+    waitTurnOfLevel:function(level){
+        return 0;
     }
 });
 
 var CardHealModel = CardModel.extend({
     defaults: function () {
         return _.extend(CardModel.prototype.defaults.call(this),{
-            type: "heal"
+            type: "heal",
+            maxLevel: 10
         })
     },
+
     onUse:function(){
         currentRoom.getHero().gainHp(this.getEffect())
     },
+    waitTurnOfLevel:function(level){
+        return level+4;
+    },
     getEffect:function(){
         var l = this.get("level");
-        return l * ( l + 1 ) / 2;
+        return l;
     }
 })
 
 var CardTailSlashModel = CardModel.extend({
     defaults: function () {
         return _.extend(CardModel.prototype.defaults.call(this),{
-            type: "tail-slash"
+            type: "tail-slash",
+            maxLevel: 4
         })
     },
+    waitTurnOfLevel:function(level){
+        return 5-level;
+    },
     onUse:function(){
-        currentRoom.getHero().gainHp(this.getEffect())
+
     }
 })
 
