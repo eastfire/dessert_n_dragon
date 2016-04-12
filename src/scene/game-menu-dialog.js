@@ -76,6 +76,8 @@ var GameMenuDialog = cc.Scale9Sprite.extend({
         menu.x = 0;
         menu.y = 0;
         this.addChild(menu);
+
+        currentRoom.blockInput();
     },
     appear:function(){
         this.runAction( cc.moveBy(times.gameOverDialog, 0, -cc.winSize.height).easing(cc.easeBounceOut())  )
@@ -84,7 +86,10 @@ var GameMenuDialog = cc.Scale9Sprite.extend({
         this.runAction(cc.sequence(
             cc.moveBy(times.gameOverDialog, 0, cc.winSize.height),
             cc.removeSelf(),
-            cc.callFunc(callback,this)
+            cc.callFunc(callback,this),
+            cc.callFunc(function(){
+                currentRoom.unblockInput();
+            },this)
         ))
     }
 })

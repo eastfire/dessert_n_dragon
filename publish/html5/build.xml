@@ -229,6 +229,7 @@
                 <file name="src/libs/utils.js"/>
                 <file name="src/libs/cocos-utils.js"/>
                 <file name="src/resource.js"/>
+                <file name="src/texts.js"/>
                 <file name="src/common.js"/>
                 <file name="src/model/movable.js"/>
                 <file name="src/model/enemy.js"/>
@@ -238,6 +239,7 @@
                 <file name="src/model/condition.js"/>
                 <file name="src/model/choice.js"/>
                 <file name="src/model/room.js"/>
+                <file name="src/model/card.js"/>
                 <file name="src/model/skill.js"/>
                 <file name="src/model/room-entry.js"/>
                 <file name="src/view/base-sprite.js"/>
@@ -252,6 +254,7 @@
                 <file name="src/scene/game-menu-dialog.js"/>
                 <file name="src/scene/game-over-dialog.js"/>
                 <file name="src/scene/choice-dialog.js"/>
+                <file name="src/scene/movable-info-dialog.js"/>
                 <file name="src/scene/select-room.js"/>
                 <file name="src/scene/main-game.js"/>
                 <file name="src/tutorial.js"/>

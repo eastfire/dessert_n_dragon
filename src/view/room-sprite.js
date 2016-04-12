@@ -47,7 +47,7 @@ var RoomSprite = BaseSprite.extend({
         var maxStep = this.model.shift(direction);
         var self = this;
         this.scheduleOnce(function(){
-            self.model.checkAllMovableMoved();
+            self.model.nextPhase();
         }, times.step * maxStep )
     },
     renderAllMovable:function(){

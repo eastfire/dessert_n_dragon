@@ -2,6 +2,14 @@ var SHIFT_RESULT_NORMAL = 1;
 var SHIFT_RESULT_MERGE_AND_DISAPPEAR = 2;
 var SHIFT_RESULT_MERGE_AND_STAY = 3;
 
+var PHASE_TURN_START = 0;
+var PHASE_GEN_ENEMY = 1;
+var PHASE_WAIT_USE_INPUT = 2;
+var PHASE_MOVE = 3;
+var PHASE_HERO_ATTACK = 4;
+var PHASE_ENEMY_ATTACK = 5;
+var PHASE_TURN_END = 6;
+
 var RoomModel = Backbone.Model.extend({
     defaults:function(){
         return {
@@ -15,6 +23,7 @@ var RoomModel = Backbone.Model.extend({
             width: 7,
             height: 7,
             turnNumber: 0,
+            phase: PHASE_TURN_START,
             score: 0,
             turnLimit: 0,
             statistic:{},
@@ -51,7 +60,7 @@ var RoomModel = Backbone.Model.extend({
         }
     },
     initialize:function(){
-        this.__acceptInput = false;
+        this.__blockInputCount = 0;
         this.initRules();
         this.initTiles();
         this.initMovables();
@@ -125,21 +134,6 @@ var RoomModel = Backbone.Model.extend({
         });
     },
     initEvents:function(){
-        this.on("turn-start-complete", this.generateEnemy, this)
-        this.on("gen-enemy-complete", this.afterGenEnemy, this)
-        this.on("all-move-complete", this.heroNormalAttack, this)
-        this.on("hero-attack-complete", function(){
-            cc.log("hero-attack-complete")
-            if ( this.passCheckCondition() ) {
-                this.enemyAttack();
-            }
-        },this)
-        this.on("enemy-attack-complete", function(){
-            cc.log("enemy-attack-complete")
-            if ( this.passCheckCondition() ) {
-                this.turnEnd();
-            }
-        }, this)
         this.on("turn-complete", this.turnStart, this)
     },
     initHero:function(){
@@ -286,8 +280,46 @@ var RoomModel = Backbone.Model.extend({
         }
         return tiles;
     },
+    nextPhase:function(){
+        var currentPhase = this.get("phase");
+        switch (currentPhase) {
+            case PHASE_TURN_START:
+                this.generateEnemy();
+                break;
+            case PHASE_GEN_ENEMY:
+                this.waitUserInput();
+                break;
+            case PHASE_WAIT_USE_INPUT: //wait use input, phase will not forward if someone call next phase in this phase;
+                break;
+            case PHASE_MOVE:
+                this.heroNormalAttack();
+                break;
+            case PHASE_HERO_ATTACK:
+                if ( this.getHero().checkLevelUp() ) {
+
+                } else {
+                    if (this.passCheckCondition()) {
+                        this.enemyAttack();
+                    }
+                }
+                break;
+            case PHASE_ENEMY_ATTACK:
+                if ( this.getHero().checkLevelUp() ) {
+
+                } else {
+                    if (this.passCheckCondition()) {
+                        this.turnEnd();
+                    }
+                }
+                break;
+                var PHASE_TURN_END = 6;
+            case PHASE_TURN_END:
+                this.turnStart();
+                break;
+        }
+    },
     turnStart:function(){
-        cc.log("turn-complete")
+        this.set("phase", PHASE_TURN_START);
         //for hero
         this.__hero.onTurnStart();
         //for enemy
@@ -298,7 +330,7 @@ var RoomModel = Backbone.Model.extend({
         },this)
         //TODO for tiles special ability
         if ( this.passCheckCondition() ) {
-            this.trigger("turn-start-complete",this)
+            this.nextPhase();
         }
         if ( this.canDrawCard() ) {
 
@@ -332,6 +364,7 @@ var RoomModel = Backbone.Model.extend({
     },
     generateEnemy:function(){
         cc.log("generateEnemy")
+        this.set("phase",PHASE_GEN_ENEMY);
         var currentGenEnemyStrategy = this.get("genEnemyStrategy")[this.get("genEnemyStrategyIndex")]
         if ( currentGenEnemyStrategy ){
 
@@ -360,16 +393,16 @@ var RoomModel = Backbone.Model.extend({
                 this.set("genEnemyStrategyIndex", this.get("genEnemyStrategyIndex")+1);
             }
             if ( !candidates.length ) {
-                cc.log("no enemy gen");
-                this.trigger("gen-enemy-complete",this)
+                //no enemy can gen
+                this.nextPhase();
             }
-        } else {
-            this.trigger("gen-enemy-complete",this)
+        } else { //no gen enemy strategy
+            this.nextPhase();
         }
     },
-    afterGenEnemy:function(){
-        cc.log("afterGenEnemy")
-        this.__acceptInput = true;
+    waitUserInput:function(){
+        this.set("phase", PHASE_WAIT_USE_INPUT);
+        this.unblockInput();
     },
     genLevelUpChoices:function(){
         var currentChoiceStrategy = this.get("genChoiceStrategy");
@@ -383,11 +416,18 @@ var RoomModel = Backbone.Model.extend({
         },this);
     },
     isAcceptInput:function(){
-        return this.__acceptInput;
+        return this.__blockInputCount <= 0;
+    },
+    blockInput:function(){
+        this.__blockInputCount++;
+    },
+    unblockInput:function(){
+        if ( this.__blockInputCount ) this.__blockInputCount--;
     },
     shift:function(direction){
         cc.log("shift"+direction);
-        this.__acceptInput = false;
+        this.set("phase", PHASE_MOVE);
+        this.blockInput();
         var maxStep = 0;
 
         var movableMapResult = [];
@@ -492,31 +532,30 @@ var RoomModel = Backbone.Model.extend({
 
         return maxStep;
     },
-    checkAllMovableMoved:function(){
-        this.trigger("all-move-complete",this)
-    },
     heroNormalAttack:function(){
         cc.log("heroNormalAttack")
+        this.set("phase",PHASE_HERO_ATTACK);
         if ( this.__hero.canAttack(movable) ) {
             var movable = this.getMovableByPosition(getIncrementPosition(this.__hero.get("positions")[0], this.__hero.get("face")));
-            if (movable instanceof EnemyModel && movable.canBeAttack()) {
+            if (movable instanceof EnemyModel && movable.canBeAttack("normal")) {
                 this.__hero.normalAttack(movable);
             } else {
-                this.trigger("hero-attack-complete", this)
+                this.nextPhase();
             }
         } else {
-            this.trigger("hero-attack-complete", this)
+            this.nextPhase();
         }
     },
     heroAttack:function(position, type, callback){
-        var movable = this.getMovableByPosition(getIncrementPosition(this.__hero.get("positions")[0], this.__hero.get("face")));
-        if (movable instanceof EnemyModel && movable.canBeAttack()) {
-            this.__hero.normalAttack(movable);
+        var movable = this.getMovableByPosition(position);
+        if (movable instanceof EnemyModel && movable.canBeAttack(type)) {
+
         } else {
-            this.trigger("hero-attack-complete", this)
+
         }
     },
     enemyAttack:function(){
+        this.set("phase",PHASE_ENEMY_ATTACK);
         var attackHappened = false;
         _.each(this.__movables,function(movable){
             if ( movable instanceof EnemyModel ) {
@@ -528,7 +567,7 @@ var RoomModel = Backbone.Model.extend({
                 }
             }
         },this)
-        if ( !attackHappened ) this.trigger("enemy-attack-complete",this)
+        if ( !attackHappened ) this.nextPhase();
     },
     checkAllEnemyAttacked:function(){
         if (_.every(this.__movables,function(movable){
@@ -536,18 +575,19 @@ var RoomModel = Backbone.Model.extend({
                 return movable.get("attackOver")
             } else return true;
         },this))
-            this.trigger("enemy-attack-complete",this)
+            this.nextPhase();
     },
     checkAllMovableGenerated:function(){
         cc.log("checkAllMovableGenerated")
         if (_.every(this.__movables,function(movable){
             return movable.get("generateOver")
         },this))
-            this.trigger("gen-enemy-complete",this)
+            this.nextPhase();
     },
     turnEnd:function(){
+        this.set("phase",PHASE_TURN_END);
         this.set("turnNumber",this.get("turnNumber")+1);
-        this.trigger("turn-complete",this)
+        this.nextPhase();
     },
     passCheckCondition:function(){
         if ( this.checkWinCondition() ) {

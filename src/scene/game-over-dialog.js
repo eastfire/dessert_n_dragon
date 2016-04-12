@@ -100,6 +100,8 @@ var GameOverDialog = cc.Scale9Sprite.extend({
         menu.x = 0;
         menu.y = 0;
         this.addChild(menu);
+
+        currentRoom.blockInput();
     },
     addStar:function(x,y, pass){
         var sprite = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame(pass?"star.png":"empty-star.png"));

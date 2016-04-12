@@ -63,19 +63,26 @@ var HeroModel = MovableModel.extend({
                 exp: this.get("exp")+amount,
                 unusedExp: 0
             });
-            return false;
         } else {
             if ( currentRoom.get("rules").heroCanLevelUp ) {
                 this.set({
-                    exp: 0,
-                    unusedExp: remainExp,
-                    level: this.get("level") + 1,
-                    requireExp: this.requireExpOfLevel(this.get("level") + 1)
+                    exp: this.get("requireExp"),
+                    unusedExp: remainExp
                 });
-                this.levelUp(this.get("level"));
-                return true;
             }
         }
+    },
+    checkLevelUp:function(){
+        if ( currentRoom.get("rules").heroCanLevelUp && this.get("exp") >= this.get("requireExp") ) {
+            this.set({
+                exp: 0,
+                level: this.get("level") + 1,
+                requireExp: this.requireExpOfLevel(this.get("level") + 1)
+            });
+            this.levelUp(this.get("level"));
+            return true;
+        }
+        return false;
     },
     canAttack:function(){
         return true
@@ -144,7 +151,7 @@ var HeroModel = MovableModel.extend({
     },
     afterNormalAttack:function(enemy){ //called by view
         this.trigger("attack-complete",this)
-        currentRoom.trigger("hero-attack-complete",currentRoom)
+        currentRoom.nextPhase();
     },
     beforeBeAttacked:function(enemy){
     },

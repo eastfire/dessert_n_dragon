@@ -339,7 +339,12 @@ var MainLayer = cc.Layer.extend({
 
         var dialog = new ChoiceDialog({
             model: currentRoom,
-            modalLayer: layer
+            modalLayer: layer,
+            callback:function(){
+                currentRoom.getHero().useRemainExp();
+                currentRoom.nextPhase();
+            },
+            context:this
         })
         layer.addChild(dialog);
         dialog.appear();

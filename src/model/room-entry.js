@@ -67,7 +67,7 @@ var room1 = { //初始
     }
 };
 
-var room2 = {
+var room2 = { //教学杀敌数过关
     turnLimit:12,
     scoreCondition: null,
     winEveryConditions:[
@@ -155,7 +155,7 @@ var room2 = {
     }
 };
 
-var room3 = {
+var room3 = { //教学杀敌数过关，且有分数要求
     turnLimit:15,
     scoreCondition: [200, 400, 600],
     winEveryConditions:[
@@ -224,7 +224,7 @@ var room3 = {
     }
 };
 
-var room4 = {
+var room4 = { //教学获得经验和升级
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -283,7 +283,7 @@ var room4 = {
         positions: [{x:3,y:3}],
         initHp: 100,
         initMaxHp: 100,
-        initRequireExp: 10,
+        initRequireExp: 50,
         maxHpStrategy:{
             type: "normal"
         },
@@ -301,7 +301,7 @@ var room4 = {
     ]
 };
 
-var room5 = {
+var room5 = { //第一次要求大量杀敌
     turnLimit:20,
     scoreCondition: [300, 600, 1000],
     winEveryConditions:[
@@ -362,10 +362,11 @@ var room5 = {
         { type:"getScore", opt:{ number:300} },
         { type:"getFullHp" },
         { type:"getRandomMove", opt:{ from:3, to:5} }
+        //TODO
     ]
 };
 
-var room6 = {
+var room6 = { //第一次出现年糕
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[

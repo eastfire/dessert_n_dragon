@@ -2,6 +2,7 @@ var ChoiceDialog = cc.Scale9Sprite.extend({
     ctor:function (options) {
         this._super(cc.spriteFrameCache.getSpriteFrame("game-over-dialog.png"));
 
+        this.options = options;
         this.model = options.model;
         this.modalLayer = options.modalLayer;
         this.level = options.level || this.model.getHero().get("level");
@@ -26,7 +27,7 @@ var ChoiceDialog = cc.Scale9Sprite.extend({
 
         this.initMenu();
 
-        currentRoom.__acceptInput = false;
+        currentRoom.blockInput();
     },
     initMenu:function(){
         this.choices = this.model.genLevelUpChoices();
@@ -109,8 +110,9 @@ var ChoiceDialog = cc.Scale9Sprite.extend({
             cc.moveBy(times.gameOverDialog, cc.winSize.width, 0),
             cc.removeSelf(),
             cc.callFunc(function(){
-                currentRoom.__acceptInput = true;
-                this.modalLayer.removeFromParent(true)
+                currentRoom.unblockInput();
+                this.modalLayer.removeFromParent(true);
+                if ( this.options.callback ) this.options.callback.call(this.options.context);
             },this)
         ))
     }

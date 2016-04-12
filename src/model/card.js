@@ -37,7 +37,7 @@ var CardModel = Backbone.Model.extend({
     onGain:function(){
     },
     use:function(){
-        currentRoom.__acceptInput = false;
+        currentRoom.blockInput();
         currentRoom.gainWait(this.getWait());
         this.onUse();
         this.trigger("use",this);
@@ -46,7 +46,8 @@ var CardModel = Backbone.Model.extend({
     onUse:function(){
     },
     afterUse:function(){ // call by view
-        currentRoom.__acceptInput = true;
+        currentRoom.unblockInput();
+        currentRoom.getHero().checkLevelUp(); //maybe level up after use card
     },
     onExile:function(){
     },
@@ -59,7 +60,7 @@ var CardModel = Backbone.Model.extend({
     onDiscard:function(){
     },
     restoreToOrigin:function(){
-        //TODO restore status that car buff or debuff
+        //TODO restore status that card buff or debuff
     }
 });
 
