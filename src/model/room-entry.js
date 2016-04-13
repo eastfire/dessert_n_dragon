@@ -1,4 +1,6 @@
-var room1 = { //初始
+var rooms = [];
+
+rooms.push({ //初始 room1
     turnLimit:6,
     scoreCondition: null,
     winEveryConditions:[
@@ -65,9 +67,9 @@ var room1 = { //初始
         }, //normal, fix
         isShowLevel: false
     }
-};
+});
 
-var room2 = { //教学杀敌数过关
+rooms.push({ //教学杀敌数过关 room2
     turnLimit:12,
     scoreCondition: null,
     winEveryConditions:[
@@ -153,9 +155,9 @@ var room2 = { //教学杀敌数过关
         }, //normal, fix
         isShowLevel: false
     }
-};
+});
 
-var room3 = { //教学杀敌数过关，且有分数要求
+rooms.push({ //教学杀敌数过关，且有分数要求 room3
     turnLimit:15,
     scoreCondition: [200, 400, 600],
     winEveryConditions:[
@@ -222,9 +224,9 @@ var room3 = { //教学杀敌数过关，且有分数要求
         }, //normal, fix
         isShowLevel: false
     }
-};
+});
 
-var room4 = { //教学获得经验和升级
+rooms.push({ //教学获得经验和升级 room4
     turnLimit:15,
     scoreCondition: [250, 450, 700],
     winEveryConditions:[
@@ -299,9 +301,9 @@ var room4 = { //教学获得经验和升级
         { type:"getCard", opt:{type:"heal"}},
         { type:"getCard", opt:{type:"tail-slash"}}
     ]
-};
+});
 
-var room5 = { //第一次要求大量杀敌
+rooms.push({ //第一次要求大量杀敌 room5
     turnLimit:20,
     scoreCondition: [300, 600, 1000],
     winEveryConditions:[
@@ -364,9 +366,9 @@ var room5 = { //第一次要求大量杀敌
         { type:"getRandomMove", opt:{ from:3, to:5} }
         //TODO
     ]
-};
+});
 
-var room6 = { //第一次出现年糕
+rooms.push({ //第一次出现年糕 room6
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -436,9 +438,9 @@ var room6 = { //第一次出现年糕
         { type:"getFullHp" },
         { type:"getRandomMove", opt:{ from:3, to:5} }
     ]
-};
+});
 
-var room7 = {
+rooms.push({ //room7
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -507,9 +509,9 @@ var room7 = {
         { type:"getFullHp" },
         { type:"getRandomMove", opt:{ from:3, to:5} }
     ]
-};
+});
 
-var room8 = {
+rooms.push({ //room8
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -581,9 +583,9 @@ var room8 = {
         { type:"getCard", opt:{type:"heal"}},
         { type:"getCard", opt:{type:"tail-slash"}}
     ]
-};
+});
 
-var room9 = {
+rooms.push({ //room9
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -652,9 +654,9 @@ var room9 = {
         { type:"getFullHp" },
         { type:"getRandomMove", opt:{ from:3, to:5} }
     ]
-};
+});
 
-var room10 = {
+rooms.push({ //room10
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -723,9 +725,9 @@ var room10 = {
         { type:"getFullHp" },
         { type:"getRandomMove", opt:{ from:3, to:5} }
     ]
-};
+});
 
-var room11 = {
+rooms.push({ //room11
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -795,9 +797,9 @@ var room11 = {
         { type:"getFullHp" },
         { type:"getRandomMove", opt:{ from:3, to:5} }
     ]
-};
+});
 
-var room12 = {
+rooms.push({ //room12
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -867,9 +869,9 @@ var room12 = {
         { type:"getFullHp" },
         { type:"getRandomMove", opt:{ from:3, to:5} }
     ]
-};
+});
 
-var room13 = {
+rooms.push({ //room13
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -938,9 +940,9 @@ var room13 = {
         { type:"getFullHp" },
         { type:"getRandomMove", opt:{ from:3, to:5} }
     ]
-};
+});
 
-var room14 = {
+rooms.push({ //room14
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -1017,9 +1019,9 @@ var room14 = {
         { type:"getFullHp" },
         { type:"getRandomMove", opt:{ from:3, to:5} }
     ]
-};
+});
 
-var room15 = {
+rooms.push({ //room15
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -1092,9 +1094,9 @@ var room15 = {
         { type:"getFullHp" },
         { type:"getRandomMove", opt:{ from:3, to:5} }
     ]
-};
+});
 
-var room16 = {
+rooms.push({ //room16
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -1167,9 +1169,9 @@ var room16 = {
         { type:"getFullHp" },
         { type:"getRandomMove", opt:{ from:3, to:5} }
     ]
-};
+});
 
-var room17 = {
+rooms.push({ //room17
     turnLimit:12,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -1240,9 +1242,9 @@ var room17 = {
         { type:"getFullHp" },
         { type:"getRandomMove", opt:{ from:3, to:5} }
     ]
-};
+});
 
-var room18 = {
+rooms.push({ //room18
     turnLimit:12,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -1314,9 +1316,9 @@ var room18 = {
         { type:"getFullHp" },
         { type:"getRandomMove", opt:{ from:3, to:5} }
     ]
-};
+});
 
-var room19 = {
+rooms.push({ //room19
     turnLimit:12,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -1388,9 +1390,9 @@ var room19 = {
         { type:"getFullHp" },
         { type:"getRandomMove", opt:{ from:3, to:5} }
     ]
-};
+});
 
-var room20 = {
+rooms.push({ //room20
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
@@ -1459,9 +1461,9 @@ var room20 = {
         { type:"getFullHp" },
         { type:"getRandomMove", opt:{ from:3, to:5} }
     ]
-};
+});
 
-var room21 = {
+rooms.push({ //room21
     turnLimit:15,
     scoreCondition: [300, 600, 1000],
     winEveryConditions:[
@@ -1521,9 +1523,9 @@ var room21 = {
         { type:"getFullHp" },
         { type:"getRandomMove", opt:{ from:3, to:5} }
     ]
-};
+});
 
-var room22 = { //对远程兵种的生存1
+rooms.push({ //对远程兵种的生存1 room22
     turnLimit:25,
     scoreCondition: [300, 600, 1000],
     winEveryConditions:[
@@ -1569,9 +1571,9 @@ var room22 = { //对远程兵种的生存1
         { type:"getFullHp" },
         { type:"getRandomMove", opt:{ from:3, to:5} }
     ]
-};
+});
 
-var room23 = { //对远程兵种的生存2
+rooms.push({ //对远程兵种的生存2 room23
     turnLimit:25,
     scoreCondition: [300, 600, 1000],
     winEveryConditions:[
@@ -1618,9 +1620,9 @@ var room23 = { //对远程兵种的生存2
         { type:"getFullHp" },
         { type:"getRandomMove", opt:{ from:3, to:5} }
     ]
-};
+});
 
-var room24 = { //对远程兵种的生存3
+rooms.push({ //对远程兵种的生存3 room24
     turnLimit:25,
     scoreCondition: [300, 600, 1000],
     winEveryConditions:[
@@ -1666,10 +1668,4 @@ var room24 = { //对远程兵种的生存3
         { type:"getFullHp" },
         { type:"getRandomMove", opt:{ from:3, to:5} }
     ]
-};
-
-var rooms = [room1, room2, room3, room4, room5, room6, room7, room8, room9, room10,
-    room11, room12,room13,room14,room15,room16,room17,room18,room19,room20,
-    room21, room22,room23,room24]
-
-        
+});
