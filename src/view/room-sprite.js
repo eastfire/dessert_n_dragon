@@ -15,16 +15,17 @@ var RoomSprite = BaseSprite.extend({
         return this.rect;
     },
     getMovableByTouchPosition:function(x,y){
-        var px = Math.floor((x - this.x + cc.winSize.width/2 + dimens.tileSize.width*this.scaleX - padding)/(dimens.tileSize.width*this.scaleX));
-        var py = Math.floor((y - this.y + cc.winSize.width/2 + dimens.tileSize.width*this.scaleX - padding)/(dimens.tileSize.height*this.scaleX));
+        var px = Math.floor((x - (this.x - (this.model.getWidth()-2)/2*dimens.tileSize.width*this.scaleX))/(dimens.tileSize.width*this.scaleX))+1;
+        var py = Math.floor((y - (this.y - (this.model.getHeight()-2)/2*dimens.tileSize.height*this.scaleX))/(dimens.tileSize.height*this.scaleX))+1;
+//        cc.log("px"+px+" py"+py)
         if ( px >= 0 && py >= 0 ) {
             return this.model.getMovableByPosition(px,py);
         }
         return null;
     },
     renderAllTile:function(){
-        var totalWidth = (this.model.get("width"))*dimens.tileSize.width
-        var totalHeight = (this.model.get("height"))*dimens.tileSize.height
+        var totalWidth = this.model.getWidth()*dimens.tileSize.width
+        var totalHeight = this.model.getHeight()*dimens.tileSize.height
         var maxSize = Math.max(totalWidth, totalHeight)
         this.model.foreachTile(function(tileModel){
             var tileSprite = new TileSprite({

@@ -90,16 +90,20 @@ var RoomModel = Backbone.Model.extend({
         this.set("rules", _.extend(defaultRules, this.get("rules")));
     },
     initTiles:function(){
-        var tiles = this.__tiles = [];
-        for ( var i = 0; i < this.get("width"); i++){
-            if ( !tiles[i] ) tiles.push([]);
-        }
         var initTiles = this.get("initTiles");
         if ( !initTiles ) return;
+        var tiles = this.__tiles = [];
+        this.__width = initTiles.length;
+        this.__height = 0;
+        for ( var i = 0; i < this.__width; i++){
+            if ( !tiles[i] ) tiles.push([]);
+        }
         var tiles = this.__tiles;
-        for ( var x = 0; x < this.get("width"); x++){
+        for ( var x = 0; x < this.__width; x++){
             if ( !initTiles[x] ) continue;
-            for ( var y = 0; y < this.get("height"); y++){
+            var height = initTiles[x].length;
+            if ( this.__height < height) this.__height = height
+            for ( var y = 0; y <height; y++){
                 var tileEntry = initTiles[x][y];
                 if ( !tileEntry ) continue;
                 if ( tileEntry.type && TILE_MODEL_MAP[tileEntry.type] ) {
@@ -112,6 +116,12 @@ var RoomModel = Backbone.Model.extend({
                 }
             }
         }
+    },
+    getWidth:function(){
+        return this.__width;
+    },
+    getHeight:function(){
+        return this.__height;
     },
     initMovables:function(){
         var initMovables = this.get("initMovables");
@@ -248,7 +258,7 @@ var RoomModel = Backbone.Model.extend({
     },
     __genMovableMap:function(){
         this.__movableMap = [];
-        for ( var i = 0; i < this.get("width"); i++){
+        for ( var i = 0; i < this.__width; i++){
             if ( !this.__movableMap[i] ) this.__movableMap.push([]);
         }
         _.each(this.__movables,function(movable){
@@ -261,8 +271,8 @@ var RoomModel = Backbone.Model.extend({
         _.each(this.__movables,callback,context)
     },
     foreachTile:function(callback,context){
-        for ( var x = 0; x < this.get("width"); x++){
-            for ( var y = 0; y < this.get("height"); y++){
+        for ( var x = 0; x < this.__width; x++){
+            for ( var y = 0; y < this.__height; y++){
                 var tile = this.getTile(x,y);
                 if ( tile ) callback.call(context, tile)
             }
@@ -270,8 +280,8 @@ var RoomModel = Backbone.Model.extend({
     },
     filterTile:function(callback, context){
         var tiles = [];
-        for ( var x = 0; x < this.get("width"); x++){
-            for ( var y = 0; y < this.get("height"); y++){
+        for ( var x = 0; x < this.__width; x++){
+            for ( var y = 0; y < this.__height; y++){
                 var tile = this.getTile(x,y);
                 if ( tile && callback.call(context, tile) ) {
                     tiles.push(tile)
@@ -431,7 +441,7 @@ var RoomModel = Backbone.Model.extend({
         var maxStep = 0;
 
         var movableMapResult = [];
-        for ( var i = 0; i < this.get("width"); i++){
+        for ( var i = 0; i < this.__width; i++){
             if ( !movableMapResult[i] ) movableMapResult.push([]);
         }
         _.each(this.__movables,function(movable){
@@ -447,7 +457,7 @@ var RoomModel = Backbone.Model.extend({
             movable._movedThisRound = false;
         },this);
 
-        traverseMap(movableMapResult, this.get("width"), this.get("height"), REVERSE_DIRECTIONS[direction], function(movable, x, y){
+        traverseMap(movableMapResult, this.__width, this.__height, REVERSE_DIRECTIONS[direction], function(movable, x, y){
             if ( !movable._movedThisRound ) {
                 if ( movable.isEdgePosition(direction,x,y) ) {
 
@@ -538,10 +548,7 @@ var RoomModel = Backbone.Model.extend({
         if ( this.__hero.canAttack(movable) ) {
             var movable = this.getMovableByPosition(getIncrementPosition(this.__hero.get("positions")[0], this.__hero.get("face")));
             if (movable instanceof EnemyModel && movable.canBeAttack("normal")) {
-                this.__hero.attack(movable, {
-                    attackType: "normal",
-                    moveType: "normal"
-                });
+                this.__hero.normalAttack(movable);
             } else {
                 this.nextPhase();
             }

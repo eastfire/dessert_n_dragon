@@ -8,7 +8,6 @@ var HeroSprite = MovableSprite.extend({
     initEvent:function(){
         this._super()
         this.model.on("attack", this.attack, this)
-        this.model.on("special-attack",this.specialAttack,this);
         this.model.on("hitForward", this.hitForward, this)
         this.model.on("hitMoveBack", this.hitMoveBack, this)
         this.model.on("miss", this.miss, this)
@@ -24,20 +23,6 @@ var HeroSprite = MovableSprite.extend({
                 this.model.hitOrMiss(enemyModel, options)
             },this)
         ))
-    },
-    specialAttack:function(enemyModel, attackType, callback ){
-        if (attackType === "tail-slash") {
-            var increment = DECREMENTS[this.model.get("face")]
-            var deltaX = dimens.tileSize.width*increment.x/2;
-            var deltaY = dimens.tileSize.height*increment.y/2
-            //TODO animation
-            this.runAction(cc.sequence(
-                cc.moveBy(times.heroAttack, deltaX, deltaY ),
-                cc.callFunc(function(){
-                    this.model.hitOrMiss(enemyModel, attackType)
-                },this)
-            ))
-        }
     },
     hitForward:function(heroModel, enemyModel){
         //TODO animation

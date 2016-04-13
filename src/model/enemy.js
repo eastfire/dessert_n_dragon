@@ -37,7 +37,7 @@ var EnemyModel = MovableModel.extend({
     },
     beforeBeAttacked:function(hero){
     },
-    checkHit:function(hero){
+    checkHit:function(hero, options){
         return true;
     },
     getClosestPoint:function(p){

@@ -5,6 +5,7 @@ var HeroModel = MovableModel.extend({
             exp: 0,
             unusedExp: 0,
 
+            forwardAfterKillEnemy: false,
             choiceNumber: 3,
             //inactive skill
             constitute: 0,
@@ -95,21 +96,34 @@ var HeroModel = MovableModel.extend({
     },
     beforeAttack:function(enemy, options){
     },
-    attack:function(enemy, options){
+    attack:function(enemy, options){ //options: attackType, attackAction, onHit,context, onMiss
         this.beforeAttack(enemy, options);
         enemy.beforeBeAttacked(this, options);
-        this.trigger("attack",this, enemy, options)
+        this.trigger("attack",enemy, options)
+    },
+    normalAttack:function(enemy) {
+        var options = {
+            attackType : "normal",
+            attackAction: "normal",
+            onHit: function(enemy, opt){
+                this.hit(enemy, options);
+                enemy.beHit(this, options);
+            },
+            onMiss: function(enemy, opt){
+                this.miss(enemy, options);
+                enemy.dodgeAttack(this, options);
+            },
+            context: this
+        }
+        this.attack(enemy, options);
     },
     hitOrMiss:function(enemy, options){ //called by view
         if ( enemy.checkHit(this, options) ) {
-            //hit
-            this.hit(enemy, options);
-            enemy.beHit(this, options);
+            cc.log(options)
+            if ( options.onHit ) options.onHit.call(options.context, enemy);
             return true;
         } else {
-            //miss
-            this.miss(enemy, options);
-            enemy.dodgeAttack(this, options);
+            if ( options.onMiss ) options.onMiss.call(options.context, enemy);
             return false;
         }
     },
@@ -120,7 +134,7 @@ var HeroModel = MovableModel.extend({
     },
     hit:function(enemy, options){
         this.beforeHit(enemy, options);
-        if ( enemy.get("heroForwardAfterKillMe") ) {
+        if ( enemy.get("heroForwardAfterKillMe") && this.get("forwardAfterKillEnemy")) {
             this.__forwardAfterKill = true;
             this.trigger("hitForward", this, enemy);
         } else {
@@ -158,7 +172,7 @@ var HeroModel = MovableModel.extend({
     },
     beforeBeAttacked:function(enemy){
     },
-    checkHit:function(enemy){
+    checkHit:function(enemy, options){
         return true;
     },
     beforeBeHit:function(enemy, attackPoint){
