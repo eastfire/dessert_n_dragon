@@ -13,15 +13,15 @@ var HeroSprite = MovableSprite.extend({
         this.model.on("hitMoveBack", this.hitMoveBack, this)
         this.model.on("miss", this.miss, this)
     },
-    attack:function(heroModel, enemyModel){
-        var increment = INCREMENTS[heroModel.get("face")]
+    attack:function(enemyModel, options){
+        var increment = INCREMENTS[this.model.get("face")]
         var deltaX = dimens.tileSize.width*increment.x/2;
         var deltaY = dimens.tileSize.height*increment.y/2
         //TODO animation
         this.runAction(cc.sequence(
             cc.moveBy(times.heroAttack, deltaX, deltaY ),
             cc.callFunc(function(){
-                this.model.hitOrMiss(enemyModel)
+                this.model.hitOrMiss(enemyModel, options)
             },this)
         ))
     },

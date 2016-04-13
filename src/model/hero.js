@@ -6,9 +6,10 @@ var HeroModel = MovableModel.extend({
             unusedExp: 0,
 
             choiceNumber: 3,
-            forwardAfterKill: true,
             //inactive skill
-            cunning: 0
+            constitute: 0,
+            cunning: 0,
+            luck: 0
         } )
     },
     initialize:function(){
@@ -117,16 +118,18 @@ var HeroModel = MovableModel.extend({
     },
     beforeHit:function(enemy){
     },
-    hit:function(enemy, attackType){
-        this.beforeHit(enemy, attackType);
+    hit:function(enemy, options){
+        this.beforeHit(enemy, options);
         if ( enemy.get("heroForwardAfterKillMe") ) {
+            this.__forwardAfterKill = true;
             this.trigger("hitForward", this, enemy);
         } else {
+            this.__forwardAfterKill = false;
             this.trigger("hitMoveBack", this, enemy);
         }
     },
-    afterHit:function(enemy, attackType){ //called by view
-        if ( this.get("forwardAfterKill") ) {
+    afterHit:function(enemy, options){ //called by view
+        if ( this.__forwardAfterKill ) {
             //remove old mapping
             currentRoom.__movableMap[this.get("positions")[0].x][this.get("positions")[0].y] = null; //hero is only size 1
             //move to new position

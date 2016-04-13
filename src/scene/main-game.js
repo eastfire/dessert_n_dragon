@@ -309,6 +309,13 @@ var MainLayer = cc.Layer.extend({
     onGameOver:function(roomModel, isWin){
         if ( isWin ) {
             var oldScore = score[roomModel.get("stageNumber")];
+            if ( !oldScore ) {
+                //first pass
+                var unlocks = roomModel.get("unlocks");
+                if ( unlocks ) {
+                    //TODO unlock
+                }
+            }
             if ( !oldScore || oldScore < roomModel.get("score") ) {
                 score[roomModel.get("stageNumber")] = roomModel.get("score");
                 saveScore();
