@@ -672,7 +672,6 @@ rooms.push({ //room8
         }, //normal, fix
         isShowLevel: false
     },
-    initHand:[],
     choicePool:[
         { type:"getScore", opt:{ number:300} },
         { type:"getFullHp" },

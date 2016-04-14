@@ -683,8 +683,11 @@ var RoomModel = Backbone.Model.extend({
     canDrawCard:function(){
         return !this.get("waitTurn")
     },
-    getCards:function(){
+    getHand:function(){
         return this.__hand;
+    },
+    getDeck:function(){
+        return this.__deck;
     },
     gainWait:function(amount){
         this.set("waitTurn", this.get("waitTurn") + amount)

@@ -40,6 +40,7 @@ var MainLayer = cc.Layer.extend({
 
         this.initMenu();
         this.initLabel();
+        this.initDeck();
         this.initConditionLabel();
 
         this.initScoreBar();
@@ -246,6 +247,28 @@ var MainLayer = cc.Layer.extend({
         });
         this.addChild(label);
     },
+    initDeck:function(){
+        var deckIcon = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("icon-deck.png"))
+        deckIcon.attr({
+            x: dimens.deckIcon.x,
+            y: dimens.deckIcon.y
+        })
+        this.deckLabel = new ccui.Text("", "Arial", dimens.deckLabel.fontSize );
+        this.deckLabel.enableOutline(colors.deckLabel.outline, dimens.deckLabel.outlineWidth);
+        this.deckLabel.setTextColor(colors.deckLabel.inside);
+        this.deckLabel.attr({
+            x: 0,
+            y: 0
+        });
+        deckIcon.addChild(this.deckLabel)
+        this.addChild(deckIcon);
+
+        this.renderDeck();
+    },
+    renderDeck:function(){
+        if ( currentRoom.getHand().length + currentRoom.getDeck().length > 0 ) this.deckLabel.setString( currentRoom.getDeck().length )
+        else this.deckLabel.setString("");
+    },
     renderConditionLabel:function(condition){
         var label = this.conditionLabels[condition.conditionType+"_"+condition.type+( condition.subtype ? ("_"+condition.subtype):"")];
         if ( !label ) return;
@@ -379,6 +402,8 @@ var MainLayer = cc.Layer.extend({
         currentRoom.on("change:turnNumber",this.onTurnNumberChange,this);
         currentRoom.on("change:turnLimit",this.onTurnNumberChange,this);
         currentRoom.on("change:statistic",this.onStatisticChange,this);
+        currentRoom.on("change:deck",this.renderDeck,this);
+        currentRoom.on("change:waitTurn",this.renderDeck,this);
         currentRoom.on("game-over",this.onGameOver,this)
 
         if ('keyboard' in cc.sys.capabilities) {

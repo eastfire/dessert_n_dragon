@@ -62,6 +62,10 @@ var colors = {
     gameOver:{
         ok: cc.color.BLACK
     },
+    deckLabel:{
+        outline: cc.color.BLACK,
+        inside: cc.color.WHITE
+    },
     card: {
         waitLabel: {
             outline: cc.color.BLACK,
@@ -150,6 +154,14 @@ var dimens = {
     },
     hands:{
         y: 100
+    },
+    deckIcon:{
+        x: 22,
+        y: 150
+    },
+    deckLabel:{
+        outlineWidth: 2,
+        fontSize: 22
     },
     card_size:{
         width: 120,

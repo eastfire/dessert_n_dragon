@@ -22,7 +22,7 @@ var HandSprite = BaseSprite.extend({
         this.model.off("change:hands",this.onHandChange);
     },
     initCards:function(){
-        var cards = this.model.getCards();
+        var cards = this.model.getHand();
         _.each(cards,function(cardModel){
             var cardSprite = new CardSprite({model:cardModel});
             cardSprite.attr({
@@ -36,7 +36,7 @@ var HandSprite = BaseSprite.extend({
     },
     onHandChange:function(){
         var needCurve = true;
-        var cards = this.model.getCards();
+        var cards = this.model.getHand();
         var index = 0;
         if ( cards.length == 0 ) {
             return;
