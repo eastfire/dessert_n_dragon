@@ -13,16 +13,39 @@ var HeroSprite = MovableSprite.extend({
         this.model.on("miss", this.miss, this)
     },
     attack:function(enemyModel, options){
-        var increment = INCREMENTS[this.model.get("face")]
-        var deltaX = dimens.tileSize.width*increment.x/2;
-        var deltaY = dimens.tileSize.height*increment.y/2
-        //TODO animation
-        this.runAction(cc.sequence(
-            cc.moveBy(times.heroAttack, deltaX, deltaY ),
-            cc.callFunc(function(){
+        switch ( options.attackAction ) {
+            case "normal":
+                var increment = INCREMENTS[this.model.get("face")]
+                var deltaX = dimens.tileSize.width*increment.x/2;
+                var deltaY = dimens.tileSize.height*increment.y/2
+                //TODO animation
+                this.runAction(cc.sequence(
+                    cc.moveBy(times.heroAttack, deltaX, deltaY ),
+                    cc.callFunc(function(){
+                        this.model.hitOrMiss(enemyModel, options)
+                    },this)
+                ))
+                break;
+            case "tail-slash":
+                var increment = DECREMENTS[this.model.get("face")]
+                var deltaX = dimens.tileSize.width*increment.x/2;
+                var deltaY = dimens.tileSize.height*increment.y/2
+                //TODO animation
+                this.runAction(cc.sequence(
+                    cc.moveBy(times.heroAttack, deltaX, deltaY ),
+                    cc.callFunc(function(){
+                        this.model.hitOrMiss(enemyModel, options)
+                    },this),
+                    cc.moveBy(times.heroAttack, -deltaX, -deltaY )
+                ))
+                break;
+            case "fire":
                 this.model.hitOrMiss(enemyModel, options)
-            },this)
-        ))
+                break;
+            default :
+                this.model.hitOrMiss(enemyModel, options)
+        }
+
     },
     hitForward:function(heroModel, enemyModel){
         //TODO animation

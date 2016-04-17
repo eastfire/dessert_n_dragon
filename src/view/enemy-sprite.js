@@ -51,3 +51,23 @@ var EnemySprite = MovableSprite.extend({
         this.model.afterDie(hero);
     }
 });
+
+MOVABLE_SPRITE_MAP["archer"] = EnemySprite.extend({
+    attack:function(enemyModel, hero){
+        var heroPosition = hero.getPosition()
+        var point = this.model.getClosestPoint(heroPosition)
+        var deltaX = dimens.tileSize.width*(Math.min(1,heroPosition.x - point.x) )/3;
+        var deltaY = dimens.tileSize.height*(Math.min(1,heroPosition.y - point.y) )/3
+        //TODO animation
+        this.runAction(cc.sequence(
+            cc.moveBy(times.enemyAttack, deltaX, deltaY ),
+            cc.callFunc(function(){
+                this.model.hitOrMiss(hero)
+            },this),
+            cc.moveBy(times.enemyAttack, -deltaX, -deltaY ),
+            cc.callFunc(function(){
+                this.model.afterAttack(hero)
+            },this)
+        ))
+    }
+});

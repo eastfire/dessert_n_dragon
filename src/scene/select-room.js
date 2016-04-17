@@ -7,12 +7,13 @@ var SelectRoomLayer = cc.Layer.extend({
         var stageNumber = 1;
 
         this.initMoney();
+
         var stepY = 50;
         
         this.scrollView = new ccui.ScrollView();
         this.scrollView.setDirection(ccui.ScrollView.DIR_VERTICAL);
         this.scrollView.setTouchEnabled(true);
-        this.scrollView.setContentSize(cc.size(cc.winSize.width, cc.winSize.height));
+        this.scrollView.setContentSize(cc.size(cc.winSize.width, cc.winSize.height - 40));
 
         this.scrollView.x = 0;
         this.scrollView.y = 0;
@@ -125,7 +126,15 @@ var SelectRoomLayer = cc.Layer.extend({
         this.renderMoney();
     },
     renderMoney:function(){
-        this.moneyLabel.setString(gameStatus.money);
+        this.moneyLabel.setString(gameStatus.get("money"));
+    },
+    onEnter:function(){
+        this._super();
+        gameStatus.on("change:money",this.renderMoney,this)
+    },
+    onExit:function(){
+        gameStatus.off("change:money")
+        this._super();
     }
 });
 

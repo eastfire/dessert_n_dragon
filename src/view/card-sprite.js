@@ -3,7 +3,7 @@ var CardSprite = BaseSprite.extend({
         this._super(options);
 
         this.setName(this.model.cid);
-        this.initStatus();
+        this.initCardLayout();
         this.renderWait();
         this.renderLevel();
     },
@@ -30,7 +30,9 @@ var CardSprite = BaseSprite.extend({
                     var s = target.getContentSize();
                     var rect = cc.rect(0, 0, s.width, s.height);
                     if (cc.rectContainsPoint(rect, locationInNode)) {
-                        return true;
+                        if ( target.model.canUse()) {
+                            return true;
+                        }
                     }
                 }
                 return false;
@@ -50,25 +52,31 @@ var CardSprite = BaseSprite.extend({
         this.model.off("change:level",this.renderLevel);
         cc.eventManager.removeListeners(this.listener);
     },
-    initStatus:function(){
-        if ( this.model.get("isShowWait") ) {
-            var icon = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("icon-wait.png"));
-            this.addChild(icon);
-            icon.attr({
-                x: dimens.card.waitIcon.x,
-                y: dimens.card.waitIcon.y
-            })
+    initCardLayout:function(){
+        this.disableMask = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("card-disabled-mask.png"));
+        this.disableMask.attr({
+            x: dimens.card_size.width/2,
+            y: dimens.card_size.height/2
+        })
+        this.addChild(this.disableMask);
 
-            this.waitLabel = new ccui.Text("", "Arial", dimens.card.waitLabel.fontSize);
-            this.waitLabel.enableOutline(colors.card.waitLabel.outline, dimens.card.waitLabel.outlineWidth);
-            this.waitLabel.setTextColor(colors.card.waitLabel.inside);
-            this.waitLabel.attr({
-                //color: colors.tableLabel,
-                x: dimens.card.waitLabel.x,
-                y: dimens.card.waitLabel.y
-            });
-            this.addChild(this.waitLabel);
-        }
+        this.waitIcon = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("icon-wait.png"));
+        this.addChild(this.waitIcon);
+        this.waitIcon.attr({
+            x: dimens.card.waitIcon.x,
+            y: dimens.card.waitIcon.y
+        })
+
+        this.waitLabel = new ccui.Text("", "Arial", dimens.card.waitLabel.fontSize);
+        this.waitLabel.enableOutline(colors.card.waitLabel.outline, dimens.card.waitLabel.outlineWidth);
+        this.waitLabel.setTextColor(colors.card.waitLabel.inside);
+        this.waitLabel.attr({
+            //color: colors.tableLabel,
+            x: dimens.card.waitLabel.x,
+            y: dimens.card.waitLabel.y
+        });
+        this.addChild(this.waitLabel);
+
 
         if ( this.model.get("isShowLevel") ) {
             var icon = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("icon-level.png"));
@@ -90,7 +98,16 @@ var CardSprite = BaseSprite.extend({
         }
     },
     renderWait:function(){
-        if ( this.waitLabel ) this.waitLabel.setString(this.model.getWait())
+        if ( this.model.get("waitTurn") ){
+            this.waitIcon.setVisible(true);
+            this.waitLabel.setVisible(true);
+            this.waitLabel.setString(this.model.getWait())
+            this.disableMask.setVisible(true);
+        }  else {
+            this.waitIcon.setVisible(false);
+            this.waitLabel.setVisible(false);
+            this.disableMask.setVisible(false);
+        }
     },
     renderLevel:function(){
         if ( this.levelLabel ) this.levelLabel.setString(this.model.get("level"))
@@ -99,6 +116,7 @@ var CardSprite = BaseSprite.extend({
         return "card-"+this.model.get("type")+".png";
     },
     useCard:function(){
+        //TODO add many effect
         this.model.afterUse();
     }
 });

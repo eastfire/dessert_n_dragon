@@ -50,6 +50,7 @@ var MainLayer = cc.Layer.extend({
         this.renderScore();
         this.renderExp();
         this.renderTurnNumber();
+        this.renderMoney();
 
         return true;
     },
@@ -92,10 +93,10 @@ var MainLayer = cc.Layer.extend({
     initLabel:function(){
         var hpIcon = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("icon-hp.png"));
         hpIcon.attr({
-            x: dimens.hpLabel.x - 26,
+            x: dimens.hpLabel.x - 20,
             y: dimens.hpLabel.y,
-            scaleX: 0.8,
-            scaleY: 0.8
+            scaleX: 0.7,
+            scaleY: 0.7
         })
         this.addChild(hpIcon);
 
@@ -110,12 +111,32 @@ var MainLayer = cc.Layer.extend({
         });
         this.addChild(this.hpLabel);
 
+        var moneyIcon = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("icon-money.png"));
+        moneyIcon.attr({
+            x: dimens.mainGameMoneyLabel.x - 20,
+            y: dimens.mainGameMoneyLabel.y,
+            scaleX: 0.7,
+            scaleY: 0.7
+        })
+        this.addChild(moneyIcon);
+
+        this.moneyLabel = new ccui.Text("", "Arial", dimens.mainGameMoneyLabel.fontSize );
+        this.moneyLabel.enableOutline(colors.hpLabel.outline, dimens.mainGameMoneyLabel.outlineWidth);
+        this.moneyLabel.setTextColor(colors.hpLabel.inside);
+        this.moneyLabel.attr({
+            //color: colors.tableLabel,
+            x: dimens.mainGameMoneyLabel.x,
+            y: dimens.mainGameMoneyLabel.y,
+            anchorX: 0
+        });
+        this.addChild(this.moneyLabel);
+
         var expIcon = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("icon-stomach.png"))
         expIcon.attr({
-            x: dimens.expLabel.x - 26,
+            x: dimens.expLabel.x - 20,
             y: dimens.expLabel.y,
-            scaleX: 0.8,
-            scaleY: 0.8
+            scaleX: 0.7,
+            scaleY: 0.7
         })
         this.addChild(expIcon);
 
@@ -156,18 +177,22 @@ var MainLayer = cc.Layer.extend({
         this.conditionLabels = {};
         var conditionType = null;
         var killConditions = _.filter(currentRoom.get("winEveryConditions"),function(condition){
+            if ( condition === "outOfTurn" ) {
+                conditionType = "outOfTurn";
+                return false;
+            }
             if ( typeof condition === "object" &&
                 ( condition.conditionType === "kill" || condition.conditionType === "kill-level" || condition.conditionType === "kill-max-level") ){
                 conditionType = condition.conditionType;
                 return true;
             } else return false;
         })
-        if ( !killConditions.length ) return;
 
         var conditionStrMap = {
             "kill": "吃掉足够多数量的敌人",
             "kill-level": "吃掉足够多等级的敌人",
-            "kill-max-level": "吃掉等级足够高的敌人"
+            "kill-max-level": "吃掉等级足够高的敌人",
+            "outOfTurn":"生存"
         };
 
         var label = new ccui.Text(conditionStrMap[conditionType], "Arial", dimens.conditionLabel.fontSize );
@@ -179,6 +204,8 @@ var MainLayer = cc.Layer.extend({
             y: dimens.condition.y +50
         });
         this.addChild(label);
+
+        if ( !killConditions.length ) return;
 
         var stepX = cc.winSize.width / killConditions.length
         var x = stepX/2;
@@ -248,8 +275,8 @@ var MainLayer = cc.Layer.extend({
         this.addChild(label);
     },
     initDeck:function(){
-        var deckIcon = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("icon-deck.png"))
-        deckIcon.attr({
+        this.deckIcon = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("icon-deck.png"))
+        this.deckIcon.attr({
             x: dimens.deckIcon.x,
             y: dimens.deckIcon.y
         })
@@ -257,17 +284,21 @@ var MainLayer = cc.Layer.extend({
         this.deckLabel.enableOutline(colors.deckLabel.outline, dimens.deckLabel.outlineWidth);
         this.deckLabel.setTextColor(colors.deckLabel.inside);
         this.deckLabel.attr({
-            x: 0,
-            y: 0
+            x: 20,
+            y: 30
         });
-        deckIcon.addChild(this.deckLabel)
-        this.addChild(deckIcon);
+        this.deckIcon.addChild(this.deckLabel)
+        this.addChild(this.deckIcon);
 
         this.renderDeck();
     },
     renderDeck:function(){
-        if ( currentRoom.getHand().length + currentRoom.getDeck().length > 0 ) this.deckLabel.setString( currentRoom.getDeck().length )
-        else this.deckLabel.setString("");
+        if ( currentRoom.getHand().length + currentRoom.getDeck().length + currentRoom.getDiscard().length > 0 ){
+            this.deckIcon.setVisible(true);
+            this.deckLabel.setString( currentRoom.getDeck().length+currentRoom.getDiscard().length )
+        } else {
+            this.deckIcon.setVisible(false);
+        }
     },
     renderConditionLabel:function(condition){
         var label = this.conditionLabels[condition.conditionType+"_"+condition.type+( condition.subtype ? ("_"+condition.subtype):"")];
@@ -277,15 +308,19 @@ var MainLayer = cc.Layer.extend({
         if ( condition.conditionType === "kill-level" || condition.conditionType === "kill" ) {
             var statisticItem = condition.conditionType+"-" + enemyType;
             statistic[statisticItem] = statistic[statisticItem] || 0;
-            label.setString(Math.max(0, condition.number - statistic[statisticItem]));
+            var number = Math.max(0, condition.number - statistic[statisticItem]);
+            label.setString(number?number:" √");
         } else if (condition.conditionType === "kill-max-level") {
             var statisticItem = condition.conditionType+"-" + enemyType;
             statistic[statisticItem] = statistic[statisticItem] || 0;
-            label.setString( condition.number+ (condition.number > statistic[statisticItem] ? "": "√"));
+            label.setString( "lv"+condition.number+ (condition.number > statistic[statisticItem] ? "": "√"));
         }
     },
     renderHp:function(){
         this.hpLabel.setString(currentRoom.getHero().get("hp")+"/"+currentRoom.getHero().get("maxHp"))
+    },
+    renderMoney:function(){
+        this.moneyLabel.setString(gameStatus.get("money"));
     },
     renderScore:function(){
         var score = currentRoom.get("score");
@@ -394,6 +429,7 @@ var MainLayer = cc.Layer.extend({
     },
     initEvent:function() {
         currentRoom.on("change:score",this.onScoreChange,this);
+        gameStatus.on("change:money",this.renderMoney,this);
         currentRoom.getHero().on("change:hp",this.onHpChange, this);
         currentRoom.getHero().on("change:maxHp",this.onMaxHpChange, this);
         currentRoom.getHero().on("change:exp",this.onExpChange, this);
@@ -403,7 +439,6 @@ var MainLayer = cc.Layer.extend({
         currentRoom.on("change:turnLimit",this.onTurnNumberChange,this);
         currentRoom.on("change:statistic",this.onStatisticChange,this);
         currentRoom.on("change:deck",this.renderDeck,this);
-        currentRoom.on("change:waitTurn",this.renderDeck,this);
         currentRoom.on("game-over",this.onGameOver,this)
 
         if ('keyboard' in cc.sys.capabilities) {
@@ -478,13 +513,16 @@ var MainLayer = cc.Layer.extend({
     },
     closeEvent:function(){
         currentRoom.off("change:score",this.onScoreChange,this);
+        gameStatus.off("change:money",this.renderMoney,this);
         currentRoom.getHero().off("change:hp",this.onHpChange, this);
         currentRoom.getHero().off("change:maxHp",this.onMaxHpChange, this);
         currentRoom.getHero().off("change:exp",this.onExpChange, this);
         currentRoom.getHero().off("change:requireExp",this.onRequireExpChange, this);
+        currentRoom.getHero().off("levelUp",this.onLevelUp, this);
         currentRoom.off("change:turnNumber",this.onTurnNumberChange,this);
         currentRoom.off("change:turnLimit",this.onTurnNumberChange,this);
         currentRoom.off("change:statistic",this.onStatisticChange,this);
+        currentRoom.off("change:deck",this.renderDeck,this);
         currentRoom.off("game-over",this.onGameOver,this)
 
         if ('keyboard' in cc.sys.capabilities) {

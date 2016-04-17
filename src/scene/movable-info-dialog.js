@@ -16,7 +16,7 @@ var MovableInfoDialog = cc.Scale9Sprite.extend({
             height: this.dialogHeight
         })
         
-        if ( this.model instanceof EnemyModel ) {
+        if ( this.model instanceof EnemyModel || this.model instanceof NeutralMovable ) {
             this.initMovableLabel();
         }
     },
@@ -31,7 +31,7 @@ var MovableInfoDialog = cc.Scale9Sprite.extend({
         })
         this.addChild(sprite);
         
-        if ( this.model.get("level") ) {
+        if ( this.model.get("level") && this.model.get("isShowLevel")) {
             var label = new ccui.Text("lv"+this.model.get("level"), "Arial", dimens.movableInfo.levelLabel.fontSize );
             label.enableOutline(colors.movableInfo.levelLabel.outline, dimens.movableInfo.levelLabel.outlineWidth);
             label.setTextColor(colors.movableInfo.levelLabel.inside);

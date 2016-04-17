@@ -10,6 +10,7 @@ var BaseSprite = cc.Sprite.extend({
     },
     onDestroy:function(){
         this.model.off();
+        this.removeAllChildren(true);
         this.removeFromParent(true);
         this.model = null;
     },

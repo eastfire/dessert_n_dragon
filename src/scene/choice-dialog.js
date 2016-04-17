@@ -68,10 +68,10 @@ var ChoiceDialog = cc.Scale9Sprite.extend({
                 cc.spriteFrameCache.getSpriteFrame("button-short-default.png"),
                 cc.spriteFrameCache.getSpriteFrame("button-short-press.png"),
                 function () {
-                    var value = (this.model.get("refreshCount") + 1) * 5;
-                    if (gameStatus.money >= value) {
-                        gameStatus.money -= value;
-                        saveGameStatus();
+                    var value = (this.model.get("refreshCount") + 1) * this.model.get("refreshCost");
+                    if (gameStatus.get("money") >= value) {
+                        gameStatus.set("money",gameStatus.get("money")-value);
+                        gameStatus.save();
                         this.model.set("refreshCount", this.model.get("refreshCount") + 1);
                         this.menu.removeFromParent(true);
                         this.initMenu();
@@ -84,7 +84,7 @@ var ChoiceDialog = cc.Scale9Sprite.extend({
                 anchorX: 0.5,
                 anchorY: 0.5
             });
-            var descLabel = new cc.LabelTTF("换一换（" + (this.model.get("refreshCount") + 1) * 5 + "$）", null, 22);
+            var descLabel = new cc.LabelTTF("换一换（" + (this.model.get("refreshCount") + 1) * this.model.get("refreshCost") + "$）", null, 22);
             descLabel.attr({
                 color: colors.gameOver.ok,
                 x: 90,

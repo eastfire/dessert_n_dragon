@@ -46,6 +46,19 @@ var getIncrementPosition = function(x, y, direction){
     }
 }
 
+var getDecrementsPosition = function(x, y, direction){
+    if ( x instanceof  Object ) {
+        direction = y;
+        y = x.y;
+        x = x.x;
+    }
+    var increment = DECREMENTS[direction]
+    return {
+        x: x + increment.x,
+        y: y + increment.y
+    }
+}
+
 var __getTraverse = function(direction, width, height){
     return [
         { //up

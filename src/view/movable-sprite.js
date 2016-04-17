@@ -15,6 +15,7 @@ var MovableSprite = BaseSprite.extend({
         } else {
             name = this.model.get("type") + (this.model.get("subtype") ? ("-" + this.model.get("subtype")) : "") + this.model.get("face") + this.__animateStatus + "0.png"
         }
+        cc.log(name);
         return name;
     },
     initAnimation:function(){

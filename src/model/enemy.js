@@ -4,8 +4,6 @@ var EXP_INFLATION_RATE = 10;
 var EnemyModel = MovableModel.extend({
     defaults:function(){
         return _.extend( MovableModel.prototype.defaults.call(this),{
-            name:"",
-            flavor:"",
             attackRage: 1,
             attackType: ATTACK_TYPE_MELEE,
             baseAttack: 1,
@@ -17,6 +15,7 @@ var EnemyModel = MovableModel.extend({
     },
     initialize:function(){
         MovableModel.prototype.initialize.call(this);
+        this.__dead = false;
         this.onLevelChange();
         this.on("change:level", this.onLevelChange,this)
     },
@@ -63,6 +62,7 @@ var EnemyModel = MovableModel.extend({
         this.die(hero);
     },
     beforeDie:function(hero){
+        this.__dead = true;
     },
     die:function(hero){
         this.beforeDie(hero);
@@ -96,7 +96,7 @@ var EnemyModel = MovableModel.extend({
         return false
     },
     canBeAttack:function(attackType){
-        return true;
+        return !this.__dead;
     },
     passAttack:function(){
         this.set("attackOver", true);
@@ -203,3 +203,20 @@ var RiceCakeModel = EnemyModel.extend({
 })
 MOVABLE_MODEL_MAP.ricecake = RiceCakeModel;
 
+var ArcherModel = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "archer"
+        } )
+    },
+    checkRange:function(hero){
+        return true;
+    },
+    expOfLevel:function(l){
+        return l*EXP_INFLATION_RATE*2
+    },
+    attackOfLevel:function(l){
+        return Math.round(l/2);
+    }
+})
+MOVABLE_MODEL_MAP.archer = ArcherModel;

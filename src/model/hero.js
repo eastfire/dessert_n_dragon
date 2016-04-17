@@ -10,7 +10,9 @@ var HeroModel = MovableModel.extend({
             //inactive skill
             constitute: 0,
             cunning: 0,
-            luck: 0
+            luck: 0,
+            maxHand: 4,
+            drawEachTurn: 1
         } )
     },
     initialize:function(){
@@ -119,7 +121,6 @@ var HeroModel = MovableModel.extend({
     },
     hitOrMiss:function(enemy, options){ //called by view
         if ( enemy.checkHit(this, options) ) {
-            cc.log(options)
             if ( options.onHit ) options.onHit.call(options.context, enemy);
             return true;
         } else {
@@ -212,6 +213,11 @@ var HeroModel = MovableModel.extend({
         this.loseHp(damage);
     },
     afterTakeDamage:function(enemy, damage){ //called by view
+    },
+    afterBeMerged:function(movable){
+        if ( movable instanceof ItemModel ) {
+            movable.taken();
+        }
     }
 })
 

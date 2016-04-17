@@ -229,10 +229,14 @@
                 <file name="src/libs/utils.js"/>
                 <file name="src/libs/cocos-utils.js"/>
                 <file name="src/resource.js"/>
+                <file name="src/dimens.js"/>
+                <file name="src/colors.js"/>
                 <file name="src/texts.js"/>
                 <file name="src/common.js"/>
+                <file name="src/model/game-status.js"/>
                 <file name="src/model/movable.js"/>
                 <file name="src/model/enemy.js"/>
+                <file name="src/model/neutral-movable.js"/>
                 <file name="src/model/hero.js"/>
                 <file name="src/model/item.js"/>
                 <file name="src/model/tile.js"/>

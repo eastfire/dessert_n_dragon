@@ -55,7 +55,8 @@ var RoomModel = Backbone.Model.extend({
             enemyLevelPool: [1],
             choicePool: [],
             currentChoices: [],
-            refreshCount:0
+            refreshCount:0,
+            refreshCost: 10
 
         }
     },
@@ -90,6 +91,7 @@ var RoomModel = Backbone.Model.extend({
         this.set("rules", _.extend(defaultRules, this.get("rules")));
     },
     initTiles:function(){
+        //TODO tileRotation tileFlipX tileFlipY
         var initTiles = this.get("initTiles");
         if ( !initTiles ) return;
         var tiles = this.__tiles = [];
@@ -142,6 +144,9 @@ var RoomModel = Backbone.Model.extend({
         this.__deck = _.map(this.get("initDeck"),function(cardEntry){
             return new CARD_MODEL_MAP[cardEntry.type](cardEntry)
         });
+        this.__discard = _.map(this.get("initDiscard"),function(cardEntry){
+            return new CARD_MODEL_MAP[cardEntry.type](cardEntry)
+        });
     },
     initEvents:function(){
         this.on("turn-complete", this.turnStart, this)
@@ -153,7 +158,7 @@ var RoomModel = Backbone.Model.extend({
         
         this.__hero.on("die",function(){
             this.gameOver(false);
-        });
+        },this);
     },
     getHero:function(){
         return this.__hero
@@ -330,6 +335,17 @@ var RoomModel = Backbone.Model.extend({
     turnStart:function(){
         cc.log("turnStart");
         this.set("phase", PHASE_TURN_START);
+        //reduce waitTurn of hand
+        _.each(this.__hand,function(cardModel){
+            cardModel.reduceWait(1)
+        },this);
+
+        //draw card
+        if ( this.canDrawCard() ) {
+            for ( var i = 0; i < this.__hero.get("drawEachTurn"); i++ ) {
+                this.drawCard();
+            }
+        }
         //for hero
         this.__hero.onTurnStart();
         //for enemy
@@ -341,9 +357,6 @@ var RoomModel = Backbone.Model.extend({
         //TODO for tiles special ability
         if ( this.passCheckCondition() ) {
             this.nextPhase();
-        }
-        if ( this.canDrawCard() ) {
-
         }
         this.loseWait(1);
     },
@@ -545,8 +558,8 @@ var RoomModel = Backbone.Model.extend({
     heroNormalAttack:function(){
         cc.log("heroNormalAttack")
         this.set("phase",PHASE_HERO_ATTACK);
+        var movable = this.getMovableByPosition(getIncrementPosition(this.__hero.get("positions")[0], this.__hero.get("face")));
         if ( this.__hero.canAttack(movable) ) {
-            var movable = this.getMovableByPosition(getIncrementPosition(this.__hero.get("positions")[0], this.__hero.get("face")));
             if (movable instanceof EnemyModel && movable.canBeAttack("normal")) {
                 this.__hero.normalAttack(movable);
             } else {
@@ -664,7 +677,22 @@ var RoomModel = Backbone.Model.extend({
     gainCard:function(opt){
         var cardModel = new CARD_MODEL_MAP[opt.type](opt);
         this.__hand.push(cardModel);
-        this.trigger("change:hands",this);
+        this.trigger("change:hand",this,"gain");
+    },
+    drawCard:function(){
+        if ( !this.__deck.length ){
+            this.__deck = _.shuffle(this.__discard);
+            this.__discard = [];
+        }
+
+        if ( !this.__deck.length ) return ;
+
+        var opt = this.__deck.pop();
+        var cardModel = new CARD_MODEL_MAP[opt.type](opt);
+        this.__hand.push(cardModel);
+        this.trigger("change:deck",this);
+        this.trigger("change:hand",this,"draw");
+        cardModel.onDraw();
     },
     discardCard:function(cardModel){
         var index = this.__hand.indexOf(cardModel);
@@ -673,21 +701,22 @@ var RoomModel = Backbone.Model.extend({
             this.__hand.splice(index, 1);
         }
         cardModel.restoreToOrigin();
-        this.__deck.push( cardModel.toJSON())
+        this.__discard.push( cardModel.toJSON())
         cardModel.destroy();
-        this.trigger("change:hands", this);
-    },
-    drawCard:function(){
-
+        this.trigger("change:hand", this, "discard");
+        this.trigger("change:deck", this);
     },
     canDrawCard:function(){
-        return !this.get("waitTurn")
+        return this.__hand.length < this.__hero.get("maxHand");
     },
     getHand:function(){
         return this.__hand;
     },
     getDeck:function(){
         return this.__deck;
+    },
+    getDiscard:function(){
+        return this.__discard;
     },
     gainWait:function(amount){
         this.set("waitTurn", this.get("waitTurn") + amount)

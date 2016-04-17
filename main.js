@@ -49,7 +49,6 @@
 var APP_NAME = "dessert_n_dragon"
 var score = {};
 var statistic = {}
-var gameStatus = { money: 100 };
 
 var loadStatistic = function() {
     var store = cc.sys.localStorage.getItem(APP_NAME+".statistic");
@@ -59,10 +58,13 @@ var loadStatistic = function() {
     }
 }
 
+var gameStatus;
 var loadGameStatus = function(){
     var store = cc.sys.localStorage.getItem(APP_NAME+".gameStatus");
     if (store) {
-        gameStatus = JSON.parse(store);
+        gameStatus = new GameStatusModel(JSON.parse(store));
+    } else {
+        gameStatus = new GameStatusModel
     }
 }
 
@@ -75,10 +77,6 @@ var loadScore = function() {
 
 var saveScore = function(){
     cc.sys.localStorage.setItem(APP_NAME+".score", JSON.stringify(score));
-}
-
-var saveGameStatus = function(){
-    cc.sys.localStorage.setItem(APP_NAME+".gameStatus", JSON.stringify(gameStatus));
 }
 
 var initTexts = function(){

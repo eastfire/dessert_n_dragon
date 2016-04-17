@@ -16,10 +16,10 @@ var HandSprite = BaseSprite.extend({
         this._super();
     },
     initEvent:function(){
-        this.model.on("change:hands",this.onHandChange, this);
+        this.model.on("change:hand",this.onHandChange, this);
     },
     closeEvent:function(){
-        this.model.off("change:hands",this.onHandChange);
+        this.model.off("change:hand",this.onHandChange);
     },
     initCards:function(){
         var cards = this.model.getHand();
@@ -34,7 +34,7 @@ var HandSprite = BaseSprite.extend({
             this.addChild(cardSprite);
         },this);
     },
-    onHandChange:function(){
+    onHandChange:function(roomModel, reason){
         var needCurve = true;
         var cards = this.model.getHand();
         var index = 0;
@@ -73,19 +73,29 @@ var HandSprite = BaseSprite.extend({
             var sprite = this.getChildByName(cardModel.cid);
             if ( sprite === null ) {
                 sprite = new CardSprite({model:cardModel});
-                sprite.attr({
-                    x: cc.winSize.width/2,
-                    y: cc.winSize.height/2,
-                    scaleX : CARD_SCALE_RATE,
-                    scaleY : CARD_SCALE_RATE
-                })
+                if ( reason === "gain") {
+                    sprite.attr({
+                        x: cc.winSize.width / 2,
+                        y: cc.winSize.height / 2,
+                        scaleX: CARD_SCALE_RATE,
+                        scaleY: CARD_SCALE_RATE
+                    })
+                } else if ( reason === "draw") {
+                    sprite.attr({
+                        x: dimens.deckIcon.x,
+                        y: dimens.deckIcon.y,
+                        scaleX: dimens.deckIconScaleRate,
+                        scaleY: dimens.deckIconScaleRate
+                    })
+                }
                 this.addChild(sprite);
             }
             if ( sprite.x != x || sprite.y != y) {
                 sprite.runAction(
                     cc.spawn(
                         cc.moveTo(times.card_sort, realX, realY),
-                        cc.rotateTo(times.card_sort, cardAngle, cardAngle)
+                        cc.rotateTo(times.card_sort, cardAngle, cardAngle),
+                        cc.scaleTo(times.card_sort, CARD_SCALE_RATE,CARD_SCALE_RATE)
                     ));
             }
             sprite.zIndex = i;

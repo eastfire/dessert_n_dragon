@@ -61,12 +61,13 @@ var MovableModel = Backbone.Model.extend({
             && movable.get("subtype") === this.get("subtype")) {
             return true;
         }
-        if (_.contains(this.get("canMergeTo"), movable.get("type"))) return true;
+
         if (_.contains(movable.get("canMergeTo"), this.get("type"))) return true;
         return false;
     },
     canMergeTo:function(movable, direction){
-        if (_.contains(movable.get("canMergeTo"), this.get("type"))) return true;
+        if (_.contains(this.get("canMergeTo"), movable.get("type"))) return true;
+//        if (_.contains(movable.get("canMergeTo"), this.get("type"))) return true;
     },
     getEdgePositionLength:function(direction){
         return this.edgePositionLength[direction]

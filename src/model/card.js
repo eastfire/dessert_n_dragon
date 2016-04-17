@@ -1,3 +1,5 @@
+var CARD_MODEL_MAP = {};
+
 var getCardName = function(type){
     return texts.card[type].name;
 }
@@ -15,13 +17,12 @@ var CardModel = Backbone.Model.extend({
 
             level: 1,
             maxLevel: 1,
-            waitTurn: 1,
-            isShowLevel: true,
-            isShowWait: true
+            waitTurn: 0,
+            isShowLevel: true
         }
     },
     initialize: function () {
-        this.set("waitTurn",this.waitTurnOfLevel(this.get("level")));
+
     },
     getName:function(){
         return getCardName(this.get("type"));
@@ -32,8 +33,11 @@ var CardModel = Backbone.Model.extend({
     getWait:function(){
         return this.get("waitTurn")
     },
+    reduceWait:function(amount){
+        this.set("waitTurn", Math.max(0,this.get("waitTurn") - amount));
+    },
     canUse:function(){
-        return true
+        return this.get("waitTurn") <= 0;
     },
     onGain:function(){
     },
@@ -53,6 +57,7 @@ var CardModel = Backbone.Model.extend({
     onExile:function(){
     },
     onDraw:function(){
+        this.set("waitTurn",this.waitTurnOfLevel(this.get("level")));
     },
     discard:function(){
         this.onDiscard();
@@ -68,7 +73,7 @@ var CardModel = Backbone.Model.extend({
     }
 });
 
-var CardHealModel = CardModel.extend({
+CARD_MODEL_MAP.heal = CardModel.extend({
     defaults: function () {
         return _.extend(CardModel.prototype.defaults.call(this),{
             type: "heal",
@@ -88,22 +93,182 @@ var CardHealModel = CardModel.extend({
     }
 })
 
-var CardTailSlashModel = CardModel.extend({
+CARD_MODEL_MAP["tail-slash"] = CardModel.extend({
     defaults: function () {
         return _.extend(CardModel.prototype.defaults.call(this),{
             type: "tail-slash",
-            maxLevel: 4
+            maxLevel: 3
         })
     },
     waitTurnOfLevel:function(level){
-        return 5-level;
+        return 4-level;
     },
     onUse:function(){
-
+        var hero = currentRoom.getHero();
+        var movable = currentRoom.getMovableByPosition(getDecrementsPosition(hero.get("positions")[0], hero.get("face")));
+        if (movable instanceof EnemyModel && movable.canBeAttack("skill")) {
+            hero.attack(movable,{
+                attackType : "skill",
+                attackAction: "tail-slash",
+                onHit: function(enemy, opt){
+                    enemy.beHit(hero, opt);
+                },
+                onMiss: function(enemy, opt){
+                    enemy.dodgeAttack(hero, opt);
+                },
+                context: this
+            });
+        }
     }
 })
 
-var CARD_MODEL_MAP = {
-    heal: CardHealModel,
-    "tail-slash":CardTailSlashModel
-}
+CARD_MODEL_MAP["vertical-fire"] = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "vertical-fire",
+            maxLevel: 5
+        })
+    },
+    waitTurnOfLevel:function(level){
+        return 11-level;
+    },
+    onUse:function(){
+        var hero = currentRoom.getHero();
+        var heroPosition = hero.get("positions")[0];
+
+        for ( var i = 0; i < currentRoom.getHeight(); i++ ) {
+            var movable = currentRoom.getMovableByPosition(heroPosition.x, i);
+            if (movable instanceof EnemyModel && movable.canBeAttack("magic")) {
+                hero.attack(movable,{
+                    attackType : "magic",
+                    attackAction: "fire",
+                    onHit: function(enemy, opt){
+                        enemy.beHit(hero, opt);
+                    },
+                    onMiss: function(enemy, opt){
+                        enemy.dodgeAttack(hero, opt);
+                    },
+                    context: this
+                });
+            }
+        }
+    }
+})
+
+CARD_MODEL_MAP["horizontal-fire"] = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "horizontal-fire",
+            maxLevel: 5
+        })
+    },
+    waitTurnOfLevel:function(level){
+        return 11-level;
+    },
+    onUse:function(){
+        var hero = currentRoom.getHero();
+        var heroPosition = hero.get("positions")[0];
+
+        for ( var i = 0; i < currentRoom.getWidth(); i++ ) {
+            var movable = currentRoom.getMovableByPosition(i,heroPosition.y);
+            if (movable instanceof EnemyModel && movable.canBeAttack("magic")) {
+                hero.attack(movable,{
+                    attackType : "magic",
+                    attackAction: "fire",
+                    onHit: function(enemy, opt){
+                        enemy.beHit(hero, opt);
+                    },
+                    onMiss: function(enemy, opt){
+                        enemy.dodgeAttack(hero, opt);
+                    },
+                    context: this
+                });
+            }
+        }
+    }
+})
+
+CARD_MODEL_MAP["cross-fire"] = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "cross-fire",
+            maxLevel: 5
+        })
+    },
+    waitTurnOfLevel:function(level){
+        return 29-level;
+    },
+    onUse:function(){
+        var hero = currentRoom.getHero();
+        var heroPosition = hero.get("positions")[0];
+
+        for ( var i = 0; i < currentRoom.getHeight(); i++ ) {
+            var movable = currentRoom.getMovableByPosition(heroPosition.x, i);
+            if (movable instanceof EnemyModel && movable.canBeAttack("magic")) {
+                hero.attack(movable,{
+                    attackType : "magic",
+                    attackAction: "fire",
+                    onHit: function(enemy, opt){
+                        enemy.beHit(hero, opt);
+                    },
+                    onMiss: function(enemy, opt){
+                        enemy.dodgeAttack(hero, opt);
+                    },
+                    context: this
+                });
+            }
+        }
+
+        for ( var i = 0; i < currentRoom.getWidth(); i++ ) {
+            var movable = currentRoom.getMovableByPosition(i,heroPosition.y);
+            if (movable instanceof EnemyModel && movable.canBeAttack("magic")) {
+                hero.attack(movable,{
+                    attackType : "magic",
+                    attackAction: "fire",
+                    onHit: function(enemy, opt){
+                        enemy.beHit(hero, opt);
+                    },
+                    onMiss: function(enemy, opt){
+                        enemy.dodgeAttack(hero, opt);
+                    },
+                    context: this
+                });
+            }
+        }
+    }
+})
+
+CARD_MODEL_MAP["whirl-slash"] = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "whirl-slash",
+            maxLevel: 5
+        })
+    },
+    waitTurnOfLevel:function(level){
+        return 25-level;
+    },
+    onUse:function(){
+        var hero = currentRoom.getHero();
+        var heroPosition = hero.get("positions")[0];
+
+        for ( var i = heroPosition.x-1; i < heroPosition.x+2; i++ ) {
+            for ( var j = heroPosition.y-1; i < heroPosition.y+2; i++ ) {
+                var movable = currentRoom.getMovableByPosition(i, j);
+                if (movable instanceof EnemyModel && movable.canBeAttack("skill")) {
+                    hero.attack(movable, {
+                        attackType: "skill",
+                        attackAction: "whirl-slash",
+                        onHit: function (enemy, opt) {
+                            enemy.beHit(hero, opt);
+                        },
+                        onMiss: function (enemy, opt) {
+                            enemy.dodgeAttack(hero, opt);
+                        },
+                        context: this
+                    });
+                }
+            }
+        }
+    }
+})
