@@ -41,6 +41,17 @@ var MovableInfoDialog = cc.Scale9Sprite.extend({
             });
             this.addChild(label);
         }
+
+        if ( this.model instanceof EnemyModel) {
+            var label = new ccui.Text("攻击力"+this.model.getAttackPoint(), "Arial", dimens.movableInfo.levelLabel.fontSize );
+            label.enableOutline(colors.movableInfo.levelLabel.outline, dimens.movableInfo.levelLabel.outlineWidth);
+            label.setTextColor(colors.movableInfo.levelLabel.inside);
+            label.attr({
+                x: dimens.movableInfo.levelLabel.x,
+                y: dimens.movableInfo.levelLabel.y - 40
+            });
+            this.addChild(label);
+        }
         
         var label = new ccui.Text(texts.movable[this.model.get("type")].name, "Arial", dimens.movableInfo.nameLabel.fontSize );
         label.enableOutline(colors.movableInfo.nameLabel.outline, dimens.movableInfo.nameLabel.outlineWidth);

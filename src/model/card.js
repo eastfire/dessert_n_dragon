@@ -253,7 +253,7 @@ CARD_MODEL_MAP["whirl-slash"] = CardModel.extend({
         var heroPosition = hero.get("positions")[0];
 
         for ( var i = heroPosition.x-1; i < heroPosition.x+2; i++ ) {
-            for ( var j = heroPosition.y-1; i < heroPosition.y+2; i++ ) {
+            for ( var j = heroPosition.y-1; j < heroPosition.y+2; j++ ) {
                 var movable = currentRoom.getMovableByPosition(i, j);
                 if (movable instanceof EnemyModel && movable.canBeAttack("skill")) {
                     hero.attack(movable, {

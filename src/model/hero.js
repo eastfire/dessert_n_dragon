@@ -12,7 +12,8 @@ var HeroModel = MovableModel.extend({
             cunning: 0,
             luck: 0,
             maxHand: 4,
-            drawEachTurn: 1
+            drawEachTurn: 1,
+            isShowLevel:false
         } )
     },
     initialize:function(){

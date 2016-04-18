@@ -49,7 +49,7 @@ var ChoiceDialog = cc.Scale9Sprite.extend({
                 anchorX: 0.5,
                 anchorY: 0.5
             });
-            var descLabel = new cc.LabelTTF(choice.description, null, 25 );
+            var descLabel = new cc.LabelTTF(choice.description, null, 20 );
             descLabel.attr({
                 color: colors.gameOver.ok,
                 x: this.dialogWidth/2,

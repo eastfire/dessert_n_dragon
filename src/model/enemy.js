@@ -4,6 +4,7 @@ var EXP_INFLATION_RATE = 10;
 var EnemyModel = MovableModel.extend({
     defaults:function(){
         return _.extend( MovableModel.prototype.defaults.call(this),{
+            name:"",
             attackRage: 1,
             attackType: ATTACK_TYPE_MELEE,
             baseAttack: 1,
@@ -228,27 +229,36 @@ var IcecreamModel = EnemyModel.extend({
         } )
     },
     afterBeMerged:function(movable){
+        EnemyModel.prototype.afterBeMerged.call(this,movable);
         if ( movable instanceof IcecreamModel ) {
-            //freeze around TODO
+            //freeze around
+            var position = this.get("positions")[0];
+            _.each( INCREMENTS, function(increment){
+                var model = currentRoom.getMovableByPosition(position.x+increment.x, position.y+increment.y);
+                if ( model ) {
+                    this.checkFreeze(model);
+                }
+            },this );
         }
     },
     afterHit:function(heroModel){
-        if ( this.checkFreeze(heorModel) ) {
-            heorModel.freeze(1);
-        }
+        this.checkFreeze(heroModel);
     },
     expOfLevel:function(l){
-        return l*EXP_INFLATION_RATE*2
+        return Math.round(l*EXP_INFLATION_RATE*2.5)
     },
     attackOfLevel:function(l){
-        return Math.round(l/2);
+        return l;
     },
     getFreezeRate:function(heroModel){
-        var level = this.get("level")；
-        return Math.min(0.5,level*(level+1)/200);
+        var level = this.get("level");
+        return Math.min(0.7,level*5/200+0.1);
+//        return 1;
     },
-    checkFreeze:function(heroModel){
-        return this.getFreezeRate(heroModel) > Math.random();
+    checkFreeze:function(model){
+        if (this.getFreezeRate(model) > Math.random() ){
+            model.getFrozen(2);
+        }
     }
 })
 MOVABLE_MODEL_MAP.icecream = IcecreamModel;
@@ -260,6 +270,7 @@ var ShamanModel = EnemyModel.extend({
         } )
     },
     afterBeMerged:function(movable){
+        EnemyModel.prototype.afterBeMerged.call(this,movable);
         if ( movable instanceof ShamanModel ) {
             //level up around TODO
         }

@@ -697,7 +697,6 @@ var RoomModel = Backbone.Model.extend({
     discardCard:function(cardModel){
         var index = this.__hand.indexOf(cardModel);
         if ( index !== -1 ) {
-            cc.log(index)
             this.__hand.splice(index, 1);
         }
         cardModel.restoreToOrigin();

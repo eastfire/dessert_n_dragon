@@ -516,8 +516,7 @@ rooms.push({ //初始 room1
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     }
 });
 
@@ -558,9 +557,9 @@ rooms.push({ //教学杀敌数过关，分数无要求 room2
     },{
         type:"pudding", subtype:"yellow"
     },{
-        type:"pudding", subtype:"green"
-    },{
         type:"pudding", subtype:"blue"
+    },{
+        type:"pudding", subtype:"green"
     }],
     initTiles:tiles7x4,
     initMovables:[{
@@ -586,8 +585,7 @@ rooms.push({ //教学杀敌数过关，分数无要求 room2
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     }
 });
 
@@ -627,9 +625,9 @@ rooms.push({ //教学杀敌数过关，且有分数要求 room3
     },{
         type:"pudding",subtype:"yellow"
     },{
-        type:"pudding",subtype:"green"
-    },{
         type:"pudding",subtype:"blue"
+    },{
+        type:"pudding",subtype:"green"
     }],
     initTiles:tiles6x4,
     initMovables:[{
@@ -667,8 +665,7 @@ rooms.push({ //教学杀敌数过关，且有分数要求 room3
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     }
 });
 
@@ -708,9 +705,9 @@ rooms.push({ //教学获得经验和升级 room4
     },{
         type:"pudding",subtype:"yellow"
     },{
-        type:"pudding",subtype:"green"
-    },{
         type:"pudding",subtype:"blue"
+    },{
+        type:"pudding",subtype:"green"
     }],
     initTiles:tiles6x6Rhombus,
     initMovables:[
@@ -726,8 +723,7 @@ rooms.push({ //教学获得经验和升级 room4
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     initHand:[],
     choicePool:STANDARD_CHOICE_POOL
@@ -777,8 +773,7 @@ rooms.push({ //第一次要求大量杀敌 room5
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -832,8 +827,7 @@ rooms.push({ //第一次出现樱桃蛋糕 room6
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -883,8 +877,7 @@ rooms.push({ //第一次出现回复药 room7
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -940,8 +933,7 @@ rooms.push({ //第一次出现年糕 room8
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -972,9 +964,9 @@ rooms.push({ //第一次要求敌人等级　room9
     enemyPool:[{
         type:"pudding",subtype:"yellow"
     },{
-        type:"pudding",subtype:"green"
-    },{
         type:"pudding",subtype:"blue"
+    },{
+        type:"pudding",subtype:"green"
     }],
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     initTiles:tiles6x6,
@@ -990,8 +982,7 @@ rooms.push({ //第一次要求敌人等级　room9
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1029,9 +1020,9 @@ rooms.push({ //复杂地形要求敌人等级room10
     },{
         type:"pudding",subtype:"yellow"
     },{
-        type:"pudding",subtype:"green"
-    },{
         type:"pudding",subtype:"blue"
+    },{
+        type:"pudding",subtype:"green"
     }],
     initTiles:tiles6x6UpArrow,
     initMovables:[
@@ -1046,8 +1037,7 @@ rooms.push({ //复杂地形要求敌人等级room10
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1111,13 +1101,12 @@ rooms.push({ //柱子 room11
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //room12
+rooms.push({ //room12 大量杀敌
     turnLimit:35,
     scoreCondition: [1000, 2000, 3000],
     winEveryConditions:[
@@ -1160,35 +1149,29 @@ rooms.push({ //room12
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //room13 TODO
-    turnLimit:15,
-    scoreCondition: [100, 150, 200],
+rooms.push({ //room13 大量杀敌
+    turnLimit:25,
+    scoreCondition: [2000, 3000, 4500],
     winEveryConditions:[
         {
             conditionType:"kill-level",
             type:"pudding",subtype: "red",
-            number: 2
+            number: 20
         },
         {
             conditionType:"kill-level",
             type:"pudding",subtype: "yellow",
-            number: 2
+            number: 20
         },
         {
             conditionType:"kill-level",
             type:"pudding",subtype: "blue",
-            number: 2
-        },
-        {
-            conditionType:"kill-level",
-            type:"pudding",subtype: "green",
-            number: 2
+            number: 20
         }
     ],
     loseAnyConditions:[
@@ -1199,10 +1182,9 @@ rooms.push({ //room13 TODO
     },{
         type:"pudding",subtype:"yellow"
     },{
-        type:"pudding",subtype:"green"
-    },{
         type:"pudding",subtype:"blue"
     }],
+    genEnemyStrategy: [{type:"random", number: 4, last: 0}],
     initTiles:tiles7x7Rhombus,
     initMovables:[
     ],
@@ -1216,48 +1198,30 @@ rooms.push({ //room13 TODO
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //room14 TODO
+rooms.push({ //room14 第一次出现法师
     turnLimit:15,
-    scoreCondition: [100, 150, 200],
+    scoreCondition: [400, 700, 1000],
     winEveryConditions:[
         {
             conditionType:"kill-level",
-            type:"pudding",subtype: "red",
-            number: 2
-        },
-        {
-            conditionType:"kill-level",
-            type:"pudding",subtype: "yellow",
-            number: 2
-        },
-        {
-            conditionType:"kill-level",
-            type:"pudding",subtype: "blue",
-            number: 2
-        },
-        {
-            conditionType:"kill-level",
-            type:"pudding",subtype: "green",
-            number: 2
+            type:"icecream",
+            number: 5
         }
     ],
     loseAnyConditions:[
         "outOfTurn"
     ],
     enemyPool:[{
-        type:"pudding",subtype:"red"
+        type:"cherrycake"
     },{
         type:"pudding",subtype:"yellow"
     },{
-        type:"pudding",subtype:"green"
-    },{
-        type:"pudding",subtype:"blue"
+        type:"icecream"
     }],
     initTiles:tiles7x7Triangle,
     initMovables:[
@@ -1272,48 +1236,35 @@ rooms.push({ //room14 TODO
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //room15 TODO
-    turnLimit:15,
-    scoreCondition: [100, 150, 200],
+rooms.push({ //room15 难行
+    turnLimit:30,
+    scoreCondition: [800, 1500, 2000],
     winEveryConditions:[
         {
-            conditionType:"kill-level",
-            type:"pudding",subtype: "red",
-            number: 2
+            conditionType:"kill-max-level",
+            type:"cherrycake",
+            number: 5
         },
         {
-            conditionType:"kill-level",
-            type:"pudding",subtype: "yellow",
-            number: 2
-        },
-        {
-            conditionType:"kill-level",
-            type:"pudding",subtype: "blue",
-            number: 2
-        },
-        {
-            conditionType:"kill-level",
-            type:"pudding",subtype: "green",
-            number: 2
+            conditionType:"kill-max-level",
+            type:"icecream",
+            number: 5
         }
     ],
     loseAnyConditions:[
         "outOfTurn"
     ],
     enemyPool:[{
-        type:"pudding",subtype:"red"
+        type:"cherrycake"
     },{
-        type:"pudding",subtype:"yellow"
+        type:"ricecake"
     },{
-        type:"pudding",subtype:"green"
-    },{
-        type:"pudding",subtype:"blue"
+        type:"icecream"
     }],
     initTiles:tiles6x6Loop,
     initMovables:[
@@ -1328,8 +1279,7 @@ rooms.push({ //room15 TODO
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1388,8 +1338,7 @@ rooms.push({ //room16 TODO
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1448,8 +1397,7 @@ rooms.push({ //room17 TODO
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1508,8 +1456,7 @@ rooms.push({ //room18 TODO
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1567,8 +1514,7 @@ rooms.push({ //room19 TODO
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1626,8 +1572,7 @@ rooms.push({ //room20 TODO
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1685,8 +1630,7 @@ rooms.push({ //room21 TODO
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1757,8 +1701,7 @@ rooms.push({ //room22 TODO
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1804,8 +1747,7 @@ rooms.push({ //room23 吃年糕啊
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1837,8 +1779,7 @@ rooms.push({ //对远程兵种的生存1 room24
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1870,8 +1811,7 @@ rooms.push({ //对远程兵种的生存2 room25
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1908,8 +1848,7 @@ rooms.push({ //对远程兵种的生存3 room26
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1941,8 +1880,7 @@ rooms.push({ //A room27 TODO
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1989,8 +1927,7 @@ rooms.push({ //room28 snake
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     initHand:[
         {type:"cross-fire"}
@@ -2044,8 +1981,7 @@ rooms.push({ //A room29 snake
         },
         expStrategy: {
             type: "normal"
-        }, //normal, fix
-        isShowLevel: false
+        } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
 });

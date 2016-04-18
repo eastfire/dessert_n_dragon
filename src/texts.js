@@ -16,7 +16,7 @@ var texts_locale = {
             //enemy
             cherrycake: {
                 name: "纸杯蛋糕下士",
-                desc: "攻击力普通。热量一般。"
+                desc: "攻击力一般。热量一般。"
             },
             pudding:{
                 name:"果冻巡逻兵",
@@ -29,6 +29,10 @@ var texts_locale = {
             archer:{
                 name:"绿豆糕射手",
                 desc:"远程攻击。攻击力低。热量一般。"
+            },
+            icecream: {
+                name:"冰激凌法师",
+                desc:"合并或攻击时有一定概率冰冻周围角色（等级越高概率越高）。攻击力一般。热量一般。　他的法师帽戴反了吗？"
             }
         },
         card:{

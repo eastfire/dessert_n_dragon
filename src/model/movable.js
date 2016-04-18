@@ -15,7 +15,10 @@ var MovableModel = Backbone.Model.extend({
             face: DIRECTION_DOWN,
             level: 1,
 
-            isShowLevel: true
+            isShowLevel: true,
+
+            //status
+            frozen: 0
         }
     },
     initialize:function(){
@@ -53,7 +56,7 @@ var MovableModel = Backbone.Model.extend({
         },this)
     },
     isMovable:function(direction){
-        return this.get("isMovable")
+        return this.get("isMovable") && !this.get("frozen");
     },
     canBeMergedBy:function(movable, direction){
         if ( this.get("isMergeToSelfType")
@@ -166,8 +169,15 @@ var MovableModel = Backbone.Model.extend({
     afterLevelUp:function(level){ //called by view
     },
     onTurnStart:function(){
+        //maintain
+        this.set({
+            frozen: Math.max(0, this.get("frozen") - 1 )
+        })
     },
     onTurnEnd:function(){
+    },
+    getFrozen:function(amount){
+        this.set("frozen",amount);
     }
 })
 

@@ -3,6 +3,10 @@ var dimens = {
         width: 120,
         height:120
     },
+    statusIcon: {
+        width: 32,
+        height: 32
+    },
 
     levelLabel:{
         x: 14,

@@ -4,6 +4,7 @@ var MovableSprite = BaseSprite.extend({
 
         this._super(options);
 
+        this.icons = {};
         this.initLabel();
         this.initEvent();
         this.initAnimation();
@@ -28,9 +29,40 @@ var MovableSprite = BaseSprite.extend({
         this.model.on("beMerged", this.beMerged, this)
         this.model.on("change:level",this.renderLevel,this)
         this.model.on("change:face",this.renderFace,this)
+        this.model.on("change:frozen",this.renderStatus,this);
     },
     renderFace:function(){
         this.setSpriteFrame(cc.spriteFrameCache.getSpriteFrame( this.getInitFrameName() ));
+    },
+    renderOneStatus:function(statusName,position){
+        if ( this.model.get(statusName) ) {
+            if ( !this.icons[statusName] ) {
+                this.icons[statusName] = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( "status-"+statusName+".png" ));
+                this.icons[statusName].attr({
+                    x: position.x,
+                    y: position.y
+                })
+                this.addChild(this.icons[statusName]);
+            } else {
+                this.icons[statusName].attr({
+                    x: position.x,
+                    y: position.y
+                })
+            }
+            position.x += dimens.statusIcon.width;
+        } else {
+            if ( this.icons[statusName] ) {
+                this.icons[statusName].removeFromParent(true);
+                this.icons[statusName] = null;
+            }
+        }
+    },
+    renderStatus:function(){
+        var position =  {
+            x :dimens.statusIcon.width/2,
+            y : dimens.tileSize.height - dimens.statusIcon.height/2
+        };
+        this.renderOneStatus("frozen", position)
     },
     initLabel:function(){
         this.levelLabel = new ccui.Text("", "Arial", dimens.levelLabel.fontSize );
