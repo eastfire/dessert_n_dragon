@@ -220,3 +220,55 @@ var ArcherModel = EnemyModel.extend({
     }
 })
 MOVABLE_MODEL_MAP.archer = ArcherModel;
+
+var IcecreamModel = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "icecream"
+        } )
+    },
+    afterBeMerged:function(movable){
+        if ( movable instanceof IcecreamModel ) {
+            //freeze around TODO
+        }
+    },
+    afterHit:function(heroModel){
+        if ( this.checkFreeze(heorModel) ) {
+            heorModel.freeze(1);
+        }
+    },
+    expOfLevel:function(l){
+        return l*EXP_INFLATION_RATE*2
+    },
+    attackOfLevel:function(l){
+        return Math.round(l/2);
+    },
+    getFreezeRate:function(heroModel){
+        var level = this.get("level")；
+        return Math.min(0.5,level*(level+1)/200);
+    },
+    checkFreeze:function(heroModel){
+        return this.getFreezeRate(heroModel) > Math.random();
+    }
+})
+MOVABLE_MODEL_MAP.icecream = IcecreamModel;
+
+var ShamanModel = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "shaman"
+        } )
+    },
+    afterBeMerged:function(movable){
+        if ( movable instanceof ShamanModel ) {
+            //level up around TODO
+        }
+    },
+    expOfLevel:function(l){
+        return l*EXP_INFLATION_RATE*2
+    },
+    attackOfLevel:function(l){
+        return l;
+    }
+})
+MOVABLE_MODEL_MAP.shaman = ShamanModel;
