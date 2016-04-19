@@ -1284,14 +1284,14 @@ rooms.push({ //room15 难行
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //room16 puff
+rooms.push({ //room16 creampuff
     turnLimit:15,
-    scoreCondition: [100, 150, 200],
+    scoreCondition: [1000, 1500, 2000],
     winEveryConditions:[
         {
             conditionType:"kill-level",
             type:"creampuff",
-            number: 7
+            number: 16
         },
         {
             conditionType:"kill-level",
@@ -1314,13 +1314,45 @@ rooms.push({ //room16 puff
     }],
     initTiles:tiles6x6Cross6x2,
     initMovables:[
+        {
+            type:"creampuff",
+            positions: [{x:1,y:3}]
+        },
+        {
+            type:"creampuff",
+            positions: [{x:2,y:3}]
+        },
+        {
+            type:"creampuff",
+            positions: [{x:5,y:4}]
+        },
+        {
+            type:"creampuff",
+            positions: [{x:6,y:4}]
+        },
+        {
+            type:"creampuff",
+            positions: [{x:4,y:1}]
+        },
+        {
+            type:"creampuff",
+            positions: [{x:4,y:2}]
+        },
+        {
+            type:"creampuff",
+            positions: [{x:3,y:5}]
+        },
+        {
+            type:"creampuff",
+            positions: [{x:3,y:6}]
+        }
     ],
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
         initHp: 100,
         initMaxHp: 100,
-        initRequireExp: 10,
+        initRequireExp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -1331,29 +1363,24 @@ rooms.push({ //room16 puff
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //room17 TODO
-    turnLimit:15,
-    scoreCondition: [100, 150, 200],
+rooms.push({ //room17 ice and fire
+    turnLimit:28,
+    scoreCondition: [1000, 1500, 2000],
     winEveryConditions:[
         {
             conditionType:"kill-level",
-            type:"pudding",subtype: "red",
-            number: 2
+            type:"creampuff",
+            number: 10
         },
         {
             conditionType:"kill-level",
-            type:"pudding",subtype: "yellow",
-            number: 2
+            type:"icecream",
+            number: 10
         },
         {
             conditionType:"kill-level",
-            type:"pudding",subtype: "blue",
-            number: 2
-        },
-        {
-            conditionType:"kill-level",
-            type:"pudding",subtype: "green",
-            number: 2
+            type:"cherrycake",
+            number: 10
         }
     ],
     loseAnyConditions:[
@@ -1363,13 +1390,11 @@ rooms.push({ //room17 TODO
         canRefreshChoice: false
     },
     enemyPool:[{
-        type:"pudding",subtype:"red"
+        type:"creampuff"
     },{
-        type:"pudding",subtype:"yellow"
+        type:"icecream"
     },{
-        type:"pudding",subtype:"green"
-    },{
-        type:"pudding",subtype:"blue"
+        type:"cherrycake"
     }],
     initTiles:tiles6x6Whirl,
     initMovables:[
