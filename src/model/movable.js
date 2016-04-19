@@ -18,7 +18,8 @@ var MovableModel = Backbone.Model.extend({
             isShowLevel: true,
 
             //status
-            frozen: 0
+            frozen: 0,
+            angry: 0
         }
     },
     initialize:function(){
@@ -157,6 +158,7 @@ var MovableModel = Backbone.Model.extend({
     beforeBeMerged:function(movable){
     },
     afterBeMerged:function(movable){
+        //TODO keep status after merge
         this.set("level",this.get("level")+movable.get("level"))
         this.levelUp(this.get("level"));
     },
@@ -178,6 +180,9 @@ var MovableModel = Backbone.Model.extend({
     },
     getFrozen:function(amount){
         this.set("frozen",amount);
+    },
+    getAngry:function(amount){
+        this.set("angry",amount);
     }
 })
 

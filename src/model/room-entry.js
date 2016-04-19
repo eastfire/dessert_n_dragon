@@ -1284,29 +1284,19 @@ rooms.push({ //room15 难行
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //room16 TODO
+rooms.push({ //room16 puff
     turnLimit:15,
     scoreCondition: [100, 150, 200],
     winEveryConditions:[
         {
             conditionType:"kill-level",
-            type:"pudding",subtype: "red",
-            number: 2
+            type:"creampuff",
+            number: 7
         },
         {
             conditionType:"kill-level",
-            type:"pudding",subtype: "yellow",
-            number: 2
-        },
-        {
-            conditionType:"kill-level",
-            type:"pudding",subtype: "blue",
-            number: 2
-        },
-        {
-            conditionType:"kill-level",
-            type:"pudding",subtype: "green",
-            number: 2
+            type:"cherrycake",subtype: "green",
+            number: 7
         }
     ],
     loseAnyConditions:[
@@ -1316,13 +1306,11 @@ rooms.push({ //room16 TODO
         canRefreshChoice: false
     },
     enemyPool:[{
-        type:"pudding",subtype:"red"
+        type:"creampuff"
     },{
-        type:"pudding",subtype:"yellow"
+        type:"cherrycake"
     },{
         type:"pudding",subtype:"green"
-    },{
-        type:"pudding",subtype:"blue"
     }],
     initTiles:tiles6x6Cross6x2,
     initMovables:[

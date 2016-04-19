@@ -30,6 +30,7 @@ var MovableSprite = BaseSprite.extend({
         this.model.on("change:level",this.renderLevel,this)
         this.model.on("change:face",this.renderFace,this)
         this.model.on("change:frozen",this.renderStatus,this);
+        this.model.on("change:angry",this.renderStatus,this);
     },
     renderFace:function(){
         this.setSpriteFrame(cc.spriteFrameCache.getSpriteFrame( this.getInitFrameName() ));
@@ -63,6 +64,7 @@ var MovableSprite = BaseSprite.extend({
             y : dimens.tileSize.height - dimens.statusIcon.height/2
         };
         this.renderOneStatus("frozen", position)
+        this.renderOneStatus("angry", position)
     },
     initLabel:function(){
         this.levelLabel = new ccui.Text("", "Arial", dimens.levelLabel.fontSize );

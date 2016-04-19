@@ -160,7 +160,7 @@ var EnemyModel = MovableModel.extend({
         currentRoom.checkAllEnemyAttacked();
     },
     getAttackPoint:function(){
-        return this.get("baseAttack");
+        return this.get("baseAttack") * (this.get("angry")?2:1);
     }
 })
 
@@ -263,23 +263,31 @@ var IcecreamModel = EnemyModel.extend({
 })
 MOVABLE_MODEL_MAP.icecream = IcecreamModel;
 
-var ShamanModel = EnemyModel.extend({
+var CreamPuffModel = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
-            type: "shaman"
+            type: "creampuff"
         } )
     },
     afterBeMerged:function(movable){
         EnemyModel.prototype.afterBeMerged.call(this,movable);
-        if ( movable instanceof ShamanModel ) {
-            //level up around TODO
+        if ( movable instanceof CreamPuffModel ) {
+            //freeze around
+            var position = this.get("positions")[0];
+            _.each( INCREMENTS, function(increment){
+                var model = currentRoom.getMovableByPosition(position.x+increment.x, position.y+increment.y);
+                if ( model instanceof EnemyModel ) {
+                    cc.log("getAngry")
+                    model.getAngry(1);
+                }
+            },this );
         }
     },
     expOfLevel:function(l){
-        return l*EXP_INFLATION_RATE*2
+        return (l+1)*EXP_INFLATION_RATE*2;
     },
     attackOfLevel:function(l){
         return l;
     }
 })
-MOVABLE_MODEL_MAP.shaman = ShamanModel;
+MOVABLE_MODEL_MAP.creampuff = CreamPuffModel;
