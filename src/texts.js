@@ -37,6 +37,10 @@ var texts_locale = {
             creampuff: {
                 name:"奶油泡芙酋长",
                 desc:"合并时周围敌人变得愤怒（攻击力加倍）。\n攻击力一般。\n热量一般。 \n(Buff by Puff)"
+            },
+            souffle: {
+                name:"蛋奶酥祭祀",
+                desc:"合并时自己和周围敌人升级。\n攻击力一般。\n热量一般。"
             }
         },
         card:{
