@@ -13,7 +13,7 @@ var IntroLayer = cc.LayerColor.extend({
             },
             //Process the touch end event
             onTouchEnded: function (touch, event) {
-                cc.director.runScene(new RoomScene());
+                cc.director.runScene(new SelectRoomScene());
             }
         }), this);
     }

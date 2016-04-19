@@ -381,7 +381,7 @@ var MainLayer = cc.Layer.extend({
         }
 
         var layer = new ModalDialogLayer({
-            clickSideCancel: true
+            clickSideCancel: false
         });
         this.addChild(layer,200);
 

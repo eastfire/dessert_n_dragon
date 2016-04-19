@@ -159,14 +159,19 @@ var MovableModel = Backbone.Model.extend({
     },
     afterBeMerged:function(movable){
         //TODO keep status after merge
-        this.set("level",this.get("level")+movable.get("level"))
-        this.levelUp(this.get("level"));
+        this.set({
+            angry: this.get("angry") || movable.get("angry"),
+            frozen: this.get("frozen") || movable.get("frozen")
+        })
+
+        this.levelUp(movable.get("level"));
     },
     beforeLevelUp:function(level){
     },
     levelUp:function(level){
-        this.beforeLevelUp(level);
-        this.trigger("levelUp",this, level)
+        this.beforeLevelUp(this.get("level"));
+        this.set("level",this.get("level")+level)
+        this.trigger("levelUp",this, this.get("level"))
     },
     afterLevelUp:function(level){ //called by view
     },

@@ -272,7 +272,7 @@ var CreamPuffModel = EnemyModel.extend({
     afterBeMerged:function(movable){
         EnemyModel.prototype.afterBeMerged.call(this,movable);
         if ( movable instanceof CreamPuffModel ) {
-            //freeze around
+            //angry around
             var position = this.get("positions")[0];
             _.each( INCREMENTS, function(increment){
                 var model = currentRoom.getMovableByPosition(position.x+increment.x, position.y+increment.y);

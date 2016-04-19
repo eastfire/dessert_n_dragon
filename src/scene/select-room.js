@@ -75,7 +75,7 @@ var SelectRoomLayer = cc.Layer.extend({
                         //Process the touch end event
                         onTouchEnded: function (touch, event) {
                             cc.director.runScene(new RoomScene({
-                                roomEntry: roomEntry,
+                                roomEntry: clone(roomEntry),
                                 maxScore: roomScore
                             }));
                         }

@@ -49,7 +49,7 @@ var GameOverDialog = cc.Scale9Sprite.extend({
                 this.disappear(function(){
                     var roomIndex = this.model.get("stageNumber")-1
                     cc.director.runScene(new RoomScene({
-                        roomEntry: rooms[roomIndex],
+                        roomEntry: clone(rooms[roomIndex]),
                         maxScore: score[roomIndex]
                     }));
                 });

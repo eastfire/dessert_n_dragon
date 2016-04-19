@@ -821,7 +821,6 @@ rooms.push({ //教学获得经验和升级 room4
         "outOfTurn"
     ],
     rules:{
-        canRefreshChoice: true
     },
     enemyPool:[{
         type:"pudding",subtype:"red"
@@ -1418,7 +1417,7 @@ rooms.push({ //room16 creampuff
         },
         {
             conditionType:"kill-level",
-            type:"cherrycake",subtype: "green",
+            type:"cherrycake",
             number: 7
         }
     ],
@@ -1426,7 +1425,6 @@ rooms.push({ //room16 creampuff
         "outOfTurn"
     ],
     rules:{
-        canRefreshChoice: false
     },
     enemyPool:[{
         type:"creampuff"
@@ -1510,7 +1508,6 @@ rooms.push({ //room17 ice and fire
         "outOfTurn"
     ],
     rules:{
-        canRefreshChoice: false
     },
     enemyPool:[{
         type:"creampuff"
@@ -1538,48 +1535,62 @@ rooms.push({ //room17 ice and fire
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //room18 TODO
-    turnLimit:15,
-    scoreCondition: [100, 150, 200],
+rooms.push({ //room18
+    turnLimit:10,
+    scoreCondition: [1500, 2000, 2500],
     winEveryConditions:[
         {
             conditionType:"kill-level",
-            type:"pudding",subtype: "red",
-            number: 2
-        },
-        {
-            conditionType:"kill-level",
-            type:"pudding",subtype: "yellow",
-            number: 2
-        },
-        {
-            conditionType:"kill-level",
-            type:"pudding",subtype: "blue",
-            number: 2
-        },
-        {
-            conditionType:"kill-level",
-            type:"pudding",subtype: "green",
-            number: 2
+            type:"souffle",
+            number: 12
         }
     ],
     loseAnyConditions:[
         "outOfTurn"
     ],
     rules:{
-        canRefreshChoice: false
     },
     enemyPool:[{
         type:"pudding",subtype:"red"
     },{
-        type:"pudding",subtype:"yellow"
+        type:"souffle"
     },{
-        type:"pudding",subtype:"green"
-    },{
-        type:"pudding",subtype:"blue"
+        type:"cherrycake"
     }],
     initTiles:tiles6x6Whirl2,
     initMovables:[
+        {
+            type:"souffle",
+            positions: [{x:1,y:1}]
+        },
+        {
+            type:"souffle",
+            positions: [{x:2,y:1}]
+        },
+        {
+            type:"souffle",
+            positions: [{x:6,y:1}]
+        },
+        {
+            type:"souffle",
+            positions: [{x:6,y:2}]
+        },
+        {
+            type:"souffle",
+            positions: [{x:1,y:5}]
+        },
+        {
+            type:"souffle",
+            positions: [{x:1,y:6}]
+        },
+        {
+            type:"souffle",
+            positions: [{x:5,y:6}]
+        },
+        {
+            type:"souffle",
+            positions: [{x:6,y:6}]
+        }
     ],
     initHero: {
         type:"normalHero",
