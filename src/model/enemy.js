@@ -277,8 +277,7 @@ var CreamPuffModel = EnemyModel.extend({
             _.each( INCREMENTS, function(increment){
                 var model = currentRoom.getMovableByPosition(position.x+increment.x, position.y+increment.y);
                 if ( model instanceof EnemyModel ) {
-                    cc.log("getAngry")
-                    model.getAngry(1);
+                     model.getAngry(1);
                 }
             },this );
         }
@@ -291,3 +290,32 @@ var CreamPuffModel = EnemyModel.extend({
     }
 })
 MOVABLE_MODEL_MAP.creampuff = CreamPuffModel;
+
+var SouffleModel = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "souffle"
+        } )
+    },
+    afterBeMerged:function(movable){
+        EnemyModel.prototype.afterBeMerged.call(this,movable);
+        this.levelUp(1);
+        if ( movable instanceof SouffleModel ) {
+            //freeze around
+            var position = this.get("positions")[0];
+            _.each( INCREMENTS, function(increment){
+                var model = currentRoom.getMovableByPosition(position.x+increment.x, position.y+increment.y);
+                if ( model instanceof EnemyModel ) {
+                    model.levelUp(1);
+                }
+            },this );
+        }
+    },
+    expOfLevel:function(l){
+        return l*EXP_INFLATION_RATE*2;
+    },
+    attackOfLevel:function(l){
+        return l;
+    }
+})
+MOVABLE_MODEL_MAP.souffle = SouffleModel;
