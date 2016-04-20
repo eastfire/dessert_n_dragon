@@ -70,8 +70,7 @@ var ChoiceDialog = cc.Scale9Sprite.extend({
                 function () {
                     var value = (this.model.get("refreshCount") + 1) * this.model.get("refreshCost");
                     if (gameStatus.get("money") >= value) {
-                        gameStatus.set("money",gameStatus.get("money")-value);
-                        gameStatus.save();
+                        gameStatus.useMoney(value);
                         this.model.set("refreshCount", this.model.get("refreshCount") + 1);
                         this.menu.removeFromParent(true);
                         this.initMenu();

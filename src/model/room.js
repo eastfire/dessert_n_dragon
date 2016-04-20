@@ -36,6 +36,7 @@ var RoomModel = Backbone.Model.extend({
             genEnemyStrategyIndex: 0,
             genEnemyStrategyTurn: 0,
             genItemStrategy: null,
+            itemPool:[],
             genChoiceStrategy: {
                 type: "random",
                 opt:{}
@@ -358,7 +359,6 @@ var RoomModel = Backbone.Model.extend({
         if ( this.passCheckCondition() ) {
             this.nextPhase();
         }
-        this.loseWait(1);
     },
     generateOneEnemyType:function(){
         return _.sample( this.get("enemyPool"));
@@ -366,7 +366,7 @@ var RoomModel = Backbone.Model.extend({
     generateOneEnemyLevel:function(){
         return _.sample( this.get("enemyLevelPool"));
     },
-    generateOneEnemy:function(position, typeObj, level){
+    generateOneMovable:function(position, typeObj, level){
         var type = typeof typeObj === "string" ? typeObj: typeObj.type;
         if ( MOVABLE_MODEL_MAP[type] ) {
             //FIXME : only single block enemy here. how to generate multi-block enemy?
@@ -407,7 +407,7 @@ var RoomModel = Backbone.Model.extend({
             }
 
             _.each( candidates,function(tile){
-                this.generateOneEnemy( tile.get("position"), this.generateOneEnemyType(), this.generateOneEnemyLevel());
+                this.generateOneMovable( tile.get("position"), this.generateOneEnemyType(), this.generateOneEnemyLevel());
             },this);
 
             this.set("genEnemyStrategyTurn", this.get("genEnemyStrategyTurn")+1);
@@ -421,6 +421,18 @@ var RoomModel = Backbone.Model.extend({
             }
         } else { //no gen enemy strategy
             this.nextPhase();
+        }
+    },
+    generateOneItemType:function(){
+        return _.sample( this.get("itemPool"));
+    },
+    generateOneItemLevel:function(enemyLevel){
+        return Math.min(9,Math.ceil(enemyLevel/4));
+    },
+    generateOneItem:function(position, enemyLevel){
+        cc.log("generateOneItem")
+        if ( this.get("itemPool").length ) {
+            this.generateOneMovable(position, this.generateOneItemType(), this.generateOneItemLevel(enemyLevel))
         }
     },
     waitUserInput:function(){
@@ -601,11 +613,11 @@ var RoomModel = Backbone.Model.extend({
             this.nextPhase();
     },
     checkAllMovableGenerated:function(){
-        cc.log("checkAllMovableGenerated")
-        if (_.every(this.__movables,function(movable){
+        if (PHASE_GEN_ENEMY === this.get("phase") && _.every(this.__movables,function(movable){
             return movable.get("generateOver")
-        },this))
+        },this)) {
             this.nextPhase();
+        }
     },
     turnEnd:function(){
         cc.log("turnEnd")
@@ -716,12 +728,6 @@ var RoomModel = Backbone.Model.extend({
     },
     getDiscard:function(){
         return this.__discard;
-    },
-    gainWait:function(amount){
-        this.set("waitTurn", this.get("waitTurn") + amount)
-    },
-    loseWait:function(amount){
-        this.set("waitTurn", Math.max(0, this.get("waitTurn") - amount))
     }
 })
 

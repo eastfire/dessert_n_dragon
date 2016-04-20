@@ -1,3 +1,5 @@
+var LUCK_EFFECT = 0.01;
+
 var HeroModel = MovableModel.extend({
     defaults:function(){
         return _.extend( MovableModel.prototype.defaults.call(this),{

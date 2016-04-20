@@ -41,3 +41,18 @@ MOVABLE_MODEL_MAP.potion = ItemModel.extend({
         return (l+1)*l/2;
     }
 })
+
+MOVABLE_MODEL_MAP.money = ItemModel.extend({
+    defaults:function(){
+        return _.extend( ItemModel.prototype.defaults.call(this),{
+            type: "money"
+        } )
+    },
+    onTaken:function(){
+        gameStatus.gainMoney(this.getEffect());
+    },
+    getEffect:function(l){
+        l = l || this.get("level");
+        return (l+1)*l/2;
+    }
+})

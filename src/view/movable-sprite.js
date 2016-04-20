@@ -125,7 +125,7 @@ var MovableSprite = BaseSprite.extend({
 
 var MOVABLE_SPRITE_MAP = {};
 
-var VerticalLog2Sprite = MovableSprite.extend({
+MOVABLE_SPRITE_MAP["vertical-log2"] = MovableSprite.extend({
     ctor:function(options) {
         this._super(options);
         this.attr({
@@ -133,4 +133,102 @@ var VerticalLog2Sprite = MovableSprite.extend({
         })
     }
 });
-MOVABLE_SPRITE_MAP["vertical-log2"] = VerticalLog2Sprite
+
+MOVABLE_SPRITE_MAP["vertical-log3"] = MovableSprite.extend({
+    ctor:function(options) {
+        this._super(options);
+        this.attr({
+            anchorY: 5/6
+        })
+    }
+});
+
+MOVABLE_SPRITE_MAP["vertical-log4"] = MovableSprite.extend({
+    ctor:function(options) {
+        this._super(options);
+        this.attr({
+            anchorY: 7/8
+        })
+    }
+});
+
+MOVABLE_SPRITE_MAP["vertical-log5"] = MovableSprite.extend({
+    ctor:function(options) {
+        this._super(options);
+        this.attr({
+            anchorY: 9/10
+        })
+    }
+});
+
+MOVABLE_SPRITE_MAP["vertical-log6"] = MovableSprite.extend({
+    ctor:function(options) {
+        this._super(options);
+        this.attr({
+            anchorY: 11/12
+        })
+    }
+});
+
+MOVABLE_SPRITE_MAP["vertical-log7"] = MovableSprite.extend({
+    ctor:function(options) {
+        this._super(options);
+        this.attr({
+            anchorY: 13/14
+        })
+    }
+});
+
+MOVABLE_SPRITE_MAP["horizontal-log2"] = MovableSprite.extend({
+    ctor:function(options) {
+        this._super(options);
+        this.attr({
+            anchorX: 1/4
+        })
+    }
+});
+
+MOVABLE_SPRITE_MAP["horizontal-log3"] = MovableSprite.extend({
+    ctor:function(options) {
+        this._super(options);
+        this.attr({
+            anchorX: 1/6
+        })
+    }
+});
+
+MOVABLE_SPRITE_MAP["horizontal-log4"] = MovableSprite.extend({
+    ctor:function(options) {
+        this._super(options);
+        this.attr({
+            anchorX: 1/8
+        })
+    }
+});
+
+MOVABLE_SPRITE_MAP["horizontal-log5"] = MovableSprite.extend({
+    ctor:function(options) {
+        this._super(options);
+        this.attr({
+            anchorX: 1/10
+        })
+    }
+});
+
+MOVABLE_SPRITE_MAP["horizontal-log6"] = MovableSprite.extend({
+    ctor:function(options) {
+        this._super(options);
+        this.attr({
+            anchorX: 1/12
+        })
+    }
+});
+
+MOVABLE_SPRITE_MAP["horizontal-log7"] = MovableSprite.extend({
+    ctor:function(options) {
+        this._super(options);
+        this.attr({
+            anchorX: 1/14
+        })
+    }
+});

@@ -74,7 +74,29 @@ var EnemyModel = MovableModel.extend({
         currentRoom.getScore(this.get("score"));
 
         currentRoom.logEnemyDie(this);
+        var enemyLevel = this.get("level");
+        var dropItem = false;
+        var p = null;
+        _.any(this.get("positions"),function(position){ //generate one item is enough
+            if ( this.checkDropItem() ) {
+                dropItem = true;
+                p = position;
+                return true;
+            }
+        },this);
+
         currentRoom.removeMovable(this);
+        cc.log(dropItem)
+        if ( dropItem ) {
+            currentRoom.generateOneItem(p, enemyLevel)
+        }
+    },
+    checkDropItem:function(){
+        cc.log(this.getDropRate())
+        return Math.random() < this.getDropRate();
+    },
+    getDropRate:function(){
+        return Math.min(0.5, (this.get("level") + currentRoom.getHero().get("luck")) * LUCK_EFFECT)
     },
     beforeDodgeAttack:function(hero){
     },

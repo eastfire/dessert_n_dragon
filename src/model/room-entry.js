@@ -583,6 +583,8 @@ var STANDARD_CHOICE_POOL = [
     { type:"reduceAllWait"}
 ]
 
+var STANDARD_ITEM_POOL = ["potion","money"];
+
 var rooms = [];
 
 rooms.push({ //初始 room1
@@ -627,10 +629,6 @@ rooms.push({ //初始 room1
         {
             type:"pudding",subtype:"blue",
             positions: [{x:1,y:1}]
-        },
-        {
-            type:"vertical-log2",subtype:"normal",
-            positions: [{x:4,y:3},{x:4,y:2}]
         }
     ],
     initHero: {
@@ -974,6 +972,7 @@ rooms.push({ //第一次出现回复药 room7
     },{
         type:"pudding",subtype:"green"
     }],
+    itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles5x6,
     initMovables:[
         {
@@ -1030,6 +1029,7 @@ rooms.push({ //第一次出现年糕 room8
     },{
         type:"pudding",subtype:"blue"
     }],
+    itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6,
     initMovables:[
         {
@@ -1095,6 +1095,7 @@ rooms.push({ //第一次要求敌人等级　room9
         type:"pudding",subtype:"green"
     }],
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
+    itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6,
     initMovables:[
     ],
@@ -1150,6 +1151,7 @@ rooms.push({ //复杂地形要求敌人等级room10
     },{
         type:"pudding",subtype:"green"
     }],
+    itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6UpArrow,
     initMovables:[
     ],
@@ -1198,6 +1200,7 @@ rooms.push({ //柱子 room11
     },{
         type:"cherrycake"
     }],
+    itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6Cross6x4,
     initMovables:[
         {
@@ -1262,6 +1265,7 @@ rooms.push({ //room12 大量杀敌
     },{
         type:"cherrycake"
     }],
+    itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x5HRotate90,
     initMovables:[
     ],
@@ -1310,6 +1314,7 @@ rooms.push({ //room13 大量杀敌
     },{
         type:"pudding",subtype:"blue"
     }],
+    itemPool:STANDARD_ITEM_POOL,
     genEnemyStrategy: [{type:"random", number: 4, last: 0}],
     initTiles:tiles7x7Rhombus,
     initMovables:[
@@ -1349,6 +1354,7 @@ rooms.push({ //room14 第一次出现法师
     },{
         type:"icecream"
     }],
+    itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x7Triangle,
     initMovables:[
     ],
@@ -1392,6 +1398,7 @@ rooms.push({ //room15 难行
     },{
         type:"icecream"
     }],
+    itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6Loop,
     initMovables:[
     ],
@@ -1437,6 +1444,7 @@ rooms.push({ //room16 creampuff
     },{
         type:"pudding",subtype:"green"
     }],
+    itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6Cross6x2,
     initMovables:[
         {
@@ -1653,6 +1661,7 @@ rooms.push({ //room19 TODO
     },{
         type:"pudding", subtype:"blue"
     }],
+    itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles5x5Loop,
     initMovables:[],
     initHero: {
