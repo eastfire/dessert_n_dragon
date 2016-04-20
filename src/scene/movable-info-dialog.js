@@ -25,10 +25,13 @@ var MovableInfoDialog = cc.Scale9Sprite.extend({
         var sprite = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( frameName ));
         sprite.attr({
             x:dimens.movableInfo.portrait.x,
-            y:dimens.movableInfo.portrait.y,
-            scaleX: 1,
-            scaleY: 1
+            y:dimens.movableInfo.portrait.y
         })
+        var scale = Math.min( dimens.tileSize.width/sprite.width, dimens.tileSize.height/sprite.height);
+        sprite.attr({
+            scaleX: scale,
+            scaleY: scale
+        });
         this.addChild(sprite);
         
         if ( this.model.get("level") && this.model.get("isShowLevel")) {

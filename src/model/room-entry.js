@@ -627,6 +627,10 @@ rooms.push({ //初始 room1
         {
             type:"pudding",subtype:"blue",
             positions: [{x:1,y:1}]
+        },
+        {
+            type:"vertical-log2",subtype:"normal",
+            positions: [{x:4,y:3},{x:4,y:2}]
         }
     ],
     initHero: {

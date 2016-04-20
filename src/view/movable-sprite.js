@@ -125,4 +125,12 @@ var MovableSprite = BaseSprite.extend({
 
 var MOVABLE_SPRITE_MAP = {};
 
-
+var VerticalLog2Sprite = MovableSprite.extend({
+    ctor:function(options) {
+        this._super(options);
+        this.attr({
+            anchorY: 0.75
+        })
+    }
+});
+MOVABLE_SPRITE_MAP["vertical-log2"] = VerticalLog2Sprite

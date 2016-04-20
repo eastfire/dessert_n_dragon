@@ -6,6 +6,10 @@ var texts_locale = {
                 name: "柱子",
                 desc: "不可通过。"
             },
+            "vertical-log2": {
+                name: "滚木，只能横向移动",
+                desc: "不可通过。"
+            },
 
             //item
             potion: {
