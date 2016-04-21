@@ -49,22 +49,14 @@
 var APP_NAME = "dessert_n_dragon"
 var score = {};
 var statistic = {}
+var gameStatus;
+var unlocked;
 
 var loadStatistic = function() {
     var store = cc.sys.localStorage.getItem(APP_NAME+".statistic");
     if (store) {
         //cc.log(store)
         statistic = JSON.parse(store);
-    }
-}
-
-var gameStatus;
-var loadGameStatus = function(){
-    var store = cc.sys.localStorage.getItem(APP_NAME+".gameStatus");
-    if (store) {
-        gameStatus = new GameStatusModel(JSON.parse(store));
-    } else {
-        gameStatus = new GameStatusModel
     }
 }
 
@@ -110,7 +102,8 @@ cc.game.onStart = function(){
     cc.LoaderScene.preload(g_resources, function () {
         initTexts();
 
-        loadGameStatus();
+        gameStatus = new GameStatusModel();
+        unlocked = new UnlockedStatusModel();
         loadStatistic();
         loadScore();
 //        loadTutorial(); //TODO

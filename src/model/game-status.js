@@ -4,6 +4,12 @@ var GameStatusModel = Backbone.Model.extend({
             money: 100
         }
     },
+    initialize:function(){
+        var store = cc.sys.localStorage.getItem(APP_NAME+".gameStatus");
+        if (store) {
+            this.set(JSON.parse(store));
+        }
+    },
     save:function(){
         cc.sys.localStorage.setItem(APP_NAME+".gameStatus", JSON.stringify(this.toJSON()));
     },
