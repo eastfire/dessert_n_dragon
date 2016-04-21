@@ -1528,6 +1528,7 @@ rooms.push({ //room17 ice and fire
     },{
         type:"cherrycake"
     }],
+    itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6Whirl,
     initMovables:[
     ],
@@ -1569,6 +1570,7 @@ rooms.push({ //room18
     },{
         type:"cherrycake"
     }],
+    itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6Whirl2,
     initMovables:[
         {
@@ -1720,6 +1722,7 @@ rooms.push({ //room20 TODO
     },{
         type:"pudding", subtype:"blue"
     }],
+    itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6Z,
     initMovables:[],
     initHero: {
@@ -1778,6 +1781,7 @@ rooms.push({ //room21 TODO
     },{
         type:"pudding", subtype:"blue"
     }],
+    itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6H,
     initMovables:[],
     initHero: {
@@ -1832,6 +1836,7 @@ rooms.push({ //room22 TODO
     },{
         type:"pudding",subtype:"blue"
     }],
+    itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6,
     initMovables:[
         {
@@ -1886,6 +1891,7 @@ rooms.push({ //room23 吃年糕啊
     },{
         type:"pudding",subtype:"green"
     }],
+    itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6,
     initMovables:[
         { type:"ricecake", positions: [{x:1,y:5}] },
@@ -1927,6 +1933,7 @@ rooms.push({ //对远程兵种的生存1 room24
     },{
         type:"archer"
     }],
+    itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x5IO,
     initMovables:[],
     initHero: {
@@ -1959,6 +1966,7 @@ rooms.push({ //对远程兵种的生存2 room25
     },{
         type:"archer"
     }],
+    itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x5IOI,
     initMovables:[],
     initHero: {
@@ -1991,6 +1999,7 @@ rooms.push({ //对远程兵种的生存3 room26
     },{
         type:"archer"
     }],
+    itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6Mi,
     initMovables:[
         { type:"archer", positions: [{x:1,y:1}] },
@@ -2028,6 +2037,7 @@ rooms.push({ //A room27 TODO
     },{
         type:"pudding",subtype:"green"
     }],
+    itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x7A,
     initMovables:[],
     initHero: {
@@ -2075,6 +2085,7 @@ rooms.push({ //room28 snake
     },{
         type:"archer"
     }],
+    itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x7Snake,
     initMovables:[],
     initHero: {
@@ -2125,6 +2136,7 @@ rooms.push({ //A room29 snake
     },{
         type:"pudding",subtype:"green"
     }],
+    itemPool:STANDARD_ITEM_POOL,
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     initTiles:tiles7x7Snake2,
     initMovables:[],
