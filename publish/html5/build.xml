@@ -246,6 +246,7 @@
                 <file name="src/model/card.js"/>
                 <file name="src/model/skill.js"/>
                 <file name="src/model/room-entry.js"/>
+                <file name="src/model/unlockable-entry.js"/>
                 <file name="src/view/base-sprite.js"/>
                 <file name="src/view/movable-sprite.js"/>
                 <file name="src/view/enemy-sprite.js"/>
