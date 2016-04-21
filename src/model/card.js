@@ -43,7 +43,6 @@ var CardModel = Backbone.Model.extend({
     },
     use:function(){
         currentRoom.blockInput();
-        currentRoom.gainWait(this.getWait());
         this.onUse();
         this.trigger("use",this);
         currentRoom.discardCard(this);

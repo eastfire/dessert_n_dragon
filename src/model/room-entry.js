@@ -1622,109 +1622,47 @@ rooms.push({ //room18
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //room19 TODO
+rooms.push({ //room19 滚木
     turnLimit:12,
-    scoreCondition: [100, 150, 200],
+    scoreCondition: [800, 1200, 1600],
     winEveryConditions:[
         {
-            conditionType:"kill-level",
+            conditionType:"kill-max-level",
             type:"pudding",subtype: "red",
-            number: 1
+            number: 3
         },
         {
-            conditionType:"kill-level",
+            conditionType:"kill-max-level",
             type:"pudding",subtype: "yellow",
-            number: 1
+            number: 3
         },
         {
-            conditionType:"kill-level",
+            conditionType:"kill-max-level",
             type:"pudding",subtype: "blue",
-            number: 1
-        },
-        {
-            conditionType:"kill-level",
-            type:"pudding",subtype: "green",
-            number: 1
+            number: 3
         }
     ],
     loseAnyConditions:[
         "outOfTurn"
     ],
-    rules:{
-        heroCanGetExp: false
-    },
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     enemyPool:[{
         type:"pudding", subtype:"red"
     },{
         type:"pudding", subtype:"yellow"
     },{
-        type:"pudding", subtype:"green"
-    },{
         type:"pudding", subtype:"blue"
     }],
     itemPool:STANDARD_ITEM_POOL,
-    initTiles:tiles5x5Loop,
-    initMovables:[],
-    initHero: {
-        type:"normalHero",
-        positions: [{x:5,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
-        maxHpStrategy:{
-            type: "normal"
-        },
-        expStrategy: {
-            type: "normal"
-        } //normal, fix
-    },
-    choicePool:STANDARD_CHOICE_POOL
-});
-
-rooms.push({ //room20 TODO
-    turnLimit:12,
-    scoreCondition: [100, 150, 200],
-    winEveryConditions:[
-        {
-            conditionType:"kill-level",
-            type:"pudding",subtype: "red",
-            number: 1
-        },
-        {
-            conditionType:"kill-level",
-            type:"pudding",subtype: "yellow",
-            number: 1
-        },
-        {
-            conditionType:"kill-level",
-            type:"pudding",subtype: "blue",
-            number: 1
-        },
-        {
-            conditionType:"kill-level",
-            type:"pudding",subtype: "green",
-            number: 1
-        }
-    ],
-    loseAnyConditions:[
-        "outOfTurn"
-    ],
-    rules:{
-        heroCanGetExp: false
-    },
-    genEnemyStrategy: [{type:"random", number: 3, last: 0}],
-    enemyPool:[{
-        type:"pudding", subtype:"red"
-    },{
-        type:"pudding", subtype:"yellow"
-    },{
-        type:"pudding", subtype:"green"
-    },{
-        type:"pudding", subtype:"blue"
+    initTiles:tiles6x5,
+    initMovables:[{
+        type:"vertical-log3",subtype:"normal",
+        positions:[
+            {x:2,y:4},
+            {x:2,y:3},
+            {x:2,y:2}
+        ]
     }],
-    itemPool:STANDARD_ITEM_POOL,
-    initTiles:tiles6x6Z,
-    initMovables:[],
     initHero: {
         type:"normalHero",
         positions: [{x:4,y:3}],
@@ -1740,53 +1678,49 @@ rooms.push({ //room20 TODO
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //room21 TODO
-    turnLimit:12,
-    scoreCondition: [100, 150, 200],
+rooms.push({ //room20 双滚木
+    turnLimit:18,
+    scoreCondition: [1000, 1300, 1600],
     winEveryConditions:[
         {
-            conditionType:"kill-level",
+            conditionType:"kill-max-level",
             type:"pudding",subtype: "red",
-            number: 1
+            number: 4
         },
         {
-            conditionType:"kill-level",
+            conditionType:"kill-max-level",
             type:"pudding",subtype: "yellow",
-            number: 1
+            number: 4
         },
         {
-            conditionType:"kill-level",
+            conditionType:"kill-max-level",
             type:"pudding",subtype: "blue",
-            number: 1
-        },
-        {
-            conditionType:"kill-level",
-            type:"pudding",subtype: "green",
-            number: 1
+            number: 4
         }
     ],
     loseAnyConditions:[
         "outOfTurn"
     ],
-    rules:{
-        heroCanGetExp: false
-    },
-    genEnemyStrategy: [{type:"random", number: 4, last: 0}],
+    genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     enemyPool:[{
         type:"pudding", subtype:"red"
     },{
         type:"pudding", subtype:"yellow"
     },{
-        type:"pudding", subtype:"green"
-    },{
         type:"pudding", subtype:"blue"
     }],
     itemPool:STANDARD_ITEM_POOL,
-    initTiles:tiles6x6H,
-    initMovables:[],
+    initTiles:tiles6x6,
+    initMovables:[{
+        type:"vertical-log2",subtype:"normal",
+        positions:[{x:1,y:4},{x:1,y:3}]
+    },{
+        type:"horizontal-log2",subtype:"normal",
+        positions:[{x:3,y:6},{x:4,y:6}]
+    }],
     initHero: {
         type:"normalHero",
-        positions: [{x:5,y:3}],
+        positions: [{x:4,y:3}],
         initHp: 100,
         initMaxHp: 100,
         maxHpStrategy:{
@@ -1799,66 +1733,55 @@ rooms.push({ //room21 TODO
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //room22 TODO
-    turnLimit:15,
-    scoreCondition: [100, 150, 200],
+rooms.push({ //room21 log in h
+    turnLimit:24,
+    scoreCondition: [1400, 1800, 2200],
     winEveryConditions:[
         {
             conditionType:"kill-level",
-            type:"pudding",subtype: "red",
-            number: 2
+            type:"icecream",
+            number: 8
         },
         {
             conditionType:"kill-level",
-            type:"pudding",subtype: "yellow",
-            number: 2
+            type:"creampuff",
+            number: 8
         },
         {
             conditionType:"kill-level",
             type:"pudding",subtype: "blue",
-            number: 2
+            number: 8
         },
         {
             conditionType:"kill-level",
-            type:"pudding",subtype: "green",
-            number: 2
+            type:"cherrycake",
+            number: 8
         }
     ],
     loseAnyConditions:[
         "outOfTurn"
     ],
+    genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     enemyPool:[{
-        type:"pudding",subtype:"red"
+        type:"cherrycake"
     },{
-        type:"pudding",subtype:"yellow"
+        type:"creampuff"
     },{
-        type:"pudding",subtype:"green"
+        type:"icecream"
     },{
-        type:"pudding",subtype:"blue"
+        type:"pudding", subtype:"blue"
     }],
     itemPool:STANDARD_ITEM_POOL,
-    initTiles:tiles6x6,
-    initMovables:[
-        {
-            type:"pillar",subtype:"normal",
-            positions: [{x:2,y:2}]
-        },
-        {
-            type:"pillar",subtype:"normal",
-            positions: [{x:5,y:2}]
-        },
-        {
-            type:"pillar",subtype:"normal",
-            positions: [{x:2,y:5}]
-        },
-        {
-            type:"pillar",subtype:"normal",
-            positions: [{x:5,y:5}]
-        }
-    ],
+    initTiles:tiles6x6H,
+    initMovables:[{
+        type:"horizontal-log4",subtype:"normal",
+        positions:[
+            {x:2,y:5},{x:3,y:5},{x:4,y:5},{x:5,y:5}
+        ]
+    }],
     initHero: {
         type:"normalHero",
-        positions: [{x:3,y:3}],
+        positions: [{x:4,y:3}],
         initHp: 100,
         initMaxHp: 100,
         maxHpStrategy:{
@@ -1871,7 +1794,7 @@ rooms.push({ //room22 TODO
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //room23 吃年糕啊
+rooms.push({ //room22 吃年糕啊
     turnLimit:15,
     scoreCondition: [300, 600, 1000],
     winEveryConditions:[
@@ -1918,7 +1841,7 @@ rooms.push({ //room23 吃年糕啊
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //对远程兵种的生存1 room24
+rooms.push({ //对远程兵种的生存1 room23
     turnLimit:25,
     scoreCondition: [400, 800, 1200],
     winEveryConditions:[
@@ -1951,7 +1874,7 @@ rooms.push({ //对远程兵种的生存1 room24
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //对远程兵种的生存2 room25
+rooms.push({ //对远程兵种的生存2 room24
     turnLimit:20,
     scoreCondition: [500, 800, 1200],
     winEveryConditions:[
@@ -1984,7 +1907,7 @@ rooms.push({ //对远程兵种的生存2 room25
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //对远程兵种的生存3 room26
+rooms.push({ //对远程兵种的生存3 room25
     turnLimit:25,
     scoreCondition: [400, 900, 1400],
     winEveryConditions:[
@@ -2022,7 +1945,7 @@ rooms.push({ //对远程兵种的生存3 room26
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //A room27 TODO
+rooms.push({ //A room26 TODO
     turnLimit:25,
     scoreCondition: [300, 600, 1000],
     winEveryConditions:[
