@@ -52,7 +52,6 @@ var GameMenuDialog = cc.Scale9Sprite.extend({
             cc.spriteFrameCache.getSpriteFrame("button-short-press.png"),
             function () {
                 this.disappear(function(){
-                    this.modalLayer.removeFromParent();
                 });
             }, this);
 
@@ -78,6 +77,7 @@ var GameMenuDialog = cc.Scale9Sprite.extend({
         this.addChild(menu);
 
         currentRoom.blockInput();
+        currentRoomSprite.stopClock();
     },
     appear:function(){
         this.runAction( cc.moveBy(times.gameOverDialog, 0, -cc.winSize.height).easing(cc.easeBounceOut())  )
@@ -89,6 +89,8 @@ var GameMenuDialog = cc.Scale9Sprite.extend({
             cc.callFunc(callback,this),
             cc.callFunc(function(){
                 currentRoom.unblockInput();
+                currentRoomSprite.startClock();
+                this.modalLayer.removeFromParent();
             },this)
         ))
     }

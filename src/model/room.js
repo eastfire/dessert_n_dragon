@@ -20,12 +20,12 @@ var RoomModel = Backbone.Model.extend({
             loseEveryConditions: [], //every fail to lose
             
             name: "",
-            width: 7,
-            height: 7,
-            turnNumber: 0,
             phase: PHASE_TURN_START,
             score: 0,
             turnLimit: 0,
+            turnNumber: 0,
+            timeLimit: 0,
+            timeNumber: 0,
             statistic:{},
 
             genEnemyStrategy: [{
@@ -728,6 +728,12 @@ var RoomModel = Backbone.Model.extend({
     },
     getDiscard:function(){
         return this.__discard;
+    },
+    tick:function(){
+        this.set("timeNumber",this.get("timeNumber")+1);
+        if ( this.isAcceptInput() && this.get("timeNumber") > this.get("timeLimit") ) {
+            this.trigger("game-over",this, false);
+        }
     }
 })
 

@@ -46,6 +46,7 @@ var MainLayer = cc.Layer.extend({
         this.initScoreBar();
 
         room.turnStart();
+
         this.renderHp();
         this.renderScore();
         this.renderExp();
@@ -77,6 +78,7 @@ var MainLayer = cc.Layer.extend({
                     model: currentRoom,
                     modalLayer: layer
                 })
+                layer.setDialogSprite(dialog);
                 layer.addChild(dialog);
                 dialog.appear();
             }, this);
@@ -172,13 +174,14 @@ var MainLayer = cc.Layer.extend({
             y: dimens.turnNumberLabel.y
         });
         this.addChild(this.turnNumberLabel);
+        this.renderTimeNumber();
     },
     initConditionLabel:function(){
         this.conditionLabels = {};
         var conditionType = null;
         var killConditions = _.filter(currentRoom.get("winEveryConditions"),function(condition){
             if ( condition === "outOfTurn" ) {
-                conditionType = "outOfTurn";
+                conditionType = condition;
                 return false;
             }
             if ( typeof condition === "object" &&
@@ -338,6 +341,16 @@ var MainLayer = cc.Layer.extend({
             this.turnNumberLabel.setString("移动次数:" + (currentRoom.get("turnLimit") - currentRoom.get("turnNumber")));
         }
     },
+    renderTimeNumber:function(){
+        if ( currentRoom.get("timeLimit") ) {
+            this.turnNumberLabel.setString("剩余时间:" + this.__processTimeStr(currentRoom.get("timeLimit") - currentRoom.get("timeNumber")));
+        }
+    },
+    __processTimeStr:function(time){
+        time = Math.round(Math.max(0, time));
+        var rest = time%60;
+        return Math.floor(time/60)+":"+(rest>10?rest:("0"+rest));
+    },
     onScoreChange:function(){
         this.renderScore();
     },
@@ -355,6 +368,9 @@ var MainLayer = cc.Layer.extend({
     },
     onTurnNumberChange:function(){
         this.renderTurnNumber();
+    },
+    onTimeNumberChange:function(){
+        this.renderTimeNumber()
     },
     onStatisticChange:function(){
         _.each(currentRoom.get("winEveryConditions"),function(condition){
@@ -424,6 +440,7 @@ var MainLayer = cc.Layer.extend({
             model: movableModel,
             modalLayer: layer
         })
+        layer.setDialogSprite(dialog);
         layer.addChild(dialog);
         dialog.appear();
     },
@@ -437,6 +454,8 @@ var MainLayer = cc.Layer.extend({
         currentRoom.getHero().on("levelUp",this.onLevelUp, this);
         currentRoom.on("change:turnNumber",this.onTurnNumberChange,this);
         currentRoom.on("change:turnLimit",this.onTurnNumberChange,this);
+        currentRoom.on("change:timeNumber",this.onTimeNumberChange,this);
+        currentRoom.on("change:timeLimit",this.onTimeNumberChange,this);
         currentRoom.on("change:statistic",this.onStatisticChange,this);
         currentRoom.on("change:deck",this.renderDeck,this);
         currentRoom.on("game-over",this.onGameOver,this)
@@ -456,6 +475,8 @@ var MainLayer = cc.Layer.extend({
             }, this);
         }
         var self = this;
+        this.roomRect = cc.rect(currentRoomSprite.x - cc.winSize.width / 2, currentRoomSprite.y - cc.winSize.width / 2,
+            cc.winSize.width, cc.winSize.width);
         cc.eventManager.addListener({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             swallowTouches: true,
@@ -463,7 +484,7 @@ var MainLayer = cc.Layer.extend({
                 if (currentRoom.isAcceptInput()) {
                     var target = event.getCurrentTarget();
                     var locationInNode = touch.getLocation();
-                    if (cc.rectContainsPoint(currentRoomSprite.getRect(), locationInNode)) {
+                    if (cc.rectContainsPoint(self.roomRect, locationInNode)) {
                         target.prevX = locationInNode.x;
                         target.prevY = locationInNode.y;
                         return true;

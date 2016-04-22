@@ -19,6 +19,9 @@ var MovableInfoDialog = cc.Scale9Sprite.extend({
         if ( this.model instanceof EnemyModel || this.model instanceof NeutralMovable ) {
             this.initMovableLabel();
         }
+
+        currentRoom.blockInput();
+        currentRoomSprite.stopClock();
     },
     initMovableLabel:function(){
         var frameName = this.model.get("type")+( this.model.get("subtype") ? ("-"+this.model.get("subtype") ) : "")+".png";
@@ -84,6 +87,8 @@ var MovableInfoDialog = cc.Scale9Sprite.extend({
             cc.moveBy(times.gameOverDialog, cc.winSize.width, 0),
             cc.removeSelf(),
             cc.callFunc(function(){
+                currentRoom.unblockInput();
+                currentRoomSprite.startClock();
                 this.modalLayer.removeFromParent(true)
             },this)
         ))

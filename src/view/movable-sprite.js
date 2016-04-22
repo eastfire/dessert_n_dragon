@@ -67,7 +67,22 @@ var MovableSprite = BaseSprite.extend({
         this.renderOneStatus("angry", position)
     },
     initLabel:function(){
-        this.levelLabel = new ccui.Text("", "Arial", dimens.levelLabel.fontSize );
+//        this.levelLabel = new ccui.Text("", "Arial", dimens.levelLabel.fontSize );
+//        this.levelLabel.enableOutline(colors.levelLabel.outline, dimens.levelLabel.outlineWidth);
+//        this.levelLabel.setTextColor(colors.levelLabel.inside);
+//        this.levelLabel.attr({
+//            //color: colors.tableLabel,
+//            x: dimens.levelLabel.x,
+//            y: dimens.levelLabel.y
+//        });
+//        this.addChild(this.levelLabel);
+
+        this.renderLevel();
+    },
+    renderLevel:function(){
+        if ( !this.model.get("isShowLevel") ) return;
+        if ( this.levelLabel ) this.levelLabel.removeFromParent(true);
+        this.levelLabel = new ccui.Text(this.model.get("level"), "Arial", dimens.levelLabel.fontSize );
         this.levelLabel.enableOutline(colors.levelLabel.outline, dimens.levelLabel.outlineWidth);
         this.levelLabel.setTextColor(colors.levelLabel.inside);
         this.levelLabel.attr({
@@ -76,12 +91,6 @@ var MovableSprite = BaseSprite.extend({
             y: dimens.levelLabel.y
         });
         this.addChild(this.levelLabel);
-
-        this.renderLevel();
-    },
-    renderLevel:function(){
-        this.levelLabel.setVisible(this.model.get("isShowLevel"))
-        this.levelLabel.setString(this.model.get("level"))
     },
     generate:function(movable){
         this.attr({

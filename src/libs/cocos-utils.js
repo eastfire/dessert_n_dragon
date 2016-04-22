@@ -80,6 +80,7 @@ var ModalDialogLayer = cc.LayerColor.extend({
         var options = options || {}
         this._super(options.maskColor || cc.color(0,0,0,128));
 
+        var self = this;
         cc.eventManager.addListener(cc.EventListener.create({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             swallowTouches: true,
@@ -91,9 +92,17 @@ var ModalDialogLayer = cc.LayerColor.extend({
             //Process the touch end event
             onTouchEnded: function (touch, event) {
                 if ( options.clickSideCancel ) {
-                    event.getCurrentTarget().removeFromParent(true)
+                    if ( self.__dialogSprite ) {
+                        self.__dialogSprite.disappear()
+                        self.__dialogSprite = null;
+                    } else {
+                        event.getCurrentTarget().removeFromParent(true)
+                    }
                 }
             }
         }), this);
+    },
+    setDialogSprite:function(dialogSprite){
+        this.__dialogSprite = dialogSprite;
     }
 });

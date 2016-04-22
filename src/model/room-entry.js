@@ -512,6 +512,17 @@ var tiles6x7A = [
     [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null,null]
 ];
 
+var tiles6x6T = [
+    [null,null,null,null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
+    [null,null,null,null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+    [null,null,null,null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+    [null,null,null,null,{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}],
+];
+
 var tiles6x6L = [
     [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
     [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
@@ -956,7 +967,7 @@ rooms.push({ //第一次出现樱桃蛋糕 room6
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //第一次出现回复药 room7
+rooms.push({ //第一次出现回复药和道具掉落 room7
     turnLimit:10,
     scoreCondition: [200, 350, 500],
     winEveryConditions:[
@@ -996,6 +1007,54 @@ rooms.push({ //第一次出现回复药 room7
         type:"normalHero",
         positions: [{x:3,y:3}],
         initHp: 10,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        } //normal, fix
+    },
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+rooms.push({ //A room8 第一次时间限制
+    timeLimit:120,
+    scoreCondition: [400, 700, 1000],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype:"red",
+            number: 6
+        },
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype:"yellow",
+            number: 6
+        },
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype:"green",
+            number: 6
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTime"
+    ],
+    enemyPool:[{
+        type:"pudding",subtype:"red"
+    },{
+        type:"pudding",subtype:"yellow"
+    },{
+        type:"pudding",subtype:"green"
+    }],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles6x6T,
+    initMovables:[],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:6}],
+        initHp: 100,
         initMaxHp: 100,
         maxHpStrategy:{
             type: "normal"

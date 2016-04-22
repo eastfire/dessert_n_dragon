@@ -6,13 +6,7 @@ var RoomSprite = BaseSprite.extend({
         this.renderAllTile();
         this.renderAllMovable();
         this.initEvent();
-    },
-    getRect:function(){
-        if ( !this.rect ) {
-            this.rect = cc.rect(this.x - cc.winSize.width / 2, this.y - cc.winSize.width / 2,
-                cc.winSize.width, cc.winSize.width);
-        }
-        return this.rect;
+        this.startClock();
     },
     getMovableByTouchPosition:function(x,y){
         var px = Math.floor((x - (this.x - (this.model.getWidth()-2)/2*dimens.tileSize.width*this.scaleX))/(dimens.tileSize.width*this.scaleX))+1;
@@ -50,6 +44,23 @@ var RoomSprite = BaseSprite.extend({
         this.scheduleOnce(function(){
             self.model.nextPhase();
         }, times.step * maxStep )
+    },
+    tick:function(){
+        if ( this.__clockRunning ) {
+            this.model.tick();
+        }
+    },
+    startClock:function(){
+        if ( this.model.get("timeLimit") ) {
+            this.__clockRunning = true;
+            this.schedule(this.tick, 1);
+        }
+    },
+    stopClock:function(){
+        if (this.model.get("timeLimit")) {
+            this.__clockRunning = false;
+            this.unschedule(this.tick);
+        }
     },
     renderAllMovable:function(){
         this.model.foreachMovable(function(movableModel){
