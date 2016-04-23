@@ -520,7 +520,7 @@ var tiles6x6T = [
     [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
     [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
     [null,null,null,null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [null,null,null,null,{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}],
+    [null,null,null,null,{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
 ];
 
 var tiles6x6L = [
@@ -584,6 +584,7 @@ var STANDARD_CHOICE_POOL = [
     { type:"getScore", opt:{ number:300} },
     { type:"getFullHp" },
     { type:"getRandomMove", opt:{ from:3, to:5} },
+    { type:"getRandomTime", opt:{ from:10, to:20} },
     { type:"getCard", opt:{type:"heal"}},
     { type:"getCard", opt:{type:"tail-slash"}},
     { type:"getCard", opt:{type:"vertical-fire"}},
@@ -597,6 +598,48 @@ var STANDARD_CHOICE_POOL = [
 var STANDARD_ITEM_POOL = ["potion","money"];
 
 var rooms = [];
+
+var infiniteRoom = { //初始 room1
+    stageNumber: 0,
+    scoreCondition: null,
+    winEveryConditions:[
+    ],
+    loseAnyConditions:[],
+    rules:{
+    },
+    genEnemyStrategy: [{type:"infinite", number: 2, last: 0}],
+    allEnemyPool:[{ type:"pudding", subtype:"red"},
+        {type:"cherrycake"},
+        {type:"ricecake"},
+        {type:"icecream"},
+        {type:"creampuff"},
+        {type:"souffle"},
+        {type:"archer"}
+    ],
+    enemyPool:[{
+        type:"pudding", subtype:"red"
+    },{
+        type:"pudding", subtype:"yellow"
+    },{
+        type:"pudding", subtype:"blue"
+    }],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles: tiles5x5,
+    initMovables:[],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:3}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        } //normal, fix
+    },
+    choicePool:STANDARD_CHOICE_POOL
+};
 
 rooms.push({ //初始 room1
     turnLimit:6,

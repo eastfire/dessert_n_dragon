@@ -2,7 +2,8 @@ var res = {
     game_plist : "res/game.plist",
     game_png : "res/game.png",
     card_plist : "res/card.plist",
-    card_png : "res/card.png"
+    card_png : "res/card.png",
+    intro_png : "res/intro.png"
 };
 
 var g_resources = [];

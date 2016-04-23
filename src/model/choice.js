@@ -7,20 +7,21 @@ var CHOICE_FACTORY_MAP = {
             }
         }
     },
-    getMove:function(roomModel, opt){
-        return {
-            description:"加"+opt.number+"次移动",
-            onChosen:function(roomModel){
-                roomModel.set("turnLimit",roomModel.get("turnLimit")+opt.number);
-            }
-        }
-    },
     getRandomMove:function(roomModel, opt){
         var number = Math.round(Math.random()*(opt.to-opt.from)+opt.from);
         return {
             description:"加"+number+"次移动",
             onChosen:function(roomModel){
                 roomModel.set("turnLimit",roomModel.get("turnLimit")+number);
+            }
+        }
+    },
+    getRandomTime:function(roomModel, opt){
+        var number = Math.round(Math.random()*(opt.to-opt.from)+opt.from);
+        return {
+            description:"加"+number+"秒时间",
+            onChosen:function(roomModel){
+                roomModel.set("timeLimit",roomModel.get("timeLimit")+number);
             }
         }
     },
@@ -39,16 +40,6 @@ var CHOICE_FACTORY_MAP = {
             description:"获得技能卡："+getCardName(opt.type)+"\n"+getCardDesc(opt.type, opt.level || 1),
             onChosen:function(roomModel){
                 roomModel.gainCard(opt);
-            }
-        }
-    },
-    reduceWait:function(roomModel, opt){
-        return {
-            description:"手中每张技能卡的等待时间减少"+opt.number,
-            onChosen:function(roomModel){
-                _.each(roomModel.getHand(),function(cardModel){
-                    cardModel.reduceWait(opt.number)
-                },this);
             }
         }
     },
@@ -79,20 +70,24 @@ CHOICE_VALIDATE_MAP = {
     getFullHp:function(roomModel){
         return roomModel.getHero().get("hp") < roomModel.getHero().get("maxHp")
     },
-    reduceWait:function(roomModel){
+    reduceRandomWait:function(roomModel){
         if ( roomModel.getHand().length === 0 ) return false;
         return _.any(roomModel.getHand(),function(cardModel){
            return cardModel.get("waitTurn") > 0;
         });
     },
-    getMove:function(roomModel){
-        var winEveryCondition = roomModel.get("winEveryConditions");
-        if ( winEveryCondition && winEveryCondition.length && winEveryCondition[0] === "outOfTurn") return false
-        return true;
+    getRandomMove:function(roomModel){
+        var loseAnyConditions = roomModel.get("loseAnyConditions");
+        if ( loseAnyConditions && loseAnyConditions.length && loseAnyConditions[0] === "outOfTurn") return true
+        return false;
+    },
+    getRandomTime:function(roomModel){
+        var loseAnyConditions = roomModel.get("loseAnyConditions");
+        if ( loseAnyConditions && loseAnyConditions.length && loseAnyConditions[0] === "outOfTime") return true
+        return false;
     }
 }
-CHOICE_VALIDATE_MAP.reduceAllWait = CHOICE_VALIDATE_MAP.reduceRandomWait = CHOICE_VALIDATE_MAP.reduceWait;
-CHOICE_VALIDATE_MAP.getRandomMove = CHOICE_VALIDATE_MAP.getMove;
+CHOICE_VALIDATE_MAP.reduceAllWait = CHOICE_VALIDATE_MAP.reduceRandomWait;
 
 var getValidChoices = function(roomModel, choicePool){
     return _.filter(choicePool,function(choiceEntry){

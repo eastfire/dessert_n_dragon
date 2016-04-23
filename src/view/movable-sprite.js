@@ -27,7 +27,7 @@ var MovableSprite = BaseSprite.extend({
         this.model.on("move", this.move, this)
         this.model.on("mergeTo", this.mergeTo, this)
         this.model.on("beMerged", this.beMerged, this)
-        this.model.on("change:level",this.renderLevel,this)
+        this.model.on("change:level",this.onLevelChange,this)
         this.model.on("change:face",this.renderFace,this)
         this.model.on("change:frozen",this.renderStatus,this);
         this.model.on("change:angry",this.renderStatus,this);
@@ -41,9 +41,16 @@ var MovableSprite = BaseSprite.extend({
                 this.icons[statusName] = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( "status-"+statusName+".png" ));
                 this.icons[statusName].attr({
                     x: position.x,
-                    y: position.y
+                    y: position.y,
+                    scaleX: 0,
+                    scaleY: 0
                 })
                 this.addChild(this.icons[statusName]);
+                this.icons[statusName].runAction(
+                    cc.sequence(
+                        cc.scaleTo(0.25,2,2),
+                        cc.scaleTo(0.1,1,1)
+                    ));
             } else {
                 this.icons[statusName].attr({
                     x: position.x,
@@ -78,6 +85,16 @@ var MovableSprite = BaseSprite.extend({
 //        this.addChild(this.levelLabel);
 
         this.renderLevel();
+    },
+    onLevelChange:function(){
+        this.renderLevel();
+        effectIconMananger.enqueue(this, {
+            icon: "icon-level",
+            text: this.model.get("level"),
+            offset: {x:-20, y:-20},
+            scaleX: 0.7,
+            scaleY: 0.7
+        });
     },
     renderLevel:function(){
         if ( !this.model.get("isShowLevel") ) return;

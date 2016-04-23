@@ -106,3 +106,121 @@ var ModalDialogLayer = cc.LayerColor.extend({
         this.__dialogSprite = dialogSprite;
     }
 });
+
+var IconSprite = cc.Sprite.extend({
+    ctor: function(options){
+        options = options || {}
+        var fontSize = options.fontSize || 30;
+        var fontColor = options.fontColor || cc.color.BLACK;
+        var text = options.text || "";
+        var image = options.image;
+        var offset = options.offset || {
+            x : 48/2,
+            y : 48/2-1
+        }
+        this._super(image);
+
+        this.label = new ccui.Text(text, "Arial", fontSize );
+        this.label.enableOutline(cc.color.WHITE, 2);
+        this.label.setTextColor(fontColor);
+
+        this.label.attr({
+            x: offset.x,
+            y: offset.y
+        })
+        this.addChild(this.label,1)
+    },
+    setIcon:function(image){
+        if ( image instanceof cc.Texture2D )
+            this.setTexture(image);
+        else if ( image instanceof cc.SpriteFrame )
+            this.setSpriteFrame(image);
+    },
+    setString:function(str){
+        this.label.setString(str)
+    },
+    setFontColor:function(color){
+        //this.label.setColor(color);
+        this.label.setTextColor(color);
+    }
+})
+
+var EffectIconManager = Backbone.Model.extend({
+    initialize:function(options){
+        this.layer = options.layer;
+        this.iconZindex = options.zindex || 100;
+        this.iconMap = {};
+        this.queueMap = {};
+    },
+    enqueue:function(sprite, options){
+        options = options || {};
+        if ( !this.queueMap[ sprite.__instanceId ] )
+            this.queueMap[sprite.__instanceId] = [];
+        this.queueMap[sprite.__instanceId].push( {
+            icon: options.icon,
+            text: options.text || "",
+            offset: options.offset || {x:0, y:0},
+            scaleX: options.scaleX || 1,
+            scaleY: options.scaleY || 1
+        });
+        this._popEffect(sprite);
+    },
+    fly:function(fromSprite, toSprite, options ) {
+        options = options || {};
+        var moveTime = options.time || 0.3;
+        var fromOffset = options.fromOffset || {x:0,y:0};
+        var toOffset = options.toOffset || {x:0,y:0};
+        var icon = new IconSprite({
+            text: options.text,
+            image: cc.spriteFrameCache.getSpriteFrame(options.icon+".png")
+        });
+        var fromBox = fromSprite.getBoundingBoxToWorld();
+        icon.attr({
+            x : fromBox.x + fromSprite.width/2 + fromOffset.x,
+            y : fromBox.y + fromSprite.height/2 + fromOffset.y
+        });
+        this.layer.addChild( icon, this.iconZindex );
+
+        var toBox = toSprite.getBoundingBoxToWorld();
+        var sequence = cc.sequence( cc.moveTo(moveTime, toBox.x + toSprite.width/2 + toOffset.x, toBox.y + toSprite.height/2 + toOffset.y ),
+            cc.callFunc(function(){
+                icon.removeFromParent(true);
+                if ( options.callback )
+                    options.callback.call(options.context);
+            },this));
+        icon.runAction(sequence);
+    },
+    _isIconRunning:function(sprite){
+        if ( this.iconMap[sprite.__instanceId] ) {
+            return true;
+        }
+        return false;
+    },
+    _popEffect:function(sprite){
+        if ( !this._isIconRunning(sprite) ) {
+            var entry = this.queueMap[sprite.__instanceId].shift();
+            if ( entry === undefined )
+                return;
+            this.iconMap[sprite.__instanceId] = new IconSprite({
+                text: entry.text,
+                image: cc.spriteFrameCache.getSpriteFrame(entry.icon+".png")
+            });
+            this.layer.addChild( this.iconMap[sprite.__instanceId], this.iconZindex );
+
+            var box = sprite.getBoundingBoxToWorld();
+            this.iconMap[sprite.__instanceId].attr({
+                x: box.x+sprite.width/2 + entry.offset.x,
+                y: box.y+sprite.height/2 + entry.offset.y,
+                scaleX: entry.scaleX,
+                scaleY: entry.scaleY
+            })
+            var sequence = cc.sequence( cc.moveBy( 0.35, 0, 35),
+                cc.callFunc(function(){
+                    this.iconMap[sprite.__instanceId].removeFromParent(true);
+                    this.iconMap[sprite.__instanceId] = null;
+                    this._popEffect(sprite);
+                },this));
+            this.iconMap[sprite.__instanceId].runAction(sequence);
+        }
+    }
+})

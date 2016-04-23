@@ -12,7 +12,7 @@ var HeroModel = MovableModel.extend({
             //inactive skill
             constitute: 0,
             cunning: 0,
-            luck: 0,
+            luck: 5,
             maxHand: 4,
             drawEachTurn: 1,
             isShowLevel:false

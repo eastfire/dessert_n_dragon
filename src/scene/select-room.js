@@ -8,15 +8,17 @@ var SelectRoomLayer = cc.Layer.extend({
 
         this.initMoney();
 
+        this.initMenu();
+
         var stepY = 50;
         
         this.scrollView = new ccui.ScrollView();
         this.scrollView.setDirection(ccui.ScrollView.DIR_VERTICAL);
         this.scrollView.setTouchEnabled(true);
-        this.scrollView.setContentSize(cc.size(cc.winSize.width, cc.winSize.height - 40));
+        this.scrollView.setContentSize(cc.size(cc.winSize.width, cc.winSize.height - 40-50));
 
         this.scrollView.x = 0;
-        this.scrollView.y = 0;
+        this.scrollView.y = 50;
         this.scrollView.setInnerContainerSize(cc.size(this.scrollView.width, Math.max(this.scrollView.height, rooms.length * stepY+currentY)));
 
         this.addChild(this.scrollView);
@@ -124,6 +126,50 @@ var SelectRoomLayer = cc.Layer.extend({
         });
         this.addChild(icon);
         this.renderMoney();
+    },
+    initMenu:function(){
+        var closeItem = new cc.MenuItemImage(
+            cc.spriteFrameCache.getSpriteFrame("close-default.png"),
+            cc.spriteFrameCache.getSpriteFrame("close-press.png"),
+            function () {
+                cc.director.runScene(new IntroScene());
+            }, this);
+
+        closeItem.attr({
+            x: 0,
+            y: 0,
+            anchorX: 0,
+            anchorY: 0
+        });
+
+        var infiniteItem = new cc.MenuItemImage(
+            cc.spriteFrameCache.getSpriteFrame("palace-infinity.png"),
+            cc.spriteFrameCache.getSpriteFrame("palace-infinity.png"),
+            function () {
+                cc.director.runScene(new RoomScene({
+                    roomEntry: clone(infiniteRoom),
+                    maxScore: score[0]
+                }));
+            }, this);
+
+        infiniteItem.attr({
+            x: cc.winSize.width/2,
+            y: 0,
+            anchorX: 0.5,
+            anchorY: 0
+        });
+
+        var menu = new cc.Menu([closeItem,infiniteItem]);
+        this.addChild(menu);
+        menu.attr({
+            x:0,
+            y:0,
+            anchorX:0,
+            anchorY: 0
+        })
+        if ( unlocked.get("infiniteRoom") ) {
+
+        }
     },
     renderMoney:function(){
         this.moneyLabel.setString(gameStatus.get("money"));

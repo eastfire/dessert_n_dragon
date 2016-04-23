@@ -9,7 +9,7 @@ KEY_DIRECTION[KEY_RIGHT] = 1;
 KEY_DIRECTION[KEY_DOWN] = 2;
 KEY_DIRECTION[KEY_LEFT] = 3;
 
-var SWIPE_THRESHOLD_WIDTH = 35;
+var SWIPE_THRESHOLD_WIDTH = 39;
 var SWIPE_THRESHOLD = 40;
 var CLICK_THRESHOLD = 6;
 
@@ -28,6 +28,21 @@ var MainLayer = cc.Layer.extend({
             y: cc.winSize.height/2
         })
         this.addChild(currentRoomSprite);
+
+        window.effectIconMananger = new EffectIconManager({
+            layer:this
+        });
+
+        this.shiftArrowSprite = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("shift-direction.png"));
+        this.shiftArrowSprite.attr({
+            x:currentRoomSprite.x,
+            y:currentRoomSprite.y,
+            scaleX: 3,
+            scaleY: 3,
+            opacity:120
+        })
+        this.addChild(this.shiftArrowSprite,90);
+        this.shiftArrowSprite.setVisible(false);
 
         var handSprite = new HandSprite({
             model: room
@@ -195,8 +210,11 @@ var MainLayer = cc.Layer.extend({
             "kill": "吃掉足够多数量的敌人",
             "kill-level": "吃掉足够多等级的敌人",
             "kill-max-level": "吃掉等级足够高的敌人",
-            "outOfTurn":"生存"
+            "outOfTurn":"生存",
+            getScore:"尽可能获得高的分数"
         };
+
+        if ( !conditionType ) conditionType = "getScore";
 
         var label = new ccui.Text(conditionStrMap[conditionType], "Arial", dimens.conditionLabel.fontSize );
         label.enableOutline(colors.conditionLabel.outline, dimens.conditionLabel.outlineWidth);
@@ -494,6 +512,36 @@ var MainLayer = cc.Layer.extend({
             },
             //Trigger when moving touch
             onTouchMoved: function (touch, event) {
+                var target = event.getCurrentTarget();
+                var locationInNode = touch.getLocation();
+                var currentX = locationInNode.x;
+                var currentY = locationInNode.y;
+
+                if ( currentY > target.prevY + SWIPE_THRESHOLD && Math.abs(currentX - target.prevX) < SWIPE_THRESHOLD_WIDTH ) {
+                    cc.log("up")
+                    self.shiftArrowSprite.setVisible(true);
+                    self.shiftArrowSprite.attr({
+                        rotation: 0
+                    });
+                } else if ( currentY < target.prevY - SWIPE_THRESHOLD && Math.abs(currentX - target.prevX) < SWIPE_THRESHOLD_WIDTH ) {
+                    cc.log("down")
+                    self.shiftArrowSprite.setVisible(true);
+                    self.shiftArrowSprite.attr({
+                        rotation: 180
+                    });
+                } else if ( currentX > target.prevX + SWIPE_THRESHOLD && Math.abs(currentY - target.prevY) < SWIPE_THRESHOLD_WIDTH ) {
+                    self.shiftArrowSprite.setVisible(true);
+                    self.shiftArrowSprite.attr({
+                        rotation: 90
+                    });
+                } else if ( currentX < target.prevX - SWIPE_THRESHOLD && Math.abs(currentY - target.prevY) < SWIPE_THRESHOLD_WIDTH ) {
+                    self.shiftArrowSprite.setVisible(true);
+                    self.shiftArrowSprite.attr({
+                        rotation: 270
+                    });
+                } else {
+                    self.shiftArrowSprite.setVisible(false);
+                }
             },
             //Process the touch end event
             onTouchEnded: function (touch, event) {
@@ -503,19 +551,14 @@ var MainLayer = cc.Layer.extend({
                 var currentY = locationInNode.y;
                 var prevX = target.prevX;
                 var prevY = target.prevY;
-                if ( Math.abs(currentX - target.prevX) < SWIPE_THRESHOLD_WIDTH ) {
-                    if ( currentY > target.prevY + SWIPE_THRESHOLD ) {
-                        window.currentRoomSprite.shift(DIRECTION_UP)
-                    } else if ( currentY < target.prevY - SWIPE_THRESHOLD ) {
-                        window.currentRoomSprite.shift(DIRECTION_DOWN)
-                    }
-                }
-                if ( Math.abs(currentY - target.prevY) < SWIPE_THRESHOLD_WIDTH ) {
-                    if ( currentX > target.prevX + SWIPE_THRESHOLD ) {
-                        window.currentRoomSprite.shift(DIRECTION_RIGHT)
-                    } else if ( currentX < target.prevX - SWIPE_THRESHOLD ) {
-                        window.currentRoomSprite.shift(DIRECTION_LEFT)
-                    }
+                if ( currentY > target.prevY + SWIPE_THRESHOLD && Math.abs(currentX - target.prevX) < SWIPE_THRESHOLD_WIDTH ) {
+                    window.currentRoomSprite.shift(DIRECTION_UP)
+                } else if ( currentY < target.prevY - SWIPE_THRESHOLD && Math.abs(currentX - target.prevX) < SWIPE_THRESHOLD_WIDTH ) {
+                    window.currentRoomSprite.shift(DIRECTION_DOWN)
+                } else if ( currentX > target.prevX + SWIPE_THRESHOLD && Math.abs(currentY - target.prevY) < SWIPE_THRESHOLD_WIDTH ) {
+                    window.currentRoomSprite.shift(DIRECTION_RIGHT)
+                } else if ( currentX < target.prevX - SWIPE_THRESHOLD && Math.abs(currentY - target.prevY) < SWIPE_THRESHOLD_WIDTH ) {
+                    window.currentRoomSprite.shift(DIRECTION_LEFT)
                 }
 
                 if ( Math.abs(currentY - target.prevY) < CLICK_THRESHOLD && Math.abs(currentX - target.prevX) < CLICK_THRESHOLD ) {
@@ -529,6 +572,7 @@ var MainLayer = cc.Layer.extend({
                         }
                     }
                 }
+                self.shiftArrowSprite.setVisible(false);
             }
         }, currentRoomSprite);
     },

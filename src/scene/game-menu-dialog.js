@@ -12,7 +12,8 @@ var GameMenuDialog = cc.Scale9Sprite.extend({
             height: 300
         })
 
-        var resultLabel = new cc.LabelTTF("第"+this.model.get("stageNumber")+"关", null, 25 );
+        var stageNumber = this.model.get("stageNumber");
+        var resultLabel = new cc.LabelTTF(stageNumber?"第"+stageNumber+"关":"无尽关卡", null, 25 );
         resultLabel.attr({
             color: colors.gameOver.ok,
             x: this.width/2,

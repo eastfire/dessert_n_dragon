@@ -103,14 +103,14 @@ cc.game.onStart = function(){
         initTexts();
 
         gameStatus = new GameStatusModel();
-        unlocked = new UnlockedStatusModel();
+        unlocked = new UnlockedStatusModel
         loadStatistic();
         loadScore();
 //        loadTutorial(); //TODO
 
         cc.spriteFrameCache.addSpriteFrames(res.game_plist);
         cc.spriteFrameCache.addSpriteFrames(res.card_plist);
-        cc.director.runScene(new SelectRoomScene());
+        cc.director.runScene(new IntroScene());
     }, this);
 };
 cc.game.run();

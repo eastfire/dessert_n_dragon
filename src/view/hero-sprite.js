@@ -11,6 +11,7 @@ var HeroSprite = MovableSprite.extend({
         this.model.on("hitForward", this.hitForward, this)
         this.model.on("hitMoveBack", this.hitMoveBack, this)
         this.model.on("miss", this.miss, this)
+        this.model.on("change:hp", this.onChangeHp, this)
     },
     attack:function(enemyModel, options){
         switch ( options.attackAction ) {
@@ -76,6 +77,21 @@ var HeroSprite = MovableSprite.extend({
                 this.model.afterMiss(enemyModel);
             },this)
         ))
+    },
+    onChangeHp:function(){
+        var prevHp = this.model.previous("hp")
+        var hp = this.model.get("hp")
+        var diffStr = hp - prevHp;
+        if ( diffStr > 0 ) {
+            diffStr = "+"+diffStr;
+        }
+        effectIconMananger.enqueue(this, {
+            icon: "icon-hp",
+            text: diffStr,
+            offset: {x:-20, y:-20},
+            scaleX: 0.7,
+            scaleY: 0.7
+        });
     }
 });
 MOVABLE_SPRITE_MAP.normalHero = HeroSprite

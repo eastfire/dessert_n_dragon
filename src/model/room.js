@@ -402,13 +402,13 @@ var RoomModel = Backbone.Model.extend({
                 number = currentGenEnemyStrategy.number.call(this)
             }
             var candidates = [];
-            if ( currentGenEnemyStrategy.type === "random" ) {
-                candidates = _.sample(tiles, number );
-            }
+            candidates = _.sample(tiles, number );
 
             _.each( candidates,function(tile){
                 this.generateOneMovable( tile.get("position"), this.generateOneEnemyType(), this.generateOneEnemyLevel());
             },this);
+
+            this.maintainCurrentGenEnemyStrategy();
 
             this.set("genEnemyStrategyTurn", this.get("genEnemyStrategyTurn")+1);
             if ( currentGenEnemyStrategy.last !== 0 && this.get("genEnemyStrategyTurn")>=currentGenEnemyStrategy.last) {
@@ -422,6 +422,9 @@ var RoomModel = Backbone.Model.extend({
         } else { //no gen enemy strategy
             this.nextPhase();
         }
+    },
+    maintainCurrentGenEnemyStrategy:function(){
+
     },
     generateOneItemType:function(){
         return _.sample( this.get("itemPool"));
