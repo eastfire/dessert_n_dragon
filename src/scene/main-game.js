@@ -9,7 +9,6 @@ KEY_DIRECTION[KEY_RIGHT] = 1;
 KEY_DIRECTION[KEY_DOWN] = 2;
 KEY_DIRECTION[KEY_LEFT] = 3;
 
-var SWIPE_THRESHOLD_WIDTH = 39;
 var SWIPE_THRESHOLD = 40;
 var CLICK_THRESHOLD = 6;
 
@@ -39,7 +38,7 @@ var MainLayer = cc.Layer.extend({
             y:currentRoomSprite.y,
             scaleX: 3,
             scaleY: 3,
-            opacity:120
+            opacity:100
         })
         this.addChild(this.shiftArrowSprite,90);
         this.shiftArrowSprite.setVisible(false);
@@ -517,24 +516,25 @@ var MainLayer = cc.Layer.extend({
                 var currentX = locationInNode.x;
                 var currentY = locationInNode.y;
 
-                if ( currentY > target.prevY + SWIPE_THRESHOLD && Math.abs(currentX - target.prevX) < SWIPE_THRESHOLD_WIDTH ) {
-                    cc.log("up")
+                var deltaX = currentX - target.prevX;
+                var deltaY = currentY - target.prevY;
+                if ( deltaY > SWIPE_THRESHOLD && Math.abs(deltaX) < Math.abs(deltaY) ) {
                     self.shiftArrowSprite.setVisible(true);
                     self.shiftArrowSprite.attr({
                         rotation: 0
                     });
-                } else if ( currentY < target.prevY - SWIPE_THRESHOLD && Math.abs(currentX - target.prevX) < SWIPE_THRESHOLD_WIDTH ) {
+                } else if ( deltaY < - SWIPE_THRESHOLD && Math.abs(deltaX) < Math.abs(deltaY) ) {
                     cc.log("down")
                     self.shiftArrowSprite.setVisible(true);
                     self.shiftArrowSprite.attr({
                         rotation: 180
                     });
-                } else if ( currentX > target.prevX + SWIPE_THRESHOLD && Math.abs(currentY - target.prevY) < SWIPE_THRESHOLD_WIDTH ) {
+                } else if ( deltaX > SWIPE_THRESHOLD && Math.abs(deltaY) <  Math.abs(deltaX) ) {
                     self.shiftArrowSprite.setVisible(true);
                     self.shiftArrowSprite.attr({
                         rotation: 90
                     });
-                } else if ( currentX < target.prevX - SWIPE_THRESHOLD && Math.abs(currentY - target.prevY) < SWIPE_THRESHOLD_WIDTH ) {
+                } else if ( deltaX < - SWIPE_THRESHOLD && Math.abs(deltaY) < Math.abs(deltaX) ) {
                     self.shiftArrowSprite.setVisible(true);
                     self.shiftArrowSprite.attr({
                         rotation: 270
@@ -551,17 +551,19 @@ var MainLayer = cc.Layer.extend({
                 var currentY = locationInNode.y;
                 var prevX = target.prevX;
                 var prevY = target.prevY;
-                if ( currentY > target.prevY + SWIPE_THRESHOLD && Math.abs(currentX - target.prevX) < SWIPE_THRESHOLD_WIDTH ) {
+                var deltaX = currentX - target.prevX;
+                var deltaY = currentY - target.prevY;
+                if ( deltaY > SWIPE_THRESHOLD && Math.abs(deltaX) < Math.abs(deltaY) ) {
                     window.currentRoomSprite.shift(DIRECTION_UP)
-                } else if ( currentY < target.prevY - SWIPE_THRESHOLD && Math.abs(currentX - target.prevX) < SWIPE_THRESHOLD_WIDTH ) {
+                } else if ( deltaY < - SWIPE_THRESHOLD && Math.abs(deltaX) < Math.abs(deltaY) ) {
                     window.currentRoomSprite.shift(DIRECTION_DOWN)
-                } else if ( currentX > target.prevX + SWIPE_THRESHOLD && Math.abs(currentY - target.prevY) < SWIPE_THRESHOLD_WIDTH ) {
+                } else if ( deltaX > SWIPE_THRESHOLD && Math.abs(deltaY) <  Math.abs(deltaX) ) {
                     window.currentRoomSprite.shift(DIRECTION_RIGHT)
-                } else if ( currentX < target.prevX - SWIPE_THRESHOLD && Math.abs(currentY - target.prevY) < SWIPE_THRESHOLD_WIDTH ) {
+                } else if ( deltaX < - SWIPE_THRESHOLD && Math.abs(deltaY) < Math.abs(deltaX) ) {
                     window.currentRoomSprite.shift(DIRECTION_LEFT)
                 }
 
-                if ( Math.abs(currentY - target.prevY) < CLICK_THRESHOLD && Math.abs(currentX - target.prevX) < CLICK_THRESHOLD ) {
+                if ( Math.abs(deltaY) < CLICK_THRESHOLD && Math.abs(deltaX) < CLICK_THRESHOLD ) {
                     var movableModel = window.currentRoomSprite.getMovableByTouchPosition(currentX,currentY);
                     if ( movableModel ) {
                         if ( movableModel instanceof HeroModel ) {

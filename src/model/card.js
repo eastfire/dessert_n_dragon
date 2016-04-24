@@ -74,6 +74,10 @@ var CardModel = Backbone.Model.extend({
     }
 });
 
+var PassiveCardModel = CardModel.extend({
+
+})
+
 CARD_MODEL_MAP.heal = CardModel.extend({
     defaults: function () {
         return _.extend(CardModel.prototype.defaults.call(this),{
@@ -89,7 +93,7 @@ CARD_MODEL_MAP.heal = CardModel.extend({
         return level+4;
     },
     getEffect:function(){
-        var l = this.get("level");
+        var l = 2*this.get("level")+1;
         return l;
     }
 })
