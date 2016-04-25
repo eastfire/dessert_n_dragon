@@ -668,13 +668,15 @@ var RoomModel = Backbone.Model.extend({
     unlockUnlockable:function(){
         var unlocks = this.get("unlocks")
         if ( unlocks ) {
-            _.each( unlocks, function(unlock){
+            return _.any( unlocks, function(unlock){
                 if ( typeof unlock === "string" ) {
                     unlockableStatus.unlock(unlock)
                 } else if ( typeof unlock === "object" ) {
                     unlockableStatus.unlock(unlock.type, unlock.subtype)
                 }
             },this)
+        } else {
+            return false;
         }
     },
     logEnemyDie:function(enemyModel){
