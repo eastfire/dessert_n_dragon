@@ -2,7 +2,6 @@ var UnlockedInfoDialog = cc.Scale9Sprite.extend({
     ctor:function (options) {
         this._super(cc.spriteFrameCache.getSpriteFrame("game-over-dialog.png"));
 
-        this.model = options.model;
         this.modalLayer = options.modalLayer;
         this.unlock = options.unlock;
         this.callback = options.callback;
@@ -15,7 +14,16 @@ var UnlockedInfoDialog = cc.Scale9Sprite.extend({
             y:cc.winSize.height/2,
             width: this.dialogWidth,
             height: this.dialogHeight
-        })
+        });
+        
+        var label = new ccui.Text(texts.unlock[this.unlock], "Arial", dimens.movableInfo.nameLabel.fontSize );
+        label.enableOutline(colors.movableInfo.nameLabel.outline, dimens.movableInfo.nameLabel.outlineWidth);
+        label.setTextColor(colors.movableInfo.nameLabel.inside);
+        label.attr({
+            x: dialogWidth/2,
+            y: dialogHeight/2
+        });
+        this.addChild(label);
         
     },
     appear:function(){
