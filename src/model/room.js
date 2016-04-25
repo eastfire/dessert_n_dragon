@@ -665,6 +665,18 @@ var RoomModel = Backbone.Model.extend({
         }
         this.trigger("game-over", this, isWin);
     },
+    unlockUnlockable:function(){
+        var unlocks = this.get("unlocks")
+        if ( unlocks ) {
+            _.each( unlocks, function(unlock){
+                if ( typeof unlock === "string" ) {
+                    unlockableStatus.unlock(unlock)
+                } else if ( typeof unlock === "object" ) {
+                    unlockableStatus.unlock(unlock.type, unlock.subtype)
+                }
+            },this)
+        }
+    },
     logEnemyDie:function(enemyModel){
         var subtype = enemyModel.get("subtype");
         if ( subtype ) {
