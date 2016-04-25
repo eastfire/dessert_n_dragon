@@ -78,6 +78,17 @@ var texts_locale = {
                 name:"回旋扫尾",
                 desc: "攻击所在周围8个格子的所有的敌人"
             }
+        },
+        unlock:{
+            "infinite":"你解锁了无尽关卡",
+            "shop.horizontal-fire":"可以在商店中解锁横向火焰了",
+            
+            //shop
+            "card.horizontal-fire":{
+                require:"shop.horizontal-fire",
+                title:"横向火焰",
+                desc:"可以在无尽关卡中使用横向火焰"
+            }
         }
     },
     en: {
