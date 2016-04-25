@@ -21,6 +21,7 @@ var UnlockedStatusModel = Backbone.Model.extend({
                     category[subtype] = true;
                     this.trigger("unlocked", type, subtype);
                     this.save();
+                    return true;
                 }
             } else {
                 category = {};
@@ -28,13 +29,16 @@ var UnlockedStatusModel = Backbone.Model.extend({
                 this.set(type, category);
                 this.trigger("unlocked", type, subtype);
                 this.save();
+                return true;
             }
         } else {
             if ( !this.get(type) ) {
                 this.set(type, true);
                 this.trigger("unlocked", type);
+                return true;
             }
         }
+        return false;
     },
     isUnlocked:function(type,subtype){
         if ( subtype ) {
