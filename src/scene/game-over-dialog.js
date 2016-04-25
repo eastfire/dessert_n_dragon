@@ -76,6 +76,14 @@ var GameOverDialog = cc.Scale9Sprite.extend({
             cc.spriteFrameCache.getSpriteFrame("button-short-press.png"),
             function () {
                 this.disappear(function(){
+                    if ( this.isWin ) {
+                        var somethingUnlocked = this.model.unlockUnlockable();
+                        if ( somethingUnlocked ) {
+                            //wait unlock-info
+                        } else {
+                            cc.director.runScene(new SelectRoomScene());
+                        }
+                    }
                     cc.director.runScene(new SelectRoomScene());
                 });
             }, this);
