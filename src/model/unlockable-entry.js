@@ -13,18 +13,27 @@ var UnlockedStatusModel = Backbone.Model.extend({
         cc.sys.localStorage.setItem(APP_NAME+".unlocked", JSON.stringify(this.toJSON()));
     },
     unlock:function(type,subtype){
+        var unlocked = false;
         if ( subtype ) {
             var category = this.get(type);
             if ( category ) {
-                category[subtype] = true;
+                if ( !category[subtype] ) {
+                    category[subtype] = true;
+                    this.trigger("unlocked", type, subtype);
+                    this.save();
+                }
             } else {
                 category = {};
                 category[subtype] = true;
                 this.set(type, category);
+                this.trigger("unlocked", type, subtype);
+                this.save();
             }
-            this.save();
         } else {
-            this.set(type, true)
+            if ( !this.get(type) ) {
+                this.set(type, true);
+                this.trigger("unlocked", type);
+            }
         }
     },
     isUnlocked:function(type,subtype){
