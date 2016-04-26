@@ -6,6 +6,7 @@ var GameOverDialog = cc.Scale9Sprite.extend({
         this.modalLayer = options.modalLayer;
 
         this.isWin = options.isWin;
+        this.isFirstPass = options.isFirstPass;
 
         this.attr({
             x:cc.winSize.width/2,
@@ -77,14 +78,18 @@ var GameOverDialog = cc.Scale9Sprite.extend({
             function () {
                 this.disappear(function(){
                     if ( this.isWin ) {
-                        var somethingUnlocked = this.model.unlockUnlockable();
+                        var somethingUnlocked = false;
+                        if ( this.isFirstPass ) {
+                            somethingUnlocked = this.model.unlockUnlockable();
+                        }
                         if ( somethingUnlocked ) {
                             //wait unlock-info
+                            cc.log("somethingUnlocked")
+                            this.modalLayer.removeFromParent(true);
                         } else {
                             cc.director.runScene(new SelectRoomScene());
                         }
                     }
-                    cc.director.runScene(new SelectRoomScene());
                 });
             }, this);
 

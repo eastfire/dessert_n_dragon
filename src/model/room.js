@@ -13,8 +13,6 @@ var PHASE_TURN_END = 6;
 var GenEnemyStrategy = Backbone.Model.extend({
     defaults:function(){
         return {
-            enemyPoolChangePerTurn : 31,
-            enemyLevelPoolChangePerTurn: 101,
             number:2,
             last: 0
         }
@@ -36,7 +34,7 @@ var GenEnemyStrategy = Backbone.Model.extend({
             roomModel.generateOneMovable( tile.get("position"), this.generateOneEnemyType(roomModel), this.generateOneEnemyLevel(roomModel));
         },this);
 
-        this.maintain();
+        this.maintain(roomModel);
 
         return candidates.length;
     },
@@ -63,29 +61,29 @@ var InfiniteGenEnemyStrategy = GenEnemyStrategy.extend({
         })
     },
     maintain:function(roomModel){
+        if ( !roomModel.get("turnNumber") ) return;
         if ( roomModel.get("turnNumber") % this.get("enemyPoolChangePerTurn") === 0 ) {
             var allEnemyPool = [];
-            _.each(this.get("baseEnemyPool"),fucntion(enemy){
+            _.each(roomModel.get("baseEnemyPool"),function(enemy){
                 allEnemyPool.push(enemy);
             },this);
             _.each(unlockedStatus.get("enemy"),function(value, key){
                 allEnemyPool.push({
                     type: key
-                }
+                });
             },this);
-            var currentEnemyPool = this.get("enemyPool");
-            var availableEnemyPool = _.filter(allEnemyPool.function(enemy){
+            var currentEnemyPool = roomModel.get("enemyPool");
+            var availableEnemyPool = _.filter(allEnemyPool,function(enemy){
                 return !_.any(currentEnemyPool, function(currentEnemy){
                     return currentEnemy.type === enemy.type;
                 });
             },this);
-            
             var newEnemy = _.sample(availableEnemyPool);
-            currentEnemyPool.unshift();
+            currentEnemyPool.shift();
             currentEnemyPool.push(newEnemy);
         }
         if ( roomModel.get("turnNumber") % this.get("enemyLevelPoolChangePerTurn") === 0 ) {
-            var levelPool = this.get("enemyLevelPool");
+            var levelPool = roomModel.get("enemyLevelPool");
             var maxLevel = _.last(levelPool);
             var newMaxLevel = Math.min(MAX_ENEMY_LEVEL , maxLevel+1)
             for ( var i = 1; i <= newMaxLevel; i++){
@@ -742,9 +740,9 @@ var RoomModel = Backbone.Model.extend({
         if ( unlocks ) {
             return _.any( unlocks, function(unlock){
                 if ( typeof unlock === "string" ) {
-                    unlockedStatus.unlock(unlock)
+                    return unlockedStatus.unlock(unlock)
                 } else if ( typeof unlock === "object" ) {
-                    unlockedStatus.unlock(unlock.type, unlock.subtype)
+                    return unlockedStatus.unlock(unlock.type, unlock.subtype)
                 }
             },this)
         } else {

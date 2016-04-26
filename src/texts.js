@@ -85,13 +85,19 @@ var texts_locale = {
         },
         unlock:{
             "infinite":"你解锁了无尽关卡",
-            "shop.horizontal-fire":"可以在商店中解锁横向火焰了",
-            
-            //shop
-            "card.horizontal-fire":"在无尽关卡中使用横向火焰",
+            shop:{
+                "horizontal-fire":"可以在商店中解锁横向火焰了"
+            },
+
+            //card
+            card:{
+                "horizontal-fire":"可以在无尽关卡中使用横向火焰"
+            },
             
             //enemy
-            "enemy.chocolate-cake":"黑森林武士将在无尽关卡中出现"
+            enemy:{
+                "chocolate-cake":"黑森林武士将在无尽关卡中出现"
+            }
         }
     },
     en: {

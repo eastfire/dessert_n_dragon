@@ -167,7 +167,7 @@ var SelectRoomLayer = cc.Layer.extend({
             anchorX:0,
             anchorY: 0
         })
-        if ( !unlockedStatus.isUnlocked("infiniteRoom") ) {
+        if ( !unlockedStatus.isUnlocked("infinite") ) {
             infiniteItem.opacity = 128;
             infiniteItem.setEnabled(false);
         }

@@ -47,6 +47,7 @@
         "src/scene/game-over-dialog.js",
         "src/scene/choice-dialog.js",
         "src/scene/movable-info-dialog.js",
+        "src/scene/unlocked-info-dialog.js",
         "src/scene/select-room.js",
         "src/scene/main-game.js",
         "src/tutorial.js"

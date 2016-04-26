@@ -67,6 +67,7 @@ var MainLayer = cc.Layer.extend({
         this.renderTurnNumber();
         this.renderMoney();
 
+        this.__unlocking = [];
         return true;
     },
     onEnter: function () {
@@ -398,14 +399,11 @@ var MainLayer = cc.Layer.extend({
         },this)
     },
     onGameOver:function(roomModel, isWin){
+        var isFirstPass = false;
         if ( isWin ) {
             var oldScore = score[roomModel.get("stageNumber")];
             if ( !oldScore ) {
-                //first pass
-                var unlocks = roomModel.get("unlocks");
-                if ( unlocks ) {
-                    //TODO unlock
-                }
+                isFirstPass = true;
             }
             if ( !oldScore || oldScore < roomModel.get("score") ) {
                 score[roomModel.get("stageNumber")] = roomModel.get("score");
@@ -421,10 +419,42 @@ var MainLayer = cc.Layer.extend({
         var dialog = new GameOverDialog({
             model: currentRoom,
             modalLayer: layer,
-            isWin: isWin
+            isWin: isWin,
+            isFirstPass: isFirstPass
         })
         layer.addChild(dialog);
         dialog.appear();
+    },
+    onUnlocked:function(unlocked){
+        this.__unlocking.push(unlocked)
+        this.notifyUnlocked();
+    },
+    notifyUnlocked:function(){
+        if ( this.__modalLayer ) return;
+        var unlocked = this.__unlocking.shift();
+        cc.log(unlocked);
+        if ( unlocked ) {
+            this.__modalLayer = new ModalDialogLayer({
+                clickSideCancel: true
+            });
+            this.addChild(this.__modalLayer,200);
+            var dialog = new UnlockedInfoDialog({
+                model: currentRoom,
+                modalLayer: this.__modalLayer,
+                unlocked: unlocked,
+                callback:function(){
+                    this.__modalLayer.setDialogSprite(null);
+                    this.__modalLayer = null;
+                    this.notifyUnlocked();
+                },
+                context : this
+            })
+            this.__modalLayer.setDialogSprite(dialog);
+            this.__modalLayer.addChild(dialog);
+            dialog.appear();
+        } else {
+            cc.director.runScene(new SelectRoomScene());
+        }
     },
     onLevelUp:function(){
         this.showChoiceDialog();
@@ -475,7 +505,8 @@ var MainLayer = cc.Layer.extend({
         currentRoom.on("change:timeLimit",this.onTimeNumberChange,this);
         currentRoom.on("change:statistic",this.onStatisticChange,this);
         currentRoom.on("change:deck",this.renderDeck,this);
-        currentRoom.on("game-over",this.onGameOver,this)
+        currentRoom.on("game-over",this.onGameOver,this);
+        unlockedStatus.on("unlocked",this.onUnlocked,this);
 
         if ('keyboard' in cc.sys.capabilities) {
             cc.eventManager.addListener({
@@ -524,7 +555,6 @@ var MainLayer = cc.Layer.extend({
                         rotation: 0
                     });
                 } else if ( deltaY < - SWIPE_THRESHOLD && Math.abs(deltaX) < Math.abs(deltaY) ) {
-                    cc.log("down")
                     self.shiftArrowSprite.setVisible(true);
                     self.shiftArrowSprite.attr({
                         rotation: 180
@@ -569,7 +599,6 @@ var MainLayer = cc.Layer.extend({
                         if ( movableModel instanceof HeroModel ) {
 
                         } else {
-                            cc.log("show " + movableModel.get("type"));
                             self.showMovableInfoDialog(movableModel);
                         }
                     }
@@ -591,6 +620,7 @@ var MainLayer = cc.Layer.extend({
         currentRoom.off("change:statistic",this.onStatisticChange,this);
         currentRoom.off("change:deck",this.renderDeck,this);
         currentRoom.off("game-over",this.onGameOver,this)
+        unlockedStatus.off("unlocked",this.onUnlocked,this);
 
         if ('keyboard' in cc.sys.capabilities) {
             cc.eventManager.removeListeners(cc.EventListener.KEYBOARD);

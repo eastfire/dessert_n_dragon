@@ -719,7 +719,8 @@ rooms.push({
         expStrategy: {
             type: "normal"
         } //normal, fix
-    }
+    },
+    unlocks:["infinite"]
 });
 
 //教学杀敌数过关，分数无要求 room2
@@ -1903,7 +1904,7 @@ rooms.push({
         } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL,
-    unlocks:["enemy.chocolate-cake"]
+    unlocks:[{type:"enemy", subtype:"chocolate-cake"}]
 });
 
 //对远程兵种的生存2 room22
