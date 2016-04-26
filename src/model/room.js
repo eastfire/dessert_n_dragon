@@ -731,6 +731,9 @@ var RoomModel = Backbone.Model.extend({
             if ( this.get("turnLimit") ) {
                 this.getScore( ( this.get("turnLimit") - this.get("turnNumber") ) * 50 );
             }
+            if ( this.get("timeLimit") ) {
+                this.getScore( ( this.get("timeLimit") - this.get("timeNumber") ) * 10 );
+            }
         }
         this.trigger("game-over", this, isWin);
     },
