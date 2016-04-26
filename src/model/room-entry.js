@@ -663,7 +663,8 @@ var infiniteRoom = { //初始 room1
     choicePool:STANDARD_CHOICE_POOL
 };
 
-rooms.push({ //初始 room1
+//初始 room1
+rooms.push({ 
     turnLimit:6,
     scoreCondition: null,
     winEveryConditions:[
@@ -721,7 +722,8 @@ rooms.push({ //初始 room1
     }
 });
 
-rooms.push({ //教学杀敌数过关，分数无要求 room2
+//教学杀敌数过关，分数无要求 room2
+rooms.push({ 
     turnLimit:10,
     scoreCondition: null,
     winEveryConditions:[
@@ -790,7 +792,8 @@ rooms.push({ //教学杀敌数过关，分数无要求 room2
     }
 });
 
-rooms.push({ //教学杀敌数过关，且有分数要求 room3
+//教学杀敌数过关，且有分数要求 room3
+rooms.push({ 
     turnLimit:15,
     scoreCondition: [200, 400, 600],
     winEveryConditions:[
@@ -870,7 +873,8 @@ rooms.push({ //教学杀敌数过关，且有分数要求 room3
     }
 });
 
-rooms.push({ //教学获得经验和升级 room4
+//教学获得经验和升级 room4
+rooms.push({ 
     turnLimit:20,
     scoreCondition: [250, 450, 700],
     winEveryConditions:[
@@ -929,7 +933,8 @@ rooms.push({ //教学获得经验和升级 room4
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //第一次要求大量杀敌 room5
+//第一次要求大量杀敌 room5
+rooms.push({ 
     turnLimit:24,
     scoreCondition: [300, 600, 1000],
     winEveryConditions:[
@@ -978,7 +983,8 @@ rooms.push({ //第一次要求大量杀敌 room5
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //第一次出现樱桃蛋糕 room6
+//第一次出现樱桃蛋糕 room6
+rooms.push({ 
     turnLimit:15,
     scoreCondition: [300, 600, 1000],
     winEveryConditions:[
@@ -1032,14 +1038,14 @@ rooms.push({ //第一次出现樱桃蛋糕 room6
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //第一次出现回复药和道具掉落 room7
+//第一次出现回复药和道具掉落 room7
+rooms.push({ 
     turnLimit:10,
     scoreCondition: [200, 350, 500],
     winEveryConditions:[
         "outOfTurn"
     ],
     loseAnyConditions:[
-        "outOfTurn"
     ],
     enemyPool:[{
         type:"cherrycake"
@@ -1083,7 +1089,8 @@ rooms.push({ //第一次出现回复药和道具掉落 room7
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //A room8 第一次时间限制
+//A room8 第一次时间限制
+rooms.push({ 
     timeLimit:120,
     scoreCondition: [400, 700, 1000],
     winEveryConditions:[
@@ -1131,7 +1138,8 @@ rooms.push({ //A room8 第一次时间限制
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //第一次出现年糕 room8
+//第一次出现年糕 room8
+rooms.push({ 
     turnLimit:15,
     scoreCondition: [300, 500, 800],
     winEveryConditions:[
@@ -1188,7 +1196,8 @@ rooms.push({ //第一次出现年糕 room8
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //第一次要求敌人等级　room9
+//第一次要求敌人等级　room9
+rooms.push({ 
     turnLimit:30,
     scoreCondition: [1000, 2000, 3000],
     winEveryConditions:[
@@ -1238,7 +1247,124 @@ rooms.push({ //第一次要求敌人等级　room9
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //复杂地形要求敌人等级room10
+//柱子 room10
+rooms.push({ 
+    turnLimit:20,
+    scoreCondition: [400, 800, 1200],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "red",
+            number: 5
+        },
+        {
+            conditionType:"kill-level",
+            type:"ricecake",
+            number: 5
+        },
+        {
+            conditionType:"kill-level",
+            type:"cherrycake",
+            number: 5
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{
+        type:"pudding",subtype:"red"
+    },{
+        type:"ricecake"
+    },{
+        type:"cherrycake"
+    }],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles6x6Cross6x4,
+    initMovables:[
+        {
+            type:"pillar",subtype:"normal",
+            positions: [{x:2,y:2}]
+        },
+        {
+            type:"pillar",subtype:"normal",
+            positions: [{x:5,y:2}]
+        },
+        {
+            type:"pillar",subtype:"normal",
+            positions: [{x:2,y:5}]
+        },
+        {
+            type:"pillar",subtype:"normal",
+            positions: [{x:5,y:5}]
+        }
+    ],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:3}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        } //normal, fix
+    },
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//room11 大量杀敌
+rooms.push({ 
+    turnLimit:35,
+    scoreCondition: [1000, 2000, 3000],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"pudding",subtype: "red",
+            number: 16
+        },
+        {
+            conditionType:"kill-level",
+            type:"ricecake",
+            number: 16
+        },
+        {
+            conditionType:"kill-level",
+            type:"cherrycake",
+            number: 16
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{
+        type:"pudding",subtype:"red"
+    },{
+        type:"ricecake"
+    },{
+        type:"cherrycake"
+    }],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles6x5HRotate90,
+    initMovables:[
+    ],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:3}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        } //normal, fix
+    },
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//复杂地形要求敌人等级room12
+rooms.push({ 
     turnLimit:21,
     scoreCondition: [800, 1500, 2000],
     winEveryConditions:[
@@ -1294,121 +1420,8 @@ rooms.push({ //复杂地形要求敌人等级room10
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //柱子 room11
-    turnLimit:20,
-    scoreCondition: [400, 800, 1200],
-    winEveryConditions:[
-        {
-            conditionType:"kill-level",
-            type:"pudding",subtype: "red",
-            number: 6
-        },
-        {
-            conditionType:"kill-level",
-            type:"ricecake",
-            number: 6
-        },
-        {
-            conditionType:"kill-level",
-            type:"cherrycake",
-            number: 6
-        }
-    ],
-    loseAnyConditions:[
-        "outOfTurn"
-    ],
-    enemyPool:[{
-        type:"pudding",subtype:"red"
-    },{
-        type:"ricecake"
-    },{
-        type:"cherrycake"
-    }],
-    itemPool:STANDARD_ITEM_POOL,
-    initTiles:tiles6x6Cross6x4,
-    initMovables:[
-        {
-            type:"pillar",subtype:"normal",
-            positions: [{x:2,y:2}]
-        },
-        {
-            type:"pillar",subtype:"normal",
-            positions: [{x:5,y:2}]
-        },
-        {
-            type:"pillar",subtype:"normal",
-            positions: [{x:2,y:5}]
-        },
-        {
-            type:"pillar",subtype:"normal",
-            positions: [{x:5,y:5}]
-        }
-    ],
-    initHero: {
-        type:"normalHero",
-        positions: [{x:3,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
-        maxHpStrategy:{
-            type: "normal"
-        },
-        expStrategy: {
-            type: "normal"
-        } //normal, fix
-    },
-    choicePool:STANDARD_CHOICE_POOL
-});
-
-rooms.push({ //room12 大量杀敌
-    turnLimit:35,
-    scoreCondition: [1000, 2000, 3000],
-    winEveryConditions:[
-        {
-            conditionType:"kill-level",
-            type:"pudding",subtype: "red",
-            number: 16
-        },
-        {
-            conditionType:"kill-level",
-            type:"ricecake",
-            number: 16
-        },
-        {
-            conditionType:"kill-level",
-            type:"cherrycake",
-            number: 16
-        }
-    ],
-    loseAnyConditions:[
-        "outOfTurn"
-    ],
-    enemyPool:[{
-        type:"pudding",subtype:"red"
-    },{
-        type:"ricecake"
-    },{
-        type:"cherrycake"
-    }],
-    itemPool:STANDARD_ITEM_POOL,
-    initTiles:tiles6x5HRotate90,
-    initMovables:[
-    ],
-    initHero: {
-        type:"normalHero",
-        positions: [{x:3,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
-        maxHpStrategy:{
-            type: "normal"
-        },
-        expStrategy: {
-            type: "normal"
-        } //normal, fix
-    },
-    choicePool:STANDARD_CHOICE_POOL
-});
-
-rooms.push({ //room13 大量杀敌
+//room13 大量杀敌
+rooms.push({ 
     turnLimit:25,
     scoreCondition: [2000, 3000, 4500],
     winEveryConditions:[
@@ -1458,7 +1471,8 @@ rooms.push({ //room13 大量杀敌
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //room14 第一次出现法师
+//room14 第一次出现法师
+rooms.push({ 
     turnLimit:15,
     scoreCondition: [400, 700, 1000],
     winEveryConditions:[
@@ -1497,51 +1511,8 @@ rooms.push({ //room14 第一次出现法师
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //room15 难行
-    turnLimit:30,
-    scoreCondition: [800, 1500, 2000],
-    winEveryConditions:[
-        {
-            conditionType:"kill-max-level",
-            type:"cherrycake",
-            number: 5
-        },
-        {
-            conditionType:"kill-max-level",
-            type:"icecream",
-            number: 5
-        }
-    ],
-    loseAnyConditions:[
-        "outOfTurn"
-    ],
-    enemyPool:[{
-        type:"cherrycake"
-    },{
-        type:"ricecake"
-    },{
-        type:"icecream"
-    }],
-    itemPool:STANDARD_ITEM_POOL,
-    initTiles:tiles6x6Loop,
-    initMovables:[
-    ],
-    initHero: {
-        type:"normalHero",
-        positions: [{x:3,y:2}],
-        initHp: 100,
-        initMaxHp: 100,
-        maxHpStrategy:{
-            type: "normal"
-        },
-        expStrategy: {
-            type: "normal"
-        } //normal, fix
-    },
-    choicePool:STANDARD_CHOICE_POOL
-});
-
-rooms.push({ //room16 creampuff
+//room15 第一次出现creampuff
+rooms.push({ 
     turnLimit:15,
     scoreCondition: [1000, 1500, 2000],
     winEveryConditions:[
@@ -1620,7 +1591,8 @@ rooms.push({ //room16 creampuff
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //room17 ice and fire
+//room16 ice and fire
+rooms.push({ 
     turnLimit:28,
     scoreCondition: [1000, 1500, 2000],
     winEveryConditions:[
@@ -1672,7 +1644,8 @@ rooms.push({ //room17 ice and fire
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //room18
+//room17 第一次出现souffle
+rooms.push({ 
     turnLimit:10,
     scoreCondition: [1500, 2000, 2500],
     winEveryConditions:[
@@ -1746,7 +1719,8 @@ rooms.push({ //room18
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //room19 滚木
+//room18 第一次出现滚木
+rooms.push({ 
     turnLimit:12,
     scoreCondition: [800, 1200, 1600],
     winEveryConditions:[
@@ -1802,7 +1776,217 @@ rooms.push({ //room19 滚木
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //room20 双滚木
+//room19 吃年糕啊
+rooms.push({ 
+    turnLimit:15,
+    scoreCondition: [300, 600, 1000],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"ricecake",
+            number: 8
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{
+        type:"pudding",subtype:"red"
+    },{
+        type:"pudding",subtype:"yellow"
+    },{
+        type:"pudding",subtype:"green"
+    }],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles6x6,
+    initMovables:[
+        { type:"ricecake", positions: [{x:1,y:5}] },
+        { type:"ricecake", positions: [{x:2,y:1}] },
+        { type:"ricecake", positions: [{x:2,y:3}] },
+        { type:"ricecake", positions: [{x:3,y:5}] },
+        { type:"ricecake", positions: [{x:4,y:2}] },
+        { type:"ricecake", positions: [{x:5,y:4}] },
+        { type:"ricecake", positions: [{x:5,y:6}] },
+        { type:"ricecake", positions: [{x:6,y:2}] }
+    ],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:4}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        } //normal, fix
+    },
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//第一次出现archer 对远程兵种的生存1 room20
+rooms.push({ 
+    turnLimit:25,
+    scoreCondition: [400, 800, 1200],
+    winEveryConditions:[
+        "outOfTurn"
+    ],
+    loseAnyConditions:[
+    ],
+    enemyPool:[{
+        type:"cherrycake"
+    },{
+        type:"pudding",subtype:"yellow"
+    },{
+        type:"archer"
+    }],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles6x5IO,
+    initMovables:[
+        { type:"archer", positions: [{x:6,y:1}] },
+        { type:"archer", positions: [{x:6,y:5}] }],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:4}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        } //normal, fix
+    },
+    choicePool:STANDARD_CHOICE_POOL,
+    unlocks:["infinite"]
+});
+
+//第一次出现chocolate cake room21
+rooms.push({
+    turnLimit:18,
+    scoreCondition: [1000, 1300, 1800],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"chocolate-cake",
+            number: 10
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{
+        type:"cherrycake"
+    },{
+        type:"chocolate"
+    },{
+        type:"pudding", subtype:"red"
+    }],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles4x6,
+    initMovables:[
+        { type:"chocolate-cake", positions: [{x:1,y:1}] },
+        { type:"chocolate-cake", positions: [{x:1,y:6}] },
+        { type:"chocolate-cake", positions: [{x:4,y:1}] },
+        { type:"chocolate-cake", positions: [{x:4,y:6}] }
+    ],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:4}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        } //normal, fix
+    },
+    choicePool:STANDARD_CHOICE_POOL,
+    unlocks:["enemy.chocolate-cake"]
+});
+
+//对远程兵种的生存2 room22
+rooms.push({ 
+    turnLimit:20,
+    scoreCondition: [500, 800, 1200],
+    winEveryConditions:[
+        "outOfTurn"
+    ],
+    loseAnyConditions:[
+    ],
+    enemyPool:[{
+        type:"cherrycake"
+    },{
+        type:"pudding",subtype:"yellow"
+    },{
+        type:"archer"
+    }],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles7x5IOI,
+    initMovables:[],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:4}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        } //normal, fix
+    },
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//room23 难行
+rooms.push({ 
+    turnLimit:30,
+    scoreCondition: [800, 1500, 2000],
+    winEveryConditions:[
+        {
+            conditionType:"kill-max-level",
+            type:"cherrycake",
+            number: 5
+        },
+        {
+            conditionType:"kill-max-level",
+            type:"icecream",
+            number: 5
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{
+        type:"cherrycake"
+    },{
+        type:"ricecake"
+    },{
+        type:"icecream"
+    }],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles6x6Loop,
+    initMovables:[
+    ],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:2}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        } //normal, fix
+    },
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//room24 双滚木
+rooms.push({
     turnLimit:18,
     scoreCondition: [1000, 1300, 1600],
     winEveryConditions:[
@@ -1857,7 +2041,138 @@ rooms.push({ //room20 双滚木
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //room21 log in h
+//对远程兵种的生存3 room25
+rooms.push({ 
+    turnLimit:25,
+    scoreCondition: [400, 900, 1400],
+    winEveryConditions:[
+        "outOfTurn"
+    ],
+    loseAnyConditions:[
+    ],
+    enemyPool:[{
+        type:"cherrycake"
+    },{
+        type:"pudding",subtype:"yellow"
+    },{
+        type:"archer"
+    }],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles6x6Mi,
+    initMovables:[
+        { type:"archer", positions: [{x:1,y:1}] },
+        { type:"archer", positions: [{x:1,y:6}] },
+        { type:"archer", positions: [{x:6,y:1}] },
+        { type:"archer", positions: [{x:6,y:6}] }
+    ],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:4}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        } //normal, fix
+    },
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//room26 A shape stronger enemy, want high level, danger
+rooms.push({ 
+    turnLimit:35,
+    scoreCondition: [1500, 2000, 2500],
+    winEveryConditions:[
+        {
+            conditionType:"kill-max-level",
+            type:"chocolate-cake",
+            number: 10
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{
+        type:"souffle"
+    },{
+        type:"creampuff"
+    },{
+        type:"chocolate-cake"
+    }],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles6x7A,
+    initMovables:[],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:6}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        } //normal, fix
+    },
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//room27 snake
+rooms.push({ 
+    turnLimit:25,
+    scoreCondition: [600, 1000, 1400],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"ricecake",
+            number: 6
+        },
+        {
+            conditionType:"kill-level",
+            type:"cherrycake",
+            number: 6
+        },
+        {
+            conditionType:"kill-level",
+            type:"archer",
+            number: 6
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{
+        type:"cherrycake"
+    },{
+        type:"ricecake"
+    },{
+        type:"archer"
+    }],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles7x7Snake,
+    initMovables:[],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:4,y:5}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        } //normal, fix
+    },
+    initHand:[
+        {type:"cross-fire"}
+    ],
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//room28 log in h
+rooms.push({ 
     turnLimit:24,
     scoreCondition: [1400, 1800, 2200],
     winEveryConditions:[
@@ -1918,242 +2233,8 @@ rooms.push({ //room21 log in h
     choicePool:STANDARD_CHOICE_POOL
 });
 
-rooms.push({ //room22 吃年糕啊
-    turnLimit:15,
-    scoreCondition: [300, 600, 1000],
-    winEveryConditions:[
-        {
-            conditionType:"kill-level",
-            type:"ricecake",
-            number: 8
-        }
-    ],
-    loseAnyConditions:[
-        "outOfTurn"
-    ],
-    enemyPool:[{
-        type:"pudding",subtype:"red"
-    },{
-        type:"pudding",subtype:"yellow"
-    },{
-        type:"pudding",subtype:"green"
-    }],
-    itemPool:STANDARD_ITEM_POOL,
-    initTiles:tiles6x6,
-    initMovables:[
-        { type:"ricecake", positions: [{x:1,y:5}] },
-        { type:"ricecake", positions: [{x:2,y:1}] },
-        { type:"ricecake", positions: [{x:2,y:3}] },
-        { type:"ricecake", positions: [{x:3,y:5}] },
-        { type:"ricecake", positions: [{x:4,y:2}] },
-        { type:"ricecake", positions: [{x:5,y:4}] },
-        { type:"ricecake", positions: [{x:5,y:6}] },
-        { type:"ricecake", positions: [{x:6,y:2}] }
-    ],
-    initHero: {
-        type:"normalHero",
-        positions: [{x:3,y:4}],
-        initHp: 100,
-        initMaxHp: 100,
-        maxHpStrategy:{
-            type: "normal"
-        },
-        expStrategy: {
-            type: "normal"
-        } //normal, fix
-    },
-    choicePool:STANDARD_CHOICE_POOL
-});
-
-rooms.push({ //对远程兵种的生存1 room23
-    turnLimit:25,
-    scoreCondition: [400, 800, 1200],
-    winEveryConditions:[
-        "outOfTurn"
-    ],
-    loseAnyConditions:[
-    ],
-    enemyPool:[{
-        type:"cherrycake"
-    },{
-        type:"pudding",subtype:"yellow"
-    },{
-        type:"archer"
-    }],
-    itemPool:STANDARD_ITEM_POOL,
-    initTiles:tiles6x5IO,
-    initMovables:[],
-    initHero: {
-        type:"normalHero",
-        positions: [{x:3,y:4}],
-        initHp: 100,
-        initMaxHp: 100,
-        maxHpStrategy:{
-            type: "normal"
-        },
-        expStrategy: {
-            type: "normal"
-        } //normal, fix
-    },
-    choicePool:STANDARD_CHOICE_POOL
-});
-
-rooms.push({ //对远程兵种的生存2 room24
-    turnLimit:20,
-    scoreCondition: [500, 800, 1200],
-    winEveryConditions:[
-        "outOfTurn"
-    ],
-    loseAnyConditions:[
-    ],
-    enemyPool:[{
-        type:"cherrycake"
-    },{
-        type:"pudding",subtype:"yellow"
-    },{
-        type:"archer"
-    }],
-    itemPool:STANDARD_ITEM_POOL,
-    initTiles:tiles7x5IOI,
-    initMovables:[],
-    initHero: {
-        type:"normalHero",
-        positions: [{x:3,y:4}],
-        initHp: 100,
-        initMaxHp: 100,
-        maxHpStrategy:{
-            type: "normal"
-        },
-        expStrategy: {
-            type: "normal"
-        } //normal, fix
-    },
-    choicePool:STANDARD_CHOICE_POOL
-});
-
-rooms.push({ //对远程兵种的生存3 room25
-    turnLimit:25,
-    scoreCondition: [400, 900, 1400],
-    winEveryConditions:[
-        "outOfTurn"
-    ],
-    loseAnyConditions:[
-    ],
-    enemyPool:[{
-        type:"cherrycake"
-    },{
-        type:"pudding",subtype:"yellow"
-    },{
-        type:"archer"
-    }],
-    itemPool:STANDARD_ITEM_POOL,
-    initTiles:tiles6x6Mi,
-    initMovables:[
-        { type:"archer", positions: [{x:1,y:1}] },
-        { type:"archer", positions: [{x:1,y:6}] },
-        { type:"archer", positions: [{x:6,y:1}] },
-        { type:"archer", positions: [{x:6,y:6}] }
-    ],
-    initHero: {
-        type:"normalHero",
-        positions: [{x:3,y:4}],
-        initHp: 100,
-        initMaxHp: 100,
-        maxHpStrategy:{
-            type: "normal"
-        },
-        expStrategy: {
-            type: "normal"
-        } //normal, fix
-    },
-    choicePool:STANDARD_CHOICE_POOL
-});
-
-rooms.push({ //A room26 TODO
-    turnLimit:25,
-    scoreCondition: [300, 600, 1000],
-    winEveryConditions:[
-        "outOfTurn"
-    ],
-    loseAnyConditions:[
-    ],
-    enemyPool:[{
-        type:"cherrycake"
-    },{
-        type:"pudding",subtype:"yellow"
-    },{
-        type:"pudding",subtype:"green"
-    }],
-    itemPool:STANDARD_ITEM_POOL,
-    initTiles:tiles6x7A,
-    initMovables:[],
-    initHero: {
-        type:"normalHero",
-        positions: [{x:3,y:6}],
-        initHp: 100,
-        initMaxHp: 100,
-        maxHpStrategy:{
-            type: "normal"
-        },
-        expStrategy: {
-            type: "normal"
-        } //normal, fix
-    },
-    choicePool:STANDARD_CHOICE_POOL
-});
-
-rooms.push({ //room28 snake
-    turnLimit:25,
-    scoreCondition: [600, 1000, 1400],
-    winEveryConditions:[
-        {
-            conditionType:"kill-level",
-            type:"ricecake",
-            number: 6
-        },
-        {
-            conditionType:"kill-level",
-            type:"cherrycake",
-            number: 6
-        },
-        {
-            conditionType:"kill-level",
-            type:"archer",
-            number: 6
-        }
-    ],
-    loseAnyConditions:[
-        "outOfTurn"
-    ],
-    enemyPool:[{
-        type:"cherrycake"
-    },{
-        type:"ricecake"
-    },{
-        type:"archer"
-    }],
-    itemPool:STANDARD_ITEM_POOL,
-    initTiles:tiles7x7Snake,
-    initMovables:[],
-    initHero: {
-        type:"normalHero",
-        positions: [{x:4,y:5}],
-        initHp: 100,
-        initMaxHp: 100,
-        maxHpStrategy:{
-            type: "normal"
-        },
-        expStrategy: {
-            type: "normal"
-        } //normal, fix
-    },
-    initHand:[
-        {type:"cross-fire"}
-    ],
-    choicePool:STANDARD_CHOICE_POOL
-});
-
-rooms.push({ //A room29 snake
+//A room29 snake
+rooms.push({ 
     turnLimit:25,
     scoreCondition: [600, 1000, 1400],
     winEveryConditions:[
@@ -2204,3 +2285,4 @@ rooms.push({ //A room29 snake
     },
     choicePool:STANDARD_CHOICE_POOL
 });
+
