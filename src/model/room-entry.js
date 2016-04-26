@@ -630,7 +630,7 @@ var infiniteRoom = { //初始 room1
     rules:{
     },
     genEnemyStrategy: [{type:"infinite", number: 2, last: 0}],
-    allEnemyPool:[{ type:"pudding", subtype:"red"},
+    baseEnemyPool:[{ type:"pudding", subtype:"red"},
         {type:"cherrycake"},
         {type:"ricecake"},
         {type:"icecream"},

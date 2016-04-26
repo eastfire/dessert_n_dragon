@@ -216,7 +216,7 @@ var RiceCakeModel = EnemyModel.extend({
         } )
     },
     expOfLevel:function(l){
-        return l*EXP_INFLATION_RATE*3
+        return l*EXP_INFLATION_RATE*2 - 1
     },
     attackOfLevel:function(l){
         return l*3;
@@ -339,3 +339,18 @@ var SouffleModel = EnemyModel.extend({
     }
 })
 MOVABLE_MODEL_MAP.souffle = SouffleModel;
+
+var ChocolateCakeModel = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "chocolate-cake"
+        } )
+    },
+    expOfLevel:function(l){
+        return l*EXP_INFLATION_RATE*3-1
+    },
+    attackOfLevel:function(l){
+        return l*2;
+    }
+})
+MOVABLE_MODEL_MAP["chocolate-cake"] = ChocolateCakeModel;

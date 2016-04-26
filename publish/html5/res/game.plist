@@ -79,6 +79,21 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>chocolate-cake.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{120,120}</string>
+                <key>spriteSourceSize</key>
+                <string>{120,120}</string>
+                <key>textureRect</key>
+                <string>{{648,2},{120,120}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>choice-default.png</key>
             <dict>
                 <key>aliases</key>
@@ -90,7 +105,7 @@
                 <key>spriteSourceSize</key>
                 <string>{380,100}</string>
                 <key>textureRect</key>
-                <string>{{648,2},{380,100}}</string>
+                <string>{{770,2},{380,100}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1244,7 +1259,7 @@
             <key>size</key>
             <string>{1384,1942}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:5ad56146886379a2894cb6122c7a0ec4:b933f8b5c4e153636ad9eafbb4ad4bc1:b2cae276934292945ac49b6ea6cfb4fe$</string>
+            <string>$TexturePacker:SmartUpdate:4eb0860976b62e2ee3735f8fcee16b44:a24d58498adf2ec858f36eee3b27cd8f:b2cae276934292945ac49b6ea6cfb4fe$</string>
             <key>textureFileName</key>
             <string>game.png</string>
         </dict>

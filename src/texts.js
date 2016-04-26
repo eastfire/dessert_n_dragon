@@ -26,6 +26,10 @@ var texts_locale = {
                 name: "纸杯蛋糕下士",
                 desc: "攻击力一般。\n饱腹度一般。"
             },
+            "chocolate-cake":{
+                name:"黑森林武士",
+                desc:"\n攻击力高。\n饱腹度高。"
+            },
             pudding:{
                 name:"果冻巡逻兵",
                 desc:"软绵无力的巡逻小兵。\n攻击力始终为1。\n饱腹度极低。"
@@ -36,7 +40,7 @@ var texts_locale = {
             },
             archer:{
                 name:"豌豆糕射手",
-                desc:"远程攻击。\n攻击力低。\n饱腹度一般。\n\n是的，他的前世绝对是射手"
+                desc:"远程攻击。\n攻击力低。\n饱腹度一般。\n\n是的，他的前世绝对是射手，天敌是僵尸。"
             },
             icecream: {
                 name:"冰激凌法师",

@@ -50,7 +50,7 @@ var UnlockedStatusModel = Backbone.Model.extend({
 })
 
 UNLOCKABLE_ENTRY_MAP = {
-    "infinite": {
+    "infiniteRoom": {
 
     }
 }

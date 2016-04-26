@@ -10,6 +10,84 @@ var PHASE_HERO_ATTACK = 4;
 var PHASE_ENEMY_ATTACK = 5;
 var PHASE_TURN_END = 6;
 
+var GenEnemyStrategy = Backbone.Model.extend({
+    defaults:function(){
+        return {
+            enemyPoolChangePerTurn : 31,
+            enemyLevelPoolChangePerTurn: 101,
+            number:2,
+            last: 0
+        }
+    },
+    initialize:function(){
+
+    },
+    genEnemy:function(roomModel){
+        var tiles = roomModel.filterTile(function(tile){
+                return tile.get("canGenEnemy") && !roomModel.getMovableByTile(tile)
+            },
+            this)
+        var number = this.getEnemyNumber(roomModel);
+
+        var candidates = [];
+        candidates = _.sample(tiles, number );
+
+        _.each( candidates,function(tile){
+            roomModel.generateOneMovable( tile.get("position"), this.generateOneEnemyType(roomModel), this.generateOneEnemyLevel(roomModel));
+        },this);
+
+        this.maintain();
+
+        return candidates.length;
+    },
+    generateOneEnemyType:function(roomModel){
+        return _.sample( roomModel.get("enemyPool"));
+    },
+    generateOneEnemyLevel:function(roomModel){
+        return _.sample( roomModel.get("enemyLevelPool"));
+    },
+    maintain:function(roomModel){
+
+    },
+    getEnemyNumber:function(roomModel){
+        return this.get("number");
+    }
+})
+
+var MAX_ENEMY_LEVEL = 18;
+var InfiniteGenEnemyStrategy = GenEnemyStrategy.extend({
+    defaults:function(){
+        return _.extend(GenEnemyStrategy.prototype.defaults.call(this),{
+            enemyPoolChangePerTurn : 31,
+            enemyLevelPoolChangePerTurn: 101
+        })
+    },
+    maintain:function(roomModel){
+        if ( roomModel.get("turnNumber") % this.get("enemyPoolChangePerTurn") === 0 ) {
+            var unlockedEnemyPool = []; //TODO
+            var allEnemyPool = this.get("baseEnemyPool") + unlockedEnemyPool;
+            var availableEnemyPool = [] //TODO
+            var currentEnemyPool = this.get("enemyPool");
+            var newEnemy = _.sample(availableEnemyPool);
+            currentEnemyPool.unshift();
+            currentEnemyPool.push(newEnemy);
+        }
+        if ( roomModel.get("turnNumber") % this.get("enemyLevelPoolChangePerTurn") === 0 ) {
+            var levelPool = this.get("enemyLevelPool");
+            var maxLevel = _.last(levelPool);
+            var newMaxLevel = Math.min(MAX_ENEMY_LEVEL , maxLevel+1)
+            for ( var i = 1; i <= newMaxLevel; i++){
+                levelPool.push(i);
+            }
+        }
+    }
+})
+
+var GEN_ENEMY_STRATEGY_MAP = {
+    random : GenEnemyStrategy,
+    infinite: InfiniteGenEnemyStrategy
+}
+
 var RoomModel = Backbone.Model.extend({
     defaults:function(){
         return {
@@ -360,12 +438,7 @@ var RoomModel = Backbone.Model.extend({
             this.nextPhase();
         }
     },
-    generateOneEnemyType:function(){
-        return _.sample( this.get("enemyPool"));
-    },
-    generateOneEnemyLevel:function(){
-        return _.sample( this.get("enemyLevelPool"));
-    },
+
     generateOneMovable:function(position, typeObj, level){
         var type = typeof typeObj === "string" ? typeObj: typeObj.type;
         if ( MOVABLE_MODEL_MAP[type] ) {
@@ -388,43 +461,27 @@ var RoomModel = Backbone.Model.extend({
     generateEnemy:function(){
         cc.log("generateEnemy")
         this.set("phase",PHASE_GEN_ENEMY);
-        var currentGenEnemyStrategy = this.get("genEnemyStrategy")[this.get("genEnemyStrategyIndex")]
-        if ( currentGenEnemyStrategy ){
-
-            var tiles = this.filterTile(function(tile){
-                    return tile.get("canGenEnemy") && !this.getMovableByTile(tile)
-                },
-            this)
-            var number = 0;
-            if ( typeof currentGenEnemyStrategy.number === "number" ) {
-                number = currentGenEnemyStrategy.number;
-            } else if ( typeof currentGenEnemyStrategy.number === "function" ) {
-                number = currentGenEnemyStrategy.number.call(this)
-            }
-            var candidates = [];
-            candidates = _.sample(tiles, number );
-
-            _.each( candidates,function(tile){
-                this.generateOneMovable( tile.get("position"), this.generateOneEnemyType(), this.generateOneEnemyLevel());
-            },this);
-
-            this.maintainCurrentGenEnemyStrategy();
+        if ( !this.currentGenEnemyStrategy ) {
+            var currentGenEnemyStrategyEntry = this.get("genEnemyStrategy")[this.get("genEnemyStrategyIndex")];
+            this.currentGenEnemyStrategy = new GEN_ENEMY_STRATEGY_MAP[currentGenEnemyStrategyEntry.type](currentGenEnemyStrategyEntry);
+        }
+        if ( this.currentGenEnemyStrategy ){
+            var genEnemyCount = this.currentGenEnemyStrategy.genEnemy(this);
 
             this.set("genEnemyStrategyTurn", this.get("genEnemyStrategyTurn")+1);
-            if ( currentGenEnemyStrategy.last !== 0 && this.get("genEnemyStrategyTurn")>=currentGenEnemyStrategy.last) {
+            var duration = this.currentGenEnemyStrategy.get("last");
+            if ( duration !== 0 && this.get("genEnemyStrategyTurn")>=duration) {
                 this.set("genEnemyStrategyTurn",0);
                 this.set("genEnemyStrategyIndex", this.get("genEnemyStrategyIndex")+1);
+                this.currentGenEnemyStrategy = null;
             }
-            if ( !candidates.length ) {
+            if ( !genEnemyCount ) {
                 //no enemy can gen
                 this.nextPhase();
             }
         } else { //no gen enemy strategy
             this.nextPhase();
         }
-    },
-    maintainCurrentGenEnemyStrategy:function(){
-
     },
     generateOneItemType:function(){
         return _.sample( this.get("itemPool"));
