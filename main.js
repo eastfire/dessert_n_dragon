@@ -50,7 +50,7 @@ var APP_NAME = "dessert_n_dragon"
 var score = {};
 var statistic = {}
 var gameStatus;
-var unlockableStatus;
+var unlockedStatus;
 
 var loadStatistic = function() {
     var store = cc.sys.localStorage.getItem(APP_NAME+".statistic");
@@ -103,7 +103,7 @@ cc.game.onStart = function(){
         initTexts();
 
         gameStatus = new GameStatusModel();
-        unlockableStatus = new UnlockedStatusModel();
+        unlockedStatus = new UnlockedStatusModel();
         loadStatistic();
         loadScore();
 //        loadTutorial(); //TODO
