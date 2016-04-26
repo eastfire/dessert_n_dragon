@@ -88,7 +88,10 @@ var texts_locale = {
             "shop.horizontal-fire":"可以在商店中解锁横向火焰了",
             
             //shop
-            "card.horizontal-fire":"在无尽关卡中使用横向火焰"
+            "card.horizontal-fire":"在无尽关卡中使用横向火焰",
+            
+            //enemy
+            "enemy.chocolate-cake":"黑森林武士将在无尽关卡中出现"
         }
     },
     en: {
