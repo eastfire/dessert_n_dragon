@@ -68,7 +68,7 @@ var InfiniteGenEnemyStrategy = GenEnemyStrategy.extend({
             _.each(this.get("baseEnemyPool"),fucntion(enemy){
                 allEnemyPool.push(enemy);
             },this);
-            _.each(unlockableStatus.get("enemy"),function(value, key){
+            _.each(unlockedStatus.get("enemy"),function(value, key){
                 allEnemyPool.push({
                     type: key
                 }
@@ -739,9 +739,9 @@ var RoomModel = Backbone.Model.extend({
         if ( unlocks ) {
             return _.any( unlocks, function(unlock){
                 if ( typeof unlock === "string" ) {
-                    unlockableStatus.unlock(unlock)
+                    unlockedStatus.unlock(unlock)
                 } else if ( typeof unlock === "object" ) {
-                    unlockableStatus.unlock(unlock.type, unlock.subtype)
+                    unlockedStatus.unlock(unlock.type, unlock.subtype)
                 }
             },this)
         } else {
