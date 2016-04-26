@@ -64,10 +64,22 @@ var InfiniteGenEnemyStrategy = GenEnemyStrategy.extend({
     },
     maintain:function(roomModel){
         if ( roomModel.get("turnNumber") % this.get("enemyPoolChangePerTurn") === 0 ) {
-            var unlockedEnemyPool = []; //TODO
-            var allEnemyPool = this.get("baseEnemyPool") + unlockedEnemyPool;
-            var availableEnemyPool = [] //TODO
+            var allEnemyPool = [];
+            _.each(this.get("baseEnemyPool"),fucntion(enemy){
+                allEnemyPool.push(enemy);
+            },this);
+            _.each(unlockableStatus.get("enemy"),function(value, key){
+                allEnemyPool.push({
+                    type: key
+                }
+            },this);
             var currentEnemyPool = this.get("enemyPool");
+            var availableEnemyPool = _.filter(allEnemyPool.function(enemy){
+                return !_.any(currentEnemyPool, function(currentEnemy){
+                    return currentEnemy.type === enemy.type;
+                });
+            },this);
+            
             var newEnemy = _.sample(availableEnemyPool);
             currentEnemyPool.unshift();
             currentEnemyPool.push(newEnemy);
