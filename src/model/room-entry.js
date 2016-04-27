@@ -722,8 +722,7 @@ rooms.push({
         expStrategy: {
             type: "normal"
         } //normal, fix
-    },
-    unlocks:["infinite"]
+    }
 });
 
 //教学杀敌数过关，分数无要求 room2
