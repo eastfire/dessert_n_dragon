@@ -184,16 +184,15 @@ var EnemyModel = MovableModel.extend({
     }
 })
 
-var PuddingModel = EnemyModel.extend({
+MOVABLE_MODEL_MAP.pudding = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
             type: "pudding"
         } )
     }
 })
-MOVABLE_MODEL_MAP.pudding = PuddingModel;
 
-var CherryCakeModel = EnemyModel.extend({
+MOVABLE_MODEL_MAP.cherrycake = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
             type: "cherrycake"
@@ -206,9 +205,8 @@ var CherryCakeModel = EnemyModel.extend({
         return l;
     }
 })
-MOVABLE_MODEL_MAP.cherrycake = CherryCakeModel;
 
-var RiceCakeModel = EnemyModel.extend({
+MOVABLE_MODEL_MAP.ricecake = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
             type: "ricecake",
@@ -222,9 +220,8 @@ var RiceCakeModel = EnemyModel.extend({
         return l*3;
     }
 })
-MOVABLE_MODEL_MAP.ricecake = RiceCakeModel;
 
-var ArcherModel = EnemyModel.extend({
+MOVABLE_MODEL_MAP.archer = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
             type: "archer"
@@ -240,9 +237,8 @@ var ArcherModel = EnemyModel.extend({
         return Math.round(l/2);
     }
 })
-MOVABLE_MODEL_MAP.archer = ArcherModel;
 
-var IcecreamModel = EnemyModel.extend({
+MOVABLE_MODEL_MAP.icecream = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
             type: "icecream"
@@ -281,9 +277,8 @@ var IcecreamModel = EnemyModel.extend({
         }
     }
 })
-MOVABLE_MODEL_MAP.icecream = IcecreamModel;
 
-var CreamPuffModel = EnemyModel.extend({
+MOVABLE_MODEL_MAP.creampuff = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
             type: "creampuff"
@@ -309,9 +304,8 @@ var CreamPuffModel = EnemyModel.extend({
         return l;
     }
 })
-MOVABLE_MODEL_MAP.creampuff = CreamPuffModel;
 
-var SouffleModel = EnemyModel.extend({
+MOVABLE_MODEL_MAP.souffle = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
             type: "souffle"
@@ -338,9 +332,8 @@ var SouffleModel = EnemyModel.extend({
         return l;
     }
 })
-MOVABLE_MODEL_MAP.souffle = SouffleModel;
 
-var ChocolateCakeModel = EnemyModel.extend({
+MOVABLE_MODEL_MAP["chocolate-cake"] = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
             type: "chocolate-cake"
@@ -353,4 +346,17 @@ var ChocolateCakeModel = EnemyModel.extend({
         return l*2;
     }
 })
-MOVABLE_MODEL_MAP["chocolate-cake"] = ChocolateCakeModel;
+
+MOVABLE_MODEL_MAP.donut = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "donut"
+        } )
+    },
+    expOfLevel:function(l){
+        return l*l+1
+    },
+    attackOfLevel:function(l){
+        return l*l;
+    }
+})
