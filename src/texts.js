@@ -22,6 +22,10 @@ var texts_locale = {
             },
 
             //enemy
+            archer:{
+                name:"豌豆糕射手",
+                desc:"远程攻击。\n攻击力低。\n饱腹度一般。\n\n是的，他的前世绝对是射手，天敌是僵尸。"
+            },
             cherrycake: {
                 name: "纸杯蛋糕下士",
                 desc: "攻击力一般。\n饱腹度一般。"
@@ -30,6 +34,18 @@ var texts_locale = {
                 name:"黑森林武士",
                 desc:"\n攻击力高。\n饱腹度高。"
             },
+            creampuff: {
+                name:"奶油泡芙酋长",
+                desc:"合并时周围敌人变得愤怒（攻击力加倍）。\n攻击力一般。\n饱腹度一般。\n\n(Buff by Puff)"
+            },
+            donut:{
+                name:"甜甜圈骑士",
+                desc:"\n攻击力非常高。\n饱腹度非常高。"
+            },
+            icecream: {
+                name:"冰激凌法师",
+                desc:"合并或攻击时有一定概率冰冻周围角色（等级越高概率越高）。\n攻击力一般。\n饱腹度一般。\n\n他的法师帽戴反了吗？"
+            },
             pudding:{
                 name:"果冻巡逻兵",
                 desc:"软绵无力的巡逻小兵。\n攻击力始终为1。\n饱腹度极低。"
@@ -37,18 +53,6 @@ var texts_locale = {
             ricecake:{
                 name:"年糕守卫",
                 desc:"始终粘着不动。\n攻击力高。\n饱腹度一般。"
-            },
-            archer:{
-                name:"豌豆糕射手",
-                desc:"远程攻击。\n攻击力低。\n饱腹度一般。\n\n是的，他的前世绝对是射手，天敌是僵尸。"
-            },
-            icecream: {
-                name:"冰激凌法师",
-                desc:"合并或攻击时有一定概率冰冻周围角色（等级越高概率越高）。\n攻击力一般。\n饱腹度一般。\n\n他的法师帽戴反了吗？"
-            },
-            creampuff: {
-                name:"奶油泡芙酋长",
-                desc:"合并时周围敌人变得愤怒（攻击力加倍）。\n攻击力一般。\n饱腹度一般。\n\n(Buff by Puff)"
             },
             souffle: {
                 name:"蛋奶酥祭司",
