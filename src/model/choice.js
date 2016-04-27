@@ -99,5 +99,18 @@ var GEN_CHOICE_STRATEGY_MAP = {
     random : function(roomModel, opt){
         var validChoices = getValidChoices(roomModel, roomModel.get("choicePool"));
         return _.sample(validChoices, roomModel.getHero().get("choiceNumber"));
+    },
+    infinite: function(roomModel, opt){
+        var unlockedChoices = _.map( unlockedStatus.get("card"), function( value, key ) {
+            return {
+                type:"getCard",
+                opt:{
+                    type:key
+                }
+            }
+        },this);
+        var allChoices = _.union(roomModel.get("choicePool"), unlockedChoices );
+        var validChoices = getValidChoices(roomModel, allChoices);
+        return _.sample(validChoices, roomModel.getHero().get("choiceNumber"));
     }
 }
