@@ -60,6 +60,9 @@ var CardModel = Backbone.Model.extend({
     onDraw:function(){
         this.set("waitTurn",this.waitTurnOfLevel(this.get("level")));
     },
+    onLevelUp:function(){
+
+    },
     discard:function(){
         this.onDiscard();
         this.trigger("discard", this);
@@ -275,5 +278,55 @@ CARD_MODEL_MAP["whirl-slash"] = CardModel.extend({
                 }
             }
         }
+    }
+})
+
+//passive card
+CARD_MODEL_MAP["luck"] = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "luck",
+            maxLevel: 5
+        })
+    },
+    getEffect:function(level){
+        level = level || this.get("level")
+        return 3+level;
+    },
+    onLevelUp:function(){
+        currentRoom.getHero().set("luck",currentRoom.getHero().get("luck") + 1 )
+    },
+    onGain:function(){
+        currentRoom.getHero().set("luck",currentRoom.getHero().get("luck") + 3 )
+    },
+    onExile:function(){
+        currentRoom.getHero().set("luck",currentRoom.getHero().get("luck") - this.getEffect() )
+    }
+})
+
+CARD_MODEL_MAP["constitution"] = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "constitution",
+            maxLevel: 5
+        })
+    },
+    getEffect:function(level){
+        level = level || this.get("level")
+        return 10+level*5;
+    },
+    onLevelUp:function(){
+        hero.set("maxHp",hero.get("maxHp") + 5 )
+        hero.set("hp", hero.get("hp") + 5 );
+    },
+    onGain:function(){
+        var hero = currentRoom.getHero();
+        hero.set("maxHp",hero.get("maxHp") + 10 )
+        hero.set("hp", hero.get("hp") + 10 );
+    },
+    onExile:function(){
+        var hero = currentRoom.getHero();
+        hero.set("maxHp",hero.get("maxHp") - this.getEffect() )
+        hero.set("hp",Math.min(hero.get("hp"), hero.get("maxHp") ) )
     }
 })

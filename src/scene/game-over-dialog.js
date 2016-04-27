@@ -15,8 +15,8 @@ var GameOverDialog = cc.Scale9Sprite.extend({
             height: 300
         })
 
-
-        var resultLabel = new cc.LabelTTF("第"+this.model.get("stageNumber")+"关 "+(this.isWin?"成功":"失败"), null, 25 );
+        var stageNumber = this.model.get("stageNumber");
+        var resultLabel = new cc.LabelTTF(stageNumber?("第"+stageNumber+"关 "+(this.isWin?"成功":"失败")):"无尽关卡", null, 25 );
         resultLabel.attr({
             color: colors.gameOver.ok,
             x: this.width/2,
@@ -48,11 +48,18 @@ var GameOverDialog = cc.Scale9Sprite.extend({
             cc.spriteFrameCache.getSpriteFrame("button-short-press.png"),
             function () {
                 this.disappear(function(){
-                    var roomIndex = this.model.get("stageNumber")-1
-                    cc.director.runScene(new RoomScene({
-                        roomEntry: clone(rooms[roomIndex]),
-                        maxScore: score[roomIndex]
-                    }));
+                    if ( this.model.get("stageNumber") === 0 ) {
+                        cc.director.runScene(new RoomScene({
+                            roomEntry: clone(rooms[roomIndex]),
+                            maxScore: score[0]
+                        }));
+                    } else {
+                        var roomIndex = this.model.get("stageNumber") - 1
+                        cc.director.runScene(new RoomScene({
+                            roomEntry: clone(infiniteRoom),
+                            maxScore: score[this.model.get("stageNumber")]
+                        }));
+                    }
                 });
             }, this);
 

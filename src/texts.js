@@ -56,6 +56,7 @@ var texts_locale = {
             }
         },
         card:{
+            //active
             heal:{
                 name:"治疗",
                 desc: function(level){
@@ -81,6 +82,16 @@ var texts_locale = {
             "whirl-slash":{
                 name:"回旋扫尾",
                 desc: "攻击所在周围8个格子的所有的敌人"
+            },
+
+            //passive
+            luck: {
+                name:"幸运",
+                desc: "被动技能：道具掉落概率+3%"
+            },
+            constitution: {
+                name:"强壮",
+                desc: "被动技能：生命上限+10"
             }
         },
         unlock:{

@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>card-cross-fire.png</key>
+            <key>card-constitution.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -19,7 +19,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-disabled-mask.png</key>
+            <key>card-cross-fire.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -34,7 +34,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-heal.png</key>
+            <key>card-disabled-mask.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -49,7 +49,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-horizontal-fire.png</key>
+            <key>card-heal.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -64,7 +64,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-tail-slash.png</key>
+            <key>card-horizontal-fire.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -79,7 +79,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-vertical-fire.png</key>
+            <key>card-luck.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -94,7 +94,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-whirl-slash.png</key>
+            <key>card-tail-slash.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -109,6 +109,36 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>card-vertical-fire.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{120,168}</string>
+                <key>spriteSourceSize</key>
+                <string>{120,168}</string>
+                <key>textureRect</key>
+                <string>{{2,1192},{120,168}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>card-whirl-slash.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{120,168}</string>
+                <key>spriteSourceSize</key>
+                <string>{120,168}</string>
+                <key>textureRect</key>
+                <string>{{2,1362},{120,168}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>
@@ -117,9 +147,9 @@
             <key>realTextureFileName</key>
             <string>card.png</string>
             <key>size</key>
-            <string>{124,1192}</string>
+            <string>{124,1532}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:db4fe649c10d9a904917862a3b99a079:a98c120f2e64f3f53bb90b570d618a21:ac15c2787776c146127be3982bd2a622$</string>
+            <string>$TexturePacker:SmartUpdate:98892813a8967d445c60cd95d5ec56c2:53b6bcdd2f66179e9e96dc25094c6fef:ac15c2787776c146127be3982bd2a622$</string>
             <key>textureFileName</key>
             <string>card.png</string>
         </dict>

@@ -660,7 +660,10 @@ var infiniteRoom = { //初始 room1
             type: "normal"
         } //normal, fix
     },
-    choicePool:STANDARD_CHOICE_POOL
+    choicePool: _.union(STANDARD_CHOICE_POOL, [
+        { type:"getCard", opt:{type:"luck"}},
+        { type:"getCard", opt:{type:"constitution"}}
+    ])
 };
 
 //初始 room1

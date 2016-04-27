@@ -39,7 +39,7 @@ var HeroModel = MovableModel.extend({
     requireExpOfLevel:function(lv){
         if ( !this.get("expStrategy") || this.get("expStrategy").type === "normal" ) {
             var lv = lv || this.get("level")
-            return Math.round((Math.log10(lv) * lv * 16.61 + 10) * (1 - (CUNNING_EFFECT / 100) * this.get("cunning")) * EXP_INFLATION_RATE);
+            return Math.round((Math.log10(lv) * lv * 16.61 + 10) * (1 - (CUNNING_EFFECT / 100) * this.get("cunning")) ) * EXP_INFLATION_RATE;
         } else if ( this.get("expStrategy").type === "fix" ) {
             return this.get("expStrategy").value * EXP_INFLATION_RATE
         }
@@ -83,10 +83,9 @@ var HeroModel = MovableModel.extend({
         if ( currentRoom.get("rules").heroCanLevelUp && this.get("exp") >= this.get("requireExp") ) {
             this.set({
                 exp: 0,
-                level: this.get("level") + 1,
                 requireExp: this.requireExpOfLevel(this.get("level") + 1)
             });
-            this.levelUp(this.get("level"));
+            this.levelUp(1);
             return true;
         }
         return false;
