@@ -10,6 +10,10 @@ var texts_locale = {
                 name: "滚木，只能横向移动",
                 desc: "不可通过。"
             },
+            "horizontal-log2": {
+                name: "滚木，只能纵向移动",
+                desc: "不可通过。"
+            },
 
             //item
             potion: {
@@ -119,3 +123,6 @@ var texts_locale = {
 
     }
 }
+
+texts_locale.zh.movable["vertical-log7"]=texts_locale.zh.movable["vertical-log6"]=texts_locale.zh.movable["vertical-log5"]=texts_locale.zh.movable["vertical-log4"]=texts_locale.zh.movable["vertical-log3"]=texts_locale.zh.movable["vertical-log2"]
+texts_locale.zh.movable["horizontal-log7"]=texts_locale.zh.movable["horizontal-log6"]=texts_locale.zh.movable["horizontal-log5"]=texts_locale.zh.movable["horizontal-log4"]=texts_locale.zh.movable["horizontal-log3"]=texts_locale.zh.movable["horizontal-log2"]=texts_locale.zh.movable["horizontal-log2"]
