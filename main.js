@@ -90,6 +90,8 @@ cc.game.onStart = function(){
     cc.view.enableRetina(false);
     // Adjust viewport meta
     cc.view.adjustViewPort(true);
+    
+    cc.view.enableAutoFullScreen(true);
     // Setup the resolution policy and design resolution size
     var policy = cc.ResolutionPolicy.FIXED_HEIGHT;
     var maxWidth = 450;
