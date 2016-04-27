@@ -621,7 +621,8 @@ var STANDARD_ITEM_POOL = ["potion","money"];
 
 var rooms = [];
 
-var infiniteRoom = { //初始 room1
+//无尽关卡
+var infiniteRoom = { 
     stageNumber: 0,
     scoreCondition: null,
     winEveryConditions:[
@@ -663,7 +664,8 @@ var infiniteRoom = { //初始 room1
     choicePool: _.union(STANDARD_CHOICE_POOL, [
         { type:"getCard", opt:{type:"luck"}},
         { type:"getCard", opt:{type:"constitution"}}
-    ])
+    ]),
+    genChoiceStrategy: { type: "infinite", opt:{} }
 };
 
 //初始 room1
