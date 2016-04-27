@@ -56,7 +56,7 @@ var AchievementLayer = cc.Layer.extend({
             cc.spriteFrameCache.getSpriteFrame("close-default.png"),
             cc.spriteFrameCache.getSpriteFrame("close-press.png"),
             function () {
-                cc.director.runScene(new IntroScene());
+                cc.director.runScene(new SelectRoomScene());
             }, this);
 
         closeItem.attr({
