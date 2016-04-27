@@ -136,10 +136,10 @@ var SelectRoomLayer = cc.Layer.extend({
             }, this);
 
         closeItem.attr({
-            x: 0,
-            y: 0,
-            anchorX: 0,
-            anchorY: 0
+            x: dimens.closeItem.x,
+            y: dimens.closeItem.y,
+            anchorX: 1,
+            anchorY: 1
         });
 
         var infiniteItem = new cc.MenuItemImage(
