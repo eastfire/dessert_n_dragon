@@ -214,7 +214,7 @@ MOVABLE_MODEL_MAP.ricecake = EnemyModel.extend({
         } )
     },
     expOfLevel:function(l){
-        return l*EXP_INFLATION_RATE*2 - 1
+        return (l*2-1)*EXP_INFLATION_RATE
     },
     attackOfLevel:function(l){
         return l*3;
@@ -246,7 +246,7 @@ MOVABLE_MODEL_MAP.icecream = EnemyModel.extend({
     },
     afterBeMerged:function(movable){
         EnemyModel.prototype.afterBeMerged.call(this,movable);
-        if ( movable instanceof IcecreamModel ) {
+        if ( movable instanceof MOVABLE_MODEL_MAP.icecream ) {
             //freeze around
             var position = this.get("positions")[0];
             _.each( INCREMENTS, function(increment){
@@ -286,7 +286,7 @@ MOVABLE_MODEL_MAP.creampuff = EnemyModel.extend({
     },
     afterBeMerged:function(movable){
         EnemyModel.prototype.afterBeMerged.call(this,movable);
-        if ( movable instanceof CreamPuffModel ) {
+        if ( movable instanceof MOVABLE_MODEL_MAP.creampuff ) {
             //angry around
             var position = this.get("positions")[0];
             _.each( INCREMENTS, function(increment){
@@ -314,7 +314,7 @@ MOVABLE_MODEL_MAP.souffle = EnemyModel.extend({
     afterBeMerged:function(movable){
         EnemyModel.prototype.afterBeMerged.call(this,movable);
         this.levelUp(1);
-        if ( movable instanceof SouffleModel ) {
+        if ( movable instanceof MOVABLE_MODEL_MAP.souffle ) {
             //freeze around
             var position = this.get("positions")[0];
             _.each( INCREMENTS, function(increment){
@@ -340,7 +340,7 @@ MOVABLE_MODEL_MAP["chocolate-cake"] = EnemyModel.extend({
         } )
     },
     expOfLevel:function(l){
-        return l*EXP_INFLATION_RATE*3-1
+        return (l*3-1)*EXP_INFLATION_RATE
     },
     attackOfLevel:function(l){
         return l*2;
@@ -354,9 +354,9 @@ MOVABLE_MODEL_MAP.donut = EnemyModel.extend({
         } )
     },
     expOfLevel:function(l){
-        return l*l+1
+        return (l*l+1)*EXP_INFLATION_RATE
     },
     attackOfLevel:function(l){
-        return l*l;
+        return l*l+1;
     }
 })

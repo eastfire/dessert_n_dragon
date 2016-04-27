@@ -7,12 +7,12 @@ var texts_locale = {
                 desc: "不可通过。"
             },
             "vertical-log2": {
-                name: "滚木，只能横向移动",
-                desc: "不可通过。"
+                name: "滚木",
+                desc: "只能横向移动，不可通过。"
             },
             "horizontal-log2": {
-                name: "滚木，只能纵向移动",
-                desc: "不可通过。"
+                name: "滚木",
+                desc: "只能纵向移动，不可通过。"
             },
 
             //item
@@ -44,7 +44,7 @@ var texts_locale = {
             },
             donut:{
                 name:"甜甜圈骑士",
-                desc:"\n攻击力非常高。\n饱腹度非常高。"
+                desc:"\n攻击力超高。\n饱腹度超高。\n\n别被他圆圆的外表欺骗"
             },
             icecream: {
                 name:"冰激凌法师",
@@ -115,7 +115,8 @@ var texts_locale = {
             
             //enemy
             enemy:{
-                "chocolate-cake":"黑森林武士将在无尽关卡中出现"
+                "chocolate-cake":"黑森林武士将在无尽关卡中出现",
+                "donut":"甜甜圈骑士将在无尽关卡中出现"
             }
         }
     },

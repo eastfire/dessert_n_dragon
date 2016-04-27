@@ -1181,7 +1181,7 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//第一次出现年糕 room8
+//第一次出现年糕 room9
 rooms.push({ 
     turnLimit:15,
     scoreCondition: [300, 500, 800],
@@ -1239,7 +1239,7 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//第一次要求敌人等级　room9
+//第一次要求敌人等级　room10
 rooms.push({ 
     turnLimit:30,
     scoreCondition: [1000, 2000, 3000],
@@ -1290,7 +1290,7 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//柱子 room10
+//柱子 room11
 rooms.push({ 
     turnLimit:20,
     scoreCondition: [400, 800, 1200],
@@ -1356,7 +1356,7 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room11 大量杀敌
+//room12 大量杀敌
 rooms.push({ 
     turnLimit:35,
     scoreCondition: [1000, 2000, 3000],
@@ -1406,7 +1406,7 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//复杂地形要求敌人等级room12
+//复杂地形要求敌人等级room13
 rooms.push({ 
     turnLimit:21,
     scoreCondition: [800, 1500, 2000],
@@ -1463,7 +1463,7 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room13 大量杀敌
+//room14 大量杀敌
 rooms.push({ 
     turnLimit:25,
     scoreCondition: [2000, 3000, 4500],
@@ -1514,7 +1514,7 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room14 第一次出现法师
+//room15 第一次出现法师
 rooms.push({ 
     turnLimit:15,
     scoreCondition: [400, 700, 1000],
@@ -1554,7 +1554,7 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room15 第一次出现creampuff
+//room16 第一次出现creampuff
 rooms.push({ 
     turnLimit:15,
     scoreCondition: [1000, 1500, 2000],
@@ -1634,7 +1634,7 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room16 ice and fire
+//room17 ice and fire
 rooms.push({ 
     turnLimit:28,
     scoreCondition: [1000, 1500, 2000],
@@ -1687,7 +1687,7 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room17 第一次出现souffle
+//room18 第一次出现souffle
 rooms.push({ 
     turnLimit:10,
     scoreCondition: [1500, 2000, 2500],
@@ -1762,7 +1762,7 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room18 第一次出现滚木
+//room19 第一次出现滚木
 rooms.push({ 
     turnLimit:12,
     scoreCondition: [800, 1200, 1600],
@@ -1819,7 +1819,7 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room19 吃年糕啊
+//room20 吃年糕啊
 rooms.push({ 
     turnLimit:15,
     scoreCondition: [300, 600, 1000],
@@ -1867,7 +1867,7 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//第一次出现archer 对远程兵种的生存1 room20
+//第一次出现archer 对远程兵种的生存1 room21
 rooms.push({ 
     turnLimit:25,
     scoreCondition: [400, 800, 1200],
@@ -1904,7 +1904,7 @@ rooms.push({
     unlocks:["infinite"]
 });
 
-//第一次出现chocolate cake room21
+//第一次出现chocolate cake room22
 rooms.push({
     turnLimit:18,
     scoreCondition: [1000, 1300, 1800],
@@ -1949,7 +1949,7 @@ rooms.push({
     unlocks:[{type:"enemy", subtype:"chocolate-cake"}]
 });
 
-//对远程兵种的生存2 room22
+//对远程兵种的生存2 room23
 rooms.push({ 
     turnLimit:20,
     scoreCondition: [500, 800, 1200],
@@ -1983,7 +1983,7 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room23 难行
+//room24 难行
 rooms.push({ 
     turnLimit:30,
     scoreCondition: [800, 1500, 2000],
@@ -2028,7 +2028,7 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room24 双滚木
+//room25 双滚木
 rooms.push({
     turnLimit:18,
     scoreCondition: [1000, 1300, 1600],
@@ -2084,7 +2084,7 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//对远程兵种的生存3 room25
+//对远程兵种的生存3 room26
 rooms.push({ 
     turnLimit:25,
     scoreCondition: [400, 900, 1400],
@@ -2123,7 +2123,7 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room26 A shape stronger enemy, want high level, danger
+//room27 A shape stronger enemy, want high level, danger
 rooms.push({ 
     turnLimit:35,
     scoreCondition: [1500, 2000, 2500],
@@ -2162,7 +2162,7 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room27 snake
+//room28 snake
 rooms.push({ 
     turnLimit:25,
     scoreCondition: [600, 1000, 1400],
@@ -2214,7 +2214,7 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room28 log in h
+//room29 log in h
 rooms.push({ 
     turnLimit:24,
     scoreCondition: [1400, 1800, 2200],
@@ -2276,7 +2276,60 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//A room29 snake
+//romm30 第一次出现 donut
+rooms.push({
+    turnLimit:25,
+    scoreCondition: [1000, 1400, 1800],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"donut",
+            number: 6
+        },
+        {
+            conditionType:"kill-level",
+            type:"cherrycake",
+            number: 6
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{
+        type:"cherrycake"
+    },{
+        type:"donut"
+    },{
+        type:"chocolate-cake"
+    }],
+    itemPool:STANDARD_ITEM_POOL,
+    genEnemyStrategy: [{type:"random", number: 2, last: 0}],
+    initTiles:tiles5x5Loop,
+    initMovables:[
+        { type:"donut", positions:[{x:1,y:1}]},
+        { type:"donut", positions:[{x:1,y:5}]},
+        { type:"donut", positions:[{x:5,y:1}]},
+        { type:"donut", positions:[{x:5,y:5}]}
+    ],
+    initHand:[
+    ],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:5}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        } //normal, fix
+    },
+    choicePool:STANDARD_CHOICE_POOL,
+    unlocks:[{type:"enemy", subtype:"donut"}]
+});
+
+//room31 snake
 rooms.push({ 
     turnLimit:25,
     scoreCondition: [600, 1000, 1400],
@@ -2312,7 +2365,6 @@ rooms.push({
     initTiles:tiles7x7Snake2,
     initMovables:[],
     initHand:[
-        {"type":"horizontal-fire"}
     ],
     initHero: {
         type:"normalHero",

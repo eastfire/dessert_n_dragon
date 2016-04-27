@@ -15,6 +15,7 @@ var CLICK_THRESHOLD = 6;
 var MainLayer = cc.Layer.extend({
     ctor:function (options) {
         this._super();
+
         var room = new RoomModel(options.roomEntry);
         this.maxScore = options.maxScore;
 

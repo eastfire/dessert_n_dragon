@@ -3,6 +3,10 @@ var dimens = {
         width: 120,
         height:120
     },
+    closeItem:{
+        x: 448,
+        y: 800
+    },
     statusIcon: {
         width: 32,
         height: 32
@@ -16,8 +20,8 @@ var dimens = {
     },
 
     moneyLabel:{
-        x: 64,
-        y: 785,
+        x: 50,
+        y: 782,
         outlineWidth: 2,
         fontSize: 18
     },

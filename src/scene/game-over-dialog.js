@@ -48,13 +48,13 @@ var GameOverDialog = cc.Scale9Sprite.extend({
             cc.spriteFrameCache.getSpriteFrame("button-short-press.png"),
             function () {
                 this.disappear(function(){
-                    if ( this.model.get("stageNumber") === 0 ) {
+                    var stageNumber = this.model.get("stageNumber")
+                    if ( stageNumber !== 0 ) {
                         cc.director.runScene(new RoomScene({
-                            roomEntry: clone(rooms[roomIndex]),
+                            roomEntry: clone(rooms[stageNumber-1]),
                             maxScore: score[0]
                         }));
                     } else {
-                        var roomIndex = this.model.get("stageNumber") - 1
                         cc.director.runScene(new RoomScene({
                             roomEntry: clone(infiniteRoom),
                             maxScore: score[this.model.get("stageNumber")]

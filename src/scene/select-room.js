@@ -105,6 +105,21 @@ var SelectRoomLayer = cc.Layer.extend({
         sprite.addChild(star);
     },
     initMoney:function(){
+        var topbar = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( "topbar.png" ))
+        topbar.attr({
+            x: cc.winSize.width/2,
+            y: cc.winSize.height,
+            anchorY: 1
+        })
+        this.addChild(topbar)
+        var bottombar = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( "bottombar.png" ))
+        bottombar.attr({
+            x: cc.winSize.width/2,
+            y: 0,
+            anchorY: 0
+        })
+        this.addChild(bottombar)
+
         this.moneyLabel = new ccui.Text("", "Arial", dimens.moneyLabel.fontSize );
         this.moneyLabel.enableOutline(colors.moneyLabel.outline, dimens.moneyLabel.outlineWidth);
         this.moneyLabel.setTextColor(colors.moneyLabel.inside);
