@@ -120,12 +120,30 @@ var texts_locale = {
                 }
             },
             cunning: {
-                name:"节食",
+                name:"健身",
                 desc: function(level){
                     return "被动：升级需要的饱腹度减少"+CARD_MODEL_MAP.cunning.getEffect(level)+"% 当前"+currentRoom.getHero().get("cunning")+"%";
                 },
                 levelUpDesc: function(level){
                     return "升级需要的饱腹度减少"+CARD_MODEL_MAP.cunning.getEffectDiff(level)+"% 当前"+currentRoom.getHero().get("cunning")+"%";
+                }
+            },
+            dexterity: {
+                name:"敏捷",
+                desc: function(level){
+                    return "被动：躲开敌人近战攻击的概率+"+CARD_MODEL_MAP.dexterity.getEffect(level)+"% 当前"+currentRoom.getHero().get("dexterity")+"%";
+                },
+                levelUpDesc: function(level){
+                    return "躲开敌人近战攻击的概率+"+CARD_MODEL_MAP.dexterity.getEffectDiff(level)+"% 当前"+currentRoom.getHero().get("dexterity")+"%";
+                }
+            },
+            dodge: {
+                name:"闪躲",
+                desc: function(level){
+                    return "被动：躲开敌人远程攻击的概率+"+CARD_MODEL_MAP.dodge.getEffect(level)+"% 当前"+currentRoom.getHero().get("dodge")+"%";
+                },
+                levelUpDesc: function(level){
+                    return "躲开敌人远程攻击的概率+"+CARD_MODEL_MAP.dodge.getEffectDiff(level)+"% 当前"+currentRoom.getHero().get("dodge")+"%";
                 }
             }
         },
@@ -133,12 +151,14 @@ var texts_locale = {
         unlock:{
             "infinite":"你解锁了无尽关卡",
             shop:{
-                "horizontal-fire":"可以在商店中解锁横向火焰了"
+                "cross-fire":"可以在商店中解锁十字火焰了",
+                "whirl-slash":"可以在商店中解锁回旋扫尾"
             },
 
             //card
             card:{
-                "horizontal-fire":"可以在无尽关卡中使用横向火焰"
+                "cross-fire":"可以在无尽关卡中使用十字火焰",
+                "whirl-slash":"可以在无尽关卡中使用回旋扫尾"
             },
             
             //enemy
