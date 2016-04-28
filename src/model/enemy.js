@@ -10,6 +10,7 @@ var EnemyModel = MovableModel.extend({
             baseAttack: 1,
             isAllFaceSame: true,
             exp: 1,
+            dexterity: 0,
             heroForwardAfterKillMe:true,
             score: SCORE_INFLATION_RATE
         } )
@@ -25,6 +26,7 @@ var EnemyModel = MovableModel.extend({
         this.set("exp",this.expOfLevel(l))
         this.set("score", this.scoreOfLevel(l) );
         this.set("baseAttack", this.attackOfLevel(l) );
+        this.set("dexterity", this.dexterityOfLevel(l) );
     },
     expOfLevel:function(l){
         return l*EXP_INFLATION_RATE
@@ -35,9 +37,15 @@ var EnemyModel = MovableModel.extend({
     attackOfLevel:function(l){
         return 1;
     },
+    dexterityOfLevel:function(l){
+        return 0;
+    },
     beforeBeAttacked:function(hero){
     },
     checkHit:function(hero, options){
+        if ( options.attackType === ATTACK_TYPE_MELEE && Math.random() < this.get("dexterity")*0.01 ) {
+            return false;
+        }
         return true;
     },
     getClosestPoint:function(p){
@@ -184,11 +192,23 @@ var EnemyModel = MovableModel.extend({
     }
 })
 
-MOVABLE_MODEL_MAP.pudding = EnemyModel.extend({
+
+
+MOVABLE_MODEL_MAP.archer = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
-            type: "pudding"
+            type: "archer",
+            attackType: ATTACK_TYPE_RANGE
         } )
+    },
+    checkRange:function(hero){
+        return true;
+    },
+    expOfLevel:function(l){
+        return l*EXP_INFLATION_RATE*2
+    },
+    attackOfLevel:function(l){
+        return Math.round(l/2);
     }
 })
 
@@ -206,36 +226,75 @@ MOVABLE_MODEL_MAP.cherrycake = EnemyModel.extend({
     }
 })
 
-MOVABLE_MODEL_MAP.ricecake = EnemyModel.extend({
+MOVABLE_MODEL_MAP["chocolate-cake"] = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
-            type: "ricecake",
-            isMovable: false
+            type: "chocolate-cake"
         } )
     },
     expOfLevel:function(l){
-        return (l*2-1)*EXP_INFLATION_RATE
+        return (l*3-1)*EXP_INFLATION_RATE
     },
     attackOfLevel:function(l){
-        return l*3;
+        return l*2;
     }
 })
 
-MOVABLE_MODEL_MAP.archer = EnemyModel.extend({
+MOVABLE_MODEL_MAP.creampuff = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
-            type: "archer",
-            attackType: ATTACK_TYPE_PROJECTILE
+            type: "creampuff"
         } )
     },
-    checkRange:function(hero){
-        return true;
+    afterBeMerged:function(movable){
+        EnemyModel.prototype.afterBeMerged.call(this,movable);
+        if ( movable instanceof MOVABLE_MODEL_MAP.creampuff ) {
+            //angry around
+            var position = this.get("positions")[0];
+            _.each( INCREMENTS, function(increment){
+                var model = currentRoom.getMovableByPosition(position.x+increment.x, position.y+increment.y);
+                if ( model instanceof EnemyModel ) {
+                     model.getAngry(1);
+                }
+            },this );
+        }
     },
     expOfLevel:function(l){
-        return l*EXP_INFLATION_RATE*2
+        return (l+1)*EXP_INFLATION_RATE*2;
+    },
+    attackOfLevel:function(l){
+        return l;
+    }
+})
+
+MOVABLE_MODEL_MAP.donut = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "donut"
+        } )
+    },
+    expOfLevel:function(l){
+        return (l*l+1)*EXP_INFLATION_RATE
+    },
+    attackOfLevel:function(l){
+        return l*l+1;
+    }
+})
+
+MOVABLE_MODEL_MAP.jelly = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "jelly"
+        } )
+    },
+    expOfLevel:function(l){
+        return (l+1)*EXP_INFLATION_RATE;
     },
     attackOfLevel:function(l){
         return Math.round(l/2);
+    },
+    dexterityOfLevel:function(l){
+        return Math.min(75, l*(l+1)/2);
     }
 })
 
@@ -279,30 +338,26 @@ MOVABLE_MODEL_MAP.icecream = EnemyModel.extend({
     }
 })
 
-MOVABLE_MODEL_MAP.creampuff = EnemyModel.extend({
+MOVABLE_MODEL_MAP.pudding = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
-            type: "creampuff"
+            type: "pudding"
+        } )
+    }
+})
+
+MOVABLE_MODEL_MAP.ricecake = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "ricecake",
+            isMovable: false
         } )
     },
-    afterBeMerged:function(movable){
-        EnemyModel.prototype.afterBeMerged.call(this,movable);
-        if ( movable instanceof MOVABLE_MODEL_MAP.creampuff ) {
-            //angry around
-            var position = this.get("positions")[0];
-            _.each( INCREMENTS, function(increment){
-                var model = currentRoom.getMovableByPosition(position.x+increment.x, position.y+increment.y);
-                if ( model instanceof EnemyModel ) {
-                     model.getAngry(1);
-                }
-            },this );
-        }
-    },
     expOfLevel:function(l){
-        return (l+1)*EXP_INFLATION_RATE*2;
+        return (l*2-1)*EXP_INFLATION_RATE
     },
     attackOfLevel:function(l){
-        return l;
+        return l*3;
     }
 })
 
@@ -334,30 +389,4 @@ MOVABLE_MODEL_MAP.souffle = EnemyModel.extend({
     }
 })
 
-MOVABLE_MODEL_MAP["chocolate-cake"] = EnemyModel.extend({
-    defaults:function(){
-        return _.extend( EnemyModel.prototype.defaults.call(this),{
-            type: "chocolate-cake"
-        } )
-    },
-    expOfLevel:function(l){
-        return (l*3-1)*EXP_INFLATION_RATE
-    },
-    attackOfLevel:function(l){
-        return l*2;
-    }
-})
 
-MOVABLE_MODEL_MAP.donut = EnemyModel.extend({
-    defaults:function(){
-        return _.extend( EnemyModel.prototype.defaults.call(this),{
-            type: "donut"
-        } )
-    },
-    expOfLevel:function(l){
-        return (l*l+1)*EXP_INFLATION_RATE
-    },
-    attackOfLevel:function(l){
-        return l*l+1;
-    }
-})
