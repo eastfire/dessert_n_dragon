@@ -188,7 +188,7 @@ var HeroModel = MovableModel.extend({
     checkHit:function(enemy, options){
         var attackType = enemy.get("attackType");
         if ( ( attackType === ATTACK_TYPE_MELEE && Math.random() < this.get("dexterity")*DEXTERITY_EFFECT ) ||
-        ( attackType === ATTACK_TYPE_PROJECTILE && Math.random() < this.get("dodge")*DODGE_EFFECT )
+        ( attackType === ATTACK_TYPE_RANGE && Math.random() < this.get("dodge")*DODGE_EFFECT )
         ) {
             return false;
         }
