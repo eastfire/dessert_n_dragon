@@ -151,14 +151,14 @@ var texts_locale = {
         unlock:{
             "infinite":"你解锁了无尽关卡",
             shop:{
-                "cross-fire":"可以在商店中解锁十字火焰了",
-                "whirl-slash":"可以在商店中解锁回旋扫尾"
+                "cross-fire":"十字火焰可以在商店中解锁了",
+                "whirl-slash":"回旋扫尾可以在商店中解锁了"
             },
 
             //card
             card:{
-                "cross-fire":"可以在无尽关卡中使用十字火焰",
-                "whirl-slash":"可以在无尽关卡中使用回旋扫尾"
+                "cross-fire":"可以在任意关卡中使用十字火焰",
+                "whirl-slash":"可以在任意关卡中使用回旋扫尾"
             },
             
             //enemy
