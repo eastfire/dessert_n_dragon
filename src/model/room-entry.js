@@ -1541,12 +1541,12 @@ rooms.push({
 //room15 第一次出现法师
 rooms.push({ 
     turnLimit:15,
-    scoreCondition: [400, 700, 1000],
+    scoreCondition: [600, 900, 1200],
     winEveryConditions:[
         {
             conditionType:"kill-level",
             type:"icecream",
-            number: 5
+            number: 7
         }
     ],
     loseAnyConditions:[
@@ -1562,6 +1562,9 @@ rooms.push({
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x7Triangle,
     initMovables:[
+        { type:"icecream", positions: [{x:1,y:7}] },
+        { type:"icecream", positions: [{x:7,y:1}] },
+        { type:"icecream", positions: [{x:7,y:7}] },
     ],
     initHero: {
         type:"normalHero",
