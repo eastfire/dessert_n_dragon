@@ -22,7 +22,7 @@ var texts_locale = {
             },
             money: {
                 name: "钱",
-                desc: "用途你懂的。\n等级越高效果越好。"
+                desc: "用途你懂的。\n等级越高金额越高。"
             },
 
             //enemy
