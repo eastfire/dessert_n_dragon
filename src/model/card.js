@@ -111,6 +111,7 @@ CARD_MODEL_MAP.heal = CardModel.extend({
     }
 })
 CARD_MODEL_MAP.heal.getEffect = function(level){
+    level = level || 1;
     return 2*l + 1;
 }
 
@@ -295,54 +296,65 @@ CARD_MODEL_MAP["whirl-slash"] = CardModel.extend({
 })
 
 //passive card
-CARD_MODEL_MAP["luck"] = CardModel.extend({
+CARD_MODEL_MAP.luck = CardModel.extend({
     defaults: function () {
         return _.extend(CardModel.prototype.defaults.call(this),{
             type: "luck",
             maxLevel: 5
         })
     },
-    getEffect:function(level){
-        level = level || this.get("level")
-        return 3+level;
-    },
     canLevelUp:function(){
         return CardModel.prototype.canLevelUp.call(this) && currentRoom.getHero().get("luck") < currentRoom.getHero().get("maxLuck")
     },
     onLevelUp:function(){
-        currentRoom.getHero().set("luck",currentRoom.getHero().get("luck") + 1 )
+        currentRoom.getHero().set("luck",currentRoom.getHero().get("luck") + CARD_MODEL_MAP.luck.getEffectDiff(this.get(level)) )
     },
     onGain:function(){
-        currentRoom.getHero().set("luck",currentRoom.getHero().get("luck") + 3 )
+        currentRoom.getHero().set("luck",currentRoom.getHero().get("luck") + CARD_MODEL_MAP.luck.getEffect(this.get(level)) )
     },
     onExile:function(){
         currentRoom.getHero().set("luck",currentRoom.getHero().get("luck") - this.getEffect() )
     }
 })
+CARD_MODEL_MAP.luck.getEffect = function(level){
+    level = level || 1;
+    return level+2;
+}
+CARD_MODEL_MAP.luck.getEffectDiff = function(currentLevel, targetLevel){
+    targetLevel = targetLevel || currentLevel+1;
+    return 1;
+}
 
-CARD_MODEL_MAP["constitution"] = CardModel.extend({
+CARD_MODEL_MAP.constitution = CardModel.extend({
     defaults: function () {
         return _.extend(CardModel.prototype.defaults.call(this),{
             type: "constitution",
             maxLevel: 5
         })
     },
-    getEffect:function(level){
-        level = level || this.get("level")
-        return 10+level*5;
-    },
     onLevelUp:function(){
-        hero.set("maxHp",hero.get("maxHp") + 5 )
-        hero.set("hp", hero.get("hp") + 5 );
+        var diff = CARD_MODEL_MAP.constitution.getEffectDiff(this.get("level"));
+        hero.set("maxHp",hero.get("maxHp") + diff )
+        hero.set("hp", hero.get("hp") + diff );
     },
     onGain:function(){
         var hero = currentRoom.getHero();
-        hero.set("maxHp",hero.get("maxHp") + 10 )
-        hero.set("hp", hero.get("hp") + 10 );
+        var effect = CARD_MODEL_MAP.constitution.getEffect(this.get("level"));
+        hero.set("maxHp",hero.get("maxHp") + effect )
+        hero.set("hp", hero.get("hp") + effect );
     },
     onExile:function(){
         var hero = currentRoom.getHero();
-        hero.set("maxHp",hero.get("maxHp") - this.getEffect() )
+        var effect = CARD_MODEL_MAP.constitution.getEffect(this.get("level"));
+        hero.set("maxHp",hero.get("maxHp") - effect )
         hero.set("hp",Math.min(hero.get("hp"), hero.get("maxHp") ) )
     }
 })
+CARD_MODEL_MAP.constitution.getEffect = function(level){
+    level = level || 1;
+    return level*5+5;
+}
+CARD_MODEL_MAP.constitution.getEffectDiff = function(currentLevel, targetLevel){
+    targetLevel = targetLevel || currentLevel+1;
+    return 5;
+}
