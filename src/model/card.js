@@ -141,6 +141,9 @@ CARD_MODEL_MAP["tail-slash"] = CardModel.extend({
                 context: this
             });
         }
+    },
+    onLevelUp:function(){
+        this.reduceWait(1);
     }
 })
 
@@ -174,6 +177,9 @@ CARD_MODEL_MAP["vertical-fire"] = CardModel.extend({
                 });
             }
         }
+    },
+    onLevelUp:function(){
+        this.reduceWait(1);
     }
 })
 
@@ -207,6 +213,9 @@ CARD_MODEL_MAP["horizontal-fire"] = CardModel.extend({
                 });
             }
         }
+    },
+    onLevelUp:function(){
+        this.reduceWait(1);
     }
 })
 
@@ -257,6 +266,9 @@ CARD_MODEL_MAP["cross-fire"] = CardModel.extend({
                 });
             }
         }
+    },
+    onLevelUp:function(){
+        this.reduceWait(2);
     }
 })
 
@@ -268,7 +280,7 @@ CARD_MODEL_MAP["whirl-slash"] = CardModel.extend({
         })
     },
     waitTurnOfLevel:function(level){
-        return 26-level*2;
+        return 27-level*2;
     },
     onUse:function(){
         var hero = currentRoom.getHero();
@@ -292,6 +304,9 @@ CARD_MODEL_MAP["whirl-slash"] = CardModel.extend({
                 }
             }
         }
+    },
+    onLevelUp:function(){
+        this.reduceWait(2);
     }
 })
 
