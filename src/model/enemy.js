@@ -224,7 +224,8 @@ MOVABLE_MODEL_MAP.ricecake = EnemyModel.extend({
 MOVABLE_MODEL_MAP.archer = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
-            type: "archer"
+            type: "archer",
+            attackType: ATTACK_TYPE_PROJECTILE
         } )
     },
     checkRange:function(hero){
