@@ -1,6 +1,7 @@
 var LUCK_EFFECT = 0.01;
 var CUNNING_EFFECT = 0.01;
 var DEXTERITY_EFFECT = 0.01;
+var DODGE_EFFECT = 0.01;
 
 var HeroModel = MovableModel.extend({
     defaults:function(){
