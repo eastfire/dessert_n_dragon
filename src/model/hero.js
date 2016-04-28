@@ -1,5 +1,6 @@
 var LUCK_EFFECT = 0.01;
 var CUNNING_EFFECT = 0.01;
+var DEXTERITY_EFFECT = 0.01;
 
 var HeroModel = MovableModel.extend({
     defaults:function(){
@@ -10,12 +11,17 @@ var HeroModel = MovableModel.extend({
 
             forwardAfterKillEnemy: false,
             choiceNumber: 3,
-            //inactive skill
+            //passive status
             constitute: 0,
             cunning: 0,
             maxCunning: 50,
+            dexterity: 0,
+            maxDexterity: 50,
+            dodge: 0,
+            maxDodge: 75,
             luck: 5,
             maxLuck: 50,
+            
             maxHand: 4,
             drawEachTurn: 1,
             isShowLevel:false
@@ -179,6 +185,12 @@ var HeroModel = MovableModel.extend({
     beforeBeAttacked:function(enemy){
     },
     checkHit:function(enemy, options){
+        var attackType = enemy.get("attackType");
+        if ( ( attackType === ATTACK_TYPE_MELEE && Math.random() < this.get("dexterity")*DEXTERITY_EFFECT ) ||
+        ( attackType === ATTACK_TYPE_PROJECTILE && Math.random() < this.get("dodge")*DODGE_EFFECT )
+        ) {
+            return false;
+        }
         return true;
     },
     beforeBeHit:function(enemy, attackPoint){
