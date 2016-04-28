@@ -354,7 +354,7 @@ var tiles6x5N = [
     [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
     [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
     [{type:"wall",subtype:"se"},{type:"wall",subtype:"elongsw"},{type:"wall",subtype:"sewlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"}],
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"newlong"},{type:"wall",subtype:"slongne"},{type:"wall",subtype:"nw"}],
+    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"newlong"},{type:"wall",subtype:"wlongne"},{type:"wall",subtype:"nw"}],
     [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
     [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
     [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
@@ -366,7 +366,7 @@ var tiles7x6N = [
     [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
     [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"elongsw"},{type:"wall",subtype:"sewlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"}],
     [null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"},null],
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"newlong"},{type:"wall",subtype:"slongne"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
+    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"newlong"},{type:"wall",subtype:"wlongne"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
     [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
     [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
     [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
@@ -725,13 +725,17 @@ var infiniteRoom = {
     },
     choicePool: _.union(STANDARD_CHOICE_POOL, [
         { type:"getCard", opt:{type:"luck"}},
-        { type:"getCard", opt:{type:"constitution"}}
+        { type:"getCard", opt:{type:"constitution"}},
+        { type:"getCard", opt:{type:"cunning"}},
+        { type:"getCard", opt:{type:"dexterity"}},
+        { type:"getCard", opt:{type:"dodge"}}
     ]),
     genChoiceStrategy: { type: "infinite", opt:{} }
 };
 
 //初始 room1
-rooms.push({ 
+rooms.push({
+    stageNumber: 1,
     turnLimit:6,
     scoreCondition: null,
     winEveryConditions:[
@@ -1564,7 +1568,7 @@ rooms.push({
     initMovables:[
         { type:"icecream", positions: [{x:1,y:7}] },
         { type:"icecream", positions: [{x:7,y:1}] },
-        { type:"icecream", positions: [{x:7,y:7}] },
+        { type:"icecream", positions: [{x:7,y:7}] }
     ],
     initHero: {
         type:"normalHero",
@@ -2406,5 +2410,56 @@ rooms.push({
         } //normal, fix
     },
     choicePool:STANDARD_CHOICE_POOL
+});
+
+//room32 snake
+rooms.push({
+    turnLimit:25,
+    scoreCondition: [600, 1000, 1400],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"jelly",
+            number: 9
+        },
+        {
+            conditionType:"kill-level",
+            type:"souffle",subtype:"green",
+            number: 9
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{
+        type:"jelly"
+    },{
+        type:"souffle"
+    },{
+        type:"chocolate-cake"
+    }],
+    itemPool:STANDARD_ITEM_POOL,
+    genEnemyStrategy: [{type:"random", number: 3, last: 0}],
+    initTiles:tiles6x5N,
+    initMovables:[
+        { type:"jelly", positions:[{x:1,y:1}]},
+        { type:"jelly", positions:[{x:6,y:5}]}
+    ],
+    initHand:[
+    ],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:4}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        } //normal, fix
+    },
+    choicePool:STANDARD_CHOICE_POOL,
+    unlocks:[{type:"enemy", subtype:"jelly"}]
 });
 

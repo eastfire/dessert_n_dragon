@@ -49,7 +49,7 @@ var HeroModel = MovableModel.extend({
     requireExpOfLevel:function(lv){
         if ( !this.get("expStrategy") || this.get("expStrategy").type === "normal" ) {
             var lv = lv || this.get("level")
-            return Math.round((Math.log10(lv) * lv * 16.61 + 10) * (1 - CUNNING_EFFECT * this.get("cunning")) ) * EXP_INFLATION_RATE;
+            return Math.round(Math.round((Math.log10(lv) * lv * 16.61 + 10) * EXP_INFLATION_RATE ) * (1 - CUNNING_EFFECT * this.get("cunning")))
         } else if ( this.get("expStrategy").type === "fix" ) {
             return this.get("expStrategy").value * EXP_INFLATION_RATE
         }
@@ -117,7 +117,7 @@ var HeroModel = MovableModel.extend({
     },
     normalAttack:function(enemy) {
         var options = {
-            attackType : "normal",
+            attackType : ATTACK_TYPE_MELEE,
             attackAction: "normal",
             onHit: function(enemy, opt){
                 this.hit(enemy, options);

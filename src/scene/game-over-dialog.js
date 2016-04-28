@@ -96,6 +96,8 @@ var GameOverDialog = cc.Scale9Sprite.extend({
                         } else {
                             cc.director.runScene(new SelectRoomScene());
                         }
+                    } else {
+                        cc.director.runScene(new SelectRoomScene());
                     }
                 });
             }, this);

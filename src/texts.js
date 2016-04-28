@@ -75,7 +75,7 @@ var texts_locale = {
                     return "恢复"+CARD_MODEL_MAP.heal.getEffect(level)+"点生命。"
                 },
                 levelUpDesc: function(level){
-                    return "多恢复2点生命(当前"+CARD_MODEL_MAP.heal.getEffect(level)+")。但等待时间+1"
+                    return "多恢复5点生命(当前"+CARD_MODEL_MAP.heal.getEffect(level)+")。但等待时间+1"
                 }
             },
             "tail-slash":{
@@ -86,22 +86,22 @@ var texts_locale = {
             "vertical-fire":{
                 name:"纵向火焰",
                 desc: "用火焰攻击所在列所有的敌人",
-                levelUpDesc: "但等待时间-1"
+                levelUpDesc: "等待时间-1"
             },
             "horizontal-fire":{
                 name:"横向火焰",
                 desc: "用火焰攻击所在行所有的敌人",
-                levelUpDesc: "但等待时间-1"
+                levelUpDesc: "等待时间-1"
             },
             "cross-fire":{
                 name:"十字火焰",
                 desc: "用火焰攻击所在行和所在列所有的敌人",
-                levelUpDesc: "但等待时间-2"
+                levelUpDesc: "等待时间-2"
             },
             "whirl-slash":{
                 name:"回旋扫尾",
                 desc: "攻击所在周围8个格子的所有的敌人",
-                levelUpDesc: "但等待时间-2"
+                levelUpDesc: "等待时间-2"
             },
 
             //passive
@@ -168,7 +168,8 @@ var texts_locale = {
             //enemy
             enemy:{
                 "chocolate-cake":"黑森林武士将在无尽关卡中出现",
-                "donut":"甜甜圈骑士将在无尽关卡中出现"
+                "donut":"甜甜圈骑士将在无尽关卡中出现",
+                "jelly":"果冻侦察兵将在无尽关卡中出现"
             }
         }
     },

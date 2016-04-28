@@ -18,7 +18,14 @@ var IntroLayer = cc.LayerColor.extend({
             },
             //Process the touch end event
             onTouchEnded: function (touch, event) {
-                cc.director.runScene(new SelectRoomScene());
+                if ( score[1] )
+                    cc.director.runScene(new SelectRoomScene());
+                else {
+                    cc.director.runScene(new RoomScene({
+                        roomEntry: clone(rooms[0]),
+                        maxScore: 0
+                    }));
+                }
             }
         }), this);
     }
