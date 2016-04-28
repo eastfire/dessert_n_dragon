@@ -104,16 +104,15 @@ CARD_MODEL_MAP.heal = CardModel.extend({
     },
 
     onUse:function(){
-        currentRoom.getHero().gainHp(this.getEffect())
+        currentRoom.getHero().gainHp(ARD_MODEL_MAP.heal.getEffect(this.get("level")))
     },
     waitTurnOfLevel:function(level){
         return level+4;
-    },
-    getEffect:function(){
-        var l = 2*this.get("level")+1;
-        return l;
     }
 })
+CARD_MODEL_MAP.heal.getEffect = function(level){
+    return 2*l + 1;
+}
 
 CARD_MODEL_MAP["tail-slash"] = CardModel.extend({
     defaults: function () {
