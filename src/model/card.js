@@ -311,34 +311,6 @@ CARD_MODEL_MAP["whirl-slash"] = CardModel.extend({
 })
 
 //passive card
-CARD_MODEL_MAP.luck = CardModel.extend({
-    defaults: function () {
-        return _.extend(CardModel.prototype.defaults.call(this),{
-            type: "luck",
-            maxLevel: 5
-        })
-    },
-    canLevelUp:function(){
-        return CardModel.prototype.canLevelUp.call(this) && currentRoom.getHero().get("luck") < currentRoom.getHero().get("maxLuck")
-    },
-    onLevelUp:function(){
-        currentRoom.getHero().set("luck",currentRoom.getHero().get("luck") + CARD_MODEL_MAP.luck.getEffectDiff(this.get(level)) )
-    },
-    onGain:function(){
-        currentRoom.getHero().set("luck",currentRoom.getHero().get("luck") + CARD_MODEL_MAP.luck.getEffect(this.get(level)) )
-    },
-    onExile:function(){
-        currentRoom.getHero().set("luck",currentRoom.getHero().get("luck") - this.getEffect() )
-    }
-})
-CARD_MODEL_MAP.luck.getEffect = function(level){
-    level = level || 1;
-    return level+2;
-}
-CARD_MODEL_MAP.luck.getEffectDiff = function(currentLevel, targetLevel){
-    targetLevel = targetLevel || currentLevel+1;
-    return 1;
-}
 
 CARD_MODEL_MAP.constitution = CardModel.extend({
     defaults: function () {
@@ -373,3 +345,120 @@ CARD_MODEL_MAP.constitution.getEffectDiff = function(currentLevel, targetLevel){
     targetLevel = targetLevel || currentLevel+1;
     return 5;
 }
+
+CARD_MODEL_MAP.cunning = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "cunning",
+            maxLevel: 5
+        })
+    },
+    canLevelUp:function(){
+        return CardModel.prototype.canLevelUp.call(this) && currentRoom.getHero().get("cunning") < currentRoom.getHero().get("maxCunning")
+    },
+    onLevelUp:function(){
+        currentRoom.getHero().set("cunning",currentRoom.getHero().get("cunning") + CARD_MODEL_MAP.cunning.getEffectDiff(this.get(level)) )
+    },
+    onGain:function(){
+        currentRoom.getHero().set("cunning",currentRoom.getHero().get("cunning") + CARD_MODEL_MAP.cunning.getEffect(this.get(level)) )
+    },
+    onExile:function(){
+        currentRoom.getHero().set("cunning",currentRoom.getHero().get("cunning") - CARD_MODEL_MAP.cunning.getEffect(this.get(level)) )
+    }
+})
+CARD_MODEL_MAP.cunning.getEffect = function(level){
+    level = level || 1;
+    return level+2;
+}
+CARD_MODEL_MAP.cunning.getEffectDiff = function(currentLevel, targetLevel){
+    targetLevel = targetLevel || currentLevel+1;
+    return 1;
+}
+
+CARD_MODEL_MAP.dexterity = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "dexterity",
+            maxLevel: 5
+        })
+    },
+    canLevelUp:function(){
+        return CardModel.prototype.canLevelUp.call(this) && currentRoom.getHero().get("dexterity") < currentRoom.getHero().get("maxDexterity")
+    },
+    onLevelUp:function(){
+        currentRoom.getHero().set("dexterity",currentRoom.getHero().get("dexterity") + CARD_MODEL_MAP.dexterity.getEffectDiff(this.get(level)) )
+    },
+    onGain:function(){
+        currentRoom.getHero().set("dexterity",currentRoom.getHero().get("dexterity") + CARD_MODEL_MAP.dexterity.getEffect(this.get(level)) )
+    },
+    onExile:function(){
+        currentRoom.getHero().set("dexterity",currentRoom.getHero().get("dexterity") - CARD_MODEL_MAP.dexterity.getEffect(this.get(level)) )
+    }
+})
+CARD_MODEL_MAP.dexterity.getEffect = function(level){
+    level = level || 1;
+    return level+2;
+}
+CARD_MODEL_MAP.dexterity.getEffectDiff = function(currentLevel, targetLevel){
+    targetLevel = targetLevel || currentLevel+1;
+    return 1;
+}
+
+CARD_MODEL_MAP.dodge = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "dodge",
+            maxLevel: 5
+        })
+    },
+    canLevelUp:function(){
+        return CardModel.prototype.canLevelUp.call(this) && currentRoom.getHero().get("dodge") < currentRoom.getHero().get("maxDodge")
+    },
+    onLevelUp:function(){
+        currentRoom.getHero().set("dodge",currentRoom.getHero().get("dodge") + CARD_MODEL_MAP.dodge.getEffectDiff(this.get(level)) )
+    },
+    onGain:function(){
+        currentRoom.getHero().set("dodge",currentRoom.getHero().get("dodge") + CARD_MODEL_MAP.dodge.getEffect(this.get(level)) )
+    },
+    onExile:function(){
+        currentRoom.getHero().set("dodge",currentRoom.getHero().get("dodge") - CARD_MODEL_MAP.dodge.getEffect(this.get(level)) )
+    }
+})
+CARD_MODEL_MAP.dodge.getEffect = function(level){
+    level = level || 1;
+    return level*2+2;
+}
+CARD_MODEL_MAP.dodge.getEffectDiff = function(currentLevel, targetLevel){
+    targetLevel = targetLevel || currentLevel+1;
+    return 2;
+}
+
+CARD_MODEL_MAP.luck = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "luck",
+            maxLevel: 5
+        })
+    },
+    canLevelUp:function(){
+        return CardModel.prototype.canLevelUp.call(this) && currentRoom.getHero().get("luck") < currentRoom.getHero().get("maxLuck")
+    },
+    onLevelUp:function(){
+        currentRoom.getHero().set("luck",currentRoom.getHero().get("luck") + CARD_MODEL_MAP.luck.getEffectDiff(this.get(level)) )
+    },
+    onGain:function(){
+        currentRoom.getHero().set("luck",currentRoom.getHero().get("luck") + CARD_MODEL_MAP.luck.getEffect(this.get(level)) )
+    },
+    onExile:function(){
+        currentRoom.getHero().set("luck",currentRoom.getHero().get("luck") - CARD_MODEL_MAP.luck.getEffect(this.get(level)) )
+    }
+})
+CARD_MODEL_MAP.luck.getEffect = function(level){
+    level = level || 1;
+    return level+2;
+}
+CARD_MODEL_MAP.luck.getEffectDiff = function(currentLevel, targetLevel){
+    targetLevel = targetLevel || currentLevel+1;
+    return 1;
+}
+
