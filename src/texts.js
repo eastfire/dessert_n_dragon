@@ -36,7 +36,7 @@ var texts_locale = {
             },
             "chocolate-cake":{
                 name:"黑森林武士",
-                desc:"\n攻击力高。\n饱腹度高。"
+                desc:"\n攻击力高。\n饱腹度高。\n\n呼～～呼"
             },
             creampuff: {
                 name:"奶油泡芙酋长",
@@ -50,8 +50,12 @@ var texts_locale = {
                 name:"冰激凌法师",
                 desc:"合并或攻击时有一定概率冰冻周围角色（等级越高概率越高）。\n攻击力一般。\n饱腹度一般。\n\n他的法师帽戴反了吗？"
             },
+            jelly:{
+                name:"果冻侦察兵",
+                desc:"一定概率躲过近距离攻击（等级越高概率越高）。\n攻击力较低。\n饱腹度低。"
+            },
             pudding:{
-                name:"果冻巡逻兵",
+                name:"布丁巡逻兵",
                 desc:"软绵无力的巡逻小兵。\n攻击力始终为1。\n饱腹度极低。"
             },
             ricecake:{
