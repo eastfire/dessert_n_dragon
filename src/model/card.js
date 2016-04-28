@@ -11,7 +11,7 @@ var getCardDesc = function(type, level){
 }
 
 var getCardLevelUpDesc = function(type, level){
-    var desc = texts.cardLevelUp[type].desc;
+    var desc = texts.card[type].levelUpDesc;
     if ( typeof desc === "function" ) {
         return desc(level);
     } else return desc;
