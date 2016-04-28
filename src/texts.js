@@ -70,7 +70,9 @@ var texts_locale = {
                 desc: function(level){
                     return "恢复"+CARD_MODEL_MAP.heal.getEffect(level)+"点生命。"
                 },
-                levelUpDesc: "多恢复2点生命。但等待时间+1"
+                levelUpDesc: function(level){
+                    return "多恢复2点生命(当前"+CARD_MODEL_MAP.heal.getEffect(level)+")。但等待时间+1"
+                }
             },
             "tail-slash":{
                 name:"扫尾",
@@ -101,13 +103,30 @@ var texts_locale = {
             //passive
             luck: {
                 name:"幸运",
-                desc: "被动技能：道具掉落概率+3%",
-                levelUpDesc: "道具掉落概率+1%"
+                desc: function(level){
+                    return "被动：道具掉落概率+"+CARD_MODEL_MAP.luck.getEffect(level)+"% 当前"+currentRoom.getHero().get("luck")+"%";
+                },
+                levelUpDesc: function(level){
+                    return "道具掉落概率+"+CARD_MODEL_MAP.luck.getEffectDiff(level)+"% 当前"+currentRoom.getHero().get("luck")+"%";
+                }
             },
             constitution: {
                 name:"强壮",
-                desc: "被动技能：生命上限+10",
-                levelUpDesc: "生命上限+5"
+                desc: function(level){
+                    return "被动：生命上限+"+CARD_MODEL_MAP.constitution.getEffect(level);
+                },
+                levelUpDesc: function(level){
+                    return "生命上限+"+CARD_MODEL_MAP.constitution.getEffectDiff(level);
+                }
+            },
+            cunning: {
+                name:"节食",
+                desc: function(level){
+                    return "被动：升级需要的饱腹度减少"+CARD_MODEL_MAP.cunning.getEffect(level)+"% 当前"+currentRoom.getHero().get("cunning")+"%";
+                },
+                levelUpDesc: function(level){
+                    return "升级需要的饱腹度减少"+CARD_MODEL_MAP.cunning.getEffectDiff(level)+"% 当前"+currentRoom.getHero().get("cunning")+"%";
+                }
             }
         },
 
