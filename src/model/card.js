@@ -217,7 +217,7 @@ CARD_MODEL_MAP["cross-fire"] = CardModel.extend({
         })
     },
     waitTurnOfLevel:function(level){
-        return 29-level;
+        return 30-level*2;
     },
     onUse:function(){
         var hero = currentRoom.getHero();
@@ -267,7 +267,7 @@ CARD_MODEL_MAP["whirl-slash"] = CardModel.extend({
         })
     },
     waitTurnOfLevel:function(level){
-        return 25-level;
+        return 26-level*2;
     },
     onUse:function(){
         var hero = currentRoom.getHero();
