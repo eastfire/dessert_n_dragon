@@ -102,6 +102,37 @@ var texts_locale = {
                 desc: "被动技能：生命上限+10"
             }
         },
+        cardLevelUp:{
+            //active
+            heal:{
+                desc: function(level){
+                    return "多恢复2点生命。"
+                }
+            },
+            "tail-slash":{
+                desc: "攻击尾部的一个敌人。"
+            },
+            "vertical-fire":{
+                desc: "用火焰攻击所在列所有的敌人"
+            },
+            "horizontal-fire":{
+                desc: "用火焰攻击所在行所有的敌人"
+            },
+            "cross-fire":{
+                desc: "用火焰攻击所在行和所在列所有的敌人"
+            },
+            "whirl-slash":{
+                desc: "攻击所在周围8个格子的所有的敌人"
+            },
+
+            //passive
+            luck: {
+                desc: "道具掉落概率增加+1%"
+            },
+            constitution: {
+                desc: "生命上限+5"
+            }
+        },
         unlock:{
             "infinite":"你解锁了无尽关卡",
             shop:{

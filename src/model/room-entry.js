@@ -652,7 +652,8 @@ var STANDARD_CHOICE_POOL = [
     { type:"getCard", opt:{type:"cross-fire"}},
     { type:"getCard", opt:{type:"whirl-slash"}},
     { type:"reduceRandomWait", opt:{ from:4, to:6}},
-    { type:"reduceAllWait"}
+    { type:"reduceAllWait"},
+    { type:"levelUpCard"}
 ]
 
 var STANDARD_ITEM_POOL = ["potion","money"];

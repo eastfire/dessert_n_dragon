@@ -1,4 +1,5 @@
 var LUCK_EFFECT = 0.01;
+var CUNNING_EFFECT = 0.01;
 
 var HeroModel = MovableModel.extend({
     defaults:function(){
@@ -12,7 +13,9 @@ var HeroModel = MovableModel.extend({
             //inactive skill
             constitute: 0,
             cunning: 0,
+            maxCunning: 50,
             luck: 5,
+            maxLuck: 50,
             maxHand: 4,
             drawEachTurn: 1,
             isShowLevel:false
@@ -39,7 +42,7 @@ var HeroModel = MovableModel.extend({
     requireExpOfLevel:function(lv){
         if ( !this.get("expStrategy") || this.get("expStrategy").type === "normal" ) {
             var lv = lv || this.get("level")
-            return Math.round((Math.log10(lv) * lv * 16.61 + 10) * (1 - (CUNNING_EFFECT / 100) * this.get("cunning")) ) * EXP_INFLATION_RATE;
+            return Math.round((Math.log10(lv) * lv * 16.61 + 10) * (1 - CUNNING_EFFECT * this.get("cunning")) ) * EXP_INFLATION_RATE;
         } else if ( this.get("expStrategy").type === "fix" ) {
             return this.get("expStrategy").value * EXP_INFLATION_RATE
         }

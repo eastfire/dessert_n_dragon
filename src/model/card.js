@@ -10,6 +10,13 @@ var getCardDesc = function(type, level){
     } else return desc;
 }
 
+var getCardLevelUpDesc = function(type, level){
+    var desc = texts.cardLevelUp[type].desc;
+    if ( typeof desc === "function" ) {
+        return desc(level);
+    } else return desc;
+}
+
 var CardModel = Backbone.Model.extend({
     defaults: function () {
         return {
@@ -59,6 +66,13 @@ var CardModel = Backbone.Model.extend({
     },
     onDraw:function(){
         this.set("waitTurn",this.waitTurnOfLevel(this.get("level")));
+    },
+    levelUp:function(amount){
+        this.set("level",this.get("level")+amount)
+        this.onLevelUp();
+    },
+    canLevelUp:function(){
+        return this.get("level") < this.get("maxLevel")
     },
     onLevelUp:function(){
 
@@ -292,6 +306,9 @@ CARD_MODEL_MAP["luck"] = CardModel.extend({
     getEffect:function(level){
         level = level || this.get("level")
         return 3+level;
+    },
+    canLevelUp:function(){
+        return CardModel.prototype.canLevelUp.call(this) && currentRoom.getHero().get("luck") < currentRoom.getHero().get("maxLuck")
     },
     onLevelUp:function(){
         currentRoom.getHero().set("luck",currentRoom.getHero().get("luck") + 1 )

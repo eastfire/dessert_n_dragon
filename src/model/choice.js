@@ -43,6 +43,21 @@ var CHOICE_FACTORY_MAP = {
             }
         }
     },
+    levelUpCard:function(roomModel){
+        var hands = roomModel.getHand();
+        var validCards = _.filter(hands, function(cardModel){
+            return cardModel.canLevelUp()
+        })
+        var levelUpCard = _.sample(validCards);
+        var type = levelUpCard.get("type")
+        var targetLevel = levelUpCard.get("level")+1
+        return {
+            description:"升级"+getCardName(type)+"到"+targetLevel+"级\n"+getCardLevelUpDesc( type, targetLevel),
+            onChosen:function(roomModel){
+                levelUpCard.levelUp(1);
+            }
+        }
+    },
     reduceRandomWait:function(roomModel, opt){
         var number = Math.round(Math.random()*(opt.to-opt.from)+opt.from);
         return {
@@ -85,6 +100,13 @@ CHOICE_VALIDATE_MAP = {
         var loseAnyConditions = roomModel.get("loseAnyConditions");
         if ( loseAnyConditions && loseAnyConditions.length && loseAnyConditions[0] === "outOfTime") return true
         return false;
+    },
+    levelUpCard:function(roomModel){
+        var hands = roomModel.getHand();
+        var validCards = _.filter(hands, function(cardModel){
+            return cardModel.canLevelUp()
+        })
+        return validCards.length;
     }
 }
 CHOICE_VALIDATE_MAP.reduceAllWait = CHOICE_VALIDATE_MAP.reduceRandomWait;
