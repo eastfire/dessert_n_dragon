@@ -68,71 +68,49 @@ var texts_locale = {
             heal:{
                 name:"治疗",
                 desc: function(level){
-                    return "恢复"+level+"点生命。"
-                }
+                    return "恢复"+CARD_MODEL_MAP.heal.getEffect(level)+"点生命。"
+                },
+                levelUpDesc: "多恢复2点生命。但等待时间+1"
             },
             "tail-slash":{
                 name:"扫尾",
-                desc: "攻击尾部的一个敌人。"
+                desc: "攻击尾部的一个敌人。",
+                levelUpDesc: "但等待时间-1"
             },
             "vertical-fire":{
                 name:"纵向火焰",
-                desc: "用火焰攻击所在列所有的敌人"
+                desc: "用火焰攻击所在列所有的敌人",
+                levelUpDesc: "但等待时间-1"
             },
             "horizontal-fire":{
                 name:"横向火焰",
-                desc: "用火焰攻击所在行所有的敌人"
+                desc: "用火焰攻击所在行所有的敌人",
+                levelUpDesc: "但等待时间-1"
             },
             "cross-fire":{
                 name:"十字火焰",
-                desc: "用火焰攻击所在行和所在列所有的敌人"
+                desc: "用火焰攻击所在行和所在列所有的敌人",
+                levelUpDesc: "但等待时间-2"
             },
             "whirl-slash":{
                 name:"回旋扫尾",
-                desc: "攻击所在周围8个格子的所有的敌人"
+                desc: "攻击所在周围8个格子的所有的敌人",
+                levelUpDesc: "但等待时间-2"
             },
 
             //passive
             luck: {
                 name:"幸运",
-                desc: "被动技能：道具掉落概率+3%"
+                desc: "被动技能：道具掉落概率+3%",
+                levelUpDesc: "道具掉落概率+1%"
             },
             constitution: {
                 name:"强壮",
-                desc: "被动技能：生命上限+10"
+                desc: "被动技能：生命上限+10",
+                levelUpDesc: "生命上限+5"
             }
         },
-        cardLevelUp:{
-            //active
-            heal:{
-                desc: function(level){
-                    return "多恢复2点生命。"
-                }
-            },
-            "tail-slash":{
-                desc: "攻击尾部的一个敌人。"
-            },
-            "vertical-fire":{
-                desc: "用火焰攻击所在列所有的敌人"
-            },
-            "horizontal-fire":{
-                desc: "用火焰攻击所在行所有的敌人"
-            },
-            "cross-fire":{
-                desc: "用火焰攻击所在行和所在列所有的敌人"
-            },
-            "whirl-slash":{
-                desc: "攻击所在周围8个格子的所有的敌人"
-            },
 
-            //passive
-            luck: {
-                desc: "道具掉落概率增加+1%"
-            },
-            constitution: {
-                desc: "生命上限+5"
-            }
-        },
         unlock:{
             "infinite":"你解锁了无尽关卡",
             shop:{
