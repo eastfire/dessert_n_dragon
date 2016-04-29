@@ -672,8 +672,8 @@ var STANDARD_CHOICE_POOL = [
     { type:"getCard", opt:{type:"tail-slash"}},
     { type:"getCard", opt:{type:"vertical-fire"}},
     { type:"getCard", opt:{type:"horizontal-fire"}},
-    { type:"getCard", opt:{type:"cross-fire"}},
-    { type:"getCard", opt:{type:"whirl-slash"}},
+//    { type:"getCard", opt:{type:"cross-fire"}},
+//    { type:"getCard", opt:{type:"whirl-slash"}},
     { type:"reduceRandomWait", opt:{ from:4, to:6}},
     { type:"reduceAllWait"},
     { type:"levelUpCard"}
@@ -729,8 +729,7 @@ var infiniteRoom = {
         { type:"getCard", opt:{type:"cunning"}},
         { type:"getCard", opt:{type:"dexterity"}},
         { type:"getCard", opt:{type:"dodge"}}
-    ]),
-    genChoiceStrategy: { type: "infinite", opt:{} }
+    ])
 };
 
 //初始 room1
@@ -1539,7 +1538,11 @@ rooms.push({
             type: "normal"
         } //normal, fix
     },
-    choicePool:STANDARD_CHOICE_POOL
+    choicePool:STANDARD_CHOICE_POOL,
+    initHand:[
+        {type:"whirl-slash"}
+    ],
+    unlocks:[{type:"shop", subtype:"whirl-slash"}]
 });
 
 //room15 第一次出现法师
@@ -2242,7 +2245,8 @@ rooms.push({
     initHand:[
         {type:"cross-fire"}
     ],
-    choicePool:STANDARD_CHOICE_POOL
+    choicePool:STANDARD_CHOICE_POOL,
+    unlocks:[{type:"shop", subtype:"cross-fire"}]
 });
 
 //room29 log in h

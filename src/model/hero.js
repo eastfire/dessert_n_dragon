@@ -2,6 +2,7 @@ var LUCK_EFFECT = 0.01;
 var CUNNING_EFFECT = 0.01;
 var DEXTERITY_EFFECT = 0.01;
 var DODGE_EFFECT = 0.01;
+var RECOVERY_EFFECT = 0.01;
 
 var HeroModel = MovableModel.extend({
     defaults:function(){
@@ -22,6 +23,8 @@ var HeroModel = MovableModel.extend({
             maxDodge: 75,
             luck: 5,
             maxLuck: 50,
+            recovery: 20,
+            maxRecovery: 100,
             
             maxHand: 4,
             drawEachTurn: 1,
@@ -95,6 +98,7 @@ var HeroModel = MovableModel.extend({
                 exp: 0,
                 requireExp: this.requireExpOfLevel(this.get("level") + 1)
             });
+            this.gainHp(this.get("maxHp")*this.get("recovery")*RECOVERY_EFFECT);
             this.levelUp(1);
             return true;
         }

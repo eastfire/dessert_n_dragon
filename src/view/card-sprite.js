@@ -19,6 +19,7 @@ var CardSprite = BaseSprite.extend({
         this.model.on("change:waitTurn",this.renderWait, this);
         this.model.on("change:level",this.renderLevel,this);
         this.model.on("use",this.useCard,this);
+        this.model.on("discard",this.onDestroy,this);
 
         cc.eventManager.addListener(this.listener = {
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
@@ -50,6 +51,7 @@ var CardSprite = BaseSprite.extend({
     closeEvent:function(){
         this.model.off("change:waitTurn",this.renderWait);
         this.model.off("change:level",this.renderLevel);
+        this.model.off("discard",this.onDestroy);
         cc.eventManager.removeListeners(this.listener);
     },
     initCardLayout:function(){

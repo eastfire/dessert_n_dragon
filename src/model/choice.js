@@ -44,15 +44,15 @@ var CHOICE_FACTORY_MAP = {
         }
     },
     levelUpCard:function(roomModel){
-        var hands = roomModel.getHand();
-        var validCards = _.filter(hands, function(cardModel){
+        var allCard = _.union(roomModel.getHand(),roomModel.getDeck(), roomModel.getDiscard());
+        var validCards = _.filter(allCard, function(cardModel){
             return cardModel.canLevelUp()
         })
         var levelUpCard = _.sample(validCards);
         var type = levelUpCard.get("type")
         var targetLevel = levelUpCard.get("level")+1
         return {
-            description:"升级"+getCardName(type)+"到"+targetLevel+"级\n"+getCardLevelUpDesc( type, targetLevel),
+            description:"将"+getCardName(type)+"升级到"+targetLevel+"级\n"+getCardLevelUpDesc( type, targetLevel),
             onChosen:function(roomModel){
                 levelUpCard.levelUp(1);
             }
@@ -102,8 +102,8 @@ CHOICE_VALIDATE_MAP = {
         return false;
     },
     levelUpCard:function(roomModel){
-        var hands = roomModel.getHand();
-        var validCards = _.filter(hands, function(cardModel){
+        var allCard = _.union(roomModel.getHand(),roomModel.getDeck(), roomModel.getDiscard());
+        var validCards = _.filter(allCard, function(cardModel){
             return cardModel.canLevelUp()
         })
         return validCards.length;
@@ -118,11 +118,7 @@ var getValidChoices = function(roomModel, choicePool){
 }
 
 var GEN_CHOICE_STRATEGY_MAP = {
-    random : function(roomModel, opt){
-        var validChoices = getValidChoices(roomModel, roomModel.get("choicePool"));
-        return _.sample(validChoices, roomModel.getHero().get("choiceNumber"));
-    },
-    infinite: function(roomModel, opt){
+    random: function(roomModel, opt){
         var unlockedChoices = _.map( unlockedStatus.get("card"), function( value, key ) {
             return {
                 type:"getCard",

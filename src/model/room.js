@@ -787,8 +787,7 @@ var RoomModel = Backbone.Model.extend({
 
         if ( !this.__deck.length ) return ;
 
-        var opt = this.__deck.pop();
-        var cardModel = new CARD_MODEL_MAP[opt.type](opt);
+        var cardModel = this.__deck.pop();
         this.__hand.push(cardModel);
         this.trigger("change:deck",this);
         this.trigger("change:hand",this,"draw");
@@ -800,8 +799,8 @@ var RoomModel = Backbone.Model.extend({
             this.__hand.splice(index, 1);
         }
         cardModel.restoreToOrigin();
-        this.__discard.push( cardModel.toJSON())
-        cardModel.destroy();
+        this.__discard.push( cardModel )
+        cardModel.trigger("discard");
         this.trigger("change:hand", this, "discard");
         this.trigger("change:deck", this);
     },

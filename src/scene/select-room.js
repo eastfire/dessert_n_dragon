@@ -174,7 +174,21 @@ var SelectRoomLayer = cc.Layer.extend({
             anchorY: 0
         });
 
-        var menu = new cc.Menu([closeItem,infiniteItem]);
+        var shopItem = new cc.MenuItemImage(
+            cc.spriteFrameCache.getSpriteFrame("shop.png"),
+            cc.spriteFrameCache.getSpriteFrame("shop.png"),
+            function () {
+                cc.director.runScene(new ShopScene());
+            }, this);
+
+        shopItem.attr({
+            x: cc.winSize.width*3/4,
+            y: 0,
+            anchorX: 0.5,
+            anchorY: 0
+        });
+
+        var menu = new cc.Menu([closeItem,infiniteItem,shopItem]);
         this.addChild(menu);
         menu.attr({
             x:0,
