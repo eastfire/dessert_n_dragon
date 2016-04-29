@@ -132,7 +132,8 @@ var GEN_CHOICE_STRATEGY_MAP = {
             return {
                 type:"getCard",
                 opt:{
-                    type:key
+                    type:key,
+                    maxCount:5
                 }
             }
         },this);
