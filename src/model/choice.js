@@ -101,6 +101,15 @@ CHOICE_VALIDATE_MAP = {
         if ( loseAnyConditions && loseAnyConditions.length && loseAnyConditions[0] === "outOfTime") return true
         return false;
     },
+    getCard:function(roomModel, choiceEntry){
+        var opt = choiceEntry.opt || {};
+        if ( !opt.maxCount ) return true;
+        var allCard = _.union(roomModel.getHand(),roomModel.getDeck(), roomModel.getDiscard());
+        var thisTypeCards = _.filter(allCard,function(cardModel){
+            return cardModel.get("type") === opt.type;
+        })
+        return thisTypeCards.length < opt.maxCount;
+    },
     levelUpCard:function(roomModel){
         var allCard = _.union(roomModel.getHand(),roomModel.getDeck(), roomModel.getDiscard());
         var validCards = _.filter(allCard, function(cardModel){
@@ -113,7 +122,7 @@ CHOICE_VALIDATE_MAP.reduceAllWait = CHOICE_VALIDATE_MAP.reduceRandomWait;
 
 var getValidChoices = function(roomModel, choicePool){
     return _.filter(choicePool,function(choiceEntry){
-        return !CHOICE_VALIDATE_MAP[choiceEntry.type] || CHOICE_VALIDATE_MAP[choiceEntry.type](roomModel); //不需要validate或通过validate
+        return !CHOICE_VALIDATE_MAP[choiceEntry.type] || CHOICE_VALIDATE_MAP[choiceEntry.type](roomModel, choiceEntry); //不需要validate或通过validate
     });
 }
 
