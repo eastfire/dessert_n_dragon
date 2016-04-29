@@ -12,6 +12,19 @@ var UnlockedStatusModel = Backbone.Model.extend({
     save:function(){
         cc.sys.localStorage.setItem(APP_NAME+".unlocked", JSON.stringify(this.toJSON()));
     },
+    __doUnlock:function(type,subtype){
+        this.save();
+        this.trigger("unlocked", {type:type, subtype:subtype});
+        if ( UNLOCKABLE_ENTRY_MAP[type] ) {
+            if ( UNLOCKABLE_ENTRY_MAP[type][subtype] && UNLOCKABLE_ENTRY_MAP[type][subtype].onUnlock) {
+                UNLOCKABLE_ENTRY_MAP[type][subtype].onUnlock();
+            } else {
+                if ( UNLOCKABLE_ENTRY_MAP[type].onUnlock ) {
+                    UNLOCKABLE_ENTRY_MAP[type].onUnlock();
+                }
+            }
+        }
+    },
     unlock:function(type,subtype){
         var unlocked = false;
         if ( subtype ) {
@@ -19,23 +32,20 @@ var UnlockedStatusModel = Backbone.Model.extend({
             if ( category ) {
                 if ( !category[subtype] ) {
                     category[subtype] = true;
-                    this.trigger("unlocked", type, subtype);
-                    this.save();
+                    this.__doUnlock(type,subtype);
                     return true;
                 }
             } else {
                 category = {};
                 category[subtype] = true;
                 this.set(type, category);
-                this.save();
-                this.trigger("unlocked", {type:type, subtype:subtype});
+                this.__doUnlock(type,subtype);
                 return true;
             }
         } else {
             if ( !this.get(type) ) {
                 this.set(type, true);
-                this.save();
-                this.trigger("unlocked",{type:type});
+                this.__doUnlock(type,subtype);
                 return true;
             }
         }
@@ -51,7 +61,18 @@ var UnlockedStatusModel = Backbone.Model.extend({
 })
 
 UNLOCKABLE_ENTRY_MAP = {
-    "infiniteRoom": {
-
+    "shop":{
+        "cross-fire": {
+            cost: 100,
+            onUnlock:function(){
+                unlockedStatus.unlock("card","cross-fire")
+            }
+        },
+        "whirl-slash": {
+            cost: 100,
+            onUnlock:function(){
+                unlockedStatus.unlock("card","whirl-slash")
+            }
+        }
     }
 }
