@@ -15,12 +15,14 @@ var ShopLayer = cc.Layer.extend({
         this.scrollView.x = 0;
         this.scrollView.y = 50;
         
-        var commodities = this.getCommondities()
+        var commodities = this.getCommodities()
         this.scrollView.setInnerContainerSize(cc.size(this.scrollView.width, Math.max(this.scrollView.height, commodities.length * stepY+currentY)));
 
         this.addChild(this.scrollView);
     },
-    
+    getCommodities:function(){
+
+    },
     initMoney:function(){
         this.moneyLabel = new ccui.Text("", "Arial", dimens.moneyLabel.fontSize );
         this.moneyLabel.enableOutline(colors.moneyLabel.outline, dimens.moneyLabel.outlineWidth);

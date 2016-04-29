@@ -668,10 +668,10 @@ var STANDARD_CHOICE_POOL = [
     { type:"getFullHp" },
     { type:"getRandomMove", opt:{ from:3, to:5} },
     { type:"getRandomTime", opt:{ from:10, to:20} },
-    { type:"getCard", opt:{type:"heal", maxCount:5}},
-    { type:"getCard", opt:{type:"tail-slash", maxCount:5}},
-    { type:"getCard", opt:{type:"vertical-fire", maxCount:5}},
-    { type:"getCard", opt:{type:"horizontal-fire", maxCount:5}},
+    { type:"getCard", opt:{type:"heal"}},
+    { type:"getCard", opt:{type:"tail-slash"}},
+    { type:"getCard", opt:{type:"vertical-fire"}},
+    { type:"getCard", opt:{type:"horizontal-fire"}},
 //    { type:"getCard", opt:{type:"cross-fire"}},
 //    { type:"getCard", opt:{type:"whirl-slash"}},
     { type:"reduceRandomWait", opt:{ from:4, to:6}},
@@ -724,11 +724,11 @@ var infiniteRoom = {
         } //normal, fix
     },
     choicePool: _.union(STANDARD_CHOICE_POOL, [
-        { type:"getCard", opt:{type:"luck", maxCount:5}},
-        { type:"getCard", opt:{type:"constitution", maxCount:5}},
-        { type:"getCard", opt:{type:"cunning", maxCount:5}},
-        { type:"getCard", opt:{type:"dexterity", maxCount:5}},
-        { type:"getCard", opt:{type:"dodge", maxCount:5}}
+        { type:"getCard", opt:{type:"luck"}},
+        { type:"getCard", opt:{type:"constitution"}},
+        { type:"getCard", opt:{type:"cunning"}},
+        { type:"getCard", opt:{type:"dexterity"}},
+        { type:"getCard", opt:{type:"dodge"}}
     ])
 };
 

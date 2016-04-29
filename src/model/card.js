@@ -91,15 +91,11 @@ var CardModel = Backbone.Model.extend({
     }
 });
 
-var PassiveCardModel = CardModel.extend({
-
-})
-
 CARD_MODEL_MAP.heal = CardModel.extend({
     defaults: function () {
         return _.extend(CardModel.prototype.defaults.call(this),{
             type: "heal",
-            maxLevel: 10
+            maxLevel: 20
         })
     },
 
@@ -114,6 +110,7 @@ CARD_MODEL_MAP.heal.getEffect = function(level){
     level = level || 1;
     return 5*level;
 }
+CARD_MODEL_MAP.heal.maxCount = 5;
 
 CARD_MODEL_MAP["tail-slash"] = CardModel.extend({
     defaults: function () {
@@ -146,6 +143,7 @@ CARD_MODEL_MAP["tail-slash"] = CardModel.extend({
         this.reduceWait(1);
     }
 })
+CARD_MODEL_MAP["tail-slash"].maxCount = 5;
 
 CARD_MODEL_MAP["vertical-fire"] = CardModel.extend({
     defaults: function () {
@@ -165,7 +163,7 @@ CARD_MODEL_MAP["vertical-fire"] = CardModel.extend({
             var movable = currentRoom.getMovableByPosition(heroPosition.x, i);
             if (movable instanceof EnemyModel && movable.canBeAttack("magic")) {
                 hero.attack(movable,{
-                    attackType : ATTACK_TYPE_MAGIC,
+                    attackType : ATTACK_TYPE_MELEE,
                     attackAction: "fire",
                     onHit: function(enemy, opt){
                         enemy.beHit(hero, opt);
@@ -182,6 +180,7 @@ CARD_MODEL_MAP["vertical-fire"] = CardModel.extend({
         this.reduceWait(1);
     }
 })
+CARD_MODEL_MAP["vertical-fire"].maxCount = 5;
 
 CARD_MODEL_MAP["horizontal-fire"] = CardModel.extend({
     defaults: function () {
@@ -201,7 +200,7 @@ CARD_MODEL_MAP["horizontal-fire"] = CardModel.extend({
             var movable = currentRoom.getMovableByPosition(i,heroPosition.y);
             if (movable instanceof EnemyModel && movable.canBeAttack("magic")) {
                 hero.attack(movable,{
-                    attackType : ATTACK_TYPE_MAGIC,
+                    attackType : "magic",
                     attackAction: "fire",
                     onHit: function(enemy, opt){
                         enemy.beHit(hero, opt);
@@ -218,6 +217,7 @@ CARD_MODEL_MAP["horizontal-fire"] = CardModel.extend({
         this.reduceWait(1);
     }
 })
+CARD_MODEL_MAP["horizontal-fire"].maxCount = 5;
 
 CARD_MODEL_MAP["cross-fire"] = CardModel.extend({
     defaults: function () {
@@ -237,7 +237,7 @@ CARD_MODEL_MAP["cross-fire"] = CardModel.extend({
             var movable = currentRoom.getMovableByPosition(heroPosition.x, i);
             if (movable instanceof EnemyModel && movable.canBeAttack("magic")) {
                 hero.attack(movable,{
-                    attackType : ATTACK_TYPE_MAGIC,
+                    attackType : "magic",
                     attackAction: "fire",
                     onHit: function(enemy, opt){
                         enemy.beHit(hero, opt);
@@ -254,7 +254,7 @@ CARD_MODEL_MAP["cross-fire"] = CardModel.extend({
             var movable = currentRoom.getMovableByPosition(i,heroPosition.y);
             if (movable instanceof EnemyModel && movable.canBeAttack("magic")) {
                 hero.attack(movable,{
-                    attackType : ATTACK_TYPE_MAGIC,
+                    attackType : "magic",
                     attackAction: "fire",
                     onHit: function(enemy, opt){
                         enemy.beHit(hero, opt);
@@ -271,6 +271,7 @@ CARD_MODEL_MAP["cross-fire"] = CardModel.extend({
         this.reduceWait(2);
     }
 })
+CARD_MODEL_MAP["cross-fire"].maxCount = 5;
 
 CARD_MODEL_MAP["whirl-slash"] = CardModel.extend({
     defaults: function () {
@@ -291,7 +292,7 @@ CARD_MODEL_MAP["whirl-slash"] = CardModel.extend({
                 var movable = currentRoom.getMovableByPosition(i, j);
                 if (movable instanceof EnemyModel && movable.canBeAttack("skill")) {
                     hero.attack(movable, {
-                        attackType: ATTACK_TYPE_MELEE,
+                        attackType: "skill",
                         attackAction: "whirl-slash",
                         onHit: function (enemy, opt) {
                             enemy.beHit(hero, opt);
@@ -309,14 +310,15 @@ CARD_MODEL_MAP["whirl-slash"] = CardModel.extend({
         this.reduceWait(2);
     }
 })
+CARD_MODEL_MAP["whirl-slash"].maxCount = 5;
 
 //passive card
-
 CARD_MODEL_MAP.constitution = CardModel.extend({
     defaults: function () {
         return _.extend(CardModel.prototype.defaults.call(this),{
             type: "constitution",
-            maxLevel: 5
+            isPassive: true,
+            maxLevel: 50
         })
     },
     onLevelUp:function(){
@@ -337,6 +339,7 @@ CARD_MODEL_MAP.constitution = CardModel.extend({
         hero.set("hp",Math.min(hero.get("hp"), hero.get("maxHp") ) )
     }
 })
+CARD_MODEL_MAP.constitution.maxCount = 3;
 CARD_MODEL_MAP.constitution.getEffect = function(level){
     level = level || 1;
     return level*5+5;
@@ -350,7 +353,8 @@ CARD_MODEL_MAP.cunning = CardModel.extend({
     defaults: function () {
         return _.extend(CardModel.prototype.defaults.call(this),{
             type: "cunning",
-            maxLevel: 5
+            isPassive: true,
+            maxLevel: 14
         })
     },
     canLevelUp:function(){
@@ -373,6 +377,7 @@ CARD_MODEL_MAP.cunning = CardModel.extend({
         hero.set("cunning",hero.get("cunning") - CARD_MODEL_MAP.cunning.getEffect(this.get("level")) )
     }
 })
+CARD_MODEL_MAP.cunning.maxCount = 3;
 CARD_MODEL_MAP.cunning.getEffect = function(level){
     level = level || 1;
     return level+2;
@@ -386,7 +391,8 @@ CARD_MODEL_MAP.dexterity = CardModel.extend({
     defaults: function () {
         return _.extend(CardModel.prototype.defaults.call(this),{
             type: "dexterity",
-            maxLevel: 5
+            isPassive: true,
+            maxLevel: 10
         })
     },
     canLevelUp:function(){
@@ -406,20 +412,22 @@ CARD_MODEL_MAP.dexterity = CardModel.extend({
         hero.set("dexterity",hero.get("dexterity") - CARD_MODEL_MAP.dexterity.getEffect(this.get("level")) )
     }
 })
+CARD_MODEL_MAP.dexterity.maxCount = 3;
 CARD_MODEL_MAP.dexterity.getEffect = function(level){
     level = level || 1;
-    return level+2;
+    return level*2+1;
 }
 CARD_MODEL_MAP.dexterity.getEffectDiff = function(currentLevel, targetLevel){
     targetLevel = targetLevel || currentLevel+1;
-    return 1;
+    return 2;
 }
 
 CARD_MODEL_MAP.dodge = CardModel.extend({
     defaults: function () {
         return _.extend(CardModel.prototype.defaults.call(this),{
             type: "dodge",
-            maxLevel: 5
+            isPassive: true,
+            maxLevel: 10
         })
     },
     canLevelUp:function(){
@@ -439,9 +447,10 @@ CARD_MODEL_MAP.dodge = CardModel.extend({
         hero.set("dodge",hero.get("dodge") - CARD_MODEL_MAP.dodge.getEffect(this.get("level")) )
     }
 })
+CARD_MODEL_MAP.dodge.maxCount = 3;
 CARD_MODEL_MAP.dodge.getEffect = function(level){
     level = level || 1;
-    return level*2+2;
+    return level*2+3;
 }
 CARD_MODEL_MAP.dodge.getEffectDiff = function(currentLevel, targetLevel){
     targetLevel = targetLevel || currentLevel+1;
@@ -452,7 +461,8 @@ CARD_MODEL_MAP.luck = CardModel.extend({
     defaults: function () {
         return _.extend(CardModel.prototype.defaults.call(this),{
             type: "luck",
-            maxLevel: 5
+            isPassive: true,
+            maxLevel: 7
         })
     },
     canLevelUp:function(){
@@ -472,12 +482,13 @@ CARD_MODEL_MAP.luck = CardModel.extend({
         hero.set("luck",hero.get("luck") - CARD_MODEL_MAP.luck.getEffect(this.get("level")) )
     }
 })
+CARD_MODEL_MAP.luck.maxCount = 3;
 CARD_MODEL_MAP.luck.getEffect = function(level){
     level = level || 1;
-    return level+2;
+    return level*2+1;
 }
 CARD_MODEL_MAP.luck.getEffectDiff = function(currentLevel, targetLevel){
     targetLevel = targetLevel || currentLevel+1;
-    return 1;
+    return 2;
 }
 

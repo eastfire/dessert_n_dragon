@@ -53,6 +53,6 @@ MOVABLE_MODEL_MAP.money = ItemModel.extend({
     },
     getEffect:function(l){
         l = l || this.get("level");
-        return (l+1)*l/2;
+        return (l+1)*l/2*5;
     }
 })

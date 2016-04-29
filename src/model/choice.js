@@ -103,12 +103,12 @@ CHOICE_VALIDATE_MAP = {
     },
     getCard:function(roomModel, choiceEntry){
         var opt = choiceEntry.opt || {};
-        if ( !opt.maxCount ) return true;
+        if ( !CARD_MODEL_MAP[opt.type].maxCount ) return true;
         var allCard = _.union(roomModel.getHand(),roomModel.getDeck(), roomModel.getDiscard());
         var thisTypeCards = _.filter(allCard,function(cardModel){
             return cardModel.get("type") === opt.type;
         })
-        return thisTypeCards.length < opt.maxCount;
+        return thisTypeCards.length < CARD_MODEL_MAP[opt.type].maxCount;
     },
     levelUpCard:function(roomModel){
         var allCard = _.union(roomModel.getHand(),roomModel.getDeck(), roomModel.getDiscard());
@@ -126,6 +126,7 @@ var getValidChoices = function(roomModel, choicePool){
     });
 }
 
+var DEFAULT_MAX_CARD_COUNT = 5;
 var GEN_CHOICE_STRATEGY_MAP = {
     random: function(roomModel, opt){
         var unlockedChoices = _.map( unlockedStatus.get("card"), function( value, key ) {
@@ -133,7 +134,7 @@ var GEN_CHOICE_STRATEGY_MAP = {
                 type:"getCard",
                 opt:{
                     type:key,
-                    maxCount:5
+                    maxCount:CARD_MODEL_MAP[key].maxCount || DEFAULT_MAX_CARD_COUNT
                 }
             }
         },this);
