@@ -228,6 +228,9 @@
                 <file name="src/libs/backbone-min.js"/>
                 <file name="src/libs/utils.js"/>
                 <file name="src/libs/cocos-utils.js"/>
+                <file name="src/libs/av-min.js"/>
+                <file name="src/libs/moment.min.js"/>
+                <file name="src/libs/zh-cn.js"/>
                 <file name="src/resource.js"/>
                 <file name="src/dimens.js"/>
                 <file name="src/colors.js"/>
@@ -258,6 +261,7 @@
                 <file name="src/scene/intro.js"/>
                 <file name="src/scene/game-menu-dialog.js"/>
                 <file name="src/scene/game-over-dialog.js"/>
+                <file name="src/scene/infinite-game-over-dialog.js"/>
                 <file name="src/scene/choice-dialog.js"/>
                 <file name="src/scene/movable-info-dialog.js"/>
                 <file name="src/scene/unlocked-info-dialog.js"/>

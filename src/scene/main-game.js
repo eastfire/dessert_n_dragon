@@ -402,6 +402,9 @@ var MainLayer = cc.Layer.extend({
         },this)
     },
     onGameOver:function(roomModel, isWin){
+        if ( this.alreadyGameOver ) return;
+        this.alreadyGameOver = true; //防止多次触发gameover
+
         var isFirstPass = false;
         if ( isWin ) {
             var oldScore = score[roomModel.get("stageNumber")];
@@ -421,7 +424,13 @@ var MainLayer = cc.Layer.extend({
         });
         this.addChild(layer,200);
 
-        var dialog = new GameOverDialog({
+        var dialogClass;
+        if ( currentRoom.get("stageNumber") === 0 ) {
+            dialogClass = InfiniteGameOverDialog;
+        } else {
+            dialogClass = GameOverDialog;
+        }
+        var dialog = new dialogClass({
             model: currentRoom,
             modalLayer: layer,
             isWin: isWin,

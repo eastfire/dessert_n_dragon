@@ -52,12 +52,12 @@ var GameOverDialog = cc.Scale9Sprite.extend({
                     if ( stageNumber !== 0 ) {
                         cc.director.runScene(new RoomScene({
                             roomEntry: clone(rooms[stageNumber-1]),
-                            maxScore: score[0]
+                            maxScore: score[stageNumber]
                         }));
                     } else {
                         cc.director.runScene(new RoomScene({
                             roomEntry: clone(infiniteRoom),
-                            maxScore: score[this.model.get("stageNumber")]
+                            maxScore: score[0]
                         }));
                     }
                 });
@@ -69,7 +69,7 @@ var GameOverDialog = cc.Scale9Sprite.extend({
             anchorX: 0.5,
             anchorY: 0.5
         });
-        var retryLabel = new cc.LabelTTF("重试", null, 25 );
+        var retryLabel = new cc.LabelTTF("再试一次", null, 25 );
         retryLabel.attr({
             color: colors.gameOver.ok,
             x: 90,
