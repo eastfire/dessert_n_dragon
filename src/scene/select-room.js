@@ -57,10 +57,11 @@ var SelectRoomLayer = cc.Layer.extend({
             }
 //            selectable = true;
             if ( selectable ) {
+                //TODO became menu item
                 (function( roomEntry) {
                     cc.eventManager.addListener({
                         event: cc.EventListener.TOUCH_ONE_BY_ONE,
-                        swallowTouches: true,
+                        swallowTouches: false,
                         onTouchBegan: function (touch, event) {
                             var target = event.getCurrentTarget();
                             var locationInNode = target.convertToNodeSpace(touch.getLocation());
@@ -161,10 +162,14 @@ var SelectRoomLayer = cc.Layer.extend({
             cc.spriteFrameCache.getSpriteFrame("palace-infinity.png"),
             cc.spriteFrameCache.getSpriteFrame("palace-infinity.png"),
             function () {
-                cc.director.runScene(new RoomScene({
-                    roomEntry: clone(infiniteRoom),
-                    maxScore: score[0]
-                }));
+                if ( !unlockedStatus.isUnlocked("infinite") ) {
+                    toast("通过第21关后解锁",{parent:this})
+                } else {
+                    cc.director.runScene(new RoomScene({
+                        roomEntry: clone(infiniteRoom),
+                        maxScore: score[0]
+                    }));
+                }
             }, this);
 
         infiniteItem.attr({
@@ -178,7 +183,11 @@ var SelectRoomLayer = cc.Layer.extend({
             cc.spriteFrameCache.getSpriteFrame("shop.png"),
             cc.spriteFrameCache.getSpriteFrame("shop.png"),
             function () {
-                cc.director.runScene(new ShopScene());
+                if ( !unlockedStatus.isUnlocked("shop-entry") ) {
+                    toast("通过第4关后解锁",{parent:this})
+                } else {
+                    cc.director.runScene(new ShopScene());
+                }
             }, this);
 
         shopItem.attr({
@@ -188,8 +197,23 @@ var SelectRoomLayer = cc.Layer.extend({
             anchorY: 0
         });
 
-        var menu = new cc.Menu([closeItem,infiniteItem,shopItem]);
-        this.addChild(menu);
+        var achievementItem = new cc.MenuItemImage(
+            cc.spriteFrameCache.getSpriteFrame("achievement.png"),
+            cc.spriteFrameCache.getSpriteFrame("achievement.png"),
+            function () {
+                cc.director.runScene(new AchievementScene());
+            }, this);
+
+        achievementItem.attr({
+            x: cc.winSize.width/4,
+            y: 0,
+            anchorX: 0.5,
+            anchorY: 0
+        });
+
+
+        var menu = new cc.Menu([closeItem,infiniteItem,shopItem, achievementItem]);
+        this.addChild(menu,100);
         menu.attr({
             x:0,
             y:0,
@@ -198,7 +222,9 @@ var SelectRoomLayer = cc.Layer.extend({
         })
         if ( !unlockedStatus.isUnlocked("infinite") ) {
             infiniteItem.opacity = 128;
-            infiniteItem.setEnabled(false);
+        }
+        if ( !unlockedStatus.isUnlocked("shop-entry") ) {
+            shopItem.opacity = 128;
         }
     },
     renderMoney:function(){

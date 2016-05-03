@@ -263,6 +263,7 @@
                 <file name="src/scene/unlocked-info-dialog.js"/>
                 <file name="src/scene/select-room.js"/>
                 <file name="src/scene/main-game.js"/>
+                <file name="src/scene/achievement-list.js"/>
                 <file name="src/scene/shop.js"/>
                 <file name="src/tutorial.js"/>
                 <file name="main.js"/>

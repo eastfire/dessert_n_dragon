@@ -15,15 +15,6 @@ var UnlockedStatusModel = Backbone.Model.extend({
     __doUnlock:function(type,subtype){
         this.save();
         this.trigger("unlocked", {type:type, subtype:subtype});
-        if ( UNLOCKABLE_ENTRY_MAP[type] ) {
-            if ( UNLOCKABLE_ENTRY_MAP[type][subtype] && UNLOCKABLE_ENTRY_MAP[type][subtype].onUnlock) {
-                UNLOCKABLE_ENTRY_MAP[type][subtype].onUnlock();
-            } else {
-                if ( UNLOCKABLE_ENTRY_MAP[type].onUnlock ) {
-                    UNLOCKABLE_ENTRY_MAP[type].onUnlock();
-                }
-            }
-        }
     },
     unlock:function(type,subtype){
         var unlocked = false;
@@ -60,19 +51,4 @@ var UnlockedStatusModel = Backbone.Model.extend({
     }
 })
 
-UNLOCKABLE_ENTRY_MAP = {
-    "shop":{
-        "cross-fire": {
-            cost: 100,
-            onUnlock:function(){
-                unlockedStatus.unlock("card","cross-fire")
-            }
-        },
-        "whirl-slash": {
-            cost: 100,
-            onUnlock:function(){
-                unlockedStatus.unlock("card","whirl-slash")
-            }
-        }
-    }
-}
+

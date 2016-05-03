@@ -85,11 +85,7 @@ var GameOverDialog = cc.Scale9Sprite.extend({
             function () {
                 this.disappear(function(){
                     if ( this.isWin ) {
-                        var somethingUnlocked = false;
-                        if ( this.isFirstPass ) {
-                            somethingUnlocked = this.model.unlockUnlockable();
-                        }
-                        if ( somethingUnlocked ) {
+                        if ( this.model.unlockUnlockable() ) {
                             //wait unlock-info
                             cc.log("somethingUnlocked")
                             this.modalLayer.removeFromParent(true);

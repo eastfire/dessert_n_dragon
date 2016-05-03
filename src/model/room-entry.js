@@ -670,8 +670,8 @@ var STANDARD_CHOICE_POOL = [
     { type:"getRandomTime", opt:{ from:10, to:20} },
     { type:"getCard", opt:{type:"heal"}},
     { type:"getCard", opt:{type:"tail-slash"}},
-    { type:"getCard", opt:{type:"vertical-fire"}},
-    { type:"getCard", opt:{type:"horizontal-fire"}},
+//    { type:"getCard", opt:{type:"vertical-fire"}},
+//    { type:"getCard", opt:{type:"horizontal-fire"}},
 //    { type:"getCard", opt:{type:"cross-fire"}},
 //    { type:"getCard", opt:{type:"whirl-slash"}},
     { type:"reduceRandomWait", opt:{ from:4, to:6}},
@@ -1000,7 +1000,8 @@ rooms.push({
         } //normal, fix
     },
     initHand:[],
-    choicePool:STANDARD_CHOICE_POOL
+    choicePool:STANDARD_CHOICE_POOL,
+    unlocks: ["shop-entry"]
 });
 
 //第一次要求大量杀敌 room5

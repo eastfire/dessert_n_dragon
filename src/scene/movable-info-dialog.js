@@ -15,8 +15,8 @@ var MovableInfoDialog = cc.Scale9Sprite.extend({
             width: this.dialogWidth,
             height: this.dialogHeight
         })
-        
-        if ( this.model instanceof EnemyModel || this.model instanceof NeutralMovable ) {
+
+        if ( this.model instanceof EnemyModel || this.model instanceof NeutralMovable || this.model instanceof ItemModel ) {
             this.initMovableLabel();
         }
 

@@ -59,6 +59,9 @@ var loadStatistic = function() {
         statistic = JSON.parse(store);
     }
 }
+var saveStatistic = function() {
+    cc.sys.localStorage.setItem(APP_NAME+".statistic", JSON.stringify(statistic));
+}
 
 var loadScore = function() {
     var store = cc.sys.localStorage.getItem(APP_NAME+".score");

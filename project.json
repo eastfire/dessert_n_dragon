@@ -50,6 +50,7 @@
         "src/scene/unlocked-info-dialog.js",
         "src/scene/select-room.js",
         "src/scene/main-game.js",
+        "src/scene/achievement-list.js",
         "src/scene/shop.js",
         "src/tutorial.js"
     ]

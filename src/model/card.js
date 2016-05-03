@@ -143,7 +143,7 @@ CARD_MODEL_MAP["tail-slash"] = CardModel.extend({
         this.reduceWait(1);
     }
 })
-CARD_MODEL_MAP["tail-slash"].maxCount = 5;
+CARD_MODEL_MAP["tail-slash"].maxCount = 4;
 
 CARD_MODEL_MAP["vertical-fire"] = CardModel.extend({
     defaults: function () {
@@ -180,7 +180,7 @@ CARD_MODEL_MAP["vertical-fire"] = CardModel.extend({
         this.reduceWait(1);
     }
 })
-CARD_MODEL_MAP["vertical-fire"].maxCount = 5;
+CARD_MODEL_MAP["vertical-fire"].maxCount = 4;
 
 CARD_MODEL_MAP["horizontal-fire"] = CardModel.extend({
     defaults: function () {
@@ -217,7 +217,7 @@ CARD_MODEL_MAP["horizontal-fire"] = CardModel.extend({
         this.reduceWait(1);
     }
 })
-CARD_MODEL_MAP["horizontal-fire"].maxCount = 5;
+CARD_MODEL_MAP["horizontal-fire"].maxCount = 4;
 
 CARD_MODEL_MAP["cross-fire"] = CardModel.extend({
     defaults: function () {
@@ -271,7 +271,7 @@ CARD_MODEL_MAP["cross-fire"] = CardModel.extend({
         this.reduceWait(2);
     }
 })
-CARD_MODEL_MAP["cross-fire"].maxCount = 5;
+CARD_MODEL_MAP["cross-fire"].maxCount = 4;
 
 CARD_MODEL_MAP["whirl-slash"] = CardModel.extend({
     defaults: function () {
@@ -310,7 +310,7 @@ CARD_MODEL_MAP["whirl-slash"] = CardModel.extend({
         this.reduceWait(2);
     }
 })
-CARD_MODEL_MAP["whirl-slash"].maxCount = 5;
+CARD_MODEL_MAP["whirl-slash"].maxCount = 4;
 
 //passive card
 CARD_MODEL_MAP.constitution = CardModel.extend({
@@ -322,6 +322,7 @@ CARD_MODEL_MAP.constitution = CardModel.extend({
         })
     },
     onLevelUp:function(){
+        var hero = currentRoom.getHero();
         var diff = CARD_MODEL_MAP.constitution.getEffectDiff(this.get("level"));
         hero.set("maxHp",hero.get("maxHp") + diff )
         hero.set("hp", hero.get("hp") + diff );
@@ -339,7 +340,7 @@ CARD_MODEL_MAP.constitution = CardModel.extend({
         hero.set("hp",Math.min(hero.get("hp"), hero.get("maxHp") ) )
     }
 })
-CARD_MODEL_MAP.constitution.maxCount = 3;
+CARD_MODEL_MAP.constitution.maxCount = 2;
 CARD_MODEL_MAP.constitution.getEffect = function(level){
     level = level || 1;
     return level*5+5;
@@ -377,7 +378,7 @@ CARD_MODEL_MAP.cunning = CardModel.extend({
         hero.set("cunning",hero.get("cunning") - CARD_MODEL_MAP.cunning.getEffect(this.get("level")) )
     }
 })
-CARD_MODEL_MAP.cunning.maxCount = 3;
+CARD_MODEL_MAP.cunning.maxCount = 2;
 CARD_MODEL_MAP.cunning.getEffect = function(level){
     level = level || 1;
     return level+2;
@@ -412,7 +413,7 @@ CARD_MODEL_MAP.dexterity = CardModel.extend({
         hero.set("dexterity",hero.get("dexterity") - CARD_MODEL_MAP.dexterity.getEffect(this.get("level")) )
     }
 })
-CARD_MODEL_MAP.dexterity.maxCount = 3;
+CARD_MODEL_MAP.dexterity.maxCount = 2;
 CARD_MODEL_MAP.dexterity.getEffect = function(level){
     level = level || 1;
     return level*2+1;
@@ -447,7 +448,7 @@ CARD_MODEL_MAP.dodge = CardModel.extend({
         hero.set("dodge",hero.get("dodge") - CARD_MODEL_MAP.dodge.getEffect(this.get("level")) )
     }
 })
-CARD_MODEL_MAP.dodge.maxCount = 3;
+CARD_MODEL_MAP.dodge.maxCount = 2;
 CARD_MODEL_MAP.dodge.getEffect = function(level){
     level = level || 1;
     return level*2+3;
@@ -482,7 +483,7 @@ CARD_MODEL_MAP.luck = CardModel.extend({
         hero.set("luck",hero.get("luck") - CARD_MODEL_MAP.luck.getEffect(this.get("level")) )
     }
 })
-CARD_MODEL_MAP.luck.maxCount = 3;
+CARD_MODEL_MAP.luck.maxCount = 2;
 CARD_MODEL_MAP.luck.getEffect = function(level){
     level = level || 1;
     return level*2+1;

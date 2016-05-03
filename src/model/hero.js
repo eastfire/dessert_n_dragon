@@ -57,21 +57,34 @@ var HeroModel = MovableModel.extend({
             return this.get("expStrategy").value * EXP_INFLATION_RATE
         }
     },
-    loseHp:function(damage){
+    loseHp:function(damage, cause){
         this.set("hp", Math.max(0, this.get("hp") - damage) );
         if ( this.get("hp") <= 0 ) {
-            this.onDie();
+            this.onDie(cause);
         }
     },
-    onDie:function(){
-        this.trigger("die",this);
+    onDie:function(cause){
+        //statistic
+        statistic["hero-die"] = statistic["hero-die"] || 0;
+        statistic["hero-die"]++;
+
+        this.trigger("die",this, cause);
     },
     gainHp:function(amount){
         this.set("hp", Math.min(this.get("maxHp"), this.get("hp") + amount) )
+
+        //statistic
+        statistic["gain-hp"] = statistic["gain-hp"] || 0;
+        statistic["gain-hp"]+=amount;
     },
     gainExp:function(amount){
         if ( currentRoom.get("rules").heroCanGetExp ) {
             this.set("unusedExp", this.get("unusedExp") + amount);
+
+            //statistic
+            statistic["gain-exp"] = statistic["gain-exp"] || 0;
+            statistic["gain-exp"]+=amount;
+
             this.useRemainExp();
         }
     },
@@ -232,7 +245,7 @@ var HeroModel = MovableModel.extend({
     takeDamage:function(enemy, damage){
         this.beforeTakeDamage(enemy, damage)
         this.trigger("takeDamage", this, enemy, damage);
-        this.loseHp(damage);
+        this.loseHp(damage, enemy);
     },
     afterTakeDamage:function(enemy, damage){ //called by view
     },

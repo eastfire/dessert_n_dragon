@@ -224,3 +224,23 @@ var EffectIconManager = Backbone.Model.extend({
         }
     }
 })
+
+var toast = function(text, options){
+    options = options || {};
+    var parent = options.parent;
+    var label = new ccui.Text(text, options.fontFamily || "Arial", options.fontSize || 24 );
+    label.enableOutline(options.outlineColor || cc.color.BLACK, options.outlineWidth || 2 );
+    label.setTextColor(options.insideColor || cc.color.WHITE);
+    label.attr({
+        //color: colors.tableLabel,
+        x: parent.width/2,
+        y: parent.height/2
+    });
+    parent.addChild(label);
+
+    label.runAction(cc.sequence(
+        cc.moveBy(0.3, 0, options.deltaY || 20),
+        cc.fadeOut(0.2),
+        cc.removeSelf()
+    ))
+}

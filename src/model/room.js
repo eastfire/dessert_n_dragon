@@ -752,13 +752,13 @@ var RoomModel = Backbone.Model.extend({
     logEnemyDie:function(enemyModel){
         var subtype = enemyModel.get("subtype");
         if ( subtype ) {
-            this.__killEnemyStatistic(enemyModel.get("type")+"_"+subtype, enemyModel)
+            this.__killEnemyStatistic(this.get("statistic"),enemyModel.get("type")+"_"+subtype, enemyModel)
         }
-        this.__killEnemyStatistic(enemyModel.get("type"), enemyModel)
+        this.__killEnemyStatistic(statistic,enemyModel.get("type"), enemyModel)
+        this.__killEnemyStatistic(this.get("statistic"),enemyModel.get("type"), enemyModel)
         this.trigger("change:statistic", this);
     },
-    __killEnemyStatistic:function(enemyType, enemyModel){
-        var statistic = this.get("statistic");
+    __killEnemyStatistic:function(statistic, enemyType, enemyModel){
         var statisticItem = "kill-"+enemyType;
         statistic[statisticItem] = statistic[statisticItem] || 0;
         statistic[statisticItem]++;
@@ -772,12 +772,18 @@ var RoomModel = Backbone.Model.extend({
     },
     getScore:function(score){
         this.set("score",this.get("score")+score);
+        //statistic
+        statistic["get-score"] = statistic["get-score"] || 0;
+        statistic["get-score"]+=score;
     },
     gainCard:function(opt){
         var cardModel = new CARD_MODEL_MAP[opt.type](opt);
         this.__hand.push(cardModel);
         cardModel.onGain();
         this.trigger("change:hand",this,"gain");
+        //statistic
+        statistic["gain-card"] = statistic["gain-card"] || 0;
+        statistic["gain-card"]++;
     },
     drawCard:function(){
         if ( !this.__deck.length ){

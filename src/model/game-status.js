@@ -1,7 +1,8 @@
 var GameStatusModel = Backbone.Model.extend({
     defaults:function(){
         return {
-            money: 100
+            money: 100,
+            achievements: {}
         }
     },
     initialize:function(){

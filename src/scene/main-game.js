@@ -85,6 +85,8 @@ var MainLayer = cc.Layer.extend({
             cc.spriteFrameCache.getSpriteFrame("close-default.png"),
             cc.spriteFrameCache.getSpriteFrame("close-press.png"),
             function () {
+                saveStatistic();
+
                 var layer = new ModalDialogLayer({
                     clickSideCancel: true
                 });
@@ -212,7 +214,7 @@ var MainLayer = cc.Layer.extend({
             "kill-level": "吃掉足够多等级的敌人",
             "kill-max-level": "吃掉等级足够高的敌人",
             "outOfTurn":"生存",
-            getScore:"尽可能获得高的分数"
+            getScore:(score[0]?("目标：最高分"+score[0]):"尽可能获得高分")
         };
 
         if ( !conditionType ) conditionType = "getScore";
@@ -411,6 +413,8 @@ var MainLayer = cc.Layer.extend({
                 saveScore();
             }
         }
+        //save statistic
+        saveStatistic();
 
         var layer = new ModalDialogLayer({
             clickSideCancel: false
