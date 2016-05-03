@@ -2468,3 +2468,79 @@ rooms.push({
     unlocks:[{type:"enemy", subtype:"jelly"}]
 });
 
+//room33 danger
+rooms.push({
+    turnLimit:20,
+    scoreCondition: [1000, 1400, 1800],
+    winEveryConditions:[
+        "outOfTurn"
+    ],
+    loseAnyConditions:[
+    ],
+    enemyPool:[{
+        type:"jelly"
+    },{
+        type:"donut"
+    },{
+        type:"chocolate-cake"
+    }],
+    itemPool:STANDARD_ITEM_POOL,
+    genEnemyStrategy: [{type:"random", number: 3, last: 0}],
+    initTiles:tiles7x5,
+    initMovables:[],
+    initHand:[
+    ],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:4,y:3}],
+        initHp: 30,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        } //normal, fix
+    },
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//room34 jelly max level
+rooms.push({
+    turnLimit:24,
+    scoreCondition: [800, 1400, 2000],
+    winEveryConditions:[
+        {
+            conditionType:"kill-max-level",
+            type:"jelly",
+            number: 10
+        }
+    ],
+    loseAnyConditions:[
+    ],
+    enemyPool:[{
+        type:"jelly"
+    },{
+        type:"souffle"
+    },{
+        type:"cherrycake"
+    }],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles6x6Loop2,
+    initMovables:[],
+    initHand:[
+    ],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:2}],
+        initHp: 30,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    choicePool:STANDARD_CHOICE_POOL
+});
