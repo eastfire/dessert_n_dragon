@@ -207,5 +207,14 @@ COMMODITY_ENTRY_LIST = [
             unlockType: "shop",
             unlockSubtype: "whirl-slash"
         }
+    },
+    {
+        cost: 500,
+        type: "card",
+        subtype: "recovery",
+        valid: {
+            unlockType: "shop",
+            unlockSubtype: "recovery"
+        }
     }
 ]

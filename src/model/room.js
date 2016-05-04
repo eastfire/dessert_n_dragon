@@ -424,13 +424,15 @@ var RoomModel = Backbone.Model.extend({
     turnStart:function(){
         cc.log("turnStart");
         this.set("phase", PHASE_TURN_START);
+//        //discard all passive card
+//        _.each( _.filter(this.__hand,function(cardModel){
+//            return cardModel.get("isPassive");
+//        },this), function(cardModel){
+//            this.discardCard(cardModel);
+//        },this);
         //reduce waitTurn of hand
         _.each(this.__hand,function(cardModel){
-            if ( cardModel.get("isPassive") ) {
-                this.discardCard(cardModel);
-            } else {
-                cardModel.reduceWait(1)
-            }
+            cardModel.reduceWait(1)
         },this);
 
         //draw card

@@ -72,7 +72,7 @@ var HeroSprite = MovableSprite.extend({
         //TODO animation
         var p = currentRoomSprite.getDrawPosition(heroModel.getPosition())
         this.runAction(cc.sequence(
-            cc.moveBy(times.heroAttack, p.x, p.y ),
+            cc.moveTo(times.heroAttack, p.x, p.y ),
             cc.callFunc(function(){
                 this.model.afterMiss(enemyModel);
             },this)

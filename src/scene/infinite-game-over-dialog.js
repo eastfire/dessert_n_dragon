@@ -1,6 +1,8 @@
 /**
  * Created by 赢潮 on 2016/5/3.
  */
+var TOP_SCORE_NUMBER = 20;
+
 var LeanCloudStrategy = function(){
     return {
         init:function(){
@@ -12,7 +14,7 @@ var LeanCloudStrategy = function(){
             var s = this.ScoreObject.new();
             s.set(score);
             s.save({
-                success:success
+                success:success,
                 error:error
             });
         },
@@ -20,9 +22,9 @@ var LeanCloudStrategy = function(){
             var query = new AV.Query(this.ScoreObject);
             query.addDescending('scoreValue');
 //            query.addAscending('createdAt');
-            query.limit(20);
+            query.limit(TOP_SCORE_NUMBER);
             query.find({
-                success:success
+                success:success,
                 error:error
             });
         }
@@ -177,7 +179,7 @@ var InfiniteGameOverDialog = cc.Scale9Sprite.extend({
                         turnNumber: this.model.get("turnNumber"),
                         killedBy: this.model.get("killedBy")
                     },function(s){
-                        self.currentScoreId = s.id;
+                        self.currentScoreObject = s;
                         currentStorageStrategy.fetchScores(function(scores){
                             self.renderScores(scores)
                         },function(){
@@ -227,17 +229,23 @@ var InfiniteGameOverDialog = cc.Scale9Sprite.extend({
         this.scrollView.y = 90;
 
         var stepY = 40;
-        this.scrollView.setInnerContainerSize(cc.size(this.scrollView.width, Math.max(this.scrollView.height, 20 * stepY)));
+        var needExtraScoreEntry = false;
+        if (this.currentScoreObject) {
+            needExtraScoreEntry = _.every(scores,function(score){
+                return this.currentScoreObject.id !== score.id
+            },this);
+        }
+        cc.log(needExtraScoreEntry)
+        this.scrollView.setInnerContainerSize(cc.size(this.scrollView.width, Math.max(this.scrollView.height,
+                ( needExtraScoreEntry ? TOP_SCORE_NUMBER + 2 : TOP_SCORE_NUMBER ) * stepY)));
         currentY = this.scrollView.getInnerContainerSize().height - stepY/2;
-        cc.log(currentY)
-        var found = false;
+
         _.each(scores,function(score){
             var text = score.get("scoreValue")+"分 "+score.get("name")+" LV"+score.get("level")+" "+
                 moment(score.createdAt).locale("zh-cn").fromNow();
             var descLabel = new cc.LabelTTF(text, null, 18 );
             var labelColor = cc.color.BLACK
-            if ( this.currentScoreId === score.id ) {
-                found = true;
+            if ( this.currentScoreObject && this.currentScoreObject.id === score.id ) {
                 labelColor = cc.color.RED
             }
             descLabel.attr({
@@ -250,6 +258,30 @@ var InfiniteGameOverDialog = cc.Scale9Sprite.extend({
             this.scrollView.addChild(descLabel);
             currentY-=stepY;
         },this)
+
+        if ( needExtraScoreEntry ) {
+            var descLabel = new cc.LabelTTF("……", null, 18 );
+            descLabel.attr({
+                color: cc.color.BLACK,
+                x: 20,
+                y: currentY,
+                anchorX: 0,
+                anchorY: 0.5
+            });
+            this.scrollView.addChild(descLabel);
+            currentY-=stepY;
+            var text = this.currentScoreObject.get("scoreValue")+"分 "+this.currentScoreObject.get("name")+" LV"+this.currentScoreObject.get("level")+" "+
+                moment(this.currentScoreObject.createdAt).locale("zh-cn").fromNow();
+            var descLabel = new cc.LabelTTF(text, null, 18 );
+            descLabel.attr({
+                color: cc.color.RED,
+                x: 20,
+                y: currentY,
+                anchorX: 0,
+                anchorY: 0.5
+            });
+            this.scrollView.addChild(descLabel);
+        }
 
         this.addChild(this.scrollView)
     },

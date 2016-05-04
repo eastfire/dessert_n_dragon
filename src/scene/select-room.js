@@ -93,7 +93,11 @@ var SelectRoomLayer = cc.Layer.extend({
             stageNumber++;
         },this)
 
-        this.scrollView.scrollToPercentVertical( 100*(1-firstUnpassed/rooms.length), 0.5,true);
+        if (firstUnpassed===0) {
+            this.scrollView.scrollToPercentVertical(0, 0.5, true);
+        } else {
+            this.scrollView.scrollToPercentVertical(100 * (1 - firstUnpassed / rooms.length), 0.5, true);
+        }
     },
     addStar:function(sprite, position){
         var star = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( "star.png" ))

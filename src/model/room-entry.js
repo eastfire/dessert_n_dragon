@@ -577,9 +577,9 @@ var tiles6x5E = [
     [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
     [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
     [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nselong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nswlong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nselong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nselong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
     [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nlongsw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"slongnw"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
+    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nlongse"},{type:"wall",subtype:"e"},{type:"wall",subtype:"slongne"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
     [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
     [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null,{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
 ];
@@ -2547,21 +2547,21 @@ rooms.push({
 
 //room35 enemy recovery skill card
 rooms.push({
-    turnLimit:25,
-    scoreCondition: [1500, 1800, 2100],
+    turnLimit:30,
+    scoreCondition: [2000, 2500, 3000],
     winEveryConditions:[
         "outOfTurn"
     ],
     loseAnyConditions:[
     ],
-    enemyLevelPool:[{
+    enemyPool:[{
         type:"ricecake"
     },{
         type:"donut"
     },{
         type:"chocolate-cake"
     }],
-    levelPool:[1,2,3],
+    enemyLevelPool:[1,2],
     itemPool:STANDARD_ITEM_POOL,
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     initTiles:tiles7x7Cross7x3,
@@ -2587,7 +2587,7 @@ rooms.push({
 //room36 icecream donut
 rooms.push({
     turnLimit:27,
-    scoreCondition: [1500, 1800, 2100],
+    scoreCondition: [1500, 2000, 2500],
     winEveryConditions:[
         {
             conditionType:"kill-level",
@@ -2608,7 +2608,7 @@ rooms.push({
     loseAnyConditions:[
         "outOfTurn"
     ],
-    enemyLevelPool:[{
+    enemyPool:[{
         type:"icecream"
     },{
         type:"donut"
@@ -2623,7 +2623,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:2,y:3}],
-        initHp: 30,
+        initHp: 100,
         initMaxHp: 100,
         maxHpStrategy:{
             type: "normal"
@@ -2654,22 +2654,19 @@ rooms.push({
     loseAnyConditions:[
         "outOfTurn"
     ],
-    enemyLevelPool:[{
+    enemyPool:[{
         type:"ricecake"
     },{
         type:"souffle"
-    },{
-        type:"chocolate-cake"
     }],
     levelPool:[1,2,3],
     itemPool:STANDARD_ITEM_POOL,
-    genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     initTiles:tiles6x6,
     initMovables:[],
     initHero: {
         type:"normalHero",
         positions: [{x:2,y:4}],
-        initHp: 30,
+        initHp: 100,
         initMaxHp: 100,
         maxHpStrategy:{
             type: "normal"
