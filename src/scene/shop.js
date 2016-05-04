@@ -27,10 +27,16 @@ var ShopLayer = cc.Layer.extend({
                 cc.spriteFrameCache.getSpriteFrame("button-short-default.png"),
                 cc.spriteFrameCache.getSpriteFrame("button-short-press.png"),
                 function () {
-                    if ( entry.cost <= gameStatus.get("money") ) {
-                        unlockedStatus.unlock(entry.type, entry.subtype)
-                        gameStatus.useMoney(entry.cost);
-                        item.setVisible(false);
+                    if ( item.opacity <= 128 ) {
+                        toast(entry.unlockHint, {parent: this})
+                    } else {
+                        if (entry.cost <= gameStatus.get("money")) {
+                            unlockedStatus.unlock(entry.type, entry.subtype)
+                            gameStatus.useMoney(entry.cost);
+                            item.setVisible(false);
+                        } else {
+                            toast("$不足", {parent: this})
+                        }
                     }
                 }, this);
 
@@ -39,7 +45,6 @@ var ShopLayer = cc.Layer.extend({
                 y: currentY,
                 anchorY: 0.5
             });
-            cc.log("item.y"+item.y);
 
             var text;
             if ( entry.type === "card") {
@@ -53,10 +58,10 @@ var ShopLayer = cc.Layer.extend({
             } else {
                 isValid = true;
             }
-            item.setEnabled( isValid )
+//            item.setEnabled( isValid )
             if ( !isValid ) {
                 text+="(未解锁)"
-                item.opacity = 129;
+                item.opacity = 128;
             }
 
             var itemName = new cc.LabelTTF(text, null, 22 );
@@ -68,7 +73,6 @@ var ShopLayer = cc.Layer.extend({
                 anchorY: 0.5
             });
             this.scrollView.addChild(itemName);
-            cc.log("itemName.y"+itemName.y);
 
             var costLabel = new cc.LabelTTF("-"+entry.cost+"$", null, 22 );
             costLabel.attr({
@@ -181,7 +185,7 @@ var ShopScene = cc.Scene.extend({
 
 COMMODITY_ENTRY_LIST = [
     {
-        cost: 30,
+        cost: 50,
         type:"card",
         subtype: "vertical-fire"
     },
@@ -192,8 +196,19 @@ COMMODITY_ENTRY_LIST = [
     },
     {
         cost: 500,
+        type: "card",
+        subtype: "whirl-slash",
+        unlockHint: "通过14关后解锁",
+        valid: {
+            unlockType: "shop",
+            unlockSubtype: "whirl-slash"
+        }
+    },
+    {
+        cost: 500,
         type:"card",
         subtype: "cross-fire",
+        unlockHint: "通过28关后解锁",
         valid:{
             unlockType:"shop",
             unlockSubtype: "cross-fire"
@@ -202,16 +217,8 @@ COMMODITY_ENTRY_LIST = [
     {
         cost: 500,
         type: "card",
-        subtype: "whirl-slash",
-        valid: {
-            unlockType: "shop",
-            unlockSubtype: "whirl-slash"
-        }
-    },
-    {
-        cost: 500,
-        type: "card",
         subtype: "recovery",
+        unlockHint: "通过35关后解锁",
         valid: {
             unlockType: "shop",
             unlockSubtype: "recovery"

@@ -32,6 +32,14 @@ var SelectRoomLayer = cc.Layer.extend({
                 anchorX: 0.5,
                 anchorY: 0.5
             })
+            var stageNumberLabel = new ccui.Text(stageNumber, "Arial", 20 );
+            stageNumberLabel.enableOutline(colors.moneyLabel.outline, dimens.moneyLabel.outlineWidth);
+            stageNumberLabel.setTextColor(colors.moneyLabel.inside);
+            stageNumberLabel.attr({
+                x: 30,
+                y: 20
+            });
+            sprite.addChild(stageNumberLabel);
             this.scrollView.addChild(sprite);
             var selectable = false;
             roomEntry.stageNumber = stageNumber;
