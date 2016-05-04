@@ -39,7 +39,7 @@ var MainLayer = cc.Layer.extend({
             y:currentRoomSprite.y,
             scaleX: 3,
             scaleY: 3,
-            opacity:100
+            opacity:75
         })
         this.addChild(this.shiftArrowSprite,90);
         this.shiftArrowSprite.setVisible(false);
