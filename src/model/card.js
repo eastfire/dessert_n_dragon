@@ -493,3 +493,37 @@ CARD_MODEL_MAP.luck.getEffectDiff = function(currentLevel, targetLevel){
     return 2;
 }
 
+CARD_MODEL_MAP.recovery = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "recovery",
+            isPassive: true,
+            maxLevel: 8
+        })
+    },
+    canLevelUp:function(){
+        var hero = currentRoom.getHero();
+        return CardModel.prototype.canLevelUp.call(this) && hero.get("recovery") < hero.get("maxRecovery")
+    },
+    onLevelUp:function(){
+        var hero = currentRoom.getHero();
+        hero.set("recovery",hero.get("recovery") + CARD_MODEL_MAP.recovery.getEffectDiff(this.get("level")) )
+    },
+    onGain:function(){
+        var hero = currentRoom.getHero();
+        hero.set("recovery",hero.get("recovery") + CARD_MODEL_MAP.recovery.getEffect(this.get("level")) )
+    },
+    onExile:function(){
+        var hero = currentRoom.getHero();
+        hero.set("recovery",hero.get("recovery") - CARD_MODEL_MAP.recovery.getEffect(this.get("level")) )
+    }
+})
+CARD_MODEL_MAP.recovery.maxCount = 2;
+CARD_MODEL_MAP.recovery.getEffect = function(level){
+    level = level || 1;
+    return level*5+5;
+}
+CARD_MODEL_MAP.recovery.getEffectDiff = function(currentLevel, targetLevel){
+    targetLevel = targetLevel || currentLevel+1;
+    return 5;
+}
