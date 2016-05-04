@@ -112,7 +112,7 @@ var texts_locale = {
             luck: {
                 name:"幸运",
                 desc: function(level){
-                    return "被动：道具掉落概率+"+CARD_MODEL_MAP.luck.getEffect(level)+"% 当前"+currentRoom.getHero().get("luck")+"%";
+                    return "被动：道具掉落概率+"+CARD_MODEL_MAP.luck.getEffect(level)+"% 当前"+currentRoom.getHero().get("luck")+"%\n";
                 },
                 levelUpDesc: function(level){
                     return "道具掉落概率+"+CARD_MODEL_MAP.luck.getEffectDiff(level)+"% 当前"+currentRoom.getHero().get("luck")+"%";
@@ -153,6 +153,15 @@ var texts_locale = {
                 levelUpDesc: function(level){
                     return "躲开敌人远程攻击的概率+"+CARD_MODEL_MAP.dodge.getEffectDiff(level)+"% 当前"+currentRoom.getHero().get("dodge")+"%";
                 }
+            },
+            recovery: {
+                name:"恢复",
+                desc: function(level){
+                    return "被动：升级时多恢复"+CARD_MODEL_MAP.recovery.getEffect(level)+"%生命 当前"+currentRoom.getHero().get("recovery")+"%";
+                },
+                levelUpDesc: function(level){
+                    return "升级时多恢复"+CARD_MODEL_MAP.recovery.getEffectDiff(level)+"%生命 当前"+currentRoom.getHero().get("recovery")+"%";
+                }
             }
         },
 
@@ -161,7 +170,8 @@ var texts_locale = {
             "shop-entry":"你可以访问商店解锁新技能",
             shop:{
                 "cross-fire":"十字火焰可以在商店中解锁了",
-                "whirl-slash":"回旋扫尾可以在商店中解锁了"
+                "whirl-slash":"回旋扫尾可以在商店中解锁了",
+                "recovery":"恢复技能可以在商店中解锁了"
             },
 
             //card
@@ -169,7 +179,8 @@ var texts_locale = {
                 "vertical-fire":"在任意关卡中使用纵向火焰",
                 "horizontal-fire":"在任意关卡中使用横向火焰",
                 "cross-fire":"在任意关卡中使用十字火焰",
-                "whirl-slash":"在任意关卡中使用回旋扫尾"
+                "whirl-slash":"在任意关卡中使用回旋扫尾",
+                "recovery":"在任意关卡中使用恢复技能"
             },
             
             //enemy
