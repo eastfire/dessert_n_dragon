@@ -4,22 +4,27 @@
 var LeanCloudStrategy = function(){
     return {
         init:function(){
-            AV.init("t9zSqtJOBXCucVufKh1BCKIv-gzGzoHsz",
+            AV.initialize("t9zSqtJOBXCucVufKh1BCKIv-gzGzoHsz",
                 "ix2t3REytTzx2ryJBFTbTKJo");
             this.ScoreObject = AV.Object.extend('Score');
         },
         saveScore:function(score, success, error){
             var s = this.ScoreObject.new();
             s.set(score);
-            s.save().then(success).then(error);
+            s.save({
+                success:success
+                error:error
+            });
         },
         fetchScores:function(success,error){
             var query = new AV.Query(this.ScoreObject);
             query.addDescending('scoreValue');
 //            query.addAscending('createdAt');
-            query.skip(0);
             query.limit(20);
-            query.find().then(success).then(error)
+            query.find({
+                success:success
+                error:error
+            });
         }
     }
 }
