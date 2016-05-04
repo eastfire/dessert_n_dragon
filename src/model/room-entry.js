@@ -2493,7 +2493,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:4,y:3}],
-        initHp: 30,
+        initHp: 50,
         initMaxHp: 100,
         maxHpStrategy:{
             type: "normal"
@@ -2543,4 +2543,43 @@ rooms.push({
         }
     },
     choicePool:STANDARD_CHOICE_POOL
+});
+
+//room35 enemy recovery skill card
+rooms.push({
+    turnLimit:25,
+    scoreCondition: [1500, 1800, 2100],
+    winEveryConditions:[
+        "outOfTurn"
+    ],
+    loseAnyConditions:[
+    ],
+    enemyLevelPool:[{
+        type:"ricecake"
+    },{
+        type:"donut"
+    },{
+        type:"chocolate-cake"
+    }],
+    levelPool:[1,2,3],
+    itemPool:STANDARD_ITEM_POOL,
+    genEnemyStrategy: [{type:"random", number: 3, last: 0}],
+    initTiles:tiles7x7Cross7x3,
+    initMovables:[],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:4,y:4}],
+        initHp: 30,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        } //normal, fix
+    },
+    choicePool:_.union(STANDARD_CHOICE_POOL,[
+        { type:"getCard", opt:{type:"recovery"}}
+        ]),
+    unlocks: [{type:"shop", subtype:"recovery"}]
 });
