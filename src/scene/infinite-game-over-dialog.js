@@ -14,7 +14,7 @@ var LeanCloudStrategy = function(){
             s.save().then(success).then(error);
         },
         fetchScores:function(success,error){
-            var query = new AV.Query("Score");
+            var query = new AV.Query(this.ScoreObject);
             query.addDescending('scoreValue');
 //            query.addAscending('createdAt');
             query.skip(0);
