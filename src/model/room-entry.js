@@ -2429,7 +2429,7 @@ rooms.push({
         },
         {
             conditionType:"kill-level",
-            type:"souffle",subtype:"green",
+            type:"souffle",
             number: 9
         }
     ],
@@ -2582,4 +2582,101 @@ rooms.push({
         { type:"getCard", opt:{type:"recovery"}}
         ]),
     unlocks: [{type:"shop", subtype:"recovery"}]
+});
+
+//room36 icecream donut
+rooms.push({
+    turnLimit:27,
+    scoreCondition: [1500, 1800, 2100],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"icecream",
+            number: 12
+        },
+        {
+            conditionType:"kill-level",
+            type:"donut",
+            number: 12
+        },
+        {
+            conditionType:"kill-level",
+            type:"jelly",
+            number: 12
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyLevelPool:[{
+        type:"icecream"
+    },{
+        type:"donut"
+    },{
+        type:"jelly"
+    }],
+    levelPool:[1,2],
+    itemPool:STANDARD_ITEM_POOL,
+    genEnemyStrategy: [{type:"random", number: 3, last: 0}],
+    initTiles:tiles6x5E,
+    initMovables:[],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:2,y:3}],
+        initHp: 30,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        } //normal, fix
+    },
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//room37 ricecake max level
+rooms.push({
+    turnLimit:27,
+    scoreCondition: [1500, 1800, 2100],
+    winEveryConditions:[
+        {
+            conditionType:"kill-max-level",
+            type:"ricecake",
+            number: 6
+        },
+        {
+            conditionType:"kill-max-level",
+            type:"souffle",
+            number: 15
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyLevelPool:[{
+        type:"ricecake"
+    },{
+        type:"souffle"
+    },{
+        type:"chocolate-cake"
+    }],
+    levelPool:[1,2,3],
+    itemPool:STANDARD_ITEM_POOL,
+    genEnemyStrategy: [{type:"random", number: 3, last: 0}],
+    initTiles:tiles6x6,
+    initMovables:[],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:2,y:4}],
+        initHp: 30,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        } //normal, fix
+    },
+    choicePool:STANDARD_CHOICE_POOL
 });
