@@ -1956,7 +1956,7 @@ rooms.push({
     enemyPool:[{
         type:"cherrycake"
     },{
-        type:"chocolate"
+        type:"chocolate-cake"
     },{
         type:"pudding", subtype:"red"
     }],
