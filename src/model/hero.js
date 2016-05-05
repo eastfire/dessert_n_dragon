@@ -28,7 +28,10 @@ var HeroModel = MovableModel.extend({
             
             maxHand: 4,
             drawEachTurn: 1,
-            isShowLevel:false
+            isShowLevel:false,
+            
+            buff: {},
+            debuff: {}
         } )
     },
     initialize:function(){
@@ -37,6 +40,10 @@ var HeroModel = MovableModel.extend({
         this.set("maxHp",this.get("initMaxHp") || this.maxHpOfLevel());
         this.set("hp",this.get("initHp") || this.get("maxHp"));
         this.set("requireExp",this.get("initRequireExp") || this.requireExpOfLevel());
+    },
+    onTurnStart:function(){
+        MovableModel.prototype.onTurnStart.call(this);
+        this.set("buff",{});
     },
     getPosition:function(){
         return this.get("positions")[0];
@@ -87,6 +94,11 @@ var HeroModel = MovableModel.extend({
 
             this.useRemainExp();
         }
+    },
+    gainBuff:function(type, amount){
+        var buff = this.get("buff")
+        buff[type] = buff[type] || 0;
+        buff[type]+=amount;
     },
     useRemainExp:function(){
         var amount = this.get("unusedExp");
