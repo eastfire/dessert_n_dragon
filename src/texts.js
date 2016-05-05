@@ -112,16 +112,16 @@ var texts_locale = {
             luck: {
                 name:"幸运",
                 desc: function(level){
-                    return "被动：道具掉落概率+"+CARD_MODEL_MAP.luck.getEffect(level)+"% 当前"+currentRoom.getHero().get("luck")+"%\n";
+                    return "持续：幸运+"+CARD_MODEL_MAP.luck.getEffect(level)+"（当前"+currentRoom.getHero().get("luck")+"）\n使用时：1回合内暂时提升幸运"+CARD_MODEL_MAP.luck.getUseEffect;
                 },
                 levelUpDesc: function(level){
-                    return "道具掉落概率+"+CARD_MODEL_MAP.luck.getEffectDiff(level)+"% 当前"+currentRoom.getHero().get("luck")+"%";
+                    return "持续：幸运+"+CARD_MODEL_MAP.luck.getEffectDiff(level)+"（当前"+currentRoom.getHero().get("luck")+"）";
                 }
             },
             constitution: {
                 name:"强壮",
                 desc: function(level){
-                    return "被动：生命上限+"+CARD_MODEL_MAP.constitution.getEffect(level);
+                    return "持续：生命上限+"+CARD_MODEL_MAP.constitution.getEffect(level)+"\n使用时：恢复"+CARD_MODEL_MAP.constitution.getUseEffect+"点生命";
                 },
                 levelUpDesc: function(level){
                     return "生命上限+"+CARD_MODEL_MAP.constitution.getEffectDiff(level);
@@ -130,7 +130,7 @@ var texts_locale = {
             cunning: {
                 name:"健身",
                 desc: function(level){
-                    return "被动：升级需要的饱腹度减少"+CARD_MODEL_MAP.cunning.getEffect(level)+"% 当前"+currentRoom.getHero().get("cunning")+"%";
+                    return "持续：升级需要的饱腹度减少"+CARD_MODEL_MAP.cunning.getEffect(level)+"% 当前"+currentRoom.getHero().get("cunning")+"%\n使用时：获得"+CARD_MODEL_MAP.cunning.getUseEffect+"点饱腹度";
                 },
                 levelUpDesc: function(level){
                     return "升级需要的饱腹度减少"+CARD_MODEL_MAP.cunning.getEffectDiff(level)+"% 当前"+currentRoom.getHero().get("cunning")+"%";
@@ -139,7 +139,7 @@ var texts_locale = {
             dexterity: {
                 name:"敏捷",
                 desc: function(level){
-                    return "被动：躲开敌人近战攻击的概率+"+CARD_MODEL_MAP.dexterity.getEffect(level)+"% 当前"+currentRoom.getHero().get("dexterity")+"%";
+                    return "被动：躲开敌人近战攻击的概率+"+CARD_MODEL_MAP.dexterity.getEffect(level)+"% 当前"+currentRoom.getHero().get("dexterity")+"%\n使用时：1回合内暂时提升敏捷"+CARD_MODEL_MAP.dexterity.getUseEffect;
                 },
                 levelUpDesc: function(level){
                     return "躲开敌人近战攻击的概率+"+CARD_MODEL_MAP.dexterity.getEffectDiff(level)+"% 当前"+currentRoom.getHero().get("dexterity")+"%";
@@ -148,7 +148,7 @@ var texts_locale = {
             dodge: {
                 name:"闪躲",
                 desc: function(level){
-                    return "被动：躲开敌人远程攻击的概率+"+CARD_MODEL_MAP.dodge.getEffect(level)+"% 当前"+currentRoom.getHero().get("dodge")+"%";
+                    return "被动：躲开敌人远程攻击的概率+"+CARD_MODEL_MAP.dodge.getEffect(level)+"% 当前"+currentRoom.getHero().get("dodge")+"%\n使用时：1回合内暂时提升闪躲"+CARD_MODEL_MAP.dodge.getUseEffect;
                 },
                 levelUpDesc: function(level){
                     return "躲开敌人远程攻击的概率+"+CARD_MODEL_MAP.dodge.getEffectDiff(level)+"% 当前"+currentRoom.getHero().get("dodge")+"%";
@@ -157,7 +157,7 @@ var texts_locale = {
             recovery: {
                 name:"恢复",
                 desc: function(level){
-                    return "被动：升级时多恢复"+CARD_MODEL_MAP.recovery.getEffect(level)+"%生命 当前"+currentRoom.getHero().get("recovery")+"%";
+                    return "被动：升级时多恢复"+CARD_MODEL_MAP.recovery.getEffect(level)+"%生命 当前"+currentRoom.getHero().get("recovery")+"%\n使用时：恢复"+CARD_MODEL_MAP.recovery.getUseEffect+"点生命";;
                 },
                 levelUpDesc: function(level){
                     return "升级时多恢复"+CARD_MODEL_MAP.recovery.getEffectDiff(level)+"%生命 当前"+currentRoom.getHero().get("recovery")+"%";
