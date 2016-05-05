@@ -461,7 +461,7 @@ CARD_MODEL_MAP.dexterity = CardModel.extend({
         hero.set("dexterity",hero.get("dexterity") - CARD_MODEL_MAP.dexterity.getEffect(this.get("level")) )
     },
     onUse:function(){
-        currentRoom.getHero().gainBoost("dexterity", CARD_MODEL_MAP.dexterity.getUseEffect);
+        currentRoom.getHero().gainBuff("dexterity", CARD_MODEL_MAP.dexterity.getUseEffect);
     }
 })
 CARD_MODEL_MAP.dexterity.maxCount = 2;
@@ -500,7 +500,7 @@ CARD_MODEL_MAP.dodge = CardModel.extend({
         hero.set("dodge",hero.get("dodge") - CARD_MODEL_MAP.dodge.getEffect(this.get("level")) )
     },
     onUse:function(){
-        currentRoom.getHero().gainBoost("dodge", CARD_MODEL_MAP.dodge.getUseEffect);
+        currentRoom.getHero().gainBuff("dodge", CARD_MODEL_MAP.dodge.getUseEffect);
     }
 })
 CARD_MODEL_MAP.dodge.maxCount = 2;
@@ -539,7 +539,7 @@ CARD_MODEL_MAP.luck = CardModel.extend({
         hero.set("luck",hero.get("luck") - CARD_MODEL_MAP.luck.getEffect(this.get("level")) )
     },
     onUse:function(){
-        currentRoom.getHero().gainBoost("luck", CARD_MODEL_MAP.luck.getUseEffect);
+        currentRoom.getHero().gainBuff("luck", CARD_MODEL_MAP.luck.getUseEffect);
     }
 })
 CARD_MODEL_MAP.luck.maxCount = 2;
