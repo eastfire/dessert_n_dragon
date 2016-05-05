@@ -104,7 +104,12 @@ var texts_locale = {
             },
             "whirl-slash":{
                 name:"回旋扫尾",
-                desc: "攻击所在周围8个格子的所有的敌人",
+                desc: "攻击上下左右4个格子的所有的敌人",
+                levelUpDesc: "等待时间-1"
+            },
+            "big-whirl-slash":{
+                name:"大回旋扫尾",
+                desc: "攻击周围8个格子的所有的敌人",
                 levelUpDesc: "等待时间-2"
             },
 
