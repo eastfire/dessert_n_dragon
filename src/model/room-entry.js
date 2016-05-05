@@ -2718,3 +2718,43 @@ rooms.push({
     },
     choicePool:STANDARD_CHOICE_POOL
 });
+
+//room38 持久战
+rooms.push({ 
+    turnLimit:50,
+    scoreCondition: [4000, 6000, 7000],
+    winEveryConditions:[
+        "outOfTurn"
+    ],
+    loseAnyConditions:[
+    ],
+    enemyPool:[{
+        type:"donut"
+    },{
+        type:"cherrycake"
+    },{
+        type:"chocolate-cake"
+    }],
+    genEnemyStrategy: [{type:"random", number: 3, last: 0}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles6x6UpArrow2,
+    initMovables:[
+    ],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:4,y:4}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        } //normal, fix
+    },
+    choicePool:STANDARD_CHOICE_POOL,
+    initHand:[
+        {type:"big-whirl-slash"}
+    ],
+    unlocks:[{type:"shop", subtype:"big-whirl-slash"}]
+});
