@@ -195,7 +195,7 @@ COMMODITY_ENTRY_LIST = [
         subtype: "horizontal-fire"
     },
     {
-        cost: 500,
+        cost: 300,
         type: "card",
         subtype: "whirl-slash",
         unlockHint: "通过14关后解锁",
@@ -222,6 +222,16 @@ COMMODITY_ENTRY_LIST = [
         valid: {
             unlockType: "shop",
             unlockSubtype: "recovery"
+        }
+    },
+    {
+        cost: 500,
+        type: "card",
+        subtype: "big-whirl-slash",
+        unlockHint: "通过38关后解锁",
+        valid: {
+            unlockType: "shop",
+            unlockSubtype: "big-whirl-slash"
         }
     }
 ]
