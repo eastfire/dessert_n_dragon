@@ -636,15 +636,26 @@ var tiles6x7F = [
     [null,null,null,null,null,wall_se,wall_e,wall_e,wall_ne]
 ];
 
-var tiles6x6T = [
-    [null,null,null,null,wall_sw,wall_w,wall_w,wall_nw],
-    [null,null,null,null,wall_s,floor_n,floor_n,wall_n],
-    [wall_sw,wall_w,wall_w,wall_w,wall_swl,floor_n,floor_n,wall_n],
-    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
-    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
-    [wall_se,wall_e,wall_e,wall_e,wall_sel,floor_n,floor_n,wall_n],
-    [null,null,null,null,wall_s,floor_n,floor_n,wall_n],
-    [null,null,null,null,wall_se,wall_e,wall_e,wall_ne]
+var tiles6x7J = [
+    [null,null,null,null,null,wall_sw,wall_w,wall_w,wall_nw],
+    [wall_sw,wall_w,wall_w,wall_nw,null,wall_s,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_n,null,wall_s,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_nwl,wall_w,wall_swl,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_sel,floor_n,floor_n,wall_n],
+    [null,null,null,null,null,wall_se,wall_e,wall_e,wall_ne]
+];
+
+var tiles6x7J2 = [
+    [wall_sw,wall_w,wall_w,wall_nw,null,wall_sw,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,wall_n,null,wall_s,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_nwl,wall_w,wall_swl,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_sel,floor_n,floor_n,wall_n],
+    [null,null,null,null,null,wall_se,floor_n,floor_n,wall_ne],
+    [null,null,null,null,null,wall_se,wall_e,wall_e,wall_ne]
 ];
 
 var tiles6x6L = [
@@ -702,6 +713,17 @@ var tiles7x7Snake2 = [
     [wall_s,floor_n,wall_nwlse,wall_ewl,wall_ewl,wall_ewl,wall_swlne,floor_n,wall_n],
     [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
     [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
+];
+
+var tiles6x6T = [
+    [null,null,null,null,wall_sw,wall_w,wall_w,wall_nw],
+    [null,null,null,null,wall_s,floor_n,floor_n,wall_n],
+    [wall_sw,wall_w,wall_w,wall_w,wall_swl,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_sel,floor_n,floor_n,wall_n],
+    [null,null,null,null,wall_s,floor_n,floor_n,wall_n],
+    [null,null,null,null,wall_se,wall_e,wall_e,wall_ne]
 ];
 
 var STANDARD_CHOICE_POOL = [
@@ -2757,4 +2779,50 @@ rooms.push({
         {type:"big-whirl-slash"}
     ],
     unlocks:[{type:"shop", subtype:"big-whirl-slash"}]
+});
+
+//room39 L icecream and jelly
+rooms.push({ 
+    timeLimit:90,
+    scoreCondition: [1000, 1400, 1700],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"jelly",
+            number: 10
+        },
+        {
+            conditionType:"kill-level",
+            type:"icecream",
+            number: 10
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTime"
+    ],
+    enemyPool:[{
+        type:"jelly"
+    },{
+        type:"icecream"
+    },{
+        type:"pudding",subtype:"blue"
+    }],
+    genEnemyStrategy: [{type:"random", number: 3, last: 0}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles6x6L3,
+    initMovables:[
+    ],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:4,y:4}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        } //normal, fix
+    },
+    choicePool:STANDARD_CHOICE_POOL
 });
