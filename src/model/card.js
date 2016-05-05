@@ -110,7 +110,7 @@ CARD_MODEL_MAP.heal.getEffect = function(level){
     level = level || 1;
     return 5*level;
 }
-CARD_MODEL_MAP.heal.maxCount = 5;
+CARD_MODEL_MAP.heal.maxCount = 4;
 
 CARD_MODEL_MAP["tail-slash"] = CardModel.extend({
     defaults: function () {
@@ -281,6 +281,46 @@ CARD_MODEL_MAP["whirl-slash"] = CardModel.extend({
         })
     },
     waitTurnOfLevel:function(level){
+        return 13-level;
+    },
+    onUse:function(){
+        var hero = currentRoom.getHero();
+        var heroPosition = hero.get("positions")[0];
+        
+        _.each( [{ x:heroPosition.x-1, y:heroPosition.y},
+                { x:heroPosition.x+1, y:heroPosition.y},
+                { x:heroPosition.x, y:heroPosition.y-1},
+                { x:heroPosition.x, y:heroPosition.y+1}], function(position){
+                    var movable = currentRoom.getMovableByPosition(position.x, position.y);
+                    if (movable instanceof EnemyModel && movable.canBeAttack("skill")) {
+                        hero.attack(movable, {
+                            attackType: "skill",
+                            attackAction: "whirl-slash",
+                            onHit: function (enemy, opt) {
+                                enemy.beHit(hero, opt);
+                            },
+                            onMiss: function (enemy, opt) {
+                                enemy.dodgeAttack(hero, opt);
+                            },
+                            context: this
+                        });
+                    }
+                },this )
+    },
+    onLevelUp:function(){
+        this.reduceWait(2);
+    }
+})
+CARD_MODEL_MAP["whirl-slash"].maxCount = 4;
+
+CARD_MODEL_MAP["big-whirl-slash"] = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "whirl-slash",
+            maxLevel: 5
+        })
+    },
+    waitTurnOfLevel:function(level){
         return 27-level*2;
     },
     onUse:function(){
@@ -293,7 +333,7 @@ CARD_MODEL_MAP["whirl-slash"] = CardModel.extend({
                 if (movable instanceof EnemyModel && movable.canBeAttack("skill")) {
                     hero.attack(movable, {
                         attackType: "skill",
-                        attackAction: "whirl-slash",
+                        attackAction: "big-whirl-slash",
                         onHit: function (enemy, opt) {
                             enemy.beHit(hero, opt);
                         },
@@ -310,7 +350,7 @@ CARD_MODEL_MAP["whirl-slash"] = CardModel.extend({
         this.reduceWait(2);
     }
 })
-CARD_MODEL_MAP["whirl-slash"].maxCount = 4;
+CARD_MODEL_MAP["big-whirl-slash"].maxCount = 4;
 
 //passive card
 CARD_MODEL_MAP.constitution = CardModel.extend({
@@ -338,6 +378,9 @@ CARD_MODEL_MAP.constitution = CardModel.extend({
         var effect = CARD_MODEL_MAP.constitution.getEffect(this.get("level"));
         hero.set("maxHp",hero.get("maxHp") - effect )
         hero.set("hp",Math.min(hero.get("hp"), hero.get("maxHp") ) )
+    },
+    onUse:function(){
+        currentRoom.getHero().gainHp(CARD_MODEL_MAP.constitution.getUseEffect);
     }
 })
 CARD_MODEL_MAP.constitution.maxCount = 2;
@@ -349,6 +392,7 @@ CARD_MODEL_MAP.constitution.getEffectDiff = function(currentLevel, targetLevel){
     targetLevel = targetLevel || currentLevel+1;
     return 5;
 }
+CARD_MODEL_MAP.constitution.getUseEffect = 5;
 
 CARD_MODEL_MAP.cunning = CardModel.extend({
     defaults: function () {
@@ -376,6 +420,9 @@ CARD_MODEL_MAP.cunning = CardModel.extend({
     onExile:function(){
         var hero = currentRoom.getHero();
         hero.set("cunning",hero.get("cunning") - CARD_MODEL_MAP.cunning.getEffect(this.get("level")) )
+    },
+    onUse:function(){
+        currentRoom.getHero().gainExp(CARD_MODEL_MAP.cunning.getUseEffect);
     }
 })
 CARD_MODEL_MAP.cunning.maxCount = 2;
@@ -387,6 +434,7 @@ CARD_MODEL_MAP.cunning.getEffectDiff = function(currentLevel, targetLevel){
     targetLevel = targetLevel || currentLevel+1;
     return 1;
 }
+CARD_MODEL_MAP.cunning.getUseEffect = 5;
 
 CARD_MODEL_MAP.dexterity = CardModel.extend({
     defaults: function () {
@@ -411,6 +459,9 @@ CARD_MODEL_MAP.dexterity = CardModel.extend({
     onExile:function(){
         var hero = currentRoom.getHero();
         hero.set("dexterity",hero.get("dexterity") - CARD_MODEL_MAP.dexterity.getEffect(this.get("level")) )
+    },
+    onUse:function(){
+        currentRoom.getHero().gainBoost("dexterity", CARD_MODEL_MAP.dexterity.getUseEffect);
     }
 })
 CARD_MODEL_MAP.dexterity.maxCount = 2;
@@ -422,6 +473,7 @@ CARD_MODEL_MAP.dexterity.getEffectDiff = function(currentLevel, targetLevel){
     targetLevel = targetLevel || currentLevel+1;
     return 2;
 }
+CARD_MODEL_MAP.dexterity.getUseEffect = 3;
 
 CARD_MODEL_MAP.dodge = CardModel.extend({
     defaults: function () {
@@ -446,6 +498,9 @@ CARD_MODEL_MAP.dodge = CardModel.extend({
     onExile:function(){
         var hero = currentRoom.getHero();
         hero.set("dodge",hero.get("dodge") - CARD_MODEL_MAP.dodge.getEffect(this.get("level")) )
+    },
+    onUse:function(){
+        currentRoom.getHero().gainBoost("dodge", CARD_MODEL_MAP.dodge.getUseEffect);
     }
 })
 CARD_MODEL_MAP.dodge.maxCount = 2;
@@ -457,6 +512,7 @@ CARD_MODEL_MAP.dodge.getEffectDiff = function(currentLevel, targetLevel){
     targetLevel = targetLevel || currentLevel+1;
     return 2;
 }
+CARD_MODEL_MAP.dodge.getUseEffect = 5;
 
 CARD_MODEL_MAP.luck = CardModel.extend({
     defaults: function () {
@@ -481,6 +537,9 @@ CARD_MODEL_MAP.luck = CardModel.extend({
     onExile:function(){
         var hero = currentRoom.getHero();
         hero.set("luck",hero.get("luck") - CARD_MODEL_MAP.luck.getEffect(this.get("level")) )
+    },
+    onUse:function(){
+        currentRoom.getHero().gainBoost("luck", CARD_MODEL_MAP.luck.getUseEffect);
     }
 })
 CARD_MODEL_MAP.luck.maxCount = 2;
@@ -492,6 +551,7 @@ CARD_MODEL_MAP.luck.getEffectDiff = function(currentLevel, targetLevel){
     targetLevel = targetLevel || currentLevel+1;
     return 2;
 }
+CARD_MODEL_MAP.luck.getUseEffect = 3;
 
 CARD_MODEL_MAP.recovery = CardModel.extend({
     defaults: function () {
@@ -516,6 +576,9 @@ CARD_MODEL_MAP.recovery = CardModel.extend({
     onExile:function(){
         var hero = currentRoom.getHero();
         hero.set("recovery",hero.get("recovery") - CARD_MODEL_MAP.recovery.getEffect(this.get("level")) )
+    },
+    onUse:function(){
+        currentRoom.getHero().gainHp(CARD_MODEL_MAP.recovery.getUseEffect);
     }
 })
 CARD_MODEL_MAP.recovery.maxCount = 2;
@@ -527,3 +590,4 @@ CARD_MODEL_MAP.recovery.getEffectDiff = function(currentLevel, targetLevel){
     targetLevel = targetLevel || currentLevel+1;
     return 5;
 }
+CARD_MODEL_MAP.recovery.getUseEffect = 5;
