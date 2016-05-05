@@ -9,7 +9,7 @@ var wall_sw = {type:"wall", subtype:"sw"};
 var wall_nenw = {type:"wall", subtype:"nenw"};
 var wall_sesw = {type:"wall", subtype:"sesw"};
 var wall_nese = {type:"wall", subtype:"nese"};
-var wall_nenw = {type:"wall", subtype:"nwsw"};
+var wall_nwsw = {type:"wall", subtype:"nwsw"};
 var wall_nel = {type:"wall", subtype:"nelong"};
 var wall_sel = {type:"wall", subtype:"selong"};
 var wall_nwl = {type:"wall", subtype:"nwlong"};
@@ -560,10 +560,10 @@ var tiles6x6Whirl2 = [
 var tiles6x6Mi = [
     [wall_sw,wall_w,wall_nwsw,wall_w,wall_w,wall_nwsw,wall_w,wall_nw],
     [wall_s,floor_n,wall_nsl,floor_n,floor_n,wall_nsl,floor_n,wall_n],
-    [wall_sesw,wall_ewl,wall_swlne,floor_n,floor_n,wall_nwlongse,wall_ewl,wall_nenw],
+    [wall_sesw,wall_ewl,wall_swlne,floor_n,floor_n,wall_nwlse,wall_ewl,wall_nenw],
     [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
     [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
-    [wall_sesw,wall_ewl,wall_selnw,floor_n,floor_n,wall_nelongsw,wall_ewl,wall_nenw],
+    [wall_sesw,wall_ewl,wall_selnw,floor_n,floor_n,wall_nelsw,wall_ewl,wall_nenw],
     [wall_s,floor_n,wall_nsl,floor_n,floor_n,wall_nsl,floor_n,wall_n],
     [wall_se,wall_e,wall_nese,wall_e,wall_e,wall_nese,wall_e,wall_ne]
 ];
@@ -684,7 +684,7 @@ var tiles6x6L3 = [
     [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
     [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
     [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
-    [wall_s,floor_n,floor_n,wall_nwl,wall_e,wall_e,wall_e,wall_ne],
+    [wall_s,floor_n,floor_n,wall_nel,wall_e,wall_e,wall_e,wall_ne],
     [wall_s,floor_n,floor_n,wall_n,null,null,null,null],
     [wall_s,floor_n,floor_n,wall_n,null,null,null,null],
     [wall_s,floor_n,floor_n,wall_n,null,null,null,null],
@@ -2814,7 +2814,7 @@ rooms.push({
     ],
     initHero: {
         type:"normalHero",
-        positions: [{x:4,y:4}],
+        positions: [{x:2,y:2}],
         initHp: 100,
         initMaxHp: 100,
         maxHpStrategy:{

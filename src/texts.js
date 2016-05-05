@@ -112,6 +112,15 @@ var texts_locale = {
                 desc: "攻击周围8个格子的所有的敌人",
                 levelUpDesc: "等待时间-2"
             },
+            cooldown:{
+                name:"冷静",
+                desc: function(level) {
+                    return "手中所有牌的等待时间减" + CARD_MODEL_MAP.cooldown.getEffect();
+                },
+                levelUpDesc:function(level){
+                    return "等待时间多减少"+CARD_MODEL_MAP.cooldown.getEffectDiff()
+                }
+            },
 
             //passive
             luck: {
@@ -177,9 +186,14 @@ var texts_locale = {
                 "cross-fire":"十字火焰可以在商店中解锁了",
                 "whirl-slash":"回旋扫尾可以在商店中解锁了",
                 "big-whirl-slash":"大回旋扫尾可以在商店中解锁了",
+                "cooldown":"冷静技能可以在商店中解锁了",
+                //passive
                 "recovery":"恢复技能可以在商店中解锁了"
             },
 
+            hand3: "手牌上限加１",
+            hand4: "手牌上限加１",
+            hand5: "手牌上限加１",
             //card
             card:{
                 "vertical-fire":"在任意关卡中使用纵向火焰",
@@ -187,6 +201,8 @@ var texts_locale = {
                 "cross-fire":"在任意关卡中使用十字火焰",
                 "whirl-slash":"在任意关卡中使用回旋扫尾",
                 "big-whirl-slash":"在任意关卡中使用大回旋扫尾",
+                "cooldown":"在任意关卡中使用冷静技能",
+                //passive
                 "recovery":"在任意关卡中使用恢复技能"
             },
             

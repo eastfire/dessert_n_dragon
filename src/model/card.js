@@ -316,7 +316,7 @@ CARD_MODEL_MAP["whirl-slash"].maxCount = 4;
 CARD_MODEL_MAP["big-whirl-slash"] = CardModel.extend({
     defaults: function () {
         return _.extend(CardModel.prototype.defaults.call(this),{
-            type: "whirl-slash",
+            type: "big-whirl-slash",
             maxLevel: 5
         })
     },
@@ -351,6 +351,37 @@ CARD_MODEL_MAP["big-whirl-slash"] = CardModel.extend({
     }
 })
 CARD_MODEL_MAP["big-whirl-slash"].maxCount = 4;
+
+CARD_MODEL_MAP.cooldown = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "cooldown",
+            maxLevel: 5
+        })
+    },
+    waitTurnOfLevel:function(level){
+        return 0;
+    },
+    onUse:function(){
+        var effect = CARD_MODEL_MAP.cooldown.getEffect(this.get("level"));
+        _.each(currentRoom.getHand(),function(cardModel){
+            cardModel.reduceWait(effect)
+        },this);
+    },
+    onLevelUp:function(){
+
+    }
+})
+CARD_MODEL_MAP.cooldown.maxCount = 4;
+CARD_MODEL_MAP.cooldown.getEffect = function(level){
+    level = level || 1;
+    return level+4;
+}
+CARD_MODEL_MAP.cooldown.getEffectDiff = function(currentLevel, targetLevel){
+    targetLevel = targetLevel || currentLevel+1;
+    return 1;
+}
+
 
 //passive card
 CARD_MODEL_MAP.constitution = CardModel.extend({

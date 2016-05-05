@@ -782,11 +782,23 @@ var RoomModel = Backbone.Model.extend({
         statistic["get-score"] = statistic["get-score"] || 0;
         statistic["get-score"]+=score;
     },
+    getMaxHand:function(){
+        var maxHand = this.getHero().get("maxHand");
+        if ( unlockedStatus.isUnlocked("hand3") ) maxHand++;
+        if ( unlockedStatus.isUnlocked("hand4") ) maxHand++;
+        if ( unlockedStatus.isUnlocked("hand5") ) maxHand++;
+        return maxHand
+    },
     gainCard:function(opt){
         var cardModel = new CARD_MODEL_MAP[opt.type](opt);
-        this.__hand.push(cardModel);
         cardModel.onGain();
-        this.trigger("change:hand",this,"gain");
+        if ( this.canDrawCard() ) {
+            this.__hand.push(cardModel);
+            this.trigger("change:hand", this, "gain");
+        } else {
+            this.__discard.push( cardModel );
+            this.trigger("change:deck", this);
+        }
         //statistic
         statistic["gain-card"] = statistic["gain-card"] || 0;
         statistic["gain-card"]++;
@@ -817,7 +829,7 @@ var RoomModel = Backbone.Model.extend({
         this.trigger("change:deck", this);
     },
     canDrawCard:function(){
-        return this.__hand.length < this.__hero.get("maxHand");
+        return this.__hand.length < this.getMaxHand();
     },
     getHand:function(){
         return this.__hand;

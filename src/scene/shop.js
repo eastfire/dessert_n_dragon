@@ -49,6 +49,8 @@ var ShopLayer = cc.Layer.extend({
             var text;
             if ( entry.type === "card") {
                 text = texts.unlock.card[entry.subtype]
+            } else {
+                text = texts.unlock[entry.type]
             }
 
 
@@ -100,6 +102,8 @@ var ShopLayer = cc.Layer.extend({
         return _.filter(COMMODITY_ENTRY_LIST,function(entry){
             if ( entry.type === "card" ) {
                 return !unlockedStatus.isUnlocked(entry.type, entry.subtype)
+            } else {
+                return !unlockedStatus.isUnlocked(entry.type)
             }
             return true;
         })
@@ -185,9 +189,16 @@ var ShopScene = cc.Scene.extend({
 
 COMMODITY_ENTRY_LIST = [
     {
-        cost: 50,
-        type:"card",
-        subtype: "vertical-fire"
+        cost: 100,
+        type:"hand3"
+    },
+    {
+        cost: 1000,
+        type:"hand4"
+    },
+    {
+        cost: 10000,
+        type:"hand5"
     },
     {
         cost: 100,
@@ -232,6 +243,16 @@ COMMODITY_ENTRY_LIST = [
         valid: {
             unlockType: "shop",
             unlockSubtype: "big-whirl-slash"
+        }
+    },
+    {
+        cost: 500,
+        type: "card",
+        subtype: "cooldown",
+        unlockHint: "通过41关后解锁",
+        valid: {
+            unlockType: "shop",
+            unlockSubtype: "cooldown"
         }
     }
 ]

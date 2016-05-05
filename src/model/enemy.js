@@ -102,7 +102,7 @@ var EnemyModel = MovableModel.extend({
         return Math.random() < this.getDropRate();
     },
     getDropRate:function(){
-        return Math.min(0.5, (this.get("level") + currentRoom.getHero().get("luck")) * LUCK_EFFECT)
+        return Math.min(0.5, (this.get("level") + currentRoom.getHero().getProp("luck")) * LUCK_EFFECT)
     },
     beforeDodgeAttack:function(hero){
     },

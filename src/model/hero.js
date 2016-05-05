@@ -26,7 +26,7 @@ var HeroModel = MovableModel.extend({
             recovery: 20,
             maxRecovery: 100,
             
-            maxHand: 4,
+            maxHand: 2,
             drawEachTurn: 1,
             isShowLevel:false,
             
@@ -214,10 +214,16 @@ var HeroModel = MovableModel.extend({
     },
     beforeBeAttacked:function(enemy){
     },
+    getProp:function(propName){
+        var prop = this.get(propName);
+        var buff = this.get("buff");
+        buff[propName] = buff[propName] || 0;
+        return prop + buff[propName]
+    },
     checkHit:function(enemy, options){
         var attackType = enemy.get("attackType");
-        if ( ( attackType === ATTACK_TYPE_MELEE && Math.random() < this.get("dexterity")*DEXTERITY_EFFECT ) ||
-        ( attackType === ATTACK_TYPE_RANGE && Math.random() < this.get("dodge")*DODGE_EFFECT )
+        if ( ( attackType === ATTACK_TYPE_MELEE && Math.random() < this.getProp("dexterity")*DEXTERITY_EFFECT ) ||
+        ( attackType === ATTACK_TYPE_RANGE && Math.random() < this.getProp("dodge")*DODGE_EFFECT )
         ) {
             return false;
         }
