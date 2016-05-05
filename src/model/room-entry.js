@@ -1,666 +1,707 @@
+var wall_n = {type:"wall", subtype:"n"};
+var wall_s = {type:"wall", subtype:"s"};
+var wall_e = {type:"wall", subtype:"e"};
+var wall_w = {type:"wall", subtype:"w"};
+var wall_ne = {type:"wall", subtype:"ne"};
+var wall_se = {type:"wall", subtype:"se"};
+var wall_nw = {type:"wall", subtype:"nw"};
+var wall_sw = {type:"wall", subtype:"sw"};
+var wall_nenw = {type:"wall", subtype:"nenw"};
+var wall_sesw = {type:"wall", subtype:"sesw"};
+var wall_nese = {type:"wall", subtype:"nese"};
+var wall_nenw = {type:"wall", subtype:"nwsw"};
+var wall_nel = {type:"wall", subtype:"nelong"};
+var wall_sel = {type:"wall", subtype:"selong"};
+var wall_nwl = {type:"wall", subtype:"nwlong"};
+var wall_swl = {type:"wall", subtype:"swlong"};
+var wall_nsl = {type:"wall", subtype:"nslong"};
+var wall_ewl = {type:"wall", subtype:"ewlong"};
+var wall_newl = {type:"wall", subtype:"newlong"};
+var wall_sewl = {type:"wall", subtype:"sewlong"};
+var wall_nsel = {type:"wall", subtype:"nselong"};
+var wall_nswl = {type:"wall", subtype:"nswlong"};
+var wall_nlse = {type:"wall", subtype:"nlongse"};
+var wall_nlsw = {type:"wall", subtype:"nlongsw"};
+var wall_slne = {type:"wall", subtype:"slongne"};
+var wall_slnw = {type:"wall", subtype:"slongnw"};
+var wall_elsw = {type:"wall", subtype:"elongsw"};
+var wall_elnw = {type:"wall", subtype:"elongnw"};
+var wall_wlse = {type:"wall", subtype:"wlongse"};
+var wall_wlne = {type:"wall", subtype:"wlongne"};
+var wall_nlsesw = {type:"wall", subtype:"nlongsesw"};
+var wall_slnenw = {type:"wall", subtype:"slongnenw"};
+var wall_elnwsw = {type:"wall", subtype:"elongnwsw"};
+var wall_wlnese = {type:"wall", subtype:"wlongnese"};
+var wall_nelsw = {type:"wall", subtype:"nelongsw"};
+var wall_nwlse = {type:"wall", subtype:"nwlongse"};
+var wall_selnw = {type:"wall", subtype:"selongnw"};
+var wall_swlne = {type:"wall", subtype:"swlongne"};
+var wall_h = {type:"wall", subtype:"hole"};
+var floor_n = {type:"floor", subtype:"normal"};
+
 var tiles4x4 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype: "w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 var tiles5x4 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype: "w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 var tiles6x4 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype: "w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 var tiles7x4 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype: "w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 var tiles4x5 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype: "w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 var tiles5x5 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype: "w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 var tiles6x5 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype: "w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 var tiles7x5 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype: "w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 var tiles4x6 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 var tiles5x6 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 var tiles6x6 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 var tiles7x6 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 var tiles4x7 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 var tiles5x7 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 var tiles6x7 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 var tiles7x7 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var tiles6x6Rhombus = [
-    [null,null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"},null,null],
-    [null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"},null],
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"}],
-    [null,{type:"wall",subtype:"se"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"},null],
-    [null,null,{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null,null]
+    [null,null,wall_sw,wall_w,wall_w,wall_nw,null,null],
+    [null,wall_sw,wall_swl,floor_n,floor_n,wall_nwl,wall_nw,null],
+    [wall_sw,wall_swl,floor_n,floor_n,floor_n,floor_n,wall_nwl,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_sel,floor_n,floor_n,floor_n,floor_n,wall_nel,wall_ne],
+    [null,wall_se,wall_sel,floor_n,floor_n,wall_nel,wall_ne,null],
+    [null,null,wall_se,wall_e,wall_e,wall_ne,null,null]
 ];
 
 var tiles7x7Rhombus = [
-    [null,null,null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"},null,null,null],
-    [null,null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"},null,null],
-    [null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"},null],
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"}],
-    [null,{type:"wall",subtype:"se"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"},null],
-    [null,null,{type:"wall",subtype:"se"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"},null,null],
-    [null,null,null,{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null,null,null]
+    [null,null,null,wall_sw,wall_w,wall_nw,null,null,null],
+    [null,null,wall_sw,wall_swl,floor_n,wall_nwl,wall_nw,null,null],
+    [null,wall_sw,wall_swl,floor_n,floor_n,floor_n,wall_nwl,wall_nw,null],
+    [wall_sw,wall_swl,floor_n,floor_n,floor_n,floor_n,floor_n,wall_nwl,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_sel,floor_n,floor_n,floor_n,floor_n,floor_n,wall_nel,wall_ne],
+    [null,wall_se,wall_sel,floor_n,floor_n,floor_n,wall_nel,wall_ne,null],
+    [null,null,wall_se,wall_sel,floor_n,wall_nel,wall_ne,null,null],
+    [null,null,null,wall_se,wall_e,wall_ne,null,null,null]
 ];
 
 var tiles6x6Triangle = [
-    [null,null,null,null,null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [null,null,null,null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [null,null,null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [null,null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [null,null,null,null,null,wall_sw,wall_w,wall_nw],
+    [null,null,null,null,wall_sw,wall_swl,floor_n,wall_n],
+    [null,null,null,wall_sw,wall_swl,floor_n,floor_n,wall_n],
+    [null,null,wall_sw,wall_swl,floor_n,floor_n,floor_n,wall_n],
+    [null,wall_sw,wall_swl,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_sw,wall_swl,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var tiles7x7Triangle = [
-    [null,null,null,null,null,null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [null,null,null,null,null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [null,null,null,null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [null,null,null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [null,null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [null,null,null,null,null,null,wall_sw,wall_w,wall_nw],
+    [null,null,null,null,null,wall_sw,wall_swl,floor_n,wall_n],
+    [null,null,null,null,wall_sw,wall_swl,floor_n,floor_n,wall_n],
+    [null,null,null,wall_sw,wall_swl,floor_n,floor_n,floor_n,wall_n],
+    [null,null,wall_sw,wall_swl,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [null,wall_sw,wall_swl,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_sw,wall_swl,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var tiles5x5Cross5x3 = [
-    [null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"},null],
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"}],
-    [null,{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null]
+    [null,wall_sw,wall_w,wall_w,wall_w,wall_nw,null],
+    [wall_sw,wall_swl,floor_n,floor_n,floor_n,wall_nwl,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_sel,floor_n,floor_n,floor_n,wall_nel,wall_ne],
+    [null,wall_se,wall_e,wall_e,wall_e,wall_ne,null]
 ];
 
 var tiles6x6Cross6x4 = [
-    [null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"},null],
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"}],
-    [null,{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null]
+    [null,wall_sw,wall_w,wall_w,wall_w,wall_w,wall_nw,null],
+    [wall_sw,wall_swl,floor_n,floor_n,floor_n,floor_n,wall_nwl,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_sel,floor_n,floor_n,floor_n,floor_n,wall_nel,wall_ne],
+    [null,wall_se,wall_e,wall_e,wall_e,wall_e,wall_ne,null]
 ];
 
 var tiles6x6Cross6x2 = [
-    [null,null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"},null,null],
-    [null,null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,null],
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}],
-    [null,null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,null],
-    [null,null,{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null,null]
+    [null,null,wall_sw,wall_w,wall_w,wall_nw,null,null],
+    [null,null,wall_s,floor_n,floor_n,wall_n,null,null],
+    [wall_sw,wall_w,wall_swl,floor_n,floor_n,wall_nwl,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_sel,floor_n,floor_n,wall_nel,wall_e,wall_ne],
+    [null,null,wall_s,floor_n,floor_n,wall_n,null,null],
+    [null,null,wall_se,wall_e,wall_e,wall_ne,null,null]
 ];
 
 var tiles7x7Cross7x5 = [
-    [null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"},null],
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"}],
-    [null,{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null]
+    [null,wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw,null],
+    [wall_sw,wall_swl,floor_n,floor_n,floor_n,floor_n,floor_n,wall_nwl,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_sel,floor_n,floor_n,floor_n,floor_n,floor_n,wall_nel,wall_ne],
+    [null,wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne,null]
 ];
 
 var tiles7x7Cross7x3 = [
-    [null,null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"},null,null],
-    [null,null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,null],
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}],
-    [null,null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,null],
-    [null,null,{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null,null]
+    [null,null,wall_sw,wall_w,wall_w,wall_w,wall_nw,null,null],
+    [null,null,wall_s,floor_n,floor_n,floor_n,wall_n,null,null],
+    [wall_sw,wall_w,wall_swl,floor_n,floor_n,floor_n,wall_nwl,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_sel,floor_n,floor_n,floor_n,wall_nel,wall_e,wall_ne],
+    [null,null,wall_s,floor_n,floor_n,floor_n,wall_n,null,null],
+    [null,null,wall_se,wall_e,wall_e,wall_e,wall_ne,null,null]
 ];
 
 var tiles5x6ZigVertical = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"},null],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"sesw"},{type:"wall",subtype:"sewlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"newlong"},{type:"wall",subtype:"nenw"}],
-    [{type:"wall",subtype:"sesw"},{type:"wall",subtype:"sewlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw,null],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_nwl,wall_nw],
+    [wall_sesw,wall_sewl,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_newl,wall_nenw],
+    [wall_sesw,wall_sewl,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_nel,wall_ne],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne,null]
 ];
 
 var tiles6x6UpArrow = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"},null,null],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"},null],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"},null],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null,null]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_nw,null,null],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_nwl,wall_nw,null],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_nwl,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_nel,wall_ne],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_nel,wall_ne,null],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_ne,null,null]
 ];
 
 var tiles6x6UpArrow2 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"},null,null],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"},null],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"}],
-    [null,{type:"wall",subtype:"se"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"},null],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null,null]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_nw,null,null],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_nwl,wall_nw,null],
+    [wall_se,wall_sel,floor_n,floor_n,floor_n,floor_n,wall_nwl,wall_nw],
+    [null,wall_se,wall_sel,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [null,wall_sw,wall_swl,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_sw,wall_swl,floor_n,floor_n,floor_n,floor_n,wall_nel,wall_ne],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_nel,wall_ne,null],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_ne,null,null]
 ]
 
 var tiles6x5HRotate90 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nwsw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nswlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nselong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"nese"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_nwsw,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,wall_nswl,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_nsel,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_nese,wall_e,wall_e,wall_ne]
 ];
 
 var tiles5x6H = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"sesw"},{type:"wall",subtype:"sewlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"newlong"},{type:"wall",subtype:"nenw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_sesw,wall_sewl,floor_n,floor_n,floor_n,floor_n,wall_newl,wall_nenw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var tiles5x6H2 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"sesw"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"sewlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"newlong"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"nenw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_sesw,wall_ewl,wall_sewl,floor_n,floor_n,wall_newl,wall_ewl,wall_nenw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var tiles6x5H2Rotate90 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nwsw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nswlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nselong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"nese"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_nwsw,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,wall_nsl,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_nswl,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_nsel,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_nsl,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_nese,wall_e,wall_e,wall_ne]
 ];
 
 var tiles6x6H = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"}],
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_sel,floor_n,floor_n,floor_n,floor_n,wall_nel,wall_ne],
+    [wall_sw,wall_swl,floor_n,floor_n,floor_n,floor_n,wall_nwl,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var tiles6x6H2 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}],
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_sel,floor_n,floor_n,wall_nel,wall_e,wall_ne],
+    [wall_sw,wall_w,wall_swl,floor_n,floor_n,wall_nwl,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var tiles6x5N = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"elongsw"},{type:"wall",subtype:"sewlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"}],
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"newlong"},{type:"wall",subtype:"wlongne"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_elsw,wall_sewl,floor_n,floor_n,wall_nel,wall_ne],
+    [wall_sw,wall_swl,floor_n,floor_n,wall_newl,wall_wlne,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var tiles7x6N = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"elongsw"},{type:"wall",subtype:"sewlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"}],
-    [null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"},null],
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"newlong"},{type:"wall",subtype:"wlongne"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_elsw,wall_sewl,floor_n,floor_n,wall_nel,wall_ne],
+    [null,wall_sw,wall_swl,floor_n,floor_n,wall_nel,wall_ne,null],
+    [wall_sw,wall_swl,floor_n,floor_n,wall_newl,wall_wlne,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var tiles5x5Loop = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"newlong"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"sewlong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,wall_newl,wall_ewl,wall_sewl,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var tiles5x5Loop2 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"hole"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_h,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var tiles5x5Loop3 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"e"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"w"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,wall_nel,wall_e,wall_sel,floor_n,wall_n],
+    [wall_s,floor_n,wall_n,null,wall_s,floor_n,wall_n],
+    [wall_s,floor_n,wall_nwl,wall_w,wall_swl,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var tiles6x6Loop = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_nel,wall_sel,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_nwl,wall_swl,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var tiles6x6Loop2 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_nel,wall_sel,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_n,wall_s,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_n,wall_s,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_nwl,wall_swl,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var tiles6x6Loop3 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,wall_nel,wall_e,wall_e,wall_sel,floor_n,wall_n],
+    [wall_s,floor_n,wall_n,null,null,wall_s,floor_n,wall_n],
+    [wall_s,floor_n,wall_n,null,null,wall_s,floor_n,wall_n],
+    [wall_s,floor_n,wall_nwl,wall_w,wall_w,wall_swl,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var tiles7x7Loop = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"e"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"w"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_nel,wall_e,wall_sel,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_n,null,wall_s,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_nwl,wall_w,wall_swl,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var tiles7x7Loop2 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"e"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"w"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_nel,wall_e,wall_sel,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_n,null,wall_s,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_n,null,wall_s,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_n,null,wall_s,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_nwl,wall_w,wall_swl,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var tiles7x7Loop3 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,null,null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,null,null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,null,null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,wall_nel,wall_e,wall_e,wall_e,wall_sel,floor_n,wall_n],
+    [wall_s,floor_n,wall_n,null,null,null,wall_s,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,wall_n,null,null,null,wall_s,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,wall_n,null,null,null,wall_s,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,wall_nwl,wall_w,wall_w,wall_w,wall_swl,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var tiles7x7Loop4 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"newlong"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"elongnwsw"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"sewlong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"sesw"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"sewlong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"newlong"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"nenw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"newlong"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"wlongnese"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"sewlong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,wall_newl,wall_ewl,wall_elnwsw,wall_ewl,wall_sewl,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,wall_nsl,floor_n,floor_n,floor_n,wall_n],
+    [wall_sesw,wall_ewl,wall_sewl,floor_n,wall_nsl,floor_n,wall_newl,wall_ewl,wall_nenw],
+    [wall_s,floor_n,floor_n,floor_n,wall_nsl,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,wall_newl,wall_ewl,wall_wlnese,wall_ewl,wall_sewl,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var tiles6x6Z = [
-    [null,null,null,null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [null,null,null,null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,null,null,null],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null,null,null,null]
+    [null,null,null,null,wall_sw,wall_w,wall_w,wall_nw],
+    [null,null,null,null,wall_s,floor_n,floor_n,wall_n],
+    [wall_sw,wall_w,wall_w,wall_w,wall_swl,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_nel,wall_e,wall_e,wall_e,wall_ne],
+    [wall_s,floor_n,floor_n,wall_n,null,null,null,null],
+    [wall_se,wall_e,wall_e,wall_ne,null,null,null,null]
 ];
 
 var tiles6x6Whirl = [
-    [null,null,null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"},null],
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}],
-    [null,{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null,null,null]
+    [null,null,null,wall_sw,wall_w,wall_w,wall_nw,null],
+    [wall_sw,wall_w,wall_w,wall_swl,floor_n,floor_n,wall_n,null],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n,null],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_nwl,wall_nw],
+    [wall_se,wall_sel,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [null,wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [null,wall_s,floor_n,floor_n,wall_nel,wall_e,wall_e,wall_ne],
+    [null,wall_se,wall_e,wall_e,wall_ne,null,null,null]
 ];
 
 var tiles6x6Whirl2 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"},null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"w"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null],
-    [null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"e"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null,{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_nw,null,wall_sw,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,wall_nwl,wall_w,wall_swl,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_nel,wall_ne],
+    [wall_se,wall_sel,floor_n,floor_n,floor_n,floor_n,wall_n,null],
+    [null,wall_s,floor_n,floor_n,floor_n,floor_n,wall_nwl,wall_nw],
+    [wall_sw,wall_swl,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_nel,wall_e,wall_sel,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_ne,null,wall_se,wall_e,wall_ne]
 ];
 
 var tiles6x6Mi = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nwsw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nwsw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"sesw"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"swlongne"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlongse"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"nenw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"sesw"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"selongnw"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelongsw"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"nenw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"nese"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"nese"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_nwsw,wall_w,wall_w,wall_nwsw,wall_w,wall_nw],
+    [wall_s,floor_n,wall_nsl,floor_n,floor_n,wall_nsl,floor_n,wall_n],
+    [wall_sesw,wall_ewl,wall_swlne,floor_n,floor_n,wall_nwlongse,wall_ewl,wall_nenw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_sesw,wall_ewl,wall_selnw,floor_n,floor_n,wall_nelongsw,wall_ewl,wall_nenw],
+    [wall_s,floor_n,wall_nsl,floor_n,floor_n,wall_nsl,floor_n,wall_n],
+    [wall_se,wall_e,wall_nese,wall_e,wall_e,wall_nese,wall_e,wall_ne]
 ];
 
 var tiles7x7Mi = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nwsw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nwsw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"sesw"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"swlongne"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlongse"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"nenw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"sesw"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"selongnw"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelongsw"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"nenw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"nese"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"nese"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_nwsw,wall_w,wall_w,wall_w,wall_nwsw,wall_w,wall_nw],
+    [wall_s,floor_n,wall_nsl,floor_n,floor_n,floor_n,wall_nsl,floor_n,wall_n],
+    [wall_sesw,wall_ewl,wall_swlne,floor_n,floor_n,floor_n,wall_nwlse,wall_ewl,wall_nenw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_sesw,wall_ewl,wall_selnw,floor_n,floor_n,floor_n,wall_nelsw,wall_ewl,wall_nenw],
+    [wall_s,floor_n,wall_nsl,floor_n,floor_n,floor_n,wall_nsl,floor_n,wall_n],
+    [wall_se,wall_e,wall_nese,wall_e,wall_e,wall_e,wall_nese,wall_e,wall_ne]
 ];
 
 var tiles6x5IO = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"sesw"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"nenw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_sesw,wall_ewl,wall_ewl,wall_ewl,wall_ewl,wall_ewl,wall_nenw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var tiles7x5IOI = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"sesw"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"nenw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"sesw"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"nenw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_sesw,wall_ewl,wall_ewl,wall_ewl,wall_ewl,wall_ewl,wall_nenw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_sesw,wall_ewl,wall_ewl,wall_ewl,wall_ewl,wall_ewl,wall_nenw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var tiles6x7A = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"},null,null],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"},null],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"nw"}],
-    [null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"e"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"w"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelong"},{type:"wall",subtype:"ne"},null],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null,null]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw,null,null],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_nwl,wall_nw,null],
+    [wall_se,wall_sel,floor_n,floor_n,floor_n,floor_n,floor_n,wall_nwl,wall_nw],
+    [null,wall_s,floor_n,wall_nel,wall_e,wall_sel,floor_n,floor_n,wall_n],
+    [null,wall_s,floor_n,wall_nwl,wall_w,wall_swl,floor_n,floor_n,wall_n],
+    [wall_sw,wall_swl,floor_n,floor_n,floor_n,floor_n,floor_n,wall_nel,wall_ne],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_nel,wall_ne,null],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne,null,null]
 ];
 
 var tiles6x5E = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nselong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nselong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nlongse"},{type:"wall",subtype:"e"},{type:"wall",subtype:"slongne"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null,{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,wall_nsel,floor_n,wall_nsel,floor_n,wall_n],
+    [wall_s,floor_n,wall_nsl,floor_n,wall_nsl,floor_n,wall_n],
+    [wall_s,floor_n,wall_nlse,wall_e,wall_slne,floor_n,wall_n],
+    [wall_s,floor_n,wall_n,null,wall_s,floor_n,wall_n],
+    [wall_se,wall_e,wall_ne,null,wall_se,wall_e,wall_ne]
 ];
 
 var tiles6x7F = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"nelong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nswlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [null,null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [null,null,{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"nlongsw"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [null,null,null,null,null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [null,null,null,null,null,{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_nel,floor_n,floor_n,wall_nswl,floor_n,floor_n,wall_n],
+    [null,null,wall_s,floor_n,floor_n,wall_nsl,floor_n,floor_n,wall_n],
+    [null,null,wall_se,wall_e,wall_e,wall_nlsw,floor_n,floor_n,wall_n],
+    [null,null,null,null,null,wall_s,floor_n,floor_n,wall_n],
+    [null,null,null,null,null,wall_se,wall_e,wall_e,wall_ne]
 ];
 
 var tiles6x6T = [
-    [null,null,null,null,{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [null,null,null,null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"swlong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"selong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [null,null,null,null,{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [null,null,null,null,{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [null,null,null,null,wall_sw,wall_w,wall_w,wall_nw],
+    [null,null,null,null,wall_s,floor_n,floor_n,wall_n],
+    [wall_sw,wall_w,wall_w,wall_w,wall_swl,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_sel,floor_n,floor_n,wall_n],
+    [null,null,null,null,wall_s,floor_n,floor_n,wall_n],
+    [null,null,null,null,wall_se,wall_e,wall_e,wall_ne]
 ];
 
 var tiles6x6L = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,null,null],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,null,null],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null,null]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,wall_nwl,wall_e,wall_e,wall_ne],
+    [wall_s,floor_n,floor_n,floor_n,wall_n,null,null,null],
+    [wall_s,floor_n,floor_n,floor_n,wall_n,null,null,null],
+    [wall_se,wall_e,wall_e,wall_e,wall_ne,null,null]
 ];
 
 var tiles6x6L2 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,null],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,null],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_nwl,wall_e,wall_ne],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n,null,null],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n,null,null],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_ne,null]
 ];
 
 var tiles6x6L3 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlong"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,null,null,null],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,null,null,null],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"},null,null,null,null],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"},null,null,null]
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_nwl,wall_e,wall_e,wall_e,wall_ne],
+    [wall_s,floor_n,floor_n,wall_n,null,null,null,null],
+    [wall_s,floor_n,floor_n,wall_n,null,null,null,null],
+    [wall_s,floor_n,floor_n,wall_n,null,null,null,null],
+    [wall_se,wall_e,wall_e,wall_ne,null,null,null]
 ];
 
 var tiles7x7Snake = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nwsw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nwsw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"nese"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_nwsw,wall_w,wall_w,wall_w,wall_nwsw,wall_w,wall_nw],
+    [wall_s,floor_n,wall_nsl,floor_n,floor_n,floor_n,wall_nsl,floor_n,wall_n],
+    [wall_s,floor_n,wall_nsl,floor_n,wall_nsl,floor_n,wall_nsl,floor_n,wall_n],
+    [wall_s,floor_n,wall_nsl,floor_n,wall_nsl,floor_n,wall_nsl,floor_n,wall_n],
+    [wall_s,floor_n,wall_nsl,floor_n,wall_nsl,floor_n,wall_nsl,floor_n,wall_n],
+    [wall_s,floor_n,wall_nsl,floor_n,wall_nsl,floor_n,wall_nsl,floor_n,wall_n],
+    [wall_s,floor_n,wall_nsl,floor_n,wall_nsl,floor_n,wall_nsl,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,wall_nsl,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_nese,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var tiles7x7Snake2 = [
-    [{type:"wall",subtype:"sw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nwsw"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"w"},{type:"wall",subtype:"nw"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nelongsw"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"selongnw"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nswlong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nslong"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"nwlongse"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"ewlong"},{type:"wall",subtype:"swlongne"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"s"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"floor",subtype:"normal"},{type:"wall",subtype:"n"}],
-    [{type:"wall",subtype:"se"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"e"},{type:"wall",subtype:"ne"}]
+    [wall_sw,wall_w,wall_nwsw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,wall_nsl,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,wall_nsl,floor_n,wall_nelsw,wall_ewl,wall_selnw,floor_n,wall_n],
+    [wall_s,floor_n,wall_nsl,floor_n,wall_nsl,floor_n,wall_nsl,floor_n,wall_n],
+    [wall_s,floor_n,wall_nsl,floor_n,wall_nswl,floor_n,wall_nsl,floor_n,wall_n],
+    [wall_s,floor_n,wall_nsl,floor_n,floor_n,floor_n,wall_nsl,floor_n,wall_n],
+    [wall_s,floor_n,wall_nwlse,wall_ewl,wall_ewl,wall_ewl,wall_swlne,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 
 var STANDARD_CHOICE_POOL = [
