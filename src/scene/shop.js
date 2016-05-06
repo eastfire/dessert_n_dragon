@@ -254,5 +254,25 @@ COMMODITY_ENTRY_LIST = [
             unlockType: "shop",
             unlockSubtype: "cooldown"
         }
+    },
+    {
+        cost: 200,
+        type: "card",
+        subtype: "freeze",
+        unlockHint: "通过45关后解锁",
+        valid: {
+            unlockType: "shop",
+            unlockSubtype: "freeze"
+        }
+    },
+    {
+        cost: 300,
+        type: "card",
+        subtype: "teleport",
+        unlockHint: "通过49关后解锁",
+        valid: {
+            unlockType: "shop",
+            unlockSubtype: "teleport"
+        }
     }
 ]
