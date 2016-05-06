@@ -367,9 +367,6 @@ CARD_MODEL_MAP.cooldown = CardModel.extend({
         _.each(currentRoom.getHand(),function(cardModel){
             cardModel.reduceWait(effect)
         },this);
-    },
-    onLevelUp:function(){
-
     }
 })
 CARD_MODEL_MAP.cooldown.maxCount = 4;
@@ -382,6 +379,53 @@ CARD_MODEL_MAP.cooldown.getEffectDiff = function(currentLevel, targetLevel){
     return 1;
 }
 
+CARD_MODEL_MAP.freeze = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "freeze",
+            maxLevel: 5
+        })
+    },
+    waitTurnOfLevel:function(level){
+        return 9-level;
+    },
+    onUse:function(){
+        currentRoom.foreachMovable(function(movableModel){
+            if ( movableModel instanceof EnemyModel ) {
+                movableModel.getFrozen(1);
+            }
+        },this)
+    },
+    onLevelUp:function(){
+        this.reduceWait(1);
+    }
+})
+
+CARD_MODEL_MAP.teleport = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "teleport",
+            maxLevel: 5
+        })
+    },
+    waitTurnOfLevel:function(level){
+        return 13-level;
+    },
+    onUse:function(){
+        var currentTile = roomModel.getTile(roomModel.getHero().get("positions")[0]);
+        var tiles = roomModel.filterTile(function(tile){
+                return currentTile !== tile && !roomModel.getMovableByTile(tile)
+            },
+            this);
+        if ( tiles.length ) {
+            var candidate = _.sample(tiles);
+            roomModel.getHero().trigger("teleport", candidate.get("position"));
+        }
+    },
+    onLevelUp:function(){
+        this.reduceWait(1);
+    }
+})
 
 //passive card
 CARD_MODEL_MAP.constitution = CardModel.extend({
