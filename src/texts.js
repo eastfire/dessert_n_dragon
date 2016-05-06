@@ -121,6 +121,16 @@ var texts_locale = {
                     return "等待时间多减少"+CARD_MODEL_MAP.cooldown.getEffectDiff()
                 }
             },
+            "freeze":{
+                name:"冰冻",
+                desc: "所有敌人不能移动1回合",
+                levelUpDesc: "等待时间-1"
+            },
+            "teleport":{
+                name:"传送",
+                desc: "随机传送到另一格空的地方",
+                levelUpDesc: "等待时间-1"
+            },
 
             //passive
             luck: {
@@ -187,6 +197,8 @@ var texts_locale = {
                 "whirl-slash":"回旋扫尾可以在商店中解锁了",
                 "big-whirl-slash":"大回旋扫尾可以在商店中解锁了",
                 "cooldown":"冷静技能可以在商店中解锁了",
+                "freeze":"冰冻技能可以在商店中解锁了",
+                "teleport":"传送技能可以在商店中解锁了",
                 //passive
                 "recovery":"恢复技能可以在商店中解锁了"
             },
@@ -202,6 +214,8 @@ var texts_locale = {
                 "whirl-slash":"在任意关卡中使用回旋扫尾",
                 "big-whirl-slash":"在任意关卡中使用大回旋扫尾",
                 "cooldown":"在任意关卡中使用冷静技能",
+                "freeze":"在任意关卡中使用冰冻技能",
+                "teleport":"在任意关卡中使用传送技能",
                 //passive
                 "recovery":"在任意关卡中使用恢复技能"
             },
