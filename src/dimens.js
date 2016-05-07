@@ -5,7 +5,7 @@ var dimens = {
     },
     closeItem:{
         x: 448,
-        y: 800
+        y: 40
     },
     statusIcon: {
         width: 32,

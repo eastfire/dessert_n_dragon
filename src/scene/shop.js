@@ -156,7 +156,7 @@ var ShopLayer = cc.Layer.extend({
         });
 
         var menu = new cc.Menu([closeItem]);
-        this.addChild(menu);
+        this.addChild(menu,200);
         menu.attr({
             x:0,
             y:0,
