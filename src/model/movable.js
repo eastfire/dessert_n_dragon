@@ -109,12 +109,14 @@ var MovableModel = Backbone.Model.extend({
             face: opt.direction
         })
         this.beforeMove( opt );
-        //remove old mapping
+        this.__removeOldMapping();
+
+        this.trigger("move",this, opt)
+    },
+    __removeOldMapping:function(){
         _.each(this.get("positions"), function (position) {
             currentRoom.__movableMap[position.x][position.y] = null;
         }, this)
-
-        this.trigger("move",this, opt)
     },
     faceTo:function(direction){
         this.set({
@@ -188,6 +190,25 @@ var MovableModel = Backbone.Model.extend({
     },
     getAngry:function(amount){
         this.set("angry",amount);
+    },
+    setNewPosition:function(newPosition){
+        this.__removeOldMapping();
+        var oldPosition = this.get("positions")[0];
+        var diffX = newPosition.x - oldPosition.x;
+        var diffY = newPosition.y - oldPosition.y;
+        _.each(this.get("positions"),function(position){
+            position.x += diffX;
+            position.y += diffY;
+            currentRoom.__movableMap[position.x][position.y] = this;
+        },this);
+        this.calculateEdgePositions();
+    },
+    teleport:function(newPosition){
+        currentRoom.getHero().trigger("teleport", newPosition);
+        currentRoom.getHero().setNewPosition(newPosition)
+    },
+    afterTeleport:function(){
+
     }
 })
 

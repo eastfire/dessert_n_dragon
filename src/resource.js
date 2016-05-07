@@ -22,7 +22,8 @@ var times = {
     gameOverDialog: 0.5,
     scoreBar: 0.1,
 
-    card_sort: 0.3
+    card_sort: 0.3,
+    teleport: 0.5
 }
 
 var animations = {

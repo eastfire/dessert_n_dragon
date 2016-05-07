@@ -31,6 +31,7 @@ var MovableSprite = BaseSprite.extend({
         this.model.on("change:face",this.renderFace,this)
         this.model.on("change:frozen",this.renderStatus,this);
         this.model.on("change:angry",this.renderStatus,this);
+        this.model.on("teleport",this.teleport,this)
     },
     renderFace:function(){
         this.setSpriteFrame(cc.spriteFrameCache.getSpriteFrame( this.getInitFrameName() ));
@@ -72,6 +73,30 @@ var MovableSprite = BaseSprite.extend({
         };
         this.renderOneStatus("frozen", position)
         this.renderOneStatus("angry", position)
+    },
+    teleport:function(newPosition){
+
+        this.runAction(cc.sequence(
+            cc.spawn(
+                cc.moveBy(times.teleport/2,0,60),
+                cc.scaleTo(times.teleport/2, 0.4, 2),
+                cc.fadeOut(times.teleport)
+            ),
+            cc.callFunc(function(){
+                this.attr({
+                    x: (newPosition.x + 0.5)* dimens.tileSize.width,
+                    y: (newPosition.y + 0.5)* dimens.tileSize.height+60
+                })
+            },this),
+            cc.spawn(
+                cc.moveBy(times.teleport/2,0,-60),
+                cc.scaleTo(times.teleport/2, 1, 1),
+                cc.fadeIn(times.teleport)
+            ),
+            cc.callFunc(function(){
+                this.model.afterTeleport();
+            },this)
+        ))
     },
     initLabel:function(){
 //        this.levelLabel = new ccui.Text("", "Arial", dimens.levelLabel.fontSize );

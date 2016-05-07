@@ -412,14 +412,15 @@ CARD_MODEL_MAP.teleport = CardModel.extend({
         return 13-level;
     },
     onUse:function(){
-        var currentTile = roomModel.getTile(roomModel.getHero().get("positions")[0]);
-        var tiles = roomModel.filterTile(function(tile){
-                return currentTile !== tile && !roomModel.getMovableByTile(tile)
+        var currentTile = currentRoom.getTile(currentRoom.getHero().get("positions")[0]);
+        var tiles = currentRoom.filterTile(function(tile){
+                return currentTile !== tile && tile.get("isPassable") && !currentRoom.getMovableByTile(tile)
             },
             this);
         if ( tiles.length ) {
             var candidate = _.sample(tiles);
-            roomModel.getHero().trigger("teleport", candidate.get("position"));
+            var newPosition = candidate.get("position");
+            currentRoom.getHero().teleport(newPosition);
         }
     },
     onLevelUp:function(){
