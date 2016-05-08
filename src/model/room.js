@@ -321,6 +321,11 @@ var RoomModel = Backbone.Model.extend({
         if ( !tile ) return null;
         return this.getMovableByPosition(tile.get("position"));
     },
+    getNewMovable:function(){
+        return _.find(this.__movables,function(movable){
+            return !(movable instanceof HeroModel || gameStatus.checkPassTutorial(movable.get("type")));
+        },this);
+    },
     addMovable:function(movable,x,y){ //left bottom corner
         if ( x instanceof Object ) {
             y = x.y;

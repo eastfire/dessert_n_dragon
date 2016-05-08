@@ -60,6 +60,12 @@ var MainLayer = cc.Layer.extend({
 
         this.initScoreBar();
 
+        var firstMovable = room.getNewMovable();
+        if ( firstMovable ){
+            this.showMovableInfoDialog(firstMovable);
+            gameStatus.passTutorial(firstMovable.get("type"));
+        }
+
         room.turnStart();
 
         this.renderHp();
@@ -69,6 +75,8 @@ var MainLayer = cc.Layer.extend({
         this.renderMoney();
 
         this.__unlocking = [];
+
+
         return true;
     },
     onEnter: function () {

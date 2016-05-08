@@ -2,7 +2,8 @@ var GameStatusModel = Backbone.Model.extend({
     defaults:function(){
         return {
             money: 100,
-            achievements: {}
+            achievements: {},
+            tutorials:{}
         }
     },
     initialize:function(){
@@ -20,6 +21,13 @@ var GameStatusModel = Backbone.Model.extend({
     },
     useMoney:function(amount){
         this.set("money",this.get("money")-amount);
+        this.save();
+    },
+    checkPassTutorial:function(item){
+        return this.get("tutorials")[item];
+    },
+    passTutorial:function(item){
+        this.get("tutorials")[item] = 1;
         this.save();
     }
 })

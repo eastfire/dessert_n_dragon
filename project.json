@@ -34,7 +34,6 @@
         "src/model/choice.js",
         "src/model/room.js",
         "src/model/card.js",
-        "src/model/skill.js",
         "src/model/room-entry.js",
         "src/model/unlockable-entry.js",
         "src/view/base-sprite.js",
