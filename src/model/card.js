@@ -57,6 +57,7 @@ var CardModel = Backbone.Model.extend({
     onUse:function(){
     },
     afterUse:function(){ // call by view
+        cc.log("afterUse")
         currentRoom.unblockInput();
         if ( currentRoom.passCheckCondition() ) {
             currentRoom.getHero().checkLevelUp(); //maybe level up after use card

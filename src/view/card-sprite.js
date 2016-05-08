@@ -52,7 +52,7 @@ var CardSprite = BaseSprite.extend({
         this.model.off("change:waitTurn",this.renderWait);
         this.model.off("change:level",this.renderLevel);
         this.model.off("discard",this.onDestroy);
-        cc.eventManager.removeListeners(this.listener);
+        cc.eventManager.removeListener(cc.EventListener.TOUCH_ONE_BY_ONE);
     },
     initCardLayout:function(){
         this.disableMask = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("card-disabled-mask.png"));
@@ -119,6 +119,11 @@ var CardSprite = BaseSprite.extend({
     },
     useCard:function(){
         //TODO add many effect
-        this.model.afterUse();
+
+        //must save cardModel before sprite destroy
+        var cardModel = this.model;
+        currentRoomSprite.scheduleOnce(function(){
+            cardModel.afterUse();
+        },0.1)
     }
 });

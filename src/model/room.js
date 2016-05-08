@@ -3,12 +3,13 @@ var SHIFT_RESULT_MERGE_AND_DISAPPEAR = 2;
 var SHIFT_RESULT_MERGE_AND_STAY = 3;
 
 var PHASE_TURN_START = 0;
-var PHASE_GEN_ENEMY = 1;
-var PHASE_WAIT_USE_INPUT = 2;
-var PHASE_MOVE = 3;
-var PHASE_HERO_ATTACK = 4;
-var PHASE_ENEMY_ATTACK = 5;
-var PHASE_TURN_END = 6;
+var PHASE_DRAW = 1;
+var PHASE_GEN_ENEMY = 2;
+var PHASE_WAIT_USE_INPUT = 3;
+var PHASE_MOVE = 4;
+var PHASE_HERO_ATTACK = 5;
+var PHASE_ENEMY_ATTACK = 6;
+var PHASE_TURN_END = 7;
 
 var GenEnemyStrategy = Backbone.Model.extend({
     defaults:function(){
@@ -280,7 +281,7 @@ var RoomModel = Backbone.Model.extend({
         this.__loseAnyConditions = [];
         this.__loseEveryConditions = [];
         if ( this.get("scoreCondition") ) {
-            this.get("winEveryConditions").push("enoughScore");
+            this.set("winEveryConditions", _.union(this.get("winEveryConditions"),["enoughScore"]));
         }
         this.__initCondition(this.__winAnyConditions, this.get("winAnyConditions"));
         this.__initCondition(this.__winEveryConditions, this.get("winEveryConditions"));
@@ -415,6 +416,9 @@ var RoomModel = Backbone.Model.extend({
         var currentPhase = this.get("phase");
         switch (currentPhase) {
             case PHASE_TURN_START:
+                this.drawCardPhase();
+                break;
+            case PHASE_DRAW:
                 this.generateEnemy();
                 break;
             case PHASE_GEN_ENEMY:
@@ -462,12 +466,6 @@ var RoomModel = Backbone.Model.extend({
             cardModel.reduceWait(1)
         },this);
 
-        //draw card
-        if ( this.canDrawCard() ) {
-            for ( var i = 0; i < this.__hero.get("drawEachTurn"); i++ ) {
-                this.drawCard();
-            }
-        }
         //for hero
         this.__hero.onTurnStart();
         //for enemy
@@ -477,11 +475,22 @@ var RoomModel = Backbone.Model.extend({
             }
         },this)
         //TODO for tiles special ability
+
         if ( this.passCheckCondition() ) {
             this.nextPhase();
         }
     },
-
+    drawCardPhase:function(){
+        cc.log("drawCardPhase");
+        this.set("phase", PHASE_DRAW);
+        //draw card
+        if ( this.canDrawCard() ) {
+            for ( var i = 0; i < this.__hero.get("drawEachTurn"); i++ ) {
+                this.drawCard();
+            }
+        }
+        this.nextPhase();
+    },
     generateOneMovable:function(position, typeObj, level){
         var type = typeof typeObj === "string" ? typeObj: typeObj.type;
         if ( MOVABLE_MODEL_MAP[type] ) {
