@@ -28,6 +28,7 @@ var GameMenuDialog = cc.Scale9Sprite.extend({
             cc.spriteFrameCache.getSpriteFrame("button-short-press.png"),
             function () {
                 this.disappear(function(){
+                    clearRoom();
                     cc.director.runScene(new SelectRoomScene());
                 });
             }, this);

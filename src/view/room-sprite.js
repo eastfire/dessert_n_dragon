@@ -39,6 +39,8 @@ var RoomSprite = BaseSprite.extend({
         })
     },
     shift:function(direction){
+        if ( this.model.getHero().get("dizzy") ) direction = REVERSE_DIRECTIONS[direction]
+
         var maxStep = this.model.shift(direction);
         var self = this;
         this.scheduleOnce(function(){

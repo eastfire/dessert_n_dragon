@@ -338,6 +338,34 @@ MOVABLE_MODEL_MAP.icecream = EnemyModel.extend({
     }
 })
 
+MOVABLE_MODEL_MAP.popcorn = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "popcorn",
+            attackType: ATTACK_TYPE_RANGE
+        } )
+    },
+    checkRange:function(hero){
+        return true;
+    },
+    expOfLevel:function(l){
+        return l*EXP_INFLATION_RATE*3
+    },
+    afterHit:function(heroModel){
+        if (this.getDizzyRate(heroModel) > Math.random() ){
+            heroModel.getDizzy(2);
+        }
+    },
+    getDizzyRate:function(heroModel){
+        var level = this.get("level");
+        return Math.min(0.7,level*5/200+0.1);
+//        return 1;
+    },
+    attackOfLevel:function(l){
+        return l;
+    }
+})
+
 MOVABLE_MODEL_MAP.pudding = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{

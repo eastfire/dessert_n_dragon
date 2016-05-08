@@ -66,7 +66,9 @@ var MainLayer = cc.Layer.extend({
             gameStatus.passTutorial(firstMovable.get("type"));
         }
 
-        room.turnStart();
+        if ( room.get("phase") === PHASE_TURN_START ) {
+            room.turnStart();
+        }
 
         this.renderHp();
         this.renderScore();
@@ -571,25 +573,26 @@ var MainLayer = cc.Layer.extend({
 
                 var deltaX = currentX - target.prevX;
                 var deltaY = currentY - target.prevY;
+                var isDizzy = currentRoom.getHero().get("dizzy");
                 if ( deltaY > SWIPE_THRESHOLD && Math.abs(deltaX) < Math.abs(deltaY) ) {
                     self.shiftArrowSprite.setVisible(true);
                     self.shiftArrowSprite.attr({
-                        rotation: 0
+                        rotation: isDizzy? 180:0
                     });
                 } else if ( deltaY < - SWIPE_THRESHOLD && Math.abs(deltaX) < Math.abs(deltaY) ) {
                     self.shiftArrowSprite.setVisible(true);
                     self.shiftArrowSprite.attr({
-                        rotation: 180
+                        rotation: isDizzy? 0:180
                     });
                 } else if ( deltaX > SWIPE_THRESHOLD && Math.abs(deltaY) <  Math.abs(deltaX) ) {
                     self.shiftArrowSprite.setVisible(true);
                     self.shiftArrowSprite.attr({
-                        rotation: 90
+                        rotation: isDizzy?270:90
                     });
                 } else if ( deltaX < - SWIPE_THRESHOLD && Math.abs(deltaY) < Math.abs(deltaX) ) {
                     self.shiftArrowSprite.setVisible(true);
                     self.shiftArrowSprite.attr({
-                        rotation: 270
+                        rotation: isDizzy?90:270
                     });
                 } else {
                     self.shiftArrowSprite.setVisible(false);

@@ -2783,7 +2783,43 @@ rooms.push({
     unlocks:[{type:"shop", subtype:"cooldown"}]
 });
 
-//room42 TODO
+//room42 popcorn
+rooms.push({
+    turnLimit:27,
+    scoreCondition: [800, 1000, 1300],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"popcorn",
+            number: 10
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"popcorn"},{type:"cherrycake"},{type:"donut"}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles6x6Loop3,
+    initMovables:[
+        { type:"popcorn", positions: [{x:1,y:1}] },
+        { type:"popcorn", positions: [{x:6,y:6}] }
+    ],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:1,y:4}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        } //normal, fix
+    },
+    initHand:[],
+    choicePool:STANDARD_CHOICE_POOL,
+    unlocks:[{type:"enemy", subtype:"popcorn"}]
+});
 
 //room43 TODO
 

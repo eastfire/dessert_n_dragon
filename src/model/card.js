@@ -468,7 +468,7 @@ CARD_MODEL_MAP.constitution.getEffectDiff = function(currentLevel, targetLevel){
     targetLevel = targetLevel || currentLevel+1;
     return 5;
 }
-CARD_MODEL_MAP.constitution.getUseEffect = 5;
+CARD_MODEL_MAP.constitution.getUseEffect = 2;
 
 CARD_MODEL_MAP.cunning = CardModel.extend({
     defaults: function () {
@@ -666,4 +666,4 @@ CARD_MODEL_MAP.recovery.getEffectDiff = function(currentLevel, targetLevel){
     targetLevel = targetLevel || currentLevel+1;
     return 5;
 }
-CARD_MODEL_MAP.recovery.getUseEffect = 5;
+CARD_MODEL_MAP.recovery.getUseEffect = 2;

@@ -43,7 +43,10 @@ var HeroModel = MovableModel.extend({
     },
     onTurnStart:function(){
         MovableModel.prototype.onTurnStart.call(this);
-        this.set("buff",{});
+        this.set({
+            buff:{},
+            dizzy: Math.max(0, this.get("dizzy") - 1 )
+        });
     },
     getPosition:function(){
         return this.get("positions")[0];
@@ -271,6 +274,9 @@ var HeroModel = MovableModel.extend({
         if ( movable instanceof ItemModel ) {
             movable.taken();
         }
+    },
+    getDizzy:function(amount){
+        this.set("dizzy",amount);
     }
 })
 

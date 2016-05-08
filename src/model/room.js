@@ -138,8 +138,8 @@ var RoomModel = Backbone.Model.extend({
             initHero:null,
             initHand: [],
             initDeck: [],
+            initDiscard:[],
 
-            waitTurn : 0,
             enemyPool: null,
             enemyLevelPool: [1],
             choicePool: [],
@@ -164,10 +164,28 @@ var RoomModel = Backbone.Model.extend({
     },
     getJson:function(){
         var tiles = [];
-        this.set("initTiles", tiles);
-        var movables = [];
-        this.set("initMovables", movables);
+        this.set("initTiles", _.map(this.__tiles,function(tileColumn){
+            return _.map(tileColumn,function(tileModel){
+                return tileModel.toJSON();
+            },this)
+        },this));
+
+        this.set("initMovables", _.map(_.filter(this.__movables,function(movableModel){
+            return !(movableModel instanceof HeroModel);
+        },this)),function(movableModel){
+            return movableModel.toJSON();
+        },this);
+        this.set("initHand", _.map(this.__hand,function(cardModel){
+            return cardModel.toJSON();
+        },this));
+        this.set("initDeck", _.map(this.__deck,function(cardModel){
+            return cardModel.toJSON();
+        },this))
+        this.set("initDiscard", _.map(this.__discard,function(cardModel){
+            return cardModel.toJSON();
+        },this))
         this.set("initHero", this.__hero.toJSON());
+        return this.toJSON();
     },
     initRules:function(){
         var defaultRules = {
@@ -539,6 +557,7 @@ var RoomModel = Backbone.Model.extend({
     },
     unblockInput:function(){
         if ( this.__blockInputCount ) this.__blockInputCount--;
+        saveRoom();
     },
     shift:function(direction){
         cc.log("shift"+direction);
@@ -854,7 +873,7 @@ var RoomModel = Backbone.Model.extend({
 })
 
 var saveRoom = function(){
-    cc.sys.localStorage.setItem(APP_NAME+".current", currentRoom.getJson());
+    cc.sys.localStorage.setItem(APP_NAME+".current", JSON.stringify(currentRoom.getJson()));
 }
 
 var clearRoom = function(){

@@ -31,6 +31,7 @@ var MovableSprite = BaseSprite.extend({
         this.model.on("change:face",this.renderFace,this)
         this.model.on("change:frozen",this.renderStatus,this);
         this.model.on("change:angry",this.renderStatus,this);
+        this.model.on("change:dizzy",this.renderStatus,this);
         this.model.on("teleport",this.teleport,this)
     },
     renderFace:function(){
@@ -73,6 +74,7 @@ var MovableSprite = BaseSprite.extend({
         };
         this.renderOneStatus("frozen", position)
         this.renderOneStatus("angry", position)
+        this.renderOneStatus("dizzy", position)
     },
     teleport:function(newPosition){
 
