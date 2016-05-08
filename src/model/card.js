@@ -61,6 +61,7 @@ var CardModel = Backbone.Model.extend({
         if ( currentRoom.passCheckCondition() ) {
             currentRoom.getHero().checkLevelUp(); //maybe level up after use card
         }
+        saveRoom();
     },
     onExile:function(){
     },

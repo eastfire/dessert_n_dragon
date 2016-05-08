@@ -2422,7 +2422,9 @@ rooms.push({
     winEveryConditions:[
         "outOfTurn"
     ],
-    loseAnyConditions:[
+    loseEveryConditions:[
+        "outOfTurn",
+        "notEnoughScore"
     ],
     enemyPool:[{
         type:"jelly"
@@ -2464,6 +2466,7 @@ rooms.push({
         }
     ],
     loseAnyConditions:[
+        "outOfTurn"
     ],
     enemyPool:[{
         type:"jelly"
@@ -2499,7 +2502,9 @@ rooms.push({
     winEveryConditions:[
         "outOfTurn"
     ],
-    loseAnyConditions:[
+    loseEveryConditions:[
+        "outOfTurn",
+        "notEnoughScore"
     ],
     enemyPool:[{
         type:"ricecake"
@@ -2632,7 +2637,9 @@ rooms.push({
     winEveryConditions:[
         "outOfTurn"
     ],
-    loseAnyConditions:[
+    loseEveryConditions:[
+        "outOfTurn",
+        "notEnoughScore"
     ],
     enemyPool:[{type:"donut"},{type:"cherrycake"},{type:"chocolate-cake"}],
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],

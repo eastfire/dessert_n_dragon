@@ -111,6 +111,7 @@ var ChoiceDialog = cc.Scale9Sprite.extend({
             cc.removeSelf(),
             cc.callFunc(function(){
                 currentRoom.unblockInput();
+                saveRoom();
                 currentRoomSprite.startClock();
                 this.modalLayer.removeFromParent(true);
                 if ( this.options.callback ) this.options.callback.call(this.options.context);

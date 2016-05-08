@@ -165,9 +165,13 @@ var RoomModel = Backbone.Model.extend({
     getJson:function(){
         var tiles = [];
         this.set("initTiles", _.map(this.__tiles,function(tileColumn){
-            return _.map(tileColumn,function(tileModel){
-                return tileModel.toJSON();
-            },this)
+            if ( tileColumn ) {
+                return _.map(tileColumn, function (tileModel) {
+                    if (tileModel)
+                        return tileModel.toJSON();
+                    else return null;
+                }, this)
+            } else return null;
         },this));
 
         this.set("initMovables", _.map(_.filter(this.__movables,function(movableModel){
@@ -537,6 +541,7 @@ var RoomModel = Backbone.Model.extend({
     waitUserInput:function(){
         this.set("phase", PHASE_WAIT_USE_INPUT);
         this.unblockInput();
+        saveRoom();
     },
     genLevelUpChoices:function(){
         var currentChoiceStrategy = this.get("genChoiceStrategy");
@@ -557,7 +562,6 @@ var RoomModel = Backbone.Model.extend({
     },
     unblockInput:function(){
         if ( this.__blockInputCount ) this.__blockInputCount--;
-        saveRoom();
     },
     shift:function(direction){
         cc.log("shift"+direction);
@@ -755,6 +759,7 @@ var RoomModel = Backbone.Model.extend({
         },this);
     },
     gameOver:function(isWin){
+        this.__gameOver = true;
         if ( isWin ) {
             if ( this.get("turnLimit") ) {
                 this.getScore( ( this.get("turnLimit") - this.get("turnNumber") ) * 50 );
@@ -764,6 +769,9 @@ var RoomModel = Backbone.Model.extend({
             }
         }
         this.trigger("game-over", this, isWin);
+    },
+    isGameOver:function(){
+        return this.__gameOver;
     },
     unlockUnlockable:function(){
         var unlocks = this.get("unlocks")
@@ -873,10 +881,13 @@ var RoomModel = Backbone.Model.extend({
 })
 
 var saveRoom = function(){
+    if ( currentRoom.isGameOver() ) return;
+    cc.log("saveRoom")
     cc.sys.localStorage.setItem(APP_NAME+".current", JSON.stringify(currentRoom.getJson()));
 }
 
 var clearRoom = function(){
+    cc.log("clearRoom")
     cc.sys.localStorage.removeItem(APP_NAME+".current");
 }
 
