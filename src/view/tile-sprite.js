@@ -29,7 +29,7 @@ var TileSprite = BaseSprite.extend({
         } else if ( !prevCloud && currentCloud ) {
             //appear
             this.__cloudSprite = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( "cloud.png" ));
-            this.addChild(this.__cloudSprite);
+            this.addChild(this.__cloudSprite, 80);
             this.__cloudSprite.attr({
                 x: this.width/2,
                 y: this.height/2,
