@@ -347,14 +347,25 @@ MOVABLE_MODEL_MAP.mushmellow = EnemyModel.extend({
     afterBeMerged:function(movable){
         EnemyModel.prototype.afterBeMerged.call(this,movable);
         if ( movable instanceof MOVABLE_MODEL_MAP.mushmellow ) {
-            //TODO
+            var tiles = _.each(_.sample(currentRoom.filterTile(function(tileModel){
+                return tileModel.isPassable(); && !tileModel.get("cloud");
+            },this),this.getCloudNumber()),
+            function(tileModel){
+                tileModel.set("cloud", this.getCloudTime());
+            },this);
         }
+    },
+    getCloudNumber:function(){
+        return Math.min(3, Math.ceil(this.get("level") / 10 ));
+    },
+    getCloudTime:function(){
+        return Math.min(3, Math.ceil(this.get("level") / 6 ))+1;
     },
     expOfLevel:function(l){
         return Math.round(l*EXP_INFLATION_RATE*2.5)
     },
     attackOfLevel:function(l){
-        return l;
+        return Math.round(l/2);
     }
 })
 
