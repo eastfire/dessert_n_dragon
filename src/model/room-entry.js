@@ -80,6 +80,66 @@ var WALL_ROTATE90_MAP = {
     nwlongse:"nelongsw"
 };
 
+var rotateTiles = function(originTiles, rotation){
+    var tiles = [];
+    var originWidth = originTiles.length;
+    var originHeight = originTiles[0].length; //assuming originTiles is rectangle 
+
+    var positionRotation90 = function(originPosition){
+        return {
+            x: originPosition.y,
+            y: originWidth - 1 - originPosition.x
+        }
+    }
+    var positionRotation180 = function(originPosition){
+        return {
+            x: originWidth - 1 - originPosition.x,
+            y: originHeight - 1 - originPosition.y
+        }
+    }
+    var positionRotation270 = function(originPosition){
+        return {
+            x: originHeight - 1 - originPosition.y,
+            y: originPosition.x
+        }
+    }
+    var rotateWall90Subtype = function(subtype){
+        return WALL_ROTATE90_MAP[subtype] || subtype;
+    }
+    var rotateWall180Subtype = function(subtype){
+        return WALL_ROTATE90_MAP[WALL_ROTATE90_MAP[subtype]] || subtype;
+    }
+    var rotateWall270Subtype = function(subtype){
+        return WALL_ROTATE90_MAP[WALL_ROTATE90_MAP[WALL_ROTATE90_MAP[subtype]]] || subtype;
+    }
+    var positionMapFunc = {
+        90:positionRotation90,
+        180:positionRotation180,
+        270:positionRotation270
+    }[rotation];
+    var rotateWallSubtypeFunc = {
+        90:rotateWall90Subtype,
+        180:rotateWall180Subtype,
+        270:rotateWall270Subtype
+    }[rotation];
+    for ( x=0; x < originWidth; x++ ) {
+        for ( y=0; y < originHeight; y++ ) {
+            var newPosition = positionMapFunc({x:x,y:y});
+            var originTileEntry = originTiles[x][y];
+            tiles[newPosition.x] = tiles[newPosition.x] || [];
+            var newTileEntry = null;
+            if ( originTileEntry ) {
+                newTileEntry = clone(originTileEntry);
+                if (newTileEntry.type==="wall") {
+                    newTileEntry.subtype = rotateWallSubtypeFunc(newTileEntry.subtype);
+                }
+            }
+            tiles[newPosition.x][newPosition.y] = newTileEntry;
+        }
+    }
+    return tiles;
+}
+
 
 var tiles4x4 = [
     [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_nw],
@@ -1177,22 +1237,10 @@ rooms.push({
     }],
     initTiles:tiles5x5,
     initMovables:[
-        {
-            type:"cherrycake",
-            positions: [{x:2,y:2}]
-        },
-        {
-            type:"cherrycake",
-            positions: [{x:4,y:2}]
-        },
-        {
-            type:"cherrycake",
-            positions: [{x:2,y:4}]
-        },
-        {
-            type:"cherrycake",
-            positions: [{x:4,y:4}]
-        }
+        {type:"cherrycake",positions: [{x:2,y:2}]},
+        {type:"cherrycake",positions: [{x:4,y:2}]},
+        {type:"cherrycake",positions: [{x:2,y:4}]},
+        {type:"cherrycake",positions: [{x:4,y:4}]}
     ],
     initHero: {
         type:"normalHero",
@@ -1228,22 +1276,10 @@ rooms.push({
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles5x6,
     initMovables:[
-        {
-            type:"potion",
-            positions: [{x:2,y:2}]
-        },
-        {
-            type:"potion",
-            positions: [{x:4,y:2}]
-        },
-        {
-            type:"potion",
-            positions: [{x:2,y:4}]
-        },
-        {
-            type:"potion",
-            positions: [{x:4,y:4}]
-        }
+        {type:"potion",positions: [{x:2,y:2}]},
+        {type:"potion",positions: [{x:4,y:2}]},
+        {type:"potion",positions: [{x:2,y:4}]},
+        {type:"potion",positions: [{x:4,y:4}]}
     ],
     initHero: {
         type:"normalHero",
@@ -1284,13 +1320,11 @@ rooms.push({
     loseAnyConditions:[
         "outOfTime"
     ],
-    enemyPool:[{
-        type:"pudding",subtype:"red"
-    },{
-        type:"pudding",subtype:"yellow"
-    },{
-        type:"pudding",subtype:"green"
-    }],
+    enemyPool:[
+        {type:"pudding",subtype:"red"},
+        {type:"pudding",subtype:"yellow"},
+        {type:"pudding",subtype:"green"}
+        ],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6T,
     initMovables:[],
@@ -1323,34 +1357,19 @@ rooms.push({
     loseAnyConditions:[
         "outOfTurn"
     ],
-    enemyPool:[{
-        type:"pudding",subtype:"red"
-    },{
-        type:"pudding",subtype:"yellow"
-    },{
-        type:"pudding",subtype:"green"
-    },{
-        type:"pudding",subtype:"blue"
-    }],
+    enemyPool:[
+        {type:"pudding",subtype:"red"},
+        {type:"pudding",subtype:"yellow"},
+        {type:"pudding",subtype:"green"},
+        {type:"pudding",subtype:"blue"}
+        ],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6,
     initMovables:[
-        {
-            type:"ricecake",
-            positions: [{x:2,y:2}]
-        },
-        {
-            type:"ricecake",
-            positions: [{x:5,y:2}]
-        },
-        {
-            type:"ricecake",
-            positions: [{x:2,y:5}]
-        },
-        {
-            type:"ricecake",
-            positions: [{x:5,y:5}]
-        }
+        {type:"ricecake",positions: [{x:2,y:2}]},
+        {type:"ricecake",positions: [{x:5,y:2}]},
+        {type:"ricecake",positions: [{x:2,y:5}]},
+        {type:"ricecake",positions: [{x:5,y:5}]}
     ],
     initHero: {
         type:"normalHero",
@@ -1391,13 +1410,11 @@ rooms.push({
     loseAnyConditions:[
         "outOfTurn"
     ],
-    enemyPool:[{
-        type:"pudding",subtype:"yellow"
-    },{
-        type:"pudding",subtype:"blue"
-    },{
-        type:"pudding",subtype:"green"
-    }],
+    enemyPool:[
+        {type:"pudding",subtype:"yellow"},
+        {type:"pudding",subtype:"blue"},
+        {type:"pudding",subtype:"green"}
+        ],
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6,
@@ -1442,32 +1459,18 @@ rooms.push({
     loseAnyConditions:[
         "outOfTurn"
     ],
-    enemyPool:[{
-        type:"pudding",subtype:"red"
-    },{
-        type:"ricecake"
-    },{
-        type:"cherrycake"
-    }],
+    enemyPool:[
+        {type:"pudding",subtype:"red"},
+        {type:"ricecake"},
+        {type:"cherrycake"}
+        ],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6Cross6x4,
     initMovables:[
-        {
-            type:"pillar",subtype:"normal",
-            positions: [{x:2,y:2}]
-        },
-        {
-            type:"pillar",subtype:"normal",
-            positions: [{x:5,y:2}]
-        },
-        {
-            type:"pillar",subtype:"normal",
-            positions: [{x:2,y:5}]
-        },
-        {
-            type:"pillar",subtype:"normal",
-            positions: [{x:5,y:5}]
-        }
+        {type:"pillar",subtype:"normal",positions: [{x:2,y:2}]},
+        {type:"pillar",subtype:"normal",positions: [{x:5,y:2}]},
+        {type:"pillar",subtype:"normal",positions: [{x:2,y:5}]},
+        {type:"pillar",subtype:"normal",positions: [{x:5,y:5}]}
     ],
     initHero: {
         type:"normalHero",
@@ -1508,13 +1511,11 @@ rooms.push({
     loseAnyConditions:[
         "outOfTurn"
     ],
-    enemyPool:[{
-        type:"pudding",subtype:"red"
-    },{
-        type:"ricecake"
-    },{
-        type:"cherrycake"
-    }],
+    enemyPool:[
+        {type:"pudding",subtype:"red"},
+        {type:"ricecake"},
+        {type:"cherrycake"}
+        ],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x5HRotate90,
     initMovables:[
@@ -1563,15 +1564,12 @@ rooms.push({
     loseAnyConditions:[
         "outOfTurn"
     ],
-    enemyPool:[{
-        type:"pudding",subtype:"red"
-    },{
-        type:"pudding",subtype:"yellow"
-    },{
-        type:"pudding",subtype:"blue"
-    },{
-        type:"pudding",subtype:"green"
-    }],
+    enemyPool:[
+        {type:"pudding",subtype:"red"},
+        {type:"pudding",subtype:"yellow"},
+        {type:"pudding",subtype:"blue"},
+        {type:"pudding",subtype:"green"}
+        ],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6UpArrow,
     initMovables:[
@@ -1615,13 +1613,11 @@ rooms.push({
     loseAnyConditions:[
         "outOfTurn"
     ],
-    enemyPool:[{
-        type:"pudding",subtype:"red"
-    },{
-        type:"pudding",subtype:"yellow"
-    },{
-        type:"pudding",subtype:"blue"
-    }],
+    enemyPool:[
+        {type:"pudding",subtype:"red"},
+        {type:"pudding",subtype:"yellow"},
+        {type:"pudding",subtype:"blue"}
+        ],
     itemPool:STANDARD_ITEM_POOL,
     genEnemyStrategy: [{type:"random", number: 4, last: 0}],
     initTiles:tiles7x7Rhombus,
