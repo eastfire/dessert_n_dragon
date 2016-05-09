@@ -48,7 +48,7 @@ var texts_locale = {
             },
             donut:{
                 name:"甜甜圈骑士",
-                desc:"\n攻击力超高。\n饱腹度超高。\n\n别被他圆圆的外表欺骗"
+                desc:"攻击力超高。\n饱腹度超高。\n\n别被他圆圆的外表欺骗"
             },
             icecream: {
                 name:"冰激凌法师",
@@ -57,6 +57,10 @@ var texts_locale = {
             jelly:{
                 name:"果冻侦察兵",
                 desc:"一定概率躲过近距离攻击（等级越高概率越高）。\n攻击力较低。\n饱腹度低。"
+            },
+            mushmellow:{
+                name:"棉花糖召唤师",
+                desc:"合并时召唤云朵遮挡视线（等级越高云朵越多）。\n攻击力较低。\n饱腹度一般。"
             },
             popcorn:{
                 name:"爆米花掷弹兵",
@@ -227,9 +231,10 @@ var texts_locale = {
             //enemy
             enemy:{
                 "chocolate-cake":"黑森林武士将在无尽关卡中出现",
-                "donut":"甜甜圈骑士将在无尽关卡中出现",
-                "jelly":"果冻侦察兵将在无尽关卡中出现",
-                "popcorn":"爆米花掷弹兵将在无尽关卡中出现"
+                donut:"甜甜圈骑士将在无尽关卡中出现",
+                jelly:"果冻侦察兵将在无尽关卡中出现",
+                popcorn:"爆米花掷弹兵将在无尽关卡中出现",
+                mushmellow:"棉花糖召唤师将在无尽关卡中出现",
             }
         },
 
@@ -392,6 +397,22 @@ var texts_locale = {
                 },
                 desc: function (level) {
                     return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-jelly"].requirement(level) + "或以上的果冻侦察兵"
+                }
+            },
+            "kill-level-mushmellow": {
+                name:function(level){
+                    return "棉花糖杀手"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-mushmellow"].requirement(level) + "的棉花糖召唤师"
+                }
+            },
+            "kill-max-level-mushmellow": {
+                name:function(level){
+                    return "精英棉花糖杀手"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-mushmellow"].requirement(level) + "或以上的棉花糖召唤师"
                 }
             }
         }
