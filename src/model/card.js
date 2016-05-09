@@ -416,7 +416,7 @@ CARD_MODEL_MAP.teleport = CardModel.extend({
     onUse:function(){
         var currentTile = currentRoom.getTile(currentRoom.getHero().get("positions")[0]);
         var tiles = currentRoom.filterTile(function(tile){
-                return currentTile !== tile && tile.get("isPassable") && !currentRoom.getMovableByTile(tile)
+                return currentTile !== tile && tile.isPassable() && !currentRoom.getMovableByTile(tile)
             },
             this);
         if ( tiles.length ) {
