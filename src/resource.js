@@ -23,7 +23,7 @@ var times = {
     scoreBar: 0.1,
 
     card_sort: 0.3,
-    teleport: 0.5
+    teleport: 0.4
 }
 
 var animations = {

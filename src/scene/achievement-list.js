@@ -452,7 +452,7 @@ ACHIEVEMENT_ENTRY_MAP = {
             return level*5+5
         },
         validation: "statistic"
-    }
+    },
     "kill-level-mushmellow": {
         index: 22,
         maxLevel: 5,

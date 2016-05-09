@@ -348,7 +348,7 @@ MOVABLE_MODEL_MAP.mushmellow = EnemyModel.extend({
         EnemyModel.prototype.afterBeMerged.call(this,movable);
         if ( movable instanceof MOVABLE_MODEL_MAP.mushmellow ) {
             var tiles = _.each(_.sample(currentRoom.filterTile(function(tileModel){
-                return tileModel.isPassable(); && !tileModel.get("cloud");
+                return tileModel.isPassable() && !tileModel.get("cloud");
             },this),this.getCloudNumber()),
             function(tileModel){
                 tileModel.set("cloud", this.getCloudTime());

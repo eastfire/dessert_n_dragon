@@ -481,6 +481,9 @@ var RoomModel = Backbone.Model.extend({
             }
         },this);
 
+        this.trigger("turn-start",this)
+    },
+    afterTurnStart:function(){
         if ( this.passCheckCondition() ) {
             this.nextPhase();
         }

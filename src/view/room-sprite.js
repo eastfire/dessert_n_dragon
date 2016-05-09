@@ -95,6 +95,12 @@ var RoomSprite = BaseSprite.extend({
         }
     },
     initEvent:function(){
+        this.model.on("turn-start",this.onTurnStart, this)
         this.model.on("generate-movable",this.generateMovable, this)
+    },
+    onTurnStart:function(){
+        this.scheduleOnce(function(){
+            this.model.afterTurnStart();
+        }, 0.4);
     }
 })

@@ -204,8 +204,8 @@ var MovableModel = Backbone.Model.extend({
         this.calculateEdgePositions();
     },
     teleport:function(newPosition){
-        currentRoom.getHero().trigger("teleport", newPosition);
-        currentRoom.getHero().setNewPosition(newPosition)
+        this.trigger("teleport", newPosition);
+        this.setNewPosition(newPosition)
     },
     afterTeleport:function(){
 

@@ -851,7 +851,7 @@ var tiles6x6T = [
     [null,null,null,null,wall_se,wall_e,wall_e,wall_ne]
 ];
 
-var tiles7x5SplitAndPortal={
+var tiles7x5SplitAndPortal=[
     [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
     [wall_s,portal_a,floor_n,floor_n,floor_n,floor_n,wall_n],
     [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
@@ -861,9 +861,9 @@ var tiles7x5SplitAndPortal={
     [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
     [wall_s,floor_n,floor_n,floor_n,floor_n,portal_a,wall_n],
     [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
-}
+]
 
-var tiles7x6SplitAndPortal={
+var tiles7x6SplitAndPortal=[
     [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
     [wall_s,portal_a,floor_n,floor_n,floor_n,floor_n,portal_b,wall_n],
     [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
@@ -873,7 +873,7 @@ var tiles7x6SplitAndPortal={
     [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
     [wall_s,portal_b,floor_n,floor_n,floor_n,floor_n,floor_n,portal_a],
     [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
-}
+]
 
 var STANDARD_CHOICE_POOL = [
     { type:"getScore", opt:{ number:300} },
@@ -2892,7 +2892,7 @@ rooms.push({
 
 //room43 timelimit+popcorn
 rooms.push({
-    timeLimit:120,
+    timeLimit:90,
     scoreCondition: [1000, 1200, 1400],
     winEveryConditions:[
         {
