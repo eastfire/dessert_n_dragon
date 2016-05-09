@@ -53,7 +53,10 @@ var GameOverDialog = cc.Scale9Sprite.extend({
                     var stageNumber = this.model.get("stageNumber")
                     if ( stageNumber !== 0 ) {
                         cc.director.runScene(new RoomScene({
-                            roomEntry: clone(rooms[stageNumber-1]),
+                            roomEntry: _.extend(clone(rooms[stageNumber-1]),  //没有经过select room的话rooms中没有stageNumber，所以要补上
+                                {
+                                    stageNumber: stageNumber
+                                }),
                             maxScore: score[stageNumber]
                         }));
                     } else {

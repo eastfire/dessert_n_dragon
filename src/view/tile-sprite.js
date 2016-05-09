@@ -8,7 +8,9 @@ var TileSprite = BaseSprite.extend({
             anchorX: 0,
             anchorY: 0
         })
-        
+        if ( this.model.get("cloud") ) {
+            this.cloudAppear();
+        }
         this.model.on("change:cloud", this.onCloudChange, this)
     },
     getInitFrameName:function(){
@@ -27,12 +29,16 @@ var TileSprite = BaseSprite.extend({
                 cc.removeSelf()
                 ));
         } else if ( !prevCloud && currentCloud ) {
-            //appear
-            this.__cloudSprite = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( "cloud.png" ));
-            this.addChild(this.__cloudSprite, 80);
+            this.cloudAppear();
+        }
+    },
+    cloudAppear:function(){
+        this.scheduleOnce(function() {
+            this.__cloudSprite = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("cloud.png"));
+            currentRoomSprite.addChild(this.__cloudSprite, 80);
             this.__cloudSprite.attr({
-                x: this.width/2,
-                y: this.height/2,
+                x: this.x+this.width/2,
+                y: this.y+this.height/2,
                 scaleX: 0.2,
                 scaleY: 0.2,
                 opacity: 0
@@ -40,9 +46,9 @@ var TileSprite = BaseSprite.extend({
             this.__cloudSprite.runAction(
                 cc.spawn(
                     cc.fadeIn(times.cloud),
-                    cc.scaleTo(times.cloud,1,1)
-                    )
+                    cc.scaleTo(times.cloud, this.scaleX+0.1, this.scaleY+0.1)
+                )
             );
-        }
+        },0.01);
     }
 })

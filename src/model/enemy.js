@@ -11,7 +11,6 @@ var EnemyModel = MovableModel.extend({
             isAllFaceSame: true,
             exp: 1,
             dexterity: 0,
-            heroForwardAfterKillMe:true,
             score: SCORE_INFLATION_RATE
         } )
     },
@@ -359,7 +358,7 @@ MOVABLE_MODEL_MAP.mushmellow = EnemyModel.extend({
         return Math.min(3, Math.ceil(this.get("level") / 10 ));
     },
     getCloudTime:function(){
-        return Math.min(3, Math.ceil(this.get("level") / 6 ))+1;
+        return Math.min(3, Math.ceil(this.get("level") / 6 ))+2;
     },
     expOfLevel:function(l){
         return Math.round(l*EXP_INFLATION_RATE*2.5)

@@ -10,6 +10,7 @@ var wall_nenw = {type:"wall", subtype:"nenw"};
 var wall_sesw = {type:"wall", subtype:"sesw"};
 var wall_nese = {type:"wall", subtype:"nese"};
 var wall_nwsw = {type:"wall", subtype:"nwsw"};
+var wall_nenwsesw = {type:"wall", subtype:"nenwsesw"};
 var wall_nel = {type:"wall", subtype:"nelong"};
 var wall_sel = {type:"wall", subtype:"selong"};
 var wall_nwl = {type:"wall", subtype:"nwlong"};
@@ -871,8 +872,32 @@ var tiles7x6SplitAndPortal=[
     [wall_sesw,wall_ewl,wall_ewl,wall_ewl,wall_ewl,wall_ewl,wall_ewl,wall_nenw],
     [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
     [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
-    [wall_s,portal_b,floor_n,floor_n,floor_n,floor_n,floor_n,portal_a],
+    [wall_s,portal_b,floor_n,floor_n,floor_n,floor_n,portal_a,wall_n],
     [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
+]
+
+var tiles7x7Split4AndPortal=[
+    [wall_sw,wall_w,wall_w,wall_w,wall_nwsw,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,portal_a,floor_n,floor_n,wall_nsl,floor_n,floor_n,portal_b,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,wall_nsl,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,wall_nsl,floor_n,floor_n,floor_n,wall_n],
+    [wall_sesw,wall_ewl,wall_ewl,wall_ewl,wall_nenwsesw,wall_ewl,wall_ewl,wall_ewl,wall_nenw],
+    [wall_s,floor_n,floor_n,floor_n,wall_nsl,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,wall_nsl,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,portal_b,floor_n,floor_n,wall_nsl,floor_n,floor_n,portal_a,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_nese,wall_e,wall_e,wall_e,wall_ne]
+]
+
+var tiles7x5Portal=[
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,portal_a,floor_n,floor_n,floor_n,portal_b,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,portal_b,floor_n,floor_n,floor_n,portal_a,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ]
 
 var STANDARD_CHOICE_POOL = [
@@ -2934,7 +2959,7 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room44 第一次出现 protal
+//room44 第一次出现 portal
 rooms.push({
     turnLimit:30,
     scoreCondition: [1500, 1800, 2100],
@@ -2968,13 +2993,166 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room45 TODO
+//room45 freeze
+rooms.push({
+    turnLimit:20,
+    scoreCondition: [2500, 3000, 4000],
+    winEveryConditions:[
+        "outOfTurn"
+    ],
+    loseEveryConditions:[
+        "outOfTurn",
+        "notEnoughScore"
+    ],
+    enemyPool:[{type:"donut"},{type:"chocolate-cake"},{type:"creampuff"}],
+    enemyLevelPool:[1,3],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles5x5,
+    initMovables:[],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:4,y:3}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    initHand:[{type:"freeze"}],
+    choicePool:STANDARD_CHOICE_POOL,
+    unlocks: [{type:"shop", subtype:"freeze"}]
+});
 
-//room46 TODO
+//room46 2 portals
+rooms.push({
+    turnLimit:30,
+    scoreCondition: [1600, 1800, 2200],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"popcorn",
+            number: 12
+        },
+        {
+            conditionType:"kill-level",
+            type:"cherrycake",
+            number: 12
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"chocolate-cake"},{type:"cherrycake"},{type:"popcorn"}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles7x6SplitAndPortal,
+    initMovables:[],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:2,y:4}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    initHand:[],
+    choicePool:STANDARD_CHOICE_POOL
+});
 
-//room47 TODO
+//room47 portal + timelimit
+rooms.push({
+    timeLimit:120,
+    scoreCondition: [1800, 2100, 2400],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"donut",
+            number: 12
+        },
+        {
+            conditionType:"kill-level",
+            type:"cherrycake",
+            number: 12
+        },
+        {
+            conditionType:"kill-level",
+            type:"jelly",
+            number: 12
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTime"
+    ],
+    enemyPool:[{type:"donut"},{type:"cherrycake"},{type:"jelly"}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles7x7Split4AndPortal,
+    initMovables:[],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:2,y:2}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    initHand:[],
+    choicePool:STANDARD_CHOICE_POOL
+});
 
-//room48 TODO
+
+//room48 log + portal
+rooms.push({
+    turnLimit:26,
+    scoreCondition: [1300, 1600, 2000],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"archer",
+            number: 9
+        },
+        {
+            conditionType:"kill-level",
+            type:"cherrycake",
+            number: 9
+        },
+        {
+            conditionType:"kill-level",
+            type:"souffle",
+            number: 12
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"archer"},{type:"cherrycake"},{type:"souffle"}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles7x5Portal,
+    initMovables:[{type:"vertical-log5",subtype:"normal",positions:[{x:4,y:5},{x:4,y:4},{x:4,y:3},{x:4,y:2},{x:4,y:1}]}],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:5,y:3}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    initHand:[],
+    choicePool:STANDARD_CHOICE_POOL
+});
 
 //room49
 rooms.push({
@@ -3019,5 +3197,46 @@ rooms.push({
         } //normal, fix
     },
     initHand:[ {type:"teleport"} ],
-    choicePool:STANDARD_CHOICE_POOL
+    choicePool:STANDARD_CHOICE_POOL,
+    unlocks: [{type:"shop", subtype:"teleport"}]
+});
+
+//room50 mushmellow 出现
+rooms.push({
+    turnLimit:20,
+    scoreCondition: [800, 1000, 1200],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"mushmellow",
+            number: 10
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"mushmellow"},{type:"pudding",subtype:"red"},{type:"donut"}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles5x5,
+    initMovables:[
+        { type:"mushmellow", positions: [{x:1,y:1}] },
+        { type:"mushmellow", positions: [{x:1,y:5}] },
+        { type:"mushmellow", positions: [{x:5,y:5}] },
+        { type:"mushmellow", positions: [{x:5,y:1}] }
+    ],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:3}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    initHand:[],
+    choicePool:STANDARD_CHOICE_POOL,
+    unlocks: [{type:"enemy", subtype:"mushmellow"}]
 });

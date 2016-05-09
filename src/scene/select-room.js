@@ -43,7 +43,7 @@ var SelectRoomLayer = cc.Layer.extend({
             this.scrollView.addChild(sprite);
             var selectable = false;
             roomEntry.stageNumber = stageNumber;
-            var roomScore = score[stageNumber]// = 100;
+            var roomScore = score[stageNumber];
             var scoreCondition = roomEntry.scoreCondition;
             if ( (!scoreCondition && roomScore ) || (scoreCondition && roomScore >= scoreCondition[0] )) {
                 selectable = true;
@@ -63,7 +63,7 @@ var SelectRoomLayer = cc.Layer.extend({
                     selectable = false;
                 }
             }
-//            selectable = true;
+//            selectable = true; //for debug
             if ( selectable ) {
                 //TODO became menu item
                 (function( roomEntry) {
@@ -85,6 +85,7 @@ var SelectRoomLayer = cc.Layer.extend({
                         },
                         //Process the touch end event
                         onTouchEnded: function (touch, event) {
+                            window.prevSelectRoom = roomEntry.stageNumber;
                             cc.director.runScene(new RoomScene({
                                 roomEntry: clone(roomEntry),
                                 maxScore: roomScore
@@ -101,10 +102,14 @@ var SelectRoomLayer = cc.Layer.extend({
             stageNumber++;
         },this)
 
-        if (firstUnpassed===0) {
-            this.scrollView.scrollToPercentVertical(0, 0.5, true);
+        if ( window.prevSelectRoom ) {
+            this.scrollView.scrollToPercentVertical(100 * (1 - window.prevSelectRoom / rooms.length), 0.5, true);
         } else {
-            this.scrollView.scrollToPercentVertical(100 * (1 - firstUnpassed / rooms.length), 0.5, true);
+            if (firstUnpassed === 0) {
+                this.scrollView.scrollToPercentVertical(0, 0.5, true);
+            } else {
+                this.scrollView.scrollToPercentVertical(100 * (1 - firstUnpassed / rooms.length), 0.5, true);
+            }
         }
     },
     addStar:function(sprite, position){

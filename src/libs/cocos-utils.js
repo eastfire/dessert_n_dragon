@@ -239,8 +239,8 @@ var toast = function(text, options){
     parent.addChild(label);
 
     label.runAction(cc.sequence(
-        cc.moveBy(0.3, 0, options.deltaY || 20),
-        cc.fadeOut(0.2),
+        cc.moveBy(0.4, 0, options.deltaY || 20),
+        cc.fadeOut(0.1),
         cc.removeSelf()
     ))
 }

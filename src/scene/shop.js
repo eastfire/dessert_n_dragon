@@ -151,8 +151,10 @@ var ShopLayer = cc.Layer.extend({
         closeItem.attr({
             x: dimens.closeItem.x,
             y: dimens.closeItem.y,
+            scaleX: 1.2,
+            scaleY: 1.2,
             anchorX: 1,
-            anchorY: 1
+            anchorY: 0.85
         });
 
         var menu = new cc.Menu([closeItem]);
