@@ -399,6 +399,22 @@ var texts_locale = {
                     return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-jelly"].requirement(level) + "或以上的果冻侦察兵"
                 }
             },
+            "kill-level-popcorn": {
+                name:function(level){
+                    return "爆米花杀手"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-popcorn"].requirement(level) + "的爆米花掷弹兵"
+                }
+            },
+            "kill-max-level-popcorn": {
+                name:function(level){
+                    return "精英爆米花杀手"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-popcorn"].requirement(level) + "或以上的爆米花掷弹兵"
+                }
+            },
             "kill-level-mushmellow": {
                 name:function(level){
                     return "棉花糖杀手"+LEVEL_TEXT_MAP[level];
