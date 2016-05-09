@@ -38,6 +38,48 @@ var wall_selnw = {type:"wall", subtype:"selongnw"};
 var wall_swlne = {type:"wall", subtype:"swlongne"};
 var wall_h = {type:"wall", subtype:"hole"};
 var floor_n = {type:"floor", subtype:"normal"};
+var portal_a = {type:"portal", subtype:"a"};
+var portal_b = {type:"portal", subtype:"b"};
+
+var WALL_ROTATE90_MAP = {
+    n:"e",
+    e:"s",
+    s:"w",
+    w:"n",
+    ne:"se",
+    se:"sw",
+    sw:"nw",
+    nw:"ne",
+    nenw:"nese",
+    nese:"sesw",
+    sesw:"nwsw",
+    nwsw:"nenw",
+    nelong:"selong",
+    selong:"swlong",
+    swlong:"nwlong",
+    nwlong:"nelong",
+    newlong:"nselong",
+    nselong:"sewlong",
+    sewlong:"nswlong",
+    nswlong:"newlong",
+    nlongse:"elongsw",
+    elongsw:"slongnw",
+    slongnw:"wlongne",
+    wlongne:"nlongse",
+    nlongsw:"elongnw",
+    elongnw:"slongne",
+    slongne:"wlongne",
+    wlongne:"nlongsw",
+    nlongsesw:"elongnwsw",
+    elongnwsw:"slongnenw",
+    slongnenw:"wlongnese",
+    wlongnese:"nlongsesw",
+    nelongsw:"selongnw",
+    selongnw:"swlongne",
+    swlongne:"nwlongse",
+    nwlongse:"nelongsw"
+};
+
 
 var tiles4x4 = [
     [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_nw],
@@ -748,6 +790,30 @@ var tiles6x6T = [
     [null,null,null,null,wall_s,floor_n,floor_n,wall_n],
     [null,null,null,null,wall_se,wall_e,wall_e,wall_ne]
 ];
+
+var tiles7x5SplitAndPortal={
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,portal_a,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_sesw,wall_ewl,wall_ewl,wall_ewl,wall_ewl,wall_ewl,wall_nenw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,portal_a,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
+}
+
+var tiles7x6SplitAndPortal={
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,portal_a,floor_n,floor_n,floor_n,floor_n,portal_b,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_sesw,wall_ewl,wall_ewl,wall_ewl,wall_ewl,wall_ewl,wall_ewl,wall_nenw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,portal_b,floor_n,floor_n,floor_n,floor_n,floor_n,portal_a],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
+}
 
 var STANDARD_CHOICE_POOL = [
     { type:"getScore", opt:{ number:300} },
@@ -2828,9 +2894,83 @@ rooms.push({
     unlocks:[{type:"enemy", subtype:"popcorn"}]
 });
 
-//room43 TODO
+//room43 timelimit+popcorn
+rooms.push({
+    timeLimit:120,
+    scoreCondition: [1000, 1200, 1400],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"popcorn",
+            number: 9
+        },
+        {
+            conditionType:"kill-level",
+            type:"icecream",
+            number: 9
+        },
+        {
+            conditionType:"kill-level",
+            type:"jelly",
+            number: 9
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTime"
+    ],
+    enemyPool:[{type:"popcorn"},{type:"icecream"},{type:"jelly"}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles4x4,
+    initMovables:[],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:2,y:2}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        } //normal, fix
+    },
+    initHand:[],
+    choicePool:STANDARD_CHOICE_POOL
+});
 
-//room44 TODO
+//room44 第一次出现 protal
+rooms.push({
+    turnLimit:30,
+    scoreCondition: [1500, 1800, 2100],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"chocolate-cake",
+            number: 16
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"chocolate-cake"},{type:"creampuff"},{type:"souffle"}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles7x5SplitAndPortal,
+    initMovables:[],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:2,y:4}],
+        initHp: 100,
+        initMaxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    initHand:[],
+    choicePool:STANDARD_CHOICE_POOL
+});
 
 //room45 TODO
 
