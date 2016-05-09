@@ -474,7 +474,12 @@ var RoomModel = Backbone.Model.extend({
                 movable.onTurnStart();
             }
         },this)
-        //TODO for tiles special ability
+
+        this.foreachTile(function(tileModel){
+            if ( tileModel.onTurnStart ) {
+                tileModel.onTurnStart.call(tileModel);
+            }
+        },this);
 
         if ( this.passCheckCondition() ) {
             this.nextPhase();

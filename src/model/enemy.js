@@ -338,6 +338,26 @@ MOVABLE_MODEL_MAP.icecream = EnemyModel.extend({
     }
 })
 
+MOVABLE_MODEL_MAP.mushmellow = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "mushmellow"
+        } )
+    },
+    afterBeMerged:function(movable){
+        EnemyModel.prototype.afterBeMerged.call(this,movable);
+        if ( movable instanceof MOVABLE_MODEL_MAP.mushmellow ) {
+            //TODO
+        }
+    },
+    expOfLevel:function(l){
+        return Math.round(l*EXP_INFLATION_RATE*2.5)
+    },
+    attackOfLevel:function(l){
+        return l;
+    }
+})
+
 MOVABLE_MODEL_MAP.popcorn = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{

@@ -20,7 +20,9 @@ var RoomTileModel = Backbone.Model.extend({
     }
 })
 
-var RoomWallTileModel = RoomTileModel.extend({
+var TILE_MODEL_MAP = {}
+
+TILE_MODEL_MAP.wall = RoomTileModel.extend({
     defaults:function(){
         return _.extend(RoomTileModel.prototype.defaults.apply(this),{
             type: "wall",
@@ -31,7 +33,7 @@ var RoomWallTileModel = RoomTileModel.extend({
     }
 })
 
-var FloorTileModel = RoomTileModel.extend({
+TILE_MODEL_MAP.floor = RoomTileModel.extend({
     defaults:function(){
         return _.extend(RoomTileModel.prototype.defaults.apply(this),{
             type: "floor",
@@ -40,7 +42,7 @@ var FloorTileModel = RoomTileModel.extend({
     }
 })
 
-var PillarTileModel = RoomTileModel.extend({
+TILE_MODEL_MAP.pillar = RoomTileModel.extend({
     defaults:function(){
         return _.extend(RoomTileModel.prototype.defaults.apply(this),{
             type: "pillar",
@@ -48,6 +50,18 @@ var PillarTileModel = RoomTileModel.extend({
             isPassable: false,
             canGenEnemy: false
         });
+    }
+})
+
+TILE_MODEL_MAP.portal = RoomTileModel.extend({
+    defaults:function(){
+        return _.extend(RoomTileModel.prototype.defaults.apply(this),{
+            type: "portal",
+            subtype: "a"
+        });
+    },
+    onTurnStart:function(){
+
     }
 })
 
@@ -61,8 +75,3 @@ var DoorTileModel = RoomTileModel.extend({
     }
 })
 
-var TILE_MODEL_MAP = {
-    "wall": RoomWallTileModel,
-    "floor":FloorTileModel,
-    "pillar":PillarTileModel
-}
