@@ -431,6 +431,8 @@ CARD_MODEL_MAP.teleport = CardModel.extend({
 })
 
 //passive card
+//TODO collector skill + item effect
+
 CARD_MODEL_MAP.constitution = CardModel.extend({
     defaults: function () {
         return _.extend(CardModel.prototype.defaults.call(this),{
