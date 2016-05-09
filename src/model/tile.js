@@ -6,6 +6,7 @@ var RoomTileModel = Backbone.Model.extend({
             isPassable: true,
             isCapture: false,
             canGenEnemy: true,
+            cloud: 0,
             position:{
                 x:0,
                 y:0
@@ -17,6 +18,10 @@ var RoomTileModel = Backbone.Model.extend({
     },
     isCapture:function(movable){
         return this.get("isCapture");
+    },
+    onTurnStart:function(){
+        //maintain
+        this.set("cloud",Math.max(0, this.get("cloud") - 1));
     }
 })
 
@@ -62,6 +67,7 @@ TILE_MODEL_MAP.portal = RoomTileModel.extend({
         });
     },
     onTurnStart:function(){
+        RoomTileModel.prototype.onTurnStart.call(this);
         //if has enemy
         var movableModel = currentRoom.getMovableByTile(this);
         if ( movableModel && 
@@ -82,6 +88,38 @@ TILE_MODEL_MAP.portal = RoomTileModel.extend({
                 cc.error("stage error! portal not appear in pair.")
             }
         }
+    }
+})
+
+TILE_MODEL_MAP.pitfall = RoomTileModel.extend({
+    defaults:function(){
+        return _.extend(RoomTileModel.prototype.defaults.apply(this),{
+            type: "pitfall",
+            isCapture: true,
+            canGenEnemy: true
+        });
+    }
+})
+
+TILE_MODEL_MAP.nail = RoomTileModel.extend({
+    defaults:function(){
+        return _.extend(RoomTileModel.prototype.defaults.apply(this),{
+            type: "nail",
+            isCapture: false,
+            canGenEnemy: true
+        });
+    },
+    onTurnStart:function(){
+        RoomTileModel.prototype.onTurnStart.call(this);
+        var movableModel = currentRoom.getMovableByTile(this);
+        if ( movableModel ){
+            if ( movableModel instanceof HeroModel ) {
+                HeroModel.loseHp(this.getEffect(), this);
+            }
+        }
+    },
+    getEffect:function(){
+        return 5;
     }
 })
 
