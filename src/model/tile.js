@@ -72,7 +72,7 @@ TILE_MODEL_MAP.portal = RoomTileModel.extend({
         var movableModel = currentRoom.getMovableByTile(this);
         if ( movableModel &&
             movableModel.__teleportTurn !== currentRoom.get("turnNumber") && //防止反复传送
-            ( movableModel instanceof HeroModel || ( movableModel instanceof EnemyModel && movableModel.get("positions").length === 1 ) ) ) {
+            movableModel.isSinglePiece() ) {
             //find another same subtype
             var tiles = currentRoom.filterTile(function(tileModel){
                 return tileModel !== this && tileModel.get("type") === this.get("type") &&
@@ -96,8 +96,8 @@ TILE_MODEL_MAP.pitfall = RoomTileModel.extend({
     defaults:function(){
         return _.extend(RoomTileModel.prototype.defaults.apply(this),{
             type: "pitfall",
-            isCapture: true,
-            canGenEnemy: true
+            subtype: "normal"
+            isCapture: true
         });
     }
 })
@@ -106,8 +106,7 @@ TILE_MODEL_MAP.nail = RoomTileModel.extend({
     defaults:function(){
         return _.extend(RoomTileModel.prototype.defaults.apply(this),{
             type: "nail",
-            isCapture: false,
-            canGenEnemy: true
+            subtype: "normal"
         });
     },
     onTurnStart:function(){
@@ -115,12 +114,85 @@ TILE_MODEL_MAP.nail = RoomTileModel.extend({
         var movableModel = currentRoom.getMovableByTile(this);
         if ( movableModel ){
             if ( movableModel instanceof HeroModel ) {
+                this.trigger("nailUp",this);
                 HeroModel.loseHp(this.getEffect(), this);
             }
         }
     },
     getEffect:function(){
         return 5;
+    }
+})
+
+var BELT_DIRECTION_MAP = [
+    n: DIRECTION_UP,
+    en: DIRECTION_UP,
+    wn: DIRECTION_UP,
+    s: DIRECTION_DOWN,
+    es: DIRECTION_DOWN,
+    ws: DIRECTION_DOWN,
+    e: DIRECTION_RIGHT,
+    ne: DIRECTION_RIGHT,
+    se: DIRECTION_RIGHT,
+    w: DIRECTION_LEFT,
+    nw: DIRECTION_LEFT,
+    sw: DIRECTION_LEFT
+    ]
+TILE_MODEL_MAP.belt = RoomTileModel.extend({
+    defaults:function(){
+        return _.extend(RoomTileModel.prototype.defaults.apply(this),{
+            type: "belt",
+            subtype: "n"
+        });
+    },
+    onTurnStart:function(){
+        RoomTileModel.prototype.onTurnStart.call(this);
+        
+        var movableModel = currentRoom.getMovableByTile(this);
+        if ( movableModel && movableModel.isSinglePiece() ){
+            if ( this.checkCanMovableToNext(this) ) {
+                var direction = BELT_DIRECTION_MAP[tileModel.get("subtype")];
+                movableModel.beltTo(getIncrementPosition(tileModel.get("position"), direction))
+            }
+        }
+    },
+    checkCanMoveToNext:function(tileModel){
+        //already calculated
+        if ( tileModel.__beltTurn === currentRoom.get("turnNumber")) {
+            return tileModel.__beltCanMoveToNext;
+        }
+        
+        var direction = BELT_DIRECTION_MAP[tileModel.get("subtype")];
+        var nextTile = currentRoom.getTile(getIncrementPosition(tileModel.get("position"), direction));
+        if ( !nextTile || !nextTile.isPassable() ) {
+            tileModel.__beltTurn = currentRoom.get("turnNumber");
+            tileModel.__beltCanMoveToNext = false;
+            return false;
+        }
+        
+        var nextMovableModel = currentRoom.getMovableByTile(nextTile);
+        if ( nextMovableModel ){ //has movable in nextTile
+            if ( nextTile instanceof TILE_MODEL_MAP.belt ) {
+                if ( this === nextTile ) { //cycled back
+                    tileModel.__beltTurn = currentRoom.get("turnNumber");
+                    tileModel.__beltCanMoveToNext = true;
+                    return true;
+                } else {
+                    var result = this.checkCanMoveToNext(nextTile);
+                    tileModel.__beltTurn = currentRoom.get("turnNumber");
+                    tileModel.__beltCanMoveToNext = result;
+                    return result;
+                }
+            } else {
+                tileModel.__beltTurn = currentRoom.get("turnNumber");
+                tileModel.__beltCanMoveToNext = false;
+                return false;
+            }
+        } else { //empty
+            tileModel.__beltTurn = currentRoom.get("turnNumber");
+            tileModel.__beltCanMoveToNext = true;
+            return true;
+        }
     }
 })
 
