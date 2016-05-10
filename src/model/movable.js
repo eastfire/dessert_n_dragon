@@ -209,6 +209,13 @@ var MovableModel = Backbone.Model.extend({
     },
     afterTeleport:function(){
 
+    },
+    beltTo:function(newPosition){
+        this.trigger("beltTo", newPosition);
+        this.setNewPosition(newPosition)
+    },
+    afterBeltTo:function(){
+        
     }
 })
 
