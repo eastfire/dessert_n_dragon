@@ -56,30 +56,30 @@ var TILE_ROTATE90_MAP = {
     nese:wall_sesw,
     sesw:wall_nwsw,
     nwsw:wall_nenw,
-    nelong:wall_selong,
-    selong:wall_swlong,
-    swlong:wall_nwlong,
-    nwlong:wall_nelong,
-    newlong:wall_nselong,
-    nselong:wall_sewlong,
-    sewlong:wall_nswlong,
-    nswlong:wall_newlong,
-    nlongse:wall_elongsw,
-    elongsw:wall_slongnw,
-    slongnw:wall_wlongne,
-    wlongne:wall_nlongse,
-    nlongsw:wall_elongnw,
-    elongnw:wall_slongne,
-    slongne:wall_wlongne,
-    wlongne:wall_nlongsw,
-    nlongsesw:wall_elongnwsw,
-    elongnwsw:wall_slongnenw,
-    slongnenw:wall_wlongnese,
-    wlongnese:wall_nlongsesw,
-    nelongsw:wall_selongnw,
-    selongnw:wall_swlongne,
-    swlongne:wall_nwlongse,
-    nwlongse:wall_nelongsw
+    nelong:wall_sel,
+    selong:wall_swl,
+    swlong:wall_nwl,
+    nwlong:wall_nel,
+    newlong:wall_nsel,
+    nselong:wall_sewl,
+    sewlong:wall_nswl,
+    nswlong:wall_newl,
+    nlongse:wall_elsw,
+    elongsw:wall_slnw,
+    slongnw:wall_wlne,
+    wlongne:wall_nlse,
+    nlongsw:wall_elnw,
+    elongnw:wall_slne,
+    slongne:wall_wlne,
+    wlongne:wall_nlsw,
+    nlongsesw:wall_elnwsw,
+    elongnwsw:wall_slnenw,
+    slongnenw:wall_wlnese,
+    wlongnese:wall_nlsesw,
+    nelongsw:wall_selnw,
+    selongnw:wall_swlne,
+    swlongne:wall_nwlse,
+    nwlongse:wall_nelsw
 };
 
 var rotateTiles = function(originTiles, rotation){
@@ -952,8 +952,7 @@ var infiniteRoom = {
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -995,8 +994,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -1055,8 +1053,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:5,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -1118,8 +1115,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -1175,9 +1171,8 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
-        initRequireExp: 50,
+        maxHp: 100,
+        requireExp: 50, //lower requirement
         maxHpStrategy:{
             type: "normal"
         },
@@ -1228,8 +1223,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -1271,8 +1265,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -1311,7 +1304,7 @@ rooms.push({
         type:"normalHero",
         positions: [{x:3,y:3}],
         initHp: 10,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -1357,8 +1350,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:6}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -1400,8 +1392,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -1449,8 +1440,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -1501,8 +1491,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -1549,8 +1538,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -1603,8 +1591,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -1652,8 +1639,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:4,y:4}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -1699,8 +1685,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:4,y:4}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -1778,9 +1763,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
-        initRequireExp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -1825,9 +1808,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
-        initRequireExp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -1870,9 +1851,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
-        initRequireExp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -1922,8 +1901,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:4,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -1964,8 +1942,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:4}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -1994,8 +1971,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:4}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2033,8 +2009,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:4}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2062,8 +2037,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:4}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2101,8 +2075,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:2}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2148,8 +2121,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:4,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2187,8 +2159,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:4}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2220,8 +2191,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:6}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2269,8 +2239,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:4,y:5}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2335,8 +2304,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:4,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2387,8 +2355,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:5}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2440,8 +2407,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:5}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2490,8 +2456,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:4}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2531,7 +2496,7 @@ rooms.push({
         type:"normalHero",
         positions: [{x:4,y:3}],
         initHp: 50,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2572,7 +2537,7 @@ rooms.push({
         type:"normalHero",
         positions: [{x:3,y:2}],
         initHp: 30,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2610,7 +2575,7 @@ rooms.push({
         type:"normalHero",
         positions: [{x:4,y:4}],
         initHp: 30,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2663,8 +2628,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:2,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2706,8 +2670,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:2,y:4}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2738,8 +2701,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:4,y:4}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2781,8 +2743,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:2,y:2}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2820,8 +2781,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:2,y:4}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2864,8 +2824,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:2,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2902,8 +2861,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:1,y:4}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2947,8 +2905,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:2,y:2}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -2981,8 +2938,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:2,y:4}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -3013,8 +2969,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:4,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -3053,8 +3008,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:2,y:4}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -3097,8 +3051,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:2,y:2}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -3142,8 +3095,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:5,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -3188,8 +3140,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },
@@ -3228,8 +3179,7 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
-        initHp: 100,
-        initMaxHp: 100,
+        maxHp: 100,
         maxHpStrategy:{
             type: "normal"
         },

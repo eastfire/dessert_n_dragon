@@ -96,7 +96,7 @@ TILE_MODEL_MAP.pitfall = RoomTileModel.extend({
     defaults:function(){
         return _.extend(RoomTileModel.prototype.defaults.apply(this),{
             type: "pitfall",
-            subtype: "normal"
+            subtype: "normal",
             isCapture: true
         });
     }
@@ -124,7 +124,7 @@ TILE_MODEL_MAP.nail = RoomTileModel.extend({
     }
 })
 
-var BELT_DIRECTION_MAP = [
+var BELT_DIRECTION_MAP = {
     n: DIRECTION_UP,
     en: DIRECTION_UP,
     wn: DIRECTION_UP,
@@ -137,7 +137,8 @@ var BELT_DIRECTION_MAP = [
     w: DIRECTION_LEFT,
     nw: DIRECTION_LEFT,
     sw: DIRECTION_LEFT
-    ]
+}
+
 TILE_MODEL_MAP.belt = RoomTileModel.extend({
     defaults:function(){
         return _.extend(RoomTileModel.prototype.defaults.apply(this),{

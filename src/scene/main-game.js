@@ -112,12 +112,18 @@ var MainLayer = cc.Layer.extend({
             }, this);
 
         closeItem.attr({
-            x: cc.winSize.width/2,
-            y: cc.winSize.height/2,
+            x: dimens.closeItem.x,
+            y: dimens.closeItem.y,
             anchorX: 1,
             anchorY: 1
         });
         var menu = new cc.Menu([closeItem]);
+        menu.attr({
+            x:0,
+            y:0,
+            anchorX:0,
+            anchorY: 0
+        })
         this.addChild(menu);
     },
     initLabel:function(){

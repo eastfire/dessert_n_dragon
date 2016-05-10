@@ -37,9 +37,9 @@ var HeroModel = MovableModel.extend({
     initialize:function(){
         MovableModel.prototype.initialize.call(this);
 
-        this.set("maxHp",this.get("initMaxHp") || this.maxHpOfLevel());
-        this.set("hp",this.get("initHp") || this.get("maxHp"));
-        this.set("requireExp",this.get("initRequireExp") || this.requireExpOfLevel());
+        this.set("maxHp",this.get("maxHp") || this.maxHpOfLevel());
+        this.set("hp",this.get("hp") || this.get("maxHp"));
+        this.set("requireExp",this.get("requireExp") || this.requireExpOfLevel());
     },
     onTurnStart:function(){
         MovableModel.prototype.onTurnStart.call(this);
