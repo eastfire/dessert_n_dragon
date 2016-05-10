@@ -189,7 +189,11 @@ var RoomModel = Backbone.Model.extend({
         this.set("initDiscard", _.map(this.__discard,function(cardModel){
             return cardModel.toJSON();
         },this))
-        this.set("initHero", this.__hero.toJSON());
+        this.set("initHero", _.extend(this.__hero.toJSON(),{
+            initMaxHp : this.__hero.get("maxHp"),
+            initHp : this.__hero.get("hp"),
+            requireExp : this.__hero.get("initRequireExp")
+        }));
         return this.toJSON();
     },
     initRules:function(){
