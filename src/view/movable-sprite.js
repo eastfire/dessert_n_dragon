@@ -32,6 +32,7 @@ var MovableSprite = BaseSprite.extend({
         this.model.on("change:angry",this.renderStatus,this);
         this.model.on("change:dizzy",this.renderStatus,this);
         this.model.on("teleport",this.teleport,this)
+        this.model.on("beltTo",this.beltTo,this)
     },
     renderFace:function(){
         this.setSpriteFrame(cc.spriteFrameCache.getSpriteFrame( this.getInitFrameName() ));
@@ -98,6 +99,14 @@ var MovableSprite = BaseSprite.extend({
                 this.model.afterTeleport();
             },this)
         ))
+    },
+    beltTo:function(newPosition){
+        this.runAction(cc.sequence(
+            cc.moveTo(times.teleport,(newPosition.x + 0.5)* dimens.tileSize.width,(newPosition.y + 0.5)* dimens.tileSize.height),
+            cc.callFunc(function(){
+                this.model.afterTeleport();
+            },this)
+        ));
     },
     initLabel:function(){
 //        this.levelLabel = new ccui.Text("", "Arial", dimens.levelLabel.fontSize );
