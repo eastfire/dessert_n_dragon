@@ -27,7 +27,7 @@ var MovableModel = Backbone.Model.extend({
         this.calculateEdgePositions();
     },
     isSinglePiece:function(){
-        return this.get("positions").length > 1;
+        return this.get("positions").length === 1;
     },
     calculateEdgePositions:function(){
         this.edgePositions = [[],[],[],[]];
