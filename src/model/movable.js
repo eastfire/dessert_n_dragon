@@ -192,7 +192,6 @@ var MovableModel = Backbone.Model.extend({
         this.set("angry",amount);
     },
     setNewPosition:function(newPosition){
-        this.__removeOldMapping();
         var oldPosition = this.get("positions")[0];
         var diffX = newPosition.x - oldPosition.x;
         var diffY = newPosition.y - oldPosition.y;
@@ -205,17 +204,27 @@ var MovableModel = Backbone.Model.extend({
     },
     teleport:function(newPosition){
         this.trigger("teleport", newPosition);
-        this.setNewPosition(newPosition)
+        this.__changePositionAtTurnStart = currentRoom.get("turnNumber");
+        this.__newPositionAtTurnStart = newPosition;
     },
     afterTeleport:function(){
-
     },
     beltTo:function(newPosition){
         this.trigger("beltTo", newPosition);
-        this.setNewPosition(newPosition)
+        this.__changePositionAtTurnStart = currentRoom.get("turnNumber");
+        this.__newPositionAtTurnStart = newPosition;
     },
-    afterBeltTo:function(){
-        
+    afterBeltTo:function(newPosition){
+    },
+    afterTurnStartStep1:function(){
+        if ( this.__changePositionAtTurnStart === currentRoom.get("turnNumber") ) {
+            this.__removeOldMapping();
+        }
+    },
+    afterTurnStartStep2:function(){
+        if ( this.__changePositionAtTurnStart === currentRoom.get("turnNumber") ) {
+            this.setNewPosition(this.__newPositionAtTurnStart);
+        }
     }
 })
 

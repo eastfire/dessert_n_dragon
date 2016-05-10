@@ -62,8 +62,7 @@ TILE_MODEL_MAP.portal = RoomTileModel.extend({
     defaults:function(){
         return _.extend(RoomTileModel.prototype.defaults.apply(this),{
             type: "portal",
-            subtype: "a",
-            canGenEnemy: false
+            subtype: "a"
         });
     },
     onTurnStart:function(){
@@ -150,10 +149,11 @@ TILE_MODEL_MAP.belt = RoomTileModel.extend({
         RoomTileModel.prototype.onTurnStart.call(this);
         
         var movableModel = currentRoom.getMovableByTile(this);
-        if ( movableModel && movableModel.isSinglePiece() ){
-            if ( this.checkCanMovableToNext(this) ) {
-                var direction = BELT_DIRECTION_MAP[tileModel.get("subtype")];
-                movableModel.beltTo(getIncrementPosition(tileModel.get("position"), direction))
+        if ( movableModel && movableModel.isSinglePiece() && movableModel.__beltTurn !== currentRoom.get("turnNumber") ){
+            if ( this.checkCanMoveToNext(this) ) {
+                movableModel.__beltTurn = currentRoom.get("turnNumber");
+                var direction = BELT_DIRECTION_MAP[this.get("subtype")];
+                movableModel.beltTo(getIncrementPosition(this.get("position"), direction))
             }
         }
     },

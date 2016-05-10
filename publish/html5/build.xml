@@ -247,8 +247,11 @@
                 <file name="src/model/choice.js"/>
                 <file name="src/model/room.js"/>
                 <file name="src/model/card.js"/>
+                <file name="src/model/tiles-set.js"/>
                 <file name="src/model/room-entry.js"/>
                 <file name="src/model/unlockable-entry.js"/>
+                <file name="src/model/commodity-entry.js"/>
+                <file name="src/model/achievement-entry.js"/>
                 <file name="src/view/base-sprite.js"/>
                 <file name="src/view/movable-sprite.js"/>
                 <file name="src/view/enemy-sprite.js"/>

@@ -101,10 +101,12 @@ var MovableSprite = BaseSprite.extend({
         ))
     },
     beltTo:function(newPosition){
+        cc.log(newPosition)
         this.runAction(cc.sequence(
-            cc.moveTo(times.teleport,(newPosition.x + 0.5)* dimens.tileSize.width,(newPosition.y + 0.5)* dimens.tileSize.height),
+            cc.moveTo(times.teleport-0.1,(newPosition.x + 0.5)* dimens.tileSize.width,(newPosition.y + 0.5)* dimens.tileSize.height),
             cc.callFunc(function(){
-                this.model.afterTeleport();
+                //FIX ME all movable in belt shall recalculate position at same time
+                this.model.afterBeltTo(newPosition);
             },this)
         ));
     },
