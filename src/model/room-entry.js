@@ -38,47 +38,48 @@ var wall_nwlse = {type:"wall", subtype:"nwlongse"};
 var wall_selnw = {type:"wall", subtype:"selongnw"};
 var wall_swlne = {type:"wall", subtype:"swlongne"};
 var wall_h = {type:"wall", subtype:"hole"};
+var belt_n = {type:"belt", subtype:"n"};
 var floor_n = {type:"floor", subtype:"normal"};
 var portal_a = {type:"portal", subtype:"a"};
 var portal_b = {type:"portal", subtype:"b"};
 
-var WALL_ROTATE90_MAP = {
-    n:"e",
-    e:"s",
-    s:"w",
-    w:"n",
-    ne:"se",
-    se:"sw",
-    sw:"nw",
-    nw:"ne",
-    nenw:"nese",
-    nese:"sesw",
-    sesw:"nwsw",
-    nwsw:"nenw",
-    nelong:"selong",
-    selong:"swlong",
-    swlong:"nwlong",
-    nwlong:"nelong",
-    newlong:"nselong",
-    nselong:"sewlong",
-    sewlong:"nswlong",
-    nswlong:"newlong",
-    nlongse:"elongsw",
-    elongsw:"slongnw",
-    slongnw:"wlongne",
-    wlongne:"nlongse",
-    nlongsw:"elongnw",
-    elongnw:"slongne",
-    slongne:"wlongne",
-    wlongne:"nlongsw",
-    nlongsesw:"elongnwsw",
-    elongnwsw:"slongnenw",
-    slongnenw:"wlongnese",
-    wlongnese:"nlongsesw",
-    nelongsw:"selongnw",
-    selongnw:"swlongne",
-    swlongne:"nwlongse",
-    nwlongse:"nelongsw"
+var TILE_ROTATE90_MAP = {
+    n:wall_e,
+    e:wall_s,
+    s:wall_w,
+    w:wall_n,
+    ne:wall_se,
+    se:wall_sw,
+    sw:wall_nw,
+    nw:wall_ne,
+    nenw:wall_nese,
+    nese:wall_sesw,
+    sesw:wall_nwsw,
+    nwsw:wall_nenw,
+    nelong:wall_selong,
+    selong:wall_swlong,
+    swlong:wall_nwlong,
+    nwlong:wall_nelong,
+    newlong:wall_nselong,
+    nselong:wall_sewlong,
+    sewlong:wall_nswlong,
+    nswlong:wall_newlong,
+    nlongse:wall_elongsw,
+    elongsw:wall_slongnw,
+    slongnw:wall_wlongne,
+    wlongne:wall_nlongse,
+    nlongsw:wall_elongnw,
+    elongnw:wall_slongne,
+    slongne:wall_wlongne,
+    wlongne:wall_nlongsw,
+    nlongsesw:wall_elongnwsw,
+    elongnwsw:wall_slongnenw,
+    slongnenw:wall_wlongnese,
+    wlongnese:wall_nlongsesw,
+    nelongsw:wall_selongnw,
+    selongnw:wall_swlongne,
+    swlongne:wall_nwlongse,
+    nwlongse:wall_nelongsw
 };
 
 var rotateTiles = function(originTiles, rotation){
@@ -104,24 +105,24 @@ var rotateTiles = function(originTiles, rotation){
             y: originPosition.x
         }
     }
-    var rotateWall90Subtype = function(subtype){
-        return WALL_ROTATE90_MAP[subtype] || subtype;
+    var rotateTile90 = function(tileEntry){
+        return TILE_ROTATE90_MAP[tileEntry.subtype] || tileEntry;
     }
-    var rotateWall180Subtype = function(subtype){
-        return WALL_ROTATE90_MAP[WALL_ROTATE90_MAP[subtype]] || subtype;
+    var rotateTile180 = function(tileEntry){
+        return TILE_ROTATE90_MAP[rotateWall90(tileEntry).subtype] || tileEntry;
     }
-    var rotateWall270Subtype = function(subtype){
-        return WALL_ROTATE90_MAP[WALL_ROTATE90_MAP[WALL_ROTATE90_MAP[subtype]]] || subtype;
+    var rotateTile270 = function(tileEntry){
+        return TILE_ROTATE90_MAP[rotateWall180(tileEntry).subtype] || tileEntry;
     }
     var positionMapFunc = {
         90:positionRotation90,
         180:positionRotation180,
         270:positionRotation270
     }[rotation];
-    var rotateWallSubtypeFunc = {
-        90:rotateWall90Subtype,
-        180:rotateWall180Subtype,
-        270:rotateWall270Subtype
+    var rotateTileFunc = {
+        90:rotateTile90,
+        180:rotateTile180,
+        270:rotateTile270
     }[rotation];
     for ( x=0; x < originWidth; x++ ) {
         for ( y=0; y < originHeight; y++ ) {
@@ -131,8 +132,8 @@ var rotateTiles = function(originTiles, rotation){
             var newTileEntry = null;
             if ( originTileEntry ) {
                 newTileEntry = clone(originTileEntry);
-                if (newTileEntry.type==="wall") {
-                    newTileEntry.subtype = rotateWallSubtypeFunc(newTileEntry.subtype);
+                if (newTileEntry.type==="wall" || newTileEntry.type==="belt") {
+                    newTileEntry.subtype = rotateTileFunc(newTileEntry);
                 }
             }
             tiles[newPosition.x][newPosition.y] = newTileEntry;
