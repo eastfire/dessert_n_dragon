@@ -931,14 +931,19 @@ var tiles7x7Split4AndPortal=[
     [wall_se,wall_e,wall_e,wall_e,wall_nese,wall_e,wall_e,wall_e,wall_ne]
 ]
 
-var tiles7x5Portal=[
-    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
-    [wall_s,portal_a,floor_n,floor_n,floor_n,portal_b,wall_n],
-    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
-    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
-    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
-    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
-    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
-    [wall_s,portal_b,floor_n,floor_n,floor_n,portal_a,wall_n],
-    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
-]
+var tiles7x6M = [
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_elsw,wall_sewl,floor_n,floor_n,wall_nel,wall_ne],
+    [null,null,null,wall_s,floor_n,floor_n,wall_newl,wall_nenw,null],
+    [wall_sw,wall_w,wall_wlse,wall_sewl,floor_n,floor_n,wall_nwl,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
+];
+
+var tiles5x7Eight = changeTiles(tiles5x7,[
+    {type:"wall",subtype:"hole",position:{x:3,2}},
+    {type:"wall",subtype:"hole",position:{x:3,5}}
+    ]);
