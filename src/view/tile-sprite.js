@@ -52,3 +52,18 @@ var TileSprite = BaseSprite.extend({
         },0.01);
     }
 })
+
+var TILE_SPRITE_MAP = {};
+
+TILE_SPRITE_MAP.nail = TileSprite.extend({
+    ctor:function(options) {
+        this._super(options);
+        this.model.on("attacking", this.onAttacking, this)
+    },
+    onAttacking:function(){
+        this.setSpriteFrame(cc.spriteFrameCache.getSpriteFrame("nail-attacking.png"));
+        this.scheduleOnce(function() {
+            this.setSpriteFrame(cc.spriteFrameCache.getSpriteFrame("nail-normal.png"));
+        }, times.teleport);
+    }
+})

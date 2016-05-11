@@ -2256,7 +2256,7 @@ rooms.push({
 //room50 mushmellow 出现
 rooms.push({
     turnLimit:20,
-    scoreCondition: [800, 1000, 1200],
+    scoreCondition: [1000, 1300, 1700],
     winEveryConditions:[
         {
             conditionType:"kill-level",
@@ -2341,7 +2341,7 @@ rooms.push({
         {
             conditionType:"kill-level",
             type:"chocolate-cake",
-            number: 10
+            number: 12
         }
     ],
     loseAnyConditions:[
@@ -2359,17 +2359,217 @@ rooms.push({
         {type:"belt",subtype:"s",position:{x:5,y:2}},
         {type:"belt",subtype:"s",position:{x:5,y:3}},
         {type:"belt",subtype:"s",position:{x:5,y:4}},
-        {type:"belt",subtype:"es",position:{x:5,y:5},
-        {type:"belt",subtype:"e",position:{x:2,y:5},
-        {type:"belt",subtype:"e",position:{x:3,y:5},
-        {type:"belt",subtype:"e",position:{x:4,y:5},
-        {type:"belt",subtype:"w",position:{x:4,y:1}
-        {type:"belt",subtype:"w",position:{x:3,y:1}
-        {type:"belt",subtype:"w",position:{x:2,y:1}
+        {type:"belt",subtype:"es",position:{x:5,y:5}},
+        {type:"belt",subtype:"e",position:{x:2,y:5}},
+        {type:"belt",subtype:"e",position:{x:3,y:5}},
+        {type:"belt",subtype:"e",position:{x:4,y:5}},
+        {type:"belt",subtype:"w",position:{x:4,y:1}},
+        {type:"belt",subtype:"w",position:{x:3,y:1}},
+        {type:"belt",subtype:"w",position:{x:2,y:1}}
     ]),
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
+        maxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//room53 pit 首次出现
+rooms.push({
+    turnLimit:28,
+    scoreCondition: [1700, 2100, 2400],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"cherrycake",
+            number: 12
+        },
+        {
+            conditionType:"kill-level",
+            type:"archer",
+            number: 12
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"jelly"},{type:"cherrycake"},{type:"archer"}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:changeTiles(tiles6x6,[
+        {type:"pit",subtype:"normal",position:{x:2,y:2}},
+        {type:"pit",subtype:"normal",position:{x:2,y:3}},
+        {type:"pit",subtype:"normal",position:{x:2,y:4}},
+        {type:"pit",subtype:"normal",position:{x:2,y:5}},
+        {type:"pit",subtype:"normal",position:{x:3,y:5}},
+        {type:"pit",subtype:"normal",position:{x:4,y:5}},
+        {type:"pit",subtype:"normal",position:{x:5,y:5}},
+        {type:"pit",subtype:"normal",position:{x:5,y:4}},
+        {type:"pit",subtype:"normal",position:{x:5,y:3}},
+        {type:"pit",subtype:"normal",position:{x:5,y:2}},
+        {type:"pit",subtype:"normal",position:{x:4,y:2}},
+        {type:"pit",subtype:"normal",position:{x:3,y:2}}
+    ]),
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:3}],
+        maxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//room54 belt & portal
+rooms.push({
+    turnLimit:26,
+    scoreCondition: [1500, 1700, 1900],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"ricecake",
+            number: 9
+        },
+        {
+            conditionType:"kill-level",
+            type:"donut",
+            number: 9
+        },
+        {
+            conditionType:"kill-level",
+            type:"cherrycake",
+            number: 9
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"ricecake"},{type:"donut"},{type:"cherrycake"}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:changeTiles(tiles7x5,[
+        {type:"belt",subtype:"e",position:{x:2,y:1}},
+        {type:"belt",subtype:"e",position:{x:3,y:1}},
+        {type:"belt",subtype:"e",position:{x:4,y:1}},
+        {type:"belt",subtype:"e",position:{x:5,y:1}},
+        {type:"belt",subtype:"w",position:{x:3,y:5}},
+        {type:"belt",subtype:"w",position:{x:4,y:5}},
+        {type:"belt",subtype:"w",position:{x:5,y:5}},
+        {type:"belt",subtype:"w",position:{x:6,y:5}},
+        {type:"portal",subtype:"a",position:{x:1,y:1}},
+        {type:"portal",subtype:"a",position:{x:7,y:5}},
+        {type:"portal",subtype:"b",position:{x:7,y:1}},
+        {type:"portal",subtype:"b",position:{x:1,y:5}}
+    ]),
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:3}],
+        maxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//room55 4 pillar
+rooms.push({
+    turnLimit:26,
+    scoreCondition: [1500, 1700, 1900],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"ricecake",
+            number: 9
+        },
+        {
+            conditionType:"kill-level",
+            type:"donut",
+            number: 9
+        },
+        {
+            conditionType:"kill-level",
+            type:"cherrycake",
+            number: 9
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"ricecake"},{type:"donut"},{type:"cherrycake"}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles7x7,
+    initMovables:[
+        {type:"vertical-log2",subtype:"normal",positions:[{x:4,y:2},{x:4,y:1}]},
+        {type:"vertical-log2",subtype:"normal",positions:[{x:4,y:7},{x:4,y:6}]},
+        {type:"horizontal-log2",subtype:"normal",positions:[{x:1,y:4},{x:2,y:4}]},
+        {type:"horizontal-log2",subtype:"normal",positions:[{x:6,y:4},{x:7,y:4}]}
+    ],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:4,y:4}],
+        maxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//room55 4 pillar
+rooms.push({
+    turnLimit:26,
+    scoreCondition: [1500, 1700, 1900],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"cherrycake",
+            number: 9
+        },
+        {
+            conditionType:"kill-level",
+            type:"jelly",
+            number: 9
+        },
+        {
+            conditionType:"kill-level",
+            type:"creampuff",
+            number: 9
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"cherrycake"},{type:"jelly"},{type:"creampuff"}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:changeTiles(tiles5x5,[
+        {type:"nail",subtype:"normal",position:{x:3,y:1}},
+        {type:"nail",subtype:"normal",position:{x:3,y:2}},
+        {type:"nail",subtype:"normal",position:{x:3,y:4}},
+        {type:"nail",subtype:"normal",position:{x:3,y:5}},
+        {type:"nail",subtype:"normal",position:{x:1,y:3}},
+        {type:"nail",subtype:"normal",position:{x:2,y:3}},
+        {type:"nail",subtype:"normal",position:{x:4,y:3}},
+        {type:"nail",subtype:"normal",position:{x:5,y:3}}
+    ]),
+    initHero: {
+        type:"normalHero",
+        positions: [{x:4,y:4}],
         maxHp: 100,
         maxHpStrategy:{
             type: "normal"

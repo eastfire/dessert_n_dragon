@@ -239,8 +239,8 @@ var RoomModel = Backbone.Model.extend({
     },
     initMovables:function(){
         var initMovables = this.get("initMovables");
-        if ( !initMovables ) return;
         var movables = this.__movables = [];
+        if ( !initMovables ) return;
         _.each(initMovables,function(movableEntry){
             if ( movableEntry && MOVABLE_MODEL_MAP[movableEntry.type] ) {
                 movables.push( new MOVABLE_MODEL_MAP[movableEntry.type](movableEntry) )

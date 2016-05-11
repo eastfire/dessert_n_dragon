@@ -22,7 +22,8 @@ var RoomSprite = BaseSprite.extend({
         var totalHeight = this.model.getHeight()*dimens.tileSize.height
         var maxSize = Math.max(totalWidth, totalHeight)
         this.model.foreachTile(function(tileModel){
-            var tileSprite = new TileSprite({
+            var TileSpriteClass = TILE_SPRITE_MAP[tileModel.get("type")] || TileSprite;
+            var tileSprite = new TileSpriteClass({
                 model: tileModel
             });
             this.addChild(tileSprite)

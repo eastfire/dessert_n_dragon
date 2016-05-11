@@ -361,7 +361,7 @@ MOVABLE_MODEL_MAP.mushmellow = EnemyModel.extend({
         return Math.min(3, Math.ceil(this.get("level") / 6 ))+2;
     },
     expOfLevel:function(l){
-        return Math.round(l*EXP_INFLATION_RATE*2.5)
+        return Math.round(Math.log(l+1)*l)*EXP_INFLATION_RATE
     },
     attackOfLevel:function(l){
         return Math.round(l/2);

@@ -944,6 +944,6 @@ var tiles7x6M = [
 ];
 
 var tiles5x7Eight = changeTiles(tiles5x7,[
-    {type:"wall",subtype:"hole",position:{x:3,2}},
-    {type:"wall",subtype:"hole",position:{x:3,5}}
+    {type:"wall",subtype:"hole",position:{x:3,y:2}},
+    {type:"wall",subtype:"hole",position:{x:3,y:5}}
     ]);
