@@ -2205,7 +2205,6 @@ rooms.push({
             type: "normal"
         }
     },
-    initHand:[],
     choicePool:STANDARD_CHOICE_POOL
 });
 
@@ -2238,7 +2237,6 @@ rooms.push({
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles5x6H2,
-    initMovables:[],
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
@@ -2289,7 +2287,6 @@ rooms.push({
             type: "normal"
         }
     },
-    initHand:[],
     choicePool:STANDARD_CHOICE_POOL,
     unlocks: [{type:"enemy", subtype:"mushmellow"}]
 });
@@ -2322,7 +2319,6 @@ rooms.push({
         {type:"belt",subtype:"s",position:{x:5,y:4}},
         {type:"belt",subtype:"s",position:{x:5,y:5}}
     ]),
-    initMovables:[],
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
@@ -2334,6 +2330,53 @@ rooms.push({
             type: "normal"
         }
     },
-    initHand:[],
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//room52 belt cycle
+rooms.push({
+    turnLimit:25,
+    scoreCondition: [1600, 2000, 2400],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"chocolate-cake",
+            number: 10
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"chocolate-cake"},{type:"creampuff"},{type:"archer"}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:changeTiles(tiles5x5,[
+        {type:"belt",subtype:"wn",position:{x:1,y:1}},
+        {type:"belt",subtype:"n",position:{x:1,y:2}},
+        {type:"belt",subtype:"n",position:{x:1,y:3}},
+        {type:"belt",subtype:"n",position:{x:1,y:4}},
+        {type:"belt",subtype:"ne",position:{x:1,y:5}},
+        {type:"belt",subtype:"sw",position:{x:5,y:1}},
+        {type:"belt",subtype:"s",position:{x:5,y:2}},
+        {type:"belt",subtype:"s",position:{x:5,y:3}},
+        {type:"belt",subtype:"s",position:{x:5,y:4}},
+        {type:"belt",subtype:"es",position:{x:5,y:5},
+        {type:"belt",subtype:"e",position:{x:2,y:5},
+        {type:"belt",subtype:"e",position:{x:3,y:5},
+        {type:"belt",subtype:"e",position:{x:4,y:5},
+        {type:"belt",subtype:"w",position:{x:4,y:1}
+        {type:"belt",subtype:"w",position:{x:3,y:1}
+        {type:"belt",subtype:"w",position:{x:2,y:1}
+    ]),
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:3}],
+        maxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
     choicePool:STANDARD_CHOICE_POOL
 });
