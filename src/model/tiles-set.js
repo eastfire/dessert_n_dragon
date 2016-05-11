@@ -48,6 +48,8 @@ var belt_w = {type:"belt", subtype:"w"};
 var floor_n = {type:"floor", subtype:"normal"};
 var portal_a = {type:"portal", subtype:"a"};
 var portal_b = {type:"portal", subtype:"b"};
+var pit_n = {type:"pit", subtype:"normal"};
+var nail_n = {type:"nail", subtype:"normal"};
 
 var WALL_ROTATE90_MAP = {
     n:wall_e,

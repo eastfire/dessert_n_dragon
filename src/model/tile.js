@@ -91,10 +91,10 @@ TILE_MODEL_MAP.portal = RoomTileModel.extend({
     }
 })
 
-TILE_MODEL_MAP.pitfall = RoomTileModel.extend({
+TILE_MODEL_MAP.pit = RoomTileModel.extend({
     defaults:function(){
         return _.extend(RoomTileModel.prototype.defaults.apply(this),{
-            type: "pitfall",
+            type: "pit",
             subtype: "normal",
             isCapture: true
         });
@@ -113,8 +113,8 @@ TILE_MODEL_MAP.nail = RoomTileModel.extend({
         var movableModel = currentRoom.getMovableByTile(this);
         if ( movableModel ){
             if ( movableModel instanceof HeroModel ) {
-                this.trigger("nailUp",this);
-                HeroModel.loseHp(this.getEffect(), this);
+                this.trigger("attacking",this);
+                currentRoom.getHero().loseHp(this.getEffect(), this);
             }
         }
     },
