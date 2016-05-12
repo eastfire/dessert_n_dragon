@@ -277,6 +277,13 @@ var HeroModel = MovableModel.extend({
     },
     getDizzy:function(amount){
         this.set("dizzy",amount);
+    },
+    getDisturb:function(amount){
+        _.each(currentRoom.getHand(),function(cardModel){
+            if ( cardModel.get("waitTurn") ) {
+                cardModel.disturb(amount);
+            }
+        });
     }
 })
 

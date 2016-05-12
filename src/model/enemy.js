@@ -337,6 +337,38 @@ MOVABLE_MODEL_MAP.icecream = EnemyModel.extend({
     }
 })
 
+MOVABLE_MODEL_MAP.lolipop = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "lolipop"
+        } )
+    },
+    afterHit:function(heroModel){
+        this.checkDisturb(heroModel);
+    },
+    expOfLevel:function(l){
+        return Math.round(l*EXP_INFLATION_RATE*2.5)
+    },
+    attackOfLevel:function(l){
+        return l;
+    },
+    getDisturbRate:function(heroModel){
+        var level = this.get("level");
+        return level/15+0.3;
+        //return 1;
+    },
+    getDisturbEffect:function(heroModel){
+        var level = this.get("level");
+        return Math.floor(level/6)+1;
+    },
+    checkDisturb:function(model){
+        if (this.getDisturbRate(model) > Math.random() ){
+            model.getDisturb(this.getDisturbEffect(model));
+        }
+    }
+})
+
+
 MOVABLE_MODEL_MAP.mushmellow = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{

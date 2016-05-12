@@ -90,6 +90,9 @@ var CardModel = Backbone.Model.extend({
     },
     waitTurnOfLevel:function(level){
         return 0;
+    },
+    disturb:function(amount){
+        this.set("waitTurn",this.get("waitTurn") + amount);
     }
 });
 

@@ -2840,3 +2840,42 @@ rooms.push({
     },
     choicePool:STANDARD_CHOICE_POOL
 });
+
+//room62 P lolipop首次出现
+rooms.push({
+    turnLimit:28,
+    scoreCondition: [1700, 2000, 2400],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"lolipop",
+            number: 15
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"lolipop"},{type:"cherrycake"},{type:"chocolate-cake"}],
+    genEnemyStrategy: [{type:"random", number: 3, last: 0}],
+    initMovables:[
+        {type:"lolipop",positions:[{x:1,y:1}]},
+        {type:"lolipop",positions:[{x:5,y:7}]},
+        {type:"lolipop",positions:[{x:5,y:5}]}
+    ],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles5x7P,
+    initHand:[{type:"tail-slash"} ],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:2,y:3}],
+        maxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    choicePool:STANDARD_CHOICE_POOL,
+    unlocks:[{type:"enemy", subtype:"lolipop"}]
+});

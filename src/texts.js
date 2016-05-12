@@ -58,6 +58,10 @@ var texts_locale = {
                 name:"果冻侦察兵",
                 desc:"一定概率躲过近距离攻击（等级越高概率越高）。\n攻击力较低。\n饱腹度低。"
             },
+            lolipop: {
+                name:"棒棒糖兄弟",
+                desc:"攻击时有一定概率使你的卡牌等待时间延长（等级越高概率越高，效果越明显）。\n攻击力一般。\n饱腹度一般。\n\n这就是人棒合一的境界"
+            },
             mushmellow:{
                 name:"棉花糖召唤师",
                 desc:"合并时召唤云朵遮挡视线（等级越高云朵越多）。\n攻击力较低。\n饱腹度一般。"
@@ -233,6 +237,7 @@ var texts_locale = {
                 "chocolate-cake":"黑森林武士将在无尽关卡中出现",
                 donut:"甜甜圈骑士将在无尽关卡中出现",
                 jelly:"果冻侦察兵将在无尽关卡中出现",
+                lolipop:"棒棒糖兄弟将在无尽关卡中出现",
                 popcorn:"爆米花掷弹兵将在无尽关卡中出现",
                 mushmellow:"棉花糖召唤师将在无尽关卡中出现",
             }
@@ -429,6 +434,22 @@ var texts_locale = {
                 },
                 desc: function (level) {
                     return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-mushmellow"].requirement(level) + "或以上的棉花糖召唤师"
+                }
+            },
+            "kill-level-lolipop": {
+                name:function(level){
+                    return "棒棒糖杀手"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-lolipop"].requirement(level) + "的棒棒糖兄弟"
+                }
+            },
+            "kill-max-level-lolipop": {
+                name:function(level){
+                    return "精英棒棒糖杀手"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-lolipop"].requirement(level) + "或以上的棒棒糖兄弟"
                 }
             }
         }
