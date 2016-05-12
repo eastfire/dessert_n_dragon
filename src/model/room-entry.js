@@ -2291,7 +2291,7 @@ rooms.push({
     unlocks: [{type:"enemy", subtype:"mushmellow"}]
 });
 
-//room51 belt 出现
+//room51 belt 首次出现
 rooms.push({
     turnLimit:25,
     scoreCondition: [2000, 2400, 2800],
@@ -2531,7 +2531,117 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room55 4 pillar
+//room56 pit & portal
+rooms.push({
+    turnLimit:28,
+    scoreCondition: [1500, 1800, 2100],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"popcorn",
+            number: 8
+        },
+        {
+            conditionType:"kill-level",
+            type:"cherrycake",
+            number: 8
+        },
+        {
+            conditionType:"kill-level",
+            type:"chocolate-cake",
+            number: 8
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"popcorn"},{type:"cherrycake"},{type:"chocolate-cake"}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:changeTiles(tiles4x6,[
+        {type:"pit",subtype:"normal",position:{x:1,y:3}},
+        {type:"pit",subtype:"normal",position:{x:2,y:3}},
+        {type:"pit",subtype:"normal",position:{x:3,y:3}},
+        {type:"pit",subtype:"normal",position:{x:4,y:3}},
+        {type:"pit",subtype:"normal",position:{x:1,y:4}},
+        {type:"pit",subtype:"normal",position:{x:2,y:4}},
+        {type:"pit",subtype:"normal",position:{x:3,y:4}},
+        {type:"pit",subtype:"normal",position:{x:4,y:4}},
+        {type:"portal",subtype:"a",position:{x:1,y:1}},
+        {type:"portal",subtype:"a",position:{x:4,y:6}}
+    ]),
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:3}],
+        maxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//room57 4 belt
+rooms.push({
+    turnLimit:28,
+    scoreCondition: [1500, 1800, 2100],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"donut",
+            number: 8
+        },
+        {
+            conditionType:"kill-level",
+            type:"cherrycake",
+            number: 8
+        },
+        {
+            conditionType:"kill-level",
+            type:"chocolate-cake",
+            number: 8
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"donut"},{type:"cherrycake"},{type:"chocolate-cake"}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:changeTiles(tiles5x5,[
+        {type:"belt",subtype:"wn",position:{x:1,y:1}},
+        {type:"belt",subtype:"ne",position:{x:1,y:2}},
+        {type:"belt",subtype:"es",position:{x:2,y:2}},
+        {type:"belt",subtype:"sw",position:{x:2,y:1}},
+        {type:"belt",subtype:"wn",position:{x:1,y:4}},
+        {type:"belt",subtype:"ne",position:{x:1,y:5}},
+        {type:"belt",subtype:"es",position:{x:2,y:5}},
+        {type:"belt",subtype:"sw",position:{x:2,y:4}},
+        {type:"belt",subtype:"wn",position:{x:4,y:1}},
+        {type:"belt",subtype:"ne",position:{x:4,y:2}},
+        {type:"belt",subtype:"es",position:{x:5,y:2}},
+        {type:"belt",subtype:"sw",position:{x:5,y:1}},
+        {type:"belt",subtype:"wn",position:{x:4,y:4}},
+        {type:"belt",subtype:"ne",position:{x:4,y:5}},
+        {type:"belt",subtype:"es",position:{x:5,y:5}},
+        {type:"belt",subtype:"sw",position:{x:5,y:4}}
+    ]),
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:3}],
+        maxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//room58 nail首次出现
 rooms.push({
     turnLimit:26,
     scoreCondition: [1500, 1700, 1900],
@@ -2570,6 +2680,70 @@ rooms.push({
     initHero: {
         type:"normalHero",
         positions: [{x:4,y:4}],
+        maxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//room59 TODO belt & portal
+
+//room60 5 belt
+rooms.push({
+    turnLimit:28,
+    scoreCondition: [1500, 1800, 2100],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"donut",
+            number: 8
+        },
+        {
+            conditionType:"kill-level",
+            type:"cherrycake",
+            number: 8
+        },
+        {
+            conditionType:"kill-level",
+            type:"chocolate-cake",
+            number: 8
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"donut"},{type:"cherrycake"},{type:"chocolate-cake"}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:changeTiles(tiles5x5,[
+        {type:"belt",subtype:"wn",position:{x:1,y:1}},
+        {type:"belt",subtype:"ne",position:{x:1,y:2}},
+        {type:"belt",subtype:"es",position:{x:2,y:2}},
+        {type:"belt",subtype:"sw",position:{x:2,y:1}},
+        {type:"belt",subtype:"wn",position:{x:1,y:5}},
+        {type:"belt",subtype:"ne",position:{x:1,y:6}},
+        {type:"belt",subtype:"es",position:{x:2,y:6}},
+        {type:"belt",subtype:"sw",position:{x:2,y:5}},
+        {type:"belt",subtype:"wn",position:{x:5,y:1}},
+        {type:"belt",subtype:"ne",position:{x:5,y:2}},
+        {type:"belt",subtype:"es",position:{x:6,y:2}},
+        {type:"belt",subtype:"sw",position:{x:6,y:1}},
+        {type:"belt",subtype:"wn",position:{x:5,y:5}},
+        {type:"belt",subtype:"ne",position:{x:5,y:6}},
+        {type:"belt",subtype:"es",position:{x:6,y:6}},
+        {type:"belt",subtype:"sw",position:{x:6,y:5}},
+        {type:"belt",subtype:"wn",position:{x:3,y:3}},
+        {type:"belt",subtype:"ne",position:{x:3,y:4}},
+        {type:"belt",subtype:"es",position:{x:4,y:4}},
+        {type:"belt",subtype:"sw",position:{x:4,y:3}}
+    ]),
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:3}],
         maxHp: 100,
         maxHpStrategy:{
             type: "normal"
