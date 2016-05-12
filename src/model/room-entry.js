@@ -2691,9 +2691,95 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room59 TODO belt & portal
+//room59 2个远程 生存
+rooms.push({
+    turnLimit:27,
+    scoreCondition: [1800, 2100, 2500],
+    winEveryConditions:["outOfTurn"],
+    loseEveryConditions:[
+        "outOfTurn",
+        "notEnoughScore"
+    ],
+    enemyPool:[{type:"donut"},{type:"popcorn"},{type:"archer"}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles6x4,
+    initHero: {
+        type:"normalHero",
+        positions: [{x:2,y:3}],
+        maxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    choicePool:STANDARD_CHOICE_POOL
+});
 
-//room60 5 belt
+//room60 belt & nail
+rooms.push({
+    turnLimit:27,
+    scoreCondition: [1800, 2100, 2500],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"icecream",
+            number: 10
+        },
+        {
+            conditionType:"kill-level",
+            type:"souffle",
+            number: 8
+        },
+        {
+            conditionType:"kill-level",
+            type:"chocolate-cake",
+            number: 8
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"icecream"},{type:"souffle"},{type:"chocolate-cake"}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:changeTiles(tiles5x4,[
+        {type:"belt",subtype:"n",position:{x:1,y:1}},
+        {type:"belt",subtype:"n",position:{x:2,y:1}},
+        {type:"belt",subtype:"n",position:{x:3,y:1}},
+        {type:"belt",subtype:"n",position:{x:4,y:1}},
+        {type:"belt",subtype:"n",position:{x:5,y:1}},
+        {type:"belt",subtype:"n",position:{x:1,y:2}},
+        {type:"belt",subtype:"n",position:{x:2,y:2}},
+        {type:"belt",subtype:"n",position:{x:3,y:2}},
+        {type:"belt",subtype:"n",position:{x:4,y:2}},
+        {type:"belt",subtype:"n",position:{x:5,y:2}},
+        {type:"belt",subtype:"n",position:{x:1,y:3}},
+        {type:"belt",subtype:"n",position:{x:2,y:3}},
+        {type:"belt",subtype:"n",position:{x:3,y:3}},
+        {type:"belt",subtype:"n",position:{x:4,y:3}},
+        {type:"belt",subtype:"n",position:{x:5,y:3}},
+        {type:"nail",subtype:"normal",position:{x:1,y:4}},
+        {type:"nail",subtype:"normal",position:{x:2,y:4}},
+        {type:"nail",subtype:"normal",position:{x:3,y:4}},
+        {type:"nail",subtype:"normal",position:{x:4,y:4}},
+        {type:"nail",subtype:"normal",position:{x:5,y:4}}
+    ]),
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:2}],
+        maxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//room61 5 belt
 rooms.push({
     turnLimit:28,
     scoreCondition: [1500, 1800, 2100],
@@ -2719,7 +2805,7 @@ rooms.push({
     ],
     enemyPool:[{type:"donut"},{type:"cherrycake"},{type:"chocolate-cake"}],
     itemPool:STANDARD_ITEM_POOL,
-    initTiles:changeTiles(tiles5x5,[
+    initTiles:changeTiles(tiles6x6,[
         {type:"belt",subtype:"wn",position:{x:1,y:1}},
         {type:"belt",subtype:"ne",position:{x:1,y:2}},
         {type:"belt",subtype:"es",position:{x:2,y:2}},
