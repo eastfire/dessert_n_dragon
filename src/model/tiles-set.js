@@ -947,3 +947,36 @@ var tiles5x7Eight = changeTiles(tiles5x7,[
     {type:"wall",subtype:"hole",position:{x:3,y:2}},
     {type:"wall",subtype:"hole",position:{x:3,y:5}}
     ]);
+
+var tiles5x7P = [
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_sel,floor_n,wall_h,floor_n,wall_n],
+    [null,null,null,null,wall_s,floor_n,floor_n,floor_n,wall_n],
+    [null,null,null,null,wall_s,floor_n,floor_n,floor_n,wall_n],
+    [null,null,null,null,wall_se,wall_e,wall_e,wall_e,wall_ne]
+];
+
+var tiles6x7U = [
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_nel,wall_e,wall_e,wall_e,wall_e,wall_ne],
+    [wall_s,floor_n,floor_n,wall_nwl,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
+];
+
+var tiles7x7X = [
+    [wall_sw,wall_w,wall_w,wall_nw,null,wall_sw,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,wall_nwlong,wall_nwsw,wall_swlong,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,wall_nswlong,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_selong,floor_n,floor_n,floor_n,floor_n,floor_n,wall_nelong,wall_ne],
+    [null,wall_sesw,wall_sewlong,floor_n,floor_n,floor_n,wall_newlong,wall_nenw,null],
+    [wall_sw,wall_swlong,floor_n,floor_n,floor_n,floor_n,floor_n,wall_nwlong,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,wall_nselong,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,wall_nelong,wall_nese,wall_selong,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_ne,null,wall_se,wall_e,wall_e,wall_ne]
+];
