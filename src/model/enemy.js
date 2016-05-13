@@ -288,10 +288,8 @@ MOVABLE_MODEL_MAP.eggroll = EnemyModel.extend({
         } )
     },
     checkRange:function(hero){
-        if ( hero.get("positions")[0].x === this.get("positions")[0].x ||
-             hero.get("positions")[0].y === this.get("positions")[0].y) {
-            return true;
-        } else return false
+        return hero.get("positions")[0].x === this.get("positions")[0].x ||
+             hero.get("positions")[0].y === this.get("positions")[0].y;
     },
     expOfLevel:function(l){
         return l*(l+1)/2*EXP_INFLATION_RATE
