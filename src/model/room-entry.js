@@ -45,7 +45,6 @@ var infiniteRoom = {
     }],
     itemPool:STANDARD_ITEM_POOL,
     initTiles: tiles5x5,
-    initMovables:[],
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
@@ -263,8 +262,6 @@ rooms.push({
         type:"pudding",subtype:"green"
     }],
     initTiles:tiles6x6Rhombus,
-    initMovables:[
-    ],
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
@@ -277,7 +274,6 @@ rooms.push({
             type: "normal"
         } //normal, fix
     },
-    initHand:[],
     choicePool:STANDARD_CHOICE_POOL,
     unlocks: ["shop-entry"]
 });
@@ -315,8 +311,6 @@ rooms.push({
         type:"pudding",subtype:"blue"
     }],
     initTiles:tiles5x6ZigVertical,
-    initMovables:[
-    ],
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
@@ -443,7 +437,6 @@ rooms.push({
         ],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6T,
-    initMovables:[],
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:6}],
@@ -532,8 +525,6 @@ rooms.push({
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6,
-    initMovables:[
-    ],
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
@@ -630,8 +621,6 @@ rooms.push({
         ],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x5HRotate90,
-    initMovables:[
-    ],
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
@@ -683,8 +672,6 @@ rooms.push({
         ],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6UpArrow,
-    initMovables:[
-    ],
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
@@ -731,8 +718,6 @@ rooms.push({
     itemPool:STANDARD_ITEM_POOL,
     genEnemyStrategy: [{type:"random", number: 4, last: 0}],
     initTiles:tiles7x7Rhombus,
-    initMovables:[
-    ],
     initHero: {
         type:"normalHero",
         positions: [{x:4,y:4}],
@@ -900,8 +885,6 @@ rooms.push({
     enemyPool:[{type:"creampuff"},{type:"icecream"},{type:"cherrycake"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6Whirl,
-    initMovables:[
-    ],
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:3}],
@@ -1130,7 +1113,6 @@ rooms.push({
     enemyPool:[{type:"cherrycake"},{type:"pudding",subtype:"yellow"},{type:"archer"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x5IOI,
-    initMovables:[],
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:4}],
@@ -1167,8 +1149,6 @@ rooms.push({
     enemyPool:[{type:"cherrycake"},{type:"ricecake"},{type:"icecream"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6Loop,
-    initMovables:[
-    ],
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:2}],
@@ -1284,7 +1264,6 @@ rooms.push({
     enemyPool:[{type:"souffle"},{type:"creampuff"},{type:"chocolate-cake"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x7A,
-    initMovables:[],
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:6}],
@@ -1332,7 +1311,6 @@ rooms.push({
     }],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x7Snake,
-    initMovables:[],
     initHero: {
         type:"normalHero",
         positions: [{x:4,y:5}],
@@ -1447,8 +1425,6 @@ rooms.push({
         { type:"donut", positions:[{x:5,y:1}]},
         { type:"donut", positions:[{x:5,y:5}]}
     ],
-    initHand:[
-    ],
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:5}],
@@ -1498,9 +1474,6 @@ rooms.push({
     itemPool:STANDARD_ITEM_POOL,
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     initTiles:tiles7x7Snake2,
-    initMovables:[],
-    initHand:[
-    ],
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:5}],
@@ -1548,8 +1521,6 @@ rooms.push({
         { type:"jelly", positions:[{x:1,y:1}]},
         { type:"jelly", positions:[{x:6,y:5}]}
     ],
-    initHand:[
-    ],
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:4}],
@@ -1586,9 +1557,6 @@ rooms.push({
     itemPool:STANDARD_ITEM_POOL,
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     initTiles:tiles7x5,
-    initMovables:[],
-    initHand:[
-    ],
     initHero: {
         type:"normalHero",
         positions: [{x:4,y:3}],
@@ -1627,9 +1595,6 @@ rooms.push({
     }],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6Loop2,
-    initMovables:[],
-    initHand:[
-    ],
     initHero: {
         type:"normalHero",
         positions: [{x:3,y:2}],
@@ -1667,7 +1632,6 @@ rooms.push({
     itemPool:STANDARD_ITEM_POOL,
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     initTiles:tiles7x7Cross7x3,
-    initMovables:[],
     initHero: {
         type:"normalHero",
         positions: [{x:4,y:4}],
@@ -1721,7 +1685,6 @@ rooms.push({
     itemPool:STANDARD_ITEM_POOL,
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     initTiles:tiles6x5E,
-    initMovables:[],
     initHero: {
         type:"normalHero",
         positions: [{x:2,y:3}],
@@ -1763,7 +1726,6 @@ rooms.push({
     levelPool:[1,2,3],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6,
-    initMovables:[],
     initHero: {
         type:"normalHero",
         positions: [{x:2,y:4}],
@@ -1793,8 +1755,6 @@ rooms.push({
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6UpArrow2,
-    initMovables:[
-    ],
     initHero: {
         type:"normalHero",
         positions: [{x:4,y:4}],
@@ -1836,7 +1796,6 @@ rooms.push({
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6L3,
-    initMovables:[],
     initHero: {
         type:"normalHero",
         positions: [{x:2,y:2}],
@@ -1874,7 +1833,6 @@ rooms.push({
     }],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x7D,
-    initMovables:[],
     initHero: {
         type:"normalHero",
         positions: [{x:2,y:4}],
@@ -1917,7 +1875,6 @@ rooms.push({
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6C,
-    initMovables:[],
     initHero: {
         type:"normalHero",
         positions: [{x:2,y:3}],
@@ -1966,7 +1923,6 @@ rooms.push({
             type: "normal"
         } //normal, fix
     },
-    initHand:[],
     choicePool:STANDARD_CHOICE_POOL,
     unlocks:[{type:"enemy", subtype:"popcorn"}]
 });
@@ -1998,7 +1954,6 @@ rooms.push({
     enemyPool:[{type:"popcorn"},{type:"icecream"},{type:"jelly"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles4x4,
-    initMovables:[],
     initHero: {
         type:"normalHero",
         positions: [{x:2,y:2}],
@@ -2010,7 +1965,6 @@ rooms.push({
             type: "normal"
         } //normal, fix
     },
-    initHand:[],
     choicePool:STANDARD_CHOICE_POOL
 });
 
@@ -2031,7 +1985,6 @@ rooms.push({
     enemyPool:[{type:"chocolate-cake"},{type:"creampuff"},{type:"souffle"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x5SplitAndPortal,
-    initMovables:[],
     initHero: {
         type:"normalHero",
         positions: [{x:2,y:4}],
@@ -2043,7 +1996,6 @@ rooms.push({
             type: "normal"
         }
     },
-    initHand:[],
     choicePool:STANDARD_CHOICE_POOL
 });
 
@@ -2062,7 +2014,6 @@ rooms.push({
     enemyLevelPool:[1,3],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles5x5,
-    initMovables:[],
     initHero: {
         type:"normalHero",
         positions: [{x:4,y:3}],
@@ -2101,7 +2052,6 @@ rooms.push({
     enemyPool:[{type:"chocolate-cake"},{type:"cherrycake"},{type:"popcorn"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x6SplitAndPortal,
-    initMovables:[],
     initHero: {
         type:"normalHero",
         positions: [{x:2,y:4}],
@@ -2113,7 +2063,6 @@ rooms.push({
             type: "normal"
         }
     },
-    initHand:[],
     choicePool:STANDARD_CHOICE_POOL
 });
 
@@ -2144,7 +2093,6 @@ rooms.push({
     enemyPool:[{type:"donut"},{type:"cherrycake"},{type:"jelly"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x7Split4AndPortal,
-    initMovables:[],
     initHero: {
         type:"normalHero",
         positions: [{x:2,y:2}],
@@ -2156,7 +2104,6 @@ rooms.push({
             type: "normal"
         }
     },
-    initHand:[],
     choicePool:STANDARD_CHOICE_POOL
 });
 
@@ -2878,6 +2825,99 @@ rooms.push({
     },
     choicePool:STANDARD_CHOICE_POOL,
     unlocks:[{type:"enemy", subtype:"lolipop"}]
+});
+
+//room63 
+rooms.push({
+    turnLimit:28,
+    scoreCondition: [2200, 2500, 2700],
+    winEveryConditions:[
+        {
+            conditionType:"kill-max-level",
+            type:"creampuff",
+            number: 10
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"creampuff"},{type:"cherrycake"},{type:"icecream"}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles5x7Eight,
+    initHero: {
+        type:"normalHero",
+        positions: [{x:2,y:3}],
+        maxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//room64 
+rooms.push({
+    timeLimit:120,
+    scoreCondition: [2000, 2300, 2500],
+    winEveryConditions:[
+        {
+            conditionType:"kill-max-level",
+            type:"popcorn",
+            number: 8
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTime"
+    ],
+    enemyPool:[{type:"popcorn"},{type:"cherrycake"},{type:"donut"}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles4x7,
+    initHero: {
+        type:"normalHero",
+        positions: [{x:2,y:3}],
+        maxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//room65 
+rooms.push({
+    timeLimit:120,
+    scoreCondition: [2000, 2300, 2500],
+    winEveryConditions:[
+        {
+            conditionType:"kill-max-level",
+            type:"lolipop",
+            number: 8
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTime"
+    ],
+    enemyPool:[{type:"popcorn"},{type:"mushmellow"},{type:"lolipop"}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles4x7,
+    initHero: {
+        type:"normalHero",
+        positions: [{x:2,y:3}],
+        maxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    choicePool:STANDARD_CHOICE_POOL
 });
 
 //room70 eggroll 首次出现
