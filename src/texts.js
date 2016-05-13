@@ -50,6 +50,10 @@ var texts_locale = {
                 name:"甜甜圈骑士",
                 desc:"攻击力超高。\n饱腹度超高。\n\n别被他圆圆的外表欺骗"
             },
+            eggroll:{
+                name:"蛋卷吹箭手",
+                desc:"远程攻击。仅当与你同一行或同一列时攻击。\n攻击力高。\n饱腹度很高。"
+            },
             icecream: {
                 name:"冰激凌法师",
                 desc:"合并或攻击时有一定概率冰冻周围角色（等级越高概率越高）。\n攻击力一般。\n饱腹度一般。\n\n他的法师帽戴反了吗？"
@@ -236,6 +240,7 @@ var texts_locale = {
             enemy:{
                 "chocolate-cake":"黑森林武士将在无尽关卡中出现",
                 donut:"甜甜圈骑士将在无尽关卡中出现",
+                eggroll:"蛋卷吹箭手将在无尽关卡中出现",
                 jelly:"果冻侦察兵将在无尽关卡中出现",
                 lolipop:"棒棒糖兄弟将在无尽关卡中出现",
                 popcorn:"爆米花掷弹兵将在无尽关卡中出现",
@@ -450,6 +455,22 @@ var texts_locale = {
                 },
                 desc: function (level) {
                     return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-lolipop"].requirement(level) + "或以上的棒棒糖兄弟"
+                }
+            },
+            "kill-level-eggroll": {
+                name:function(level){
+                    return "蛋卷杀手"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-eggroll"].requirement(level) + "的蛋卷吹箭手"
+                }
+            },
+            "kill-max-level-eggroll": {
+                name:function(level){
+                    return "精英蛋卷杀手"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-eggroll"].requirement(level) + "或以上的蛋卷吹箭手"
                 }
             }
         }

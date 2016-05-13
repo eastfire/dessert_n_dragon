@@ -2849,7 +2849,7 @@ rooms.push({
         {
             conditionType:"kill-level",
             type:"lolipop",
-            number: 15
+            number: 16
         }
     ],
     loseAnyConditions:[
@@ -2878,4 +2878,41 @@ rooms.push({
     },
     choicePool:STANDARD_CHOICE_POOL,
     unlocks:[{type:"enemy", subtype:"lolipop"}]
+});
+
+//room70 eggroll 首次出现
+rooms.push({
+    turnLimit:22,
+    scoreCondition: [1700, 2000, 2400],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"eggroll",
+            number: 14
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"lolipop"},{type:"eggroll"},{type:"pudding",subtype:"blue"}],
+    genEnemyStrategy: [{type:"random", number: 3, last: 0}],
+    initMovables:[
+        {type:"eggroll",positions:[{x:1,y:7}]},
+        {type:"eggroll",positions:[{x:7,y:7}]}
+    ],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles7x7Y,
+    initHero: {
+        type:"normalHero",
+        positions: [{x:4,y:3}],
+        maxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    choicePool:STANDARD_CHOICE_POOL,
+    unlocks:[{type:"enemy", subtype:"eggroll"}]
 });

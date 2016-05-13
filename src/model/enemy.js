@@ -280,6 +280,27 @@ MOVABLE_MODEL_MAP.donut = EnemyModel.extend({
     }
 })
 
+MOVABLE_MODEL_MAP.eggroll = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "eggroll",
+            attackType: ATTACK_TYPE_RANGE
+        } )
+    },
+    checkRange:function(hero){
+        if ( hero.get("positions")[0].x === this.get("positions")[0].x ||
+             hero.get("positions")[0].y === this.get("positions")[0].y) {
+            return true;
+        } else return false
+    },
+    expOfLevel:function(l){
+        return l*(l+1)/2*EXP_INFLATION_RATE
+    },
+    attackOfLevel:function(l){
+        return l*2+1;
+    }
+})
+
 MOVABLE_MODEL_MAP.jelly = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{

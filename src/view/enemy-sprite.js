@@ -72,4 +72,4 @@ MOVABLE_SPRITE_MAP["archer"] = EnemySprite.extend({
     }
 });
 
-MOVABLE_SPRITE_MAP["popcorn"] = MOVABLE_SPRITE_MAP["archer"]
+MOVABLE_SPRITE_MAP["eggroll"] = MOVABLE_SPRITE_MAP["popcorn"] = MOVABLE_SPRITE_MAP["archer"]
