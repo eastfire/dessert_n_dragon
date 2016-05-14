@@ -3,7 +3,7 @@ var MovableSprite = BaseSprite.extend({
         this.__animateStatus = "stand";
 
         this._super(options);
-
+        this.setName(this.model.cid);
         this.icons = {};
         this.initLabel();
         this.initEvent();

@@ -124,6 +124,6 @@ var CardSprite = BaseSprite.extend({
         var cardModel = this.model;
         currentRoomSprite.scheduleOnce(function(){
             cardModel.afterUse();
-        },0.1)
+        },times.useCard+0.01)
     }
 });

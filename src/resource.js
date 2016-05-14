@@ -22,6 +22,7 @@ var times = {
     gameOverDialog: 0.5,
     scoreBar: 0.1,
 
+    useCard: 0.25,
     card_sort: 0.3,
     teleport: 0.4,
     cloud: 0.3

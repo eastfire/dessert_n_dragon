@@ -57,7 +57,6 @@ var CardModel = Backbone.Model.extend({
     onUse:function(){
     },
     afterUse:function(){ // call by view
-        cc.log("afterUse")
         currentRoom.unblockInput();
         if ( currentRoom.passCheckCondition() ) {
             currentRoom.getHero().checkLevelUp(); //maybe level up after use card
@@ -168,7 +167,7 @@ CARD_MODEL_MAP["vertical-fire"] = CardModel.extend({
             var movable = currentRoom.getMovableByPosition(heroPosition.x, i);
             if (movable instanceof EnemyModel && movable.canBeAttack("magic")) {
                 hero.attack(movable,{
-                    attackType : ATTACK_TYPE_MELEE,
+                    attackType : ATTACK_TYPE_MAGIC,
                     attackAction: "fire",
                     onHit: function(enemy, opt){
                         enemy.beHit(hero, opt);
@@ -205,7 +204,7 @@ CARD_MODEL_MAP["horizontal-fire"] = CardModel.extend({
             var movable = currentRoom.getMovableByPosition(i,heroPosition.y);
             if (movable instanceof EnemyModel && movable.canBeAttack("magic")) {
                 hero.attack(movable,{
-                    attackType : "magic",
+                    attackType : ATTACK_TYPE_MAGIC,
                     attackAction: "fire",
                     onHit: function(enemy, opt){
                         enemy.beHit(hero, opt);
@@ -242,7 +241,7 @@ CARD_MODEL_MAP["cross-fire"] = CardModel.extend({
             var movable = currentRoom.getMovableByPosition(heroPosition.x, i);
             if (movable instanceof EnemyModel && movable.canBeAttack("magic")) {
                 hero.attack(movable,{
-                    attackType : "magic",
+                    attackType : ATTACK_TYPE_MAGIC,
                     attackAction: "fire",
                     onHit: function(enemy, opt){
                         enemy.beHit(hero, opt);
@@ -259,7 +258,7 @@ CARD_MODEL_MAP["cross-fire"] = CardModel.extend({
             var movable = currentRoom.getMovableByPosition(i,heroPosition.y);
             if (movable instanceof EnemyModel && movable.canBeAttack("magic")) {
                 hero.attack(movable,{
-                    attackType : "magic",
+                    attackType : ATTACK_TYPE_MAGIC,
                     attackAction: "fire",
                     onHit: function(enemy, opt){
                         enemy.beHit(hero, opt);
@@ -299,7 +298,7 @@ CARD_MODEL_MAP["whirl-slash"] = CardModel.extend({
                     var movable = currentRoom.getMovableByPosition(position.x, position.y);
                     if (movable instanceof EnemyModel && movable.canBeAttack("skill")) {
                         hero.attack(movable, {
-                            attackType: "skill",
+                            attackType: ATTACK_TYPE_MELEE,
                             attackAction: "whirl-slash",
                             onHit: function (enemy, opt) {
                                 enemy.beHit(hero, opt);
@@ -337,7 +336,7 @@ CARD_MODEL_MAP["big-whirl-slash"] = CardModel.extend({
                 var movable = currentRoom.getMovableByPosition(i, j);
                 if (movable instanceof EnemyModel && movable.canBeAttack("skill")) {
                     hero.attack(movable, {
-                        attackType: "skill",
+                        attackType: ATTACK_TYPE_MELEE,
                         attackAction: "big-whirl-slash",
                         onHit: function (enemy, opt) {
                             enemy.beHit(hero, opt);

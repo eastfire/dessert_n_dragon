@@ -1063,7 +1063,7 @@ rooms.push({
     unlocks:["infinite"]
 });
 
-//第一次出现chocolate cake room22
+//room22 第一次出现chocolate cake
 rooms.push({
     turnLimit:18,
     scoreCondition: [1000, 1300, 1800],

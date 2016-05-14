@@ -177,7 +177,12 @@ var EffectIconManager = Backbone.Model.extend({
         var fromBox = fromSprite.getBoundingBoxToWorld();
         icon.attr({
             x : fromBox.x + fromSprite.width/2 + fromOffset.x,
-            y : fromBox.y + fromSprite.height/2 + fromOffset.y
+            y : fromBox.y + fromSprite.height/2 + fromOffset.y,
+            scaleX: options.scaleX || 1,
+            scaleY: options.scaleY || 1,
+            rotation: options.rotation || 0,
+            anchorX: 0.5,
+            anchorY: 0.5
         });
         this.layer.addChild( icon, this.iconZindex );
 

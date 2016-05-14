@@ -41,7 +41,28 @@ var HeroSprite = MovableSprite.extend({
                 ))
                 break;
             case "fire":
-                this.model.hitOrMiss(enemyModel, options)
+                var targetSprite = currentRoomSprite.getChildByName(enemyModel.cid);
+                var rotation = Math.atan2(-targetSprite.y+this.y,targetSprite.x-this.x) * 180/3.14159;
+                effectIconMananger.fly(this, targetSprite, {
+                    icon:"fireball",
+                    rotation: rotation,
+                    scaleX: 0.5,
+                    scaleY: 0.5,
+                    fromOffset:{
+                        x: -23,
+                        y: -23
+                    },
+                    toOffset:{
+                        x: -23,
+                        y: -23
+                    },
+                    time: times.useCard,
+                    callback:function(){
+                        this.model.hitOrMiss(enemyModel, options)
+                    },
+                    context:this
+                })
+
                 break;
             default :
                 this.model.hitOrMiss(enemyModel, options)
