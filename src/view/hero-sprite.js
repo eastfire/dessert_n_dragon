@@ -64,6 +64,28 @@ var HeroSprite = MovableSprite.extend({
                 })
 
                 break;
+            case "meteor-shower":
+                var targetSprite = currentRoomSprite.getChildByName(enemyModel.cid);
+                effectIconMananger.fly(targetSprite, targetSprite, {
+                    icon:"fireball",
+                    rotation: 135,
+                    scaleX: 0.3,
+                    scaleY: 0.6,
+                    fromOffset:{
+                        x: -23+100,
+                        y: -23+100
+                    },
+                    toOffset:{
+                        x: -23,
+                        y: -23
+                    },
+                    time: times.useCard,
+                    callback:function(){
+                        this.model.hitOrMiss(enemyModel, options)
+                    },
+                    context:this
+                })
+                break;
             default :
                 this.model.hitOrMiss(enemyModel, options)
         }

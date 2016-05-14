@@ -392,6 +392,9 @@ var RoomModel = Backbone.Model.extend({
     foreachMovable:function(callback, context){
         _.each(this.__movables,callback,context)
     },
+    filterMovable:function(callback, context){
+        return _.filter(this.__movables,callback,context)
+    },
     foreachTile:function(callback,context){
         for ( var x = 0; x < this.__width; x++){
             for ( var y = 0; y < this.__height; y++){

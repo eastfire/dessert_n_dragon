@@ -137,25 +137,39 @@ var texts_locale = {
                     return "等待时间多减少"+CARD_MODEL_MAP.cooldown.getEffectDiff()
                 }
             },
-            "freeze":{
+            freeze:{
                 name:"冰冻",
                 desc: "所有敌人不能移动1回合",
                 levelUpDesc: "等待时间-1"
             },
-            "teleport":{
+            "meteor-shower":{
+                name:"陨石雨",
+                desc: function(level) {
+                    return "用陨石雨随机消灭" + CARD_MODEL_MAP["meteor-shower"].getEffect()+"个敌人";
+                },
+                levelUpDesc:function(level){
+                    return "多消灭"+CARD_MODEL_MAP["meteor-shower"].getEffectDiff()+"个敌人";
+                }
+            },
+            teleport:{
                 name:"传送",
                 desc: "随机传送到另一格空的地方",
                 levelUpDesc: "等待时间-1"
             },
+            tornado:{
+                name:"狂风",
+                desc: "将所有敌人或道具随机排列",
+                levelUpDesc: "等待时间-1"
+            },
 
             //passive
-            luck: {
-                name:"幸运",
+            collector: {
+                name:"收集",
                 desc: function(level){
-                    return "持续：幸运+"+CARD_MODEL_MAP.luck.getEffect(level)+"（当前"+currentRoom.getHero().get("luck")+"）\n使用时：1回合内暂时提升幸运"+CARD_MODEL_MAP.luck.getUseEffect;
+                    return "持续：获得道具的效果+"+CARD_MODEL_MAP.collector.getEffect(level)+"（当前"+currentRoom.getHero().get("collector")+"）\n使用时：1回合内暂时提升幸运"+CARD_MODEL_MAP.collector.getUseEffect;
                 },
                 levelUpDesc: function(level){
-                    return "幸运多+"+CARD_MODEL_MAP.luck.getEffectDiff(level)+"（当前"+currentRoom.getHero().get("luck")+"）";
+                    return "获得道具的效果多+"+CARD_MODEL_MAP.collector.getEffectDiff(level)+"（当前"+currentRoom.getHero().get("collector")+"）";
                 }
             },
             constitution: {
@@ -194,6 +208,15 @@ var texts_locale = {
                     return "躲开敌人远程攻击的概率多+"+CARD_MODEL_MAP.dodge.getEffectDiff(level)+"% 当前"+currentRoom.getHero().get("dodge")+"%";
                 }
             },
+            luck: {
+                name:"幸运",
+                desc: function(level){
+                    return "持续：幸运+"+CARD_MODEL_MAP.luck.getEffect(level)+"（当前"+currentRoom.getHero().get("luck")+"）\n使用时：1回合内暂时提升幸运"+CARD_MODEL_MAP.luck.getUseEffect;
+                },
+                levelUpDesc: function(level){
+                    return "幸运多+"+CARD_MODEL_MAP.luck.getEffectDiff(level)+"（当前"+currentRoom.getHero().get("luck")+"）";
+                }
+            },
             recovery: {
                 name:"恢复",
                 desc: function(level){
@@ -212,11 +235,13 @@ var texts_locale = {
                 "cross-fire":"十字火焰可以在商店中解锁了",
                 "whirl-slash":"回旋扫尾可以在商店中解锁了",
                 "big-whirl-slash":"大回旋扫尾可以在商店中解锁了",
-                "cooldown":"冷静技能可以在商店中解锁了",
-                "freeze":"冰冻技能可以在商店中解锁了",
-                "teleport":"传送技能可以在商店中解锁了",
+                cooldown:"冷静技能可以在商店中解锁了",
+                freeze:"冰冻技能可以在商店中解锁了",
+                teleport:"传送技能可以在商店中解锁了",
+                "meteor-shower":"陨石雨技能可以在商店中解锁了",
+                tornado:"狂风技能可以在商店中解锁了",
                 //passive
-                "recovery":"恢复技能可以在商店中解锁了"
+                recovery:"恢复技能可以在商店中解锁了"
             },
 
             hand3: "手牌上限加１",
@@ -232,6 +257,8 @@ var texts_locale = {
                 "cooldown":"在任意关卡中使用冷静技能",
                 "freeze":"在任意关卡中使用冰冻技能",
                 "teleport":"在任意关卡中使用传送技能",
+                tornado:"在任意关卡中使用狂风技能",
+                "meteor-shower":"在任意关卡中使用陨石雨技能",
                 //passive
                 "recovery":"在任意关卡中使用恢复技能"
             },

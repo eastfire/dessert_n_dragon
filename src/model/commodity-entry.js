@@ -85,5 +85,25 @@ COMMODITY_ENTRY_LIST = [
             unlockType: "shop",
             unlockSubtype: "teleport"
         }
+    },
+    {
+        cost: 500,
+        type: "card",
+        subtype: "tornado",
+        unlockHint: "通过65关后解锁",
+        valid: {
+            unlockType: "shop",
+            unlockSubtype: "tornado"
+        }
+    },
+    {
+        cost: 1500,
+        type: "card",
+        subtype: "meteor-shower",
+        unlockHint: "通过72关后解锁",
+        valid: {
+            unlockType: "shop",
+            unlockSubtype: "meteor-shower"
+        }
     }
 ]

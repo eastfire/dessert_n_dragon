@@ -2889,7 +2889,47 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room65 
+//room65 tornado skill
+rooms.push({
+    turnLimit:5,
+    scoreCondition: [1000, 1300, 1800],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"donut",
+            number: 12
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"donut"},{type:"cherrycake"}],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles5x5,
+    initMovables:[
+        {type:"donut",level:3,positions:[{x:2,y:2}]},
+        {type:"donut",level:3,positions:[{x:2,y:4}]},
+        {type:"donut",level:3,positions:[{x:4,y:4}]},
+        {type:"donut",level:3,positions:[{x:4,y:2}]}
+    ],
+    initHero: {
+        type:"normalHero",
+        positions: [{x:3,y:3}],
+        hp: 30,
+        maxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    initHand:[{type:"tornado"}],
+    choicePool:STANDARD_CHOICE_POOL,
+    unlocks:[{type:"shop", subtype:"tornado"}]
+});
+
+//room66
 rooms.push({
     timeLimit:120,
     scoreCondition: [2000, 2300, 2500],
@@ -2919,6 +2959,12 @@ rooms.push({
     },
     choicePool:STANDARD_CHOICE_POOL
 });
+
+//TODO 67
+
+//TODO 68
+
+//TODO 69
 
 //room70 eggroll 首次出现
 rooms.push({
@@ -2955,4 +3001,44 @@ rooms.push({
     },
     choicePool:STANDARD_CHOICE_POOL,
     unlocks:[{type:"enemy", subtype:"eggroll"}]
+});
+
+//TODO
+
+//room72 meteor-shower 首次出现
+rooms.push({
+    turnLimit:22,
+    scoreCondition: [1700, 2000, 2400],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"eggroll",
+            number: 14
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"lolipop"},{type:"eggroll"},{type:"pudding",subtype:"blue"}],
+    genEnemyStrategy: [{type:"random", number: 3, last: 0}],
+    initMovables:[
+        {type:"eggroll",positions:[{x:1,y:7}]},
+        {type:"eggroll",positions:[{x:7,y:7}]}
+    ],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles:tiles7x7Y,
+    initHero: {
+        type:"normalHero",
+        positions: [{x:4,y:3}],
+        maxHp: 100,
+        maxHpStrategy:{
+            type: "normal"
+        },
+        expStrategy: {
+            type: "normal"
+        }
+    },
+    choicePool:STANDARD_CHOICE_POOL,
+    initHand:[{type:"meteor-shower"}],
+    unlocks:[{type:"shop", subtype:"meteor-shower"}]
 });

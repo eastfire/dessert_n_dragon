@@ -25,6 +25,8 @@ var HeroModel = MovableModel.extend({
             maxLuck: 60,
             recovery: 20,
             maxRecovery: 100,
+            collector: 0,
+            maxCollector: 10,
             
             maxHand: 2,
             drawEachTurn: 1,

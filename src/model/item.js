@@ -34,7 +34,7 @@ MOVABLE_MODEL_MAP.potion = ItemModel.extend({
         } )
     },
     onTaken:function(){
-        currentRoom.getHero().gainHp(this.getEffect());
+        currentRoom.getHero().gainHp(this.getEffect()+currentRoom.getHero().get("collector"));
     },
     getEffect:function(l){
         l = l || this.get("level");
@@ -49,7 +49,7 @@ MOVABLE_MODEL_MAP.money = ItemModel.extend({
         } )
     },
     onTaken:function(){
-        gameStatus.gainMoney(this.getEffect());
+        gameStatus.gainMoney(this.getEffect()+currentRoom.getHero().get("collector"));
     },
     getEffect:function(l){
         l = l || this.get("level");

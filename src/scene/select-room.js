@@ -63,7 +63,7 @@ var SelectRoomLayer = cc.Layer.extend({
                     selectable = false;
                 }
             }
-//            selectable = true; //for debug
+            selectable = true; //for debug
             if ( selectable ) {
                 //TODO became menu item
                 (function( roomEntry) {

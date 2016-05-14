@@ -405,6 +405,49 @@ CARD_MODEL_MAP.freeze = CardModel.extend({
     }
 })
 
+CARD_MODEL_MAP["meteor-shower"] = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "meteor-shower",
+            maxLevel: 5
+        })
+    },
+    waitTurnOfLevel:function(level){
+        return 20;
+    },
+    onUse:function(){
+        var hero = currentRoom.getHero();
+        _.each( _.sample(currentRoom.filterMovable(function(movableModel){
+            return movableModel instanceof EnemyModel;
+        },this), CARD_MODEL_MAP["meteor-shower"].getEffect(this.get("level"))),
+            function(movableModel){
+                hero.attack(movableModel, {
+                    attackType: ATTACK_TYPE_MAGIC,
+                    attackAction: "meteor-shower",
+                    onHit: function (enemy, opt) {
+                        enemy.beHit(hero, opt);
+                    },
+                    onMiss: function (enemy, opt) {
+                        enemy.dodgeAttack(hero, opt);
+                    },
+                    context: this
+                });
+            }
+        ,this)
+    },
+    onLevelUp:function(){
+        this.reduceWait(CARD_MODEL_MAP["meteor-shower"].getEffectDiff());
+    }
+})
+CARD_MODEL_MAP["meteor-shower"].maxCount = 4;
+CARD_MODEL_MAP["meteor-shower"].getEffect = function(level){
+    level = level || 1;
+    return level+4;
+}
+CARD_MODEL_MAP["meteor-shower"].getEffectDiff = function(currentLevel, targetLevel){
+    return 2;
+}
+
 CARD_MODEL_MAP.teleport = CardModel.extend({
     defaults: function () {
         return _.extend(CardModel.prototype.defaults.call(this),{
@@ -432,8 +475,79 @@ CARD_MODEL_MAP.teleport = CardModel.extend({
     }
 })
 
+CARD_MODEL_MAP.tornado = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "tornado",
+            maxLevel: 5
+        })
+    },
+    waitTurnOfLevel:function(level){
+        return 10-level;
+    },
+    onUse:function(){
+        var candidates = currentRoom.filterMovable(function(movableModel){
+            return (movableModel instanceof EnemyModel || movableModel instanceof ItemModel)&&movableModel.getSize()===1;
+        },this)
+        _.each(candidates,function(movableModel){
+            movableModel.__removeOldMapping();
+        },this);
+
+        var targetTiles = _.sample( currentRoom.filterTile(function(tileModel){
+            return tileModel.get("canGenEnemy") && !currentRoom.getMovableByTile(tileModel);
+        },this),candidates.length)
+
+        var i = 0;
+        _.each(candidates,function(movableModel){
+            movableModel.trigger("teleport", targetTiles[i].get("position"));
+            movableModel.setNewPosition(targetTiles[i].get("position"));
+            i++;
+        },this);
+    },
+    onLevelUp:function(){
+        this.reduceWait(1);
+    }
+})
+
 //passive card
-//TODO collector skill + item effect
+CARD_MODEL_MAP.collector = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "collector",
+            isPassive: true,
+            maxLevel: 7
+        })
+    },
+    canLevelUp:function(){
+        var hero = currentRoom.getHero();
+        return CardModel.prototype.canLevelUp.call(this) && hero.get("collector") < hero.get("maxCollector")
+    },
+    onLevelUp:function(){
+        var hero = currentRoom.getHero();
+        hero.set("collector",hero.get("collector") + CARD_MODEL_MAP.collector.getEffectDiff(this.get("level")) )
+    },
+    onGain:function(){
+        var hero = currentRoom.getHero();
+        hero.set("collector",hero.get("collector") + CARD_MODEL_MAP.collector.getEffect(this.get("level")) )
+    },
+    onExile:function(){
+        var hero = currentRoom.getHero();
+        hero.set("collector",hero.get("collector") - CARD_MODEL_MAP.collector.getEffect(this.get("level")) )
+    },
+    onUse:function(){
+        currentRoom.getHero().gainBuff("luck", CARD_MODEL_MAP.collector.getUseEffect);
+    }
+})
+CARD_MODEL_MAP.collector.maxCount = 2;
+CARD_MODEL_MAP.collector.getEffect = function(level){
+    level = level || 1;
+    return level*2+1;
+}
+CARD_MODEL_MAP.collector.getEffectDiff = function(currentLevel, targetLevel){
+    targetLevel = targetLevel || currentLevel+1;
+    return 2;
+}
+CARD_MODEL_MAP.collector.getUseEffect = 2;
 
 CARD_MODEL_MAP.constitution = CardModel.extend({
     defaults: function () {
