@@ -271,11 +271,19 @@ var texts_locale = {
                 jelly:"果冻侦察兵将在无尽关卡中出现",
                 lolipop:"棒棒糖兄弟将在无尽关卡中出现",
                 popcorn:"爆米花掷弹兵将在无尽关卡中出现",
-                mushmellow:"棉花糖召唤师将在无尽关卡中出现",
+                mushmellow:"棉花糖召唤师将在无尽关卡中出现"
             }
         },
 
         achievement:{
+            "hero-die": {
+                name:function(level){
+                    return "百折不挠"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "失去所有生命" + ACHIEVEMENT_ENTRY_MAP["hero-die"].requirement(level) + "次"
+                }
+            },
             "kill-level-pudding": {
                 name:function(level){
                     return "布丁杀手"+LEVEL_TEXT_MAP[level];
