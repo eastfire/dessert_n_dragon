@@ -185,6 +185,28 @@ var changeTiles = function(originTiles, changes){
     return tiles;
 }
 
+var tiles6x3 = [
+    [wall_sw,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_ne]
+];
+
+var tiles7x3 = [
+    [wall_sw,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_ne]
+];
 var tiles4x4 = [
     [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_nw],
     [wall_s,floor_n,floor_n,floor_n,floor_n,wall_n],
@@ -298,6 +320,13 @@ var tiles7x6 = [
     [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
     [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
     [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
+];
+var tiles3x7 = [
+    [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_se,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_e,wall_ne]
 ];
 var tiles4x7 = [
     [wall_sw,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_w,wall_nw],

@@ -509,6 +509,14 @@ CARD_MODEL_MAP.tornado = CardModel.extend({
     }
 })
 
+//TODO dispel 驱散
+
+//TODO resurrection
+
+//TODO stealth 隐身
+
+//TODO throw bomb
+
 //passive card
 CARD_MODEL_MAP.collector = CardModel.extend({
     defaults: function () {
@@ -787,3 +795,9 @@ CARD_MODEL_MAP.recovery.getEffectDiff = function(currentLevel, targetLevel){
     return 5;
 }
 CARD_MODEL_MAP.recovery.getUseEffect = 2;
+
+//TODO regeneration
+
+//TODO wisdom
+
+//TODO get more score

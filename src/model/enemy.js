@@ -498,4 +498,18 @@ MOVABLE_MODEL_MAP.souffle = EnemyModel.extend({
     }
 })
 
+//TODO sweet-dumpling 汤圆 回合开始时如果为双数等级且能分开则分开
+
+//TODO 封魔
+
+//TODO 偷道具升级
+
+//TODO 防魔
+
+//TODO 变瞎
+
+//TODO 吸血升级
+
+//TODO 将攻击导向周围敌人
+
 
