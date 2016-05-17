@@ -445,7 +445,7 @@ CARD_MODEL_MAP["meteor-shower"].getEffect = function(level){
     return level+4;
 }
 CARD_MODEL_MAP["meteor-shower"].getEffectDiff = function(currentLevel, targetLevel){
-    return 2;
+    return 1;
 }
 
 CARD_MODEL_MAP.teleport = CardModel.extend({

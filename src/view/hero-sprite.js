@@ -40,6 +40,21 @@ var HeroSprite = MovableSprite.extend({
                     cc.moveBy(times.heroAttack, -deltaX, -deltaY )
                 ))
                 break;
+            case "whirl-slash":case "big-whirl-slash":
+                if ( !this.__whirling ) {
+                    this.__whirling = true;
+                    this.runAction(cc.sequence(
+                        cc.rotateBy(times.heroAttack, 360 ),
+                        cc.callFunc(function(){
+                            this.__whirling = false;
+
+                        },this)
+                    ))
+                }
+                this.scheduleOnce(function(){
+                    this.model.hitOrMiss(enemyModel, options)
+                },times.heroAttack)
+                break;
             case "fire":
                 var targetSprite = currentRoomSprite.getChildByName(enemyModel.cid);
                 var rotation = Math.atan2(-targetSprite.y+this.y,targetSprite.x-this.x) * 180/3.14159;
