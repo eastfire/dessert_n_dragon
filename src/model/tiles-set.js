@@ -1022,3 +1022,24 @@ var tiles7x7Y = [
     [null,null,null,null,wall_se,wall_sel,floor_n,floor_n,wall_n],
     [null,null,null,null,null,wall_se,wall_e,wall_e,wall_ne]
 ];
+
+var tiles5x5Wang = [
+    [wall_sw,wall_w,wall_nwsw,wall_w,wall_nwsw,wall_w,wall_nw],
+    [wall_s,floor_n,wall_nsl,floor_n,wall_nsl,floor_n,wall_n],
+    [wall_s,floor_n,wall_nswl,floor_n,wall_nswl,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,wall_nsel,floor_n,wall_nsel,floor_n,wall_n],
+    [wall_s,floor_n,wall_nsl,floor_n,wall_nsl,floor_n,wall_n],
+    [wall_se,wall_e,wall_nese,wall_e,wall_nese,wall_e,wall_ne]
+];
+
+var tiles6x5Wang = [
+    [wall_sw,wall_w,wall_nwsw,wall_w,wall_nwsw,wall_w,wall_nw],
+    [wall_s,floor_n,wall_nsl,floor_n,wall_nsl,floor_n,wall_n],
+    [wall_s,floor_n,wall_nswl,floor_n,wall_nswl,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,floor_n,floor_n,floor_n,floor_n,wall_n],
+    [wall_s,floor_n,wall_nsel,floor_n,wall_nsel,floor_n,wall_n],
+    [wall_s,floor_n,wall_nsl,floor_n,wall_nsl,floor_n,wall_n],
+    [wall_se,wall_e,wall_nese,wall_e,wall_nese,wall_e,wall_ne]
+];
