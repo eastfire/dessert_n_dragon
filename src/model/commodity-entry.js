@@ -105,5 +105,15 @@ COMMODITY_ENTRY_LIST = [
             unlockType: "shop",
             unlockSubtype: "meteor-shower"
         }
-    }
+    },
+    {
+        cost: 500,
+        type: "card",
+        subtype: "collector",
+        unlockHint: "通过78关后解锁",
+        valid: {
+            unlockType: "shop",
+            unlockSubtype: "collector"
+        }
+    },
 ]

@@ -179,14 +179,14 @@ var SelectRoomLayer = cc.Layer.extend({
             cc.spriteFrameCache.getSpriteFrame("palace-infinity.png"),
             cc.spriteFrameCache.getSpriteFrame("palace-infinity.png"),
             function () {
-                if ( !unlockedStatus.isUnlocked("infinite") ) {
+                /*if ( !unlockedStatus.isUnlocked("infinite") ) {
                     toast("通过第21关后解锁",{parent:this})
-                } else {
+                } else {*/
                     cc.director.runScene(new RoomScene({
                         roomEntry: clone(infiniteRoom),
                         maxScore: score[0]
                     }));
-                }
+                //}
             }, this);
 
         infiniteItem.attr({
@@ -237,9 +237,9 @@ var SelectRoomLayer = cc.Layer.extend({
             anchorX:0,
             anchorY: 0
         })
-        if ( !unlockedStatus.isUnlocked("infinite") ) {
+        /*if ( !unlockedStatus.isUnlocked("infinite") ) {
             infiniteItem.opacity = 128;
-        }
+        }*/
         if ( !unlockedStatus.isUnlocked("shop-entry") ) {
             shopItem.opacity = 128;
         }

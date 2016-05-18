@@ -241,7 +241,8 @@ var texts_locale = {
                 "meteor-shower":"陨石雨技能可以在商店中解锁了",
                 tornado:"狂风技能可以在商店中解锁了",
                 //passive
-                recovery:"恢复技能可以在商店中解锁了"
+                recovery:"恢复技能可以在商店中解锁了",
+                collector:"收集技能可以在商店中解锁了"
             },
 
             hand3: "手牌上限加１",
@@ -254,13 +255,14 @@ var texts_locale = {
                 "cross-fire":"在任意关卡中使用十字火焰",
                 "whirl-slash":"在任意关卡中使用回旋扫尾",
                 "big-whirl-slash":"在任意关卡中使用大回旋扫尾",
-                "cooldown":"在任意关卡中使用冷静技能",
-                "freeze":"在任意关卡中使用冰冻技能",
-                "teleport":"在任意关卡中使用传送技能",
+                cooldown:"在任意关卡中使用冷静技能",
+                freeze:"在任意关卡中使用冰冻技能",
+                teleport:"在任意关卡中使用传送技能",
                 tornado:"在任意关卡中使用狂风技能",
                 "meteor-shower":"在任意关卡中使用陨石雨技能",
                 //passive
-                "recovery":"在任意关卡中使用恢复技能"
+                recovery:"在任意关卡中使用恢复技能",
+                collector:"在任意关卡中使用收集技能"
             },
             
             //enemy

@@ -2342,7 +2342,7 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room nail&pit
+//room69 nail&pit
 rooms.push({
     turnLimit:25,
     scoreCondition: [1700, 2000, 2300],
@@ -2443,7 +2443,7 @@ rooms.push({
         {type:"nail",subtype:"normal",position:{x:1,y:5}},
         {type:"nail",subtype:"normal",position:{x:1,y:4}},
         {type:"nail",subtype:"normal",position:{x:1,y:3}},
-        {type:"nail",subtype:"normal",position:{x:1,y:2}},
+        {type:"nail",subtype:"normal",position:{x:1,y:2}}
     ]),
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
@@ -2480,7 +2480,7 @@ rooms.push({
 //room73 3 type of range
 rooms.push({
     turnLimit:24,
-    scoreCondition: [1800, 2300, 2600],
+    scoreCondition: [2000, 2300, 2600],
     winEveryConditions:[
         {
             conditionType:"kill-level",
@@ -2505,6 +2505,70 @@ rooms.push({
     enemyLevelPool: [1,2],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles5x5,
+    initHero: STANDARD_HERO,
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//room74 hard
+rooms.push({
+    turnLimit:30,
+    scoreCondition: [2100, 2400, 2800],
+    winEveryConditions:[
+        {
+            conditionType:"kill-max-level",
+            type:"icecream",
+            number: 7
+        },
+        {
+            conditionType:"kill-max-level",
+            type:"eggroll",
+            number: 7
+        },
+        {
+            conditionType:"kill-max-level",
+            type:"chocolate-cake",
+            number: 7
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"icecream"},{type:"eggroll"},{type:"chocolate-cake"}],
+    enemyLevelPool:[1,2],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles: tiles6x5Wang,
+    initHero: STANDARD_HERO,
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+//room75
+rooms.push({
+    turnLimit:30,
+    scoreCondition: [2100, 2400, 2800],
+    winEveryConditions:[
+        {
+            conditionType:"kill-max-level",
+            type:"icecream",
+            number: 7
+        },
+        {
+            conditionType:"kill-max-level",
+            type:"eggroll",
+            number: 7
+        },
+        {
+            conditionType:"kill-max-level",
+            type:"chocolate-cake",
+            number: 7
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"icecream"},{type:"eggroll"},{type:"chocolate-cake"}],
+    enemyLevelPool:[1,2],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles: tiles6x5Wang,
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
