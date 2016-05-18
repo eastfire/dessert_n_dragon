@@ -43,6 +43,24 @@ var GameOverDialog = cc.Scale9Sprite.extend({
             this.addStar((this.width)/2-60, 160, (!scoreCondition && roomScore ) || (scoreCondition && roomScore >= scoreCondition[0] ) )
             this.addStar((this.width)/2, 160, (!scoreCondition && roomScore ) || (scoreCondition &&roomScore >= scoreCondition[1]))
             this.addStar((this.width)/2+60, 160,(!scoreCondition && roomScore ) || (scoreCondition &&roomScore >= scoreCondition[2]))
+        } else {
+            var reason;
+            if ( this.model.getHero().get("hp") <= 0 ) {
+                reason = "你失去了所有生命";
+            } else {
+                if ( !this.model.checkWinCondition() ) {
+                    reason = this.model.getFailReason();
+                }
+            }
+            var failReasonLabel = new cc.LabelTTF(reason, null, 25 );
+            failReasonLabel.attr({
+                color: colors.gameOver.ok,
+                x: this.width/2,
+                y: 160,
+                anchorX: 0.5,
+                anchorY: 0.5
+            });
+            this.addChild(failReasonLabel);
         }
 
         var retryItem = new cc.MenuItemImage(

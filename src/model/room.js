@@ -777,6 +777,27 @@ var RoomModel = Backbone.Model.extend({
             return conditionCallback.call(this, this)
         },this);
     },
+    getFailReason:function(){
+        var conditions = this.get("winEveryConditions");
+        var i = 0;
+        var reason;
+        _.any(this.__winEveryConditions,function(conditionCallback){
+            var conditionEntry = conditions[i];
+            cc.log(conditionEntry)
+            if ( !conditionCallback.call(this, this) ) {
+                cc.log()
+                if ( typeof conditionEntry === "string" && conditionEntry === "enoughScore") { //predefined condition
+                    reason = "分数沒有达到目标"
+                    return true;
+                } else {
+                    reason = "没有完成任务"
+                    return true;
+                }
+            }
+            i++;
+        },this);
+        return reason;
+    },
     checkLoseCondition:function(){
         if ( _.any(this.__loseAnyConditions,function(conditionCallback){
             return conditionCallback.call(this, this)

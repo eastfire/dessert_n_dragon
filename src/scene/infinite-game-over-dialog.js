@@ -36,6 +36,9 @@ var currentStorageStrategy = new LeanCloudStrategy();
 var InfiniteGameOverDialog = cc.Scale9Sprite.extend({
     ctor:function (options) {
         this._super(cc.spriteFrameCache.getSpriteFrame("game-over-dialog.png"));
+
+        clearRoom();
+
         this.model = options.model;
         this.modalLayer = options.modalLayer;
 
