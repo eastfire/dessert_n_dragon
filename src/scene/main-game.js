@@ -376,6 +376,8 @@ var MainLayer = cc.Layer.extend({
     renderTurnNumber:function(){
         if ( currentRoom.get("turnLimit") ) {
             this.turnNumberLabel.setString("移动次数:" + (currentRoom.get("turnLimit") - currentRoom.get("turnNumber")));
+        } else {
+            this.turnNumberLabel.setString("第"+(currentRoom.get("turnNumber")+1)+"回合");
         }
     },
     renderTimeNumber:function(){

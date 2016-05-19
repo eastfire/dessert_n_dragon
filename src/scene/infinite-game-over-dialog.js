@@ -244,7 +244,7 @@ var InfiniteGameOverDialog = cc.Scale9Sprite.extend({
         currentY = this.scrollView.getInnerContainerSize().height - stepY/2;
 
         _.each(scores,function(score){
-            var text = score.get("scoreValue")+"分 "+score.get("name")+" LV"+score.get("level")+" "+
+            var text = score.get("scoreValue")+"分 "+score.get("name")+" LV"+score.get("level")+" "+score.get("turnNumber")+"回合 "+
                 moment(score.createdAt).locale("zh-cn").fromNow();
             var descLabel = new cc.LabelTTF(text, null, 18 );
             var labelColor = cc.color.BLACK
@@ -273,7 +273,8 @@ var InfiniteGameOverDialog = cc.Scale9Sprite.extend({
             });
             this.scrollView.addChild(descLabel);
             currentY-=stepY;
-            var text = this.currentScoreObject.get("scoreValue")+"分 "+this.currentScoreObject.get("name")+" LV"+this.currentScoreObject.get("level")+" "+
+            var text = this.currentScoreObject.get("scoreValue")+"分 "+this.currentScoreObject.get("name")+
+                " LV"+this.currentScoreObject.get("level")+" "+this.currentScoreObject.get("turnNumber")+"回合 "+
                 moment(this.currentScoreObject.createdAt).locale("zh-cn").fromNow();
             var descLabel = new cc.LabelTTF(text, null, 18 );
             descLabel.attr({
