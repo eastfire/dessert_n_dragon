@@ -16,7 +16,8 @@ var MainLayer = cc.Layer.extend({
     ctor:function (options) {
         this._super();
 
-        var room = new RoomModel(options.roomEntry);
+        var roomType = options.roomEntry.type || "normal";
+        var room = new ROOM_MODEL_MAP[roomType](RoomModel(options.roomEntry));
         this.maxScore = options.maxScore;
 
         window.currentRoom = room;
@@ -59,12 +60,6 @@ var MainLayer = cc.Layer.extend({
         this.initConditionLabel();
 
         this.initScoreBar();
-
-        var firstMovable = room.getNewMovable();
-        if ( firstMovable ){
-            this.showMovableInfoDialog(firstMovable);
-            gameStatus.passTutorial(firstMovable.get("type"));
-        }
 
         if ( room.get("phase") === PHASE_TURN_START ) {
             room.turnStart();
@@ -332,6 +327,9 @@ var MainLayer = cc.Layer.extend({
 
         this.renderDeck();
     },
+    switchRoom:function(){
+        
+    },
     renderDeck:function(){
         if ( currentRoom.getHand().length + currentRoom.getDeck().length + currentRoom.getDiscard().length > 0 ){
             this.deckIcon.setVisible(true);
@@ -538,6 +536,9 @@ var MainLayer = cc.Layer.extend({
         currentRoom.on("change:statistic",this.onStatisticChange,this);
         currentRoom.on("change:deck",this.renderDeck,this);
         currentRoom.on("game-over",this.onGameOver,this);
+        currentRoom.on("new-movable",this.showMovableInfoDialog,this)
+        currentRoom.on("switch-room",this.switchRoom,this)
+        
         unlockedStatus.on("unlocked",this.onUnlocked,this);
 
         if ('keyboard' in cc.sys.capabilities) {
@@ -654,6 +655,8 @@ var MainLayer = cc.Layer.extend({
         currentRoom.off("change:deck",this.renderDeck,this);
         currentRoom.off("game-over",this.onGameOver,this)
         unlockedStatus.off("unlocked",this.onUnlocked,this);
+        currentRoom.off("new-movable",this.showMovableInfoDialog,this)
+        currentRoom.off("switch-room",this.switchRoom,this)
 
         if ('keyboard' in cc.sys.capabilities) {
             cc.eventManager.removeListeners(cc.EventListener.KEYBOARD);

@@ -32,6 +32,7 @@ var rooms = [];
 
 //无尽关卡
 var infiniteRoom = { 
+    type:"infinite",
     stageNumber: 0,
     scoreCondition: null,
     winEveryConditions:[
@@ -56,6 +57,7 @@ var infiniteRoom = {
         type:"pudding", subtype:"blue"
     }],
     itemPool:STANDARD_ITEM_POOL,
+    exits:[{x:1,y:1},{x:5,y:5}],
     initTiles: tiles5x5,
     initHero: STANDARD_HERO,
     choicePool: _.union(STANDARD_CHOICE_POOL, [
@@ -64,7 +66,7 @@ var infiniteRoom = {
         { type:"getCard", opt:{type:"cunning"}},
         { type:"getCard", opt:{type:"dexterity"}},
         { type:"getCard", opt:{type:"dodge"}}
-    ])
+    ]),
 };
 
 //初始 room1
@@ -81,6 +83,7 @@ rooms.push({
     },
     enemyPool:[{type:"pudding", subtype:"red"},{type:"pudding", subtype:"yellow"},{type:"pudding", subtype:"blue"}],
     initTiles: tiles5x5,
+    exits:[{x:1,y:1},{x:5,y:5}],
     initMovables:[
         {type:"pudding",subtype:"yellow", positions: [{x:3,y:2}]},
         {type:"pudding",subtype:"red", positions: [{x:2,y:2}]},
@@ -132,6 +135,7 @@ rooms.push({
         {type:"pudding", subtype:"green"}
         ],
     initTiles:tiles7x4,
+    exits:[{x:1,y:1},{x:7,y:4},{x:7,y:1},{x:1,y:4}],
     initMovables:[
         {type:"pudding",subtype:"red",positions: [{x:1,y:1}]},
         {type:"pudding",subtype:"yellow",positions: [{x:2,y:1}]},
@@ -180,6 +184,7 @@ rooms.push({
         {type:"pudding",subtype:"green"}
         ],
     initTiles:tiles6x4,
+    exits:[{x:1,y:1},{x:6,y:4},{x:6,y:1},{x:1,y:4}],
     initMovables:[
         {type:"pudding",subtype:"red",positions: [{x:1,y:1}]},
         {type:"pudding",subtype:"yellow",positions: [{x:2,y:1}]},
@@ -234,6 +239,7 @@ rooms.push({
         type:"pudding",subtype:"green"
     }],
     initTiles:tiles6x6Rhombus,
+    exits:[{x:3,y:1},{x:4,y:6}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL,
     unlocks: ["shop-entry"]
@@ -272,6 +278,7 @@ rooms.push({
         type:"pudding",subtype:"blue"
     }],
     initTiles:tiles5x6ZigVertical,
+    exits:[{x:1,y:1},{x:5,y:1}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -298,6 +305,7 @@ rooms.push({
         type:"pudding",subtype:"green"
     }],
     initTiles:tiles5x5,
+    exits:[{x:1,y:1},{x:5,y:5},{x:5,y:1},{x:1,y:5}],
     initMovables:[
         {type:"cherrycake",positions: [{x:2,y:2}]},
         {type:"cherrycake",positions: [{x:4,y:2}]},
@@ -326,6 +334,7 @@ rooms.push({
     }],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles5x6,
+    exits:[{x:1,y:1},{x:5,y:6},{x:5,y:1},{x:1,y:6}],
     initMovables:[
         {type:"potion",positions: [{x:2,y:2}]},
         {type:"potion",positions: [{x:4,y:2}]},
@@ -367,6 +376,7 @@ rooms.push({
         ],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6T,
+    exits:[{x:1,y:6},{x:6,y:6}],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:3,y:6}]}),
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -393,6 +403,7 @@ rooms.push({
         ],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6,
+    exits:[{x:1,y:1},{x:6,y:6}],
     initMovables:[
         {type:"ricecake",positions: [{x:2,y:2}]},
         {type:"ricecake",positions: [{x:5,y:2}]},
@@ -435,6 +446,7 @@ rooms.push({
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6,
+    exits:[{x:1,y:6},{x:6,y:1}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -470,6 +482,7 @@ rooms.push({
         ],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6Cross6x4,
+    exits:[{x:2,y:1},{x:5,y:6}],
     initMovables:[
         {type:"pillar",subtype:"normal",positions: [{x:2,y:2}]},
         {type:"pillar",subtype:"normal",positions: [{x:5,y:2}]},
@@ -511,6 +524,7 @@ rooms.push({
         ],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x5HRotate90,
+    exits:[{x:1,y:1}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -552,6 +566,7 @@ rooms.push({
         ],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6UpArrow,
+    exits:[{x:1,y:1},{x:6,y:1}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -588,6 +603,7 @@ rooms.push({
     itemPool:STANDARD_ITEM_POOL,
     genEnemyStrategy: [{type:"random", number: 4, last: 0}],
     initTiles:tiles7x7Rhombus,
+    exits:[{x:4,y:1},{x:1,y:4},{x:4,y:7},{x:7,y:4}],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:4,y:4}]}),
     choicePool:STANDARD_CHOICE_POOL,
     initHand:[
@@ -619,6 +635,7 @@ rooms.push({
     }],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x7Triangle,
+    exits:[{x:1,y:7},{x:7,y:1},{x:7,y:7}],
     initMovables:[
         { type:"icecream", positions: [{x:1,y:7}] },
         { type:"icecream", positions: [{x:7,y:1}] },
@@ -658,6 +675,7 @@ rooms.push({
     }],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6Cross6x2,
+    exits:[{x:3,y:1},{x:4,y:6}],
     initMovables:[
         {type:"creampuff",positions: [{x:1,y:3}]},
         {type:"creampuff",positions: [{x:2,y:3}]},
@@ -701,6 +719,7 @@ rooms.push({
     enemyPool:[{type:"creampuff"},{type:"icecream"},{type:"cherrycake"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6Whirl,
+    exits:[{x:3,y:1},{x:4,y:6}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -724,6 +743,7 @@ rooms.push({
     enemyPool:[{type:"pudding",subtype:"red"},{type:"souffle"},{type:"cherrycake"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6Whirl2,
+    exits:[{x:1,y:1},{x:1,y:6},{x:6,y:6},{x:6,y:1}],
     initMovables:[
         {type:"souffle",positions: [{x:1,y:1}]},
         {type:"souffle",positions: [{x:2,y:1}]},
@@ -766,6 +786,7 @@ rooms.push({
     enemyPool:[{type:"pudding", subtype:"red"},{type:"pudding", subtype:"yellow"},{type:"pudding", subtype:"blue"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x5,
+    exits:[{x:1,y:1},{x:6,y:5}],
     initMovables:[{
         type:"vertical-log3",subtype:"normal",
         positions:[
@@ -795,6 +816,7 @@ rooms.push({
     enemyPool:[{type:"pudding",subtype:"red"},{type:"pudding",subtype:"yellow"},{type:"pudding",subtype:"green"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6,
+    exits:[{x:6,y:1},{x:1,y:6}],
     initMovables:[
         { type:"ricecake", positions: [{x:1,y:5}] },
         { type:"ricecake", positions: [{x:2,y:1}] },
@@ -821,6 +843,7 @@ rooms.push({
     enemyPool:[{type:"cherrycake"},{type:"pudding",subtype:"yellow"},{type:"archer"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x5IO,
+    exits:[{x:6,y:1},{x:6,y:5}],
     initMovables:[
         { type:"archer", positions: [{x:6,y:1}] },
         { type:"archer", positions: [{x:6,y:5}] }],
@@ -846,6 +869,7 @@ rooms.push({
     enemyPool:[{type:"cherrycake"},{type:"chocolate-cake"},{type:"pudding", subtype:"red"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles4x6,
+    exits:[{x:4,y:1},{x:1,y:6}],
     initMovables:[
         { type:"chocolate-cake", positions: [{x:1,y:1}] },
         { type:"chocolate-cake", positions: [{x:1,y:6}] },
@@ -869,6 +893,7 @@ rooms.push({
     enemyPool:[{type:"cherrycake"},{type:"pudding",subtype:"yellow"},{type:"archer"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x5IOI,
+    exits:[{x:3,y:1},{x:5,y:5}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -895,6 +920,7 @@ rooms.push({
     enemyPool:[{type:"cherrycake"},{type:"ricecake"},{type:"icecream"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6Loop,
+    exits:[{x:1,y:1},{x:6,y:6}],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:3,y:2}]}),
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -927,6 +953,7 @@ rooms.push({
     enemyPool:[{type:"pudding", subtype:"red"},{type:"pudding", subtype:"yellow"},{type:"pudding", subtype:"blue"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6,
+    exits:[{x:2,y:1},{x:5,y:6}],
     initMovables:[
         {type:"vertical-log2",subtype:"normal",positions:[{x:1,y:4},{x:1,y:3}]},
         {type:"horizontal-log2",subtype:"normal",positions:[{x:3,y:6},{x:4,y:6}]}
@@ -953,6 +980,7 @@ rooms.push({
     }],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6Mi,
+    exits:[{x:3,y:1},{x:4,y:5}],
     initMovables:[
         { type:"archer", positions: [{x:1,y:1}] },
         { type:"archer", positions: [{x:1,y:6}] },
@@ -980,6 +1008,7 @@ rooms.push({
     enemyPool:[{type:"souffle"},{type:"creampuff"},{type:"chocolate-cake"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x7A,
+    exits:[{x:1,y:1},{x:6,y:1}],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:3,y:6}]}),
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1017,6 +1046,7 @@ rooms.push({
     }],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x7Snake,
+    exits:[{x:4,y:5}],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:4,y:5}]}),
     initHand:[
         {type:"cross-fire"}
@@ -1066,6 +1096,7 @@ rooms.push({
     }],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6H,
+    exits:[{x:1,y:1},{x:1,y:6},{x:6,y:1},{x:6,y:6}],
     initMovables:[{
         type:"horizontal-log4",subtype:"normal",
         positions:[
@@ -1105,6 +1136,7 @@ rooms.push({
     itemPool:STANDARD_ITEM_POOL,
     genEnemyStrategy: [{type:"random", number: 2, last: 0}],
     initTiles:tiles5x5Loop,
+    exits:[{x:1,y:1},{x:1,y:5},{x:5,y:5},{x:5,y:1}],
     initMovables:[
         { type:"donut", positions:[{x:1,y:1}]},
         { type:"donut", positions:[{x:1,y:5}]},
@@ -1150,11 +1182,12 @@ rooms.push({
     itemPool:STANDARD_ITEM_POOL,
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     initTiles:tiles7x7Snake2,
+    exits:[{x:3,y:5},{x:1,y:1}],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:3,y:5}]}),
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room32 snake
+//room32 N
 rooms.push({
     turnLimit:25,
     scoreCondition: [600, 1000, 1400],
@@ -1183,6 +1216,7 @@ rooms.push({
     itemPool:STANDARD_ITEM_POOL,
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     initTiles:tiles6x5N,
+    exits:[{x:1,y:1},{x:6,y:1},{x:6,y:5},{x:1,y:5}],
     initMovables:[
         { type:"jelly", positions:[{x:1,y:1}]},
         { type:"jelly", positions:[{x:6,y:5}]}
@@ -1213,6 +1247,7 @@ rooms.push({
     itemPool:STANDARD_ITEM_POOL,
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     initTiles:tiles7x5,
+    exits:[{x:1,y:1},{x:1,y:7},{x:7,y:5},{x:1,y:5}],
     initHero: _.extend(clone(STANDARD_HERO),{hp:50, positions: [{x:4,y:3}]}),
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1240,6 +1275,7 @@ rooms.push({
     }],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6Loop2,
+    exits:[{x:1,y:1},{x:6,y:6},{x:6,y:1},{x:1,y:6}],
     initHero: _.extend(clone(STANDARD_HERO),{hp:30, positions: [{x:3,y:2}]}),
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1266,6 +1302,7 @@ rooms.push({
     itemPool:STANDARD_ITEM_POOL,
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     initTiles:tiles7x7Cross7x3,
+    exits:[{x:3,y:1},{x:5,y:7},{x:1,y:3},{x:7,y:5}],
     initHero: _.extend(clone(STANDARD_HERO),{hp:30, positions: [{x:4,y:4}]}),
     choicePool:_.union(STANDARD_CHOICE_POOL,[
         { type:"getCard", opt:{type:"recovery"}}
@@ -1308,6 +1345,7 @@ rooms.push({
     itemPool:STANDARD_ITEM_POOL,
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     initTiles:tiles6x5E,
+    exits:[{x:1,y:1},{x:1,y:5},{x:6,y:5},{x:6,y:1}],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:2,y:3}]}),
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1339,6 +1377,7 @@ rooms.push({
     levelPool:[1,2,3],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6,
+    exits:[{x:1,y:1},{x:6,y:6},{x:6,y:1},{x:1,y:6}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1358,6 +1397,7 @@ rooms.push({
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6UpArrow2,
+    exits:[{x:1,y:1},{x:6,y:1}],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:4,y:4}]}),
     choicePool:STANDARD_CHOICE_POOL,
     initHand:[
@@ -1389,6 +1429,7 @@ rooms.push({
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6L3,
+    exits:[{x:1,y:1},{x:1,y:6},{x:6,y:1}],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:2,y:2}]}),
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1416,6 +1457,7 @@ rooms.push({
     }],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x7D,
+    exits:[{x:1,y:1},{x:1,y:7}],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:2,y:4}]}),
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1448,6 +1490,7 @@ rooms.push({
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6C,
+    exits:[{x:1,y:1},{x:1,y:6},{x:6,y:6},{x:6,y:1}],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:2,y:3}]}),
     initHand:[ {type:"vertical-fire"}, {type:"cooldown"} ],
     choicePool:STANDARD_CHOICE_POOL,
@@ -1471,6 +1514,7 @@ rooms.push({
     enemyPool:[{type:"popcorn"},{type:"cherrycake"},{type:"donut"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x6Loop3,
+    exits:[{x:1,y:1},{x:6,y:6},{x:6,y:1},{x:1,y:6}],
     initMovables:[
         { type:"popcorn", positions: [{x:1,y:1}] },
         { type:"popcorn", positions: [{x:6,y:6}] }
@@ -1507,6 +1551,7 @@ rooms.push({
     enemyPool:[{type:"popcorn"},{type:"icecream"},{type:"jelly"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles4x4,
+    exits:[{x:1,y:1},{x:4,y:4},{x:4,y:1},{x:1,y:4}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1528,6 +1573,7 @@ rooms.push({
     enemyPool:[{type:"chocolate-cake"},{type:"creampuff"},{type:"souffle"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x5SplitAndPortal,
+    exits:[{x:3,y:1},{x:5,y:5}],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:2,y:3}]}),
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1547,6 +1593,7 @@ rooms.push({
     enemyLevelPool:[1,3],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles5x5,
+    exits:[{x:1,y:1},{x:5,y:5},{x:5,y:1},{x:1,y:5}],
     initHero: STANDARD_HERO,
     initHand:[{type:"freeze"}],
     choicePool:STANDARD_CHOICE_POOL,
@@ -1575,6 +1622,7 @@ rooms.push({
     enemyPool:[{type:"chocolate-cake"},{type:"cherrycake"},{type:"popcorn"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x6SplitAndPortal,
+    exits:[{x:2,y:2},{x:6,y:5},{x:6,y:2},{x:2,y:5}],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:2,y:4}]}),
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1606,6 +1654,7 @@ rooms.push({
     enemyPool:[{type:"donut"},{type:"cherrycake"},{type:"jelly"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x7Split4AndPortal,
+    exits:[{x:2,y:2},{x:6,y:2},{x:6,y:6},{x:2,y:6}],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:2,y:2}]}),
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1643,6 +1692,7 @@ rooms.push({
         {type:"portal",subtype:"b",position:{x:1,y:5}},
         {type:"portal",subtype:"b",position:{x:7,y:1}}
     ]),
+    exits:[{x:2,y:2},{x:6,y:4},{x:6,y:2},{x:2,y:4}],
     initMovables:[{type:"vertical-log5",subtype:"normal",positions:[{x:4,y:5},{x:4,y:4},{x:4,y:3},{x:4,y:2},{x:4,y:1}]}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
@@ -1677,6 +1727,7 @@ rooms.push({
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles5x6H2,
+    exits:[{x:1,y:1},{x:5,y:6},{x:5,y:1},{x:1,y:6}],
     initHero: STANDARD_HERO,
     initHand:[ {type:"teleport"} ],
     choicePool:STANDARD_CHOICE_POOL,
@@ -1700,6 +1751,7 @@ rooms.push({
     enemyPool:[{type:"mushmellow"},{type:"pudding",subtype:"red"},{type:"donut"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles5x5,
+    exits:[{x:5,y:5},{x:5,y:1},{x:1,y:5},{x:1,y:1}],
     initMovables:[
         { type:"mushmellow", positions: [{x:1,y:1}] },
         { type:"mushmellow", positions: [{x:1,y:5}] },
@@ -1739,6 +1791,7 @@ rooms.push({
         {type:"belt",subtype:"s",position:{x:5,y:4}},
         {type:"belt",subtype:"s",position:{x:5,y:5}}
     ]),
+    exits:[{x:3,y:3}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1777,6 +1830,7 @@ rooms.push({
         {type:"belt",subtype:"w",position:{x:3,y:1}},
         {type:"belt",subtype:"w",position:{x:2,y:1}}
     ]),
+    exits:[{x:3,y:3}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1816,6 +1870,7 @@ rooms.push({
         {type:"pit",subtype:"normal",position:{x:4,y:2}},
         {type:"pit",subtype:"normal",position:{x:3,y:2}}
     ]),
+    exits:[{x:1,y:1},{x:6,y:6},{x:6,y:1},{x:1,y:6}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1860,6 +1915,7 @@ rooms.push({
         {type:"portal",subtype:"b",position:{x:7,y:1}},
         {type:"portal",subtype:"b",position:{x:1,y:5}}
     ]),
+    exits:[{x:1,y:3},{x:7,y:3}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1891,6 +1947,7 @@ rooms.push({
     enemyPool:[{type:"ricecake"},{type:"donut"},{type:"cherrycake"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x7,
+    exits:[{x:4,y:4}],
     initMovables:[
         {type:"vertical-log2",subtype:"normal",positions:[{x:4,y:2},{x:4,y:1}]},
         {type:"vertical-log2",subtype:"normal",positions:[{x:4,y:7},{x:4,y:6}]},
@@ -1939,6 +1996,7 @@ rooms.push({
         {type:"portal",subtype:"a",position:{x:1,y:1}},
         {type:"portal",subtype:"a",position:{x:4,y:6}}
     ]),
+    exits:[{x:1,y:6},{x:4,y:1}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -1987,6 +2045,7 @@ rooms.push({
         {type:"belt",subtype:"es",position:{x:5,y:5}},
         {type:"belt",subtype:"sw",position:{x:5,y:4}}
     ]),
+    exits:[{x:3,y:3}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -2027,6 +2086,7 @@ rooms.push({
         {type:"nail",subtype:"normal",position:{x:4,y:3}},
         {type:"nail",subtype:"normal",position:{x:5,y:3}}
     ]),
+    exits:[{x:1,y:1},{x:1,y:5},{x:5,y:5},{x:5,y:1}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -2043,6 +2103,7 @@ rooms.push({
     enemyPool:[{type:"donut"},{type:"popcorn"},{type:"archer"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles6x4,
+    exits:[{x:1,y:1},{x:6,y:4},{x:6,y:1},{x:1,y:4}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -2095,6 +2156,7 @@ rooms.push({
         {type:"nail",subtype:"normal",position:{x:4,y:4}},
         {type:"nail",subtype:"normal",position:{x:5,y:4}}
     ]),
+    exits:[{x:1,y:1}],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:3,y:2}]}),
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -2147,6 +2209,7 @@ rooms.push({
         {type:"belt",subtype:"es",position:{x:4,y:4}},
         {type:"belt",subtype:"sw",position:{x:4,y:3}}
     ]),
+    exits:[{x:1,y:3},{x:6,y:4},{x:4,y:1},{x:3,y:6}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -2174,6 +2237,7 @@ rooms.push({
     ],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles5x7P,
+    exits:[{x:1,y:1},{x:1,y:7}],
     initHand:[{type:"tail-slash"} ],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:2,y:3}]}),
     choicePool:STANDARD_CHOICE_POOL,
@@ -2197,6 +2261,7 @@ rooms.push({
     enemyPool:[{type:"creampuff"},{type:"cherrycake"},{type:"icecream"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles5x7Eight,
+    exits:[{x:1,y:1},{x:5,y:7},{x:5,y:1},{x:1,y:7}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -2218,6 +2283,7 @@ rooms.push({
     enemyPool:[{type:"popcorn"},{type:"cherrycake"},{type:"donut"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles4x7,
+    exits:[{x:1,y:1},{x:4,y:7},{x:4,y:1},{x:1,y:7}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -2239,6 +2305,7 @@ rooms.push({
     enemyPool:[{type:"donut"},{type:"cherrycake"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles5x5,
+    exits:[{x:1,y:1},{x:5,y:5},{x:5,y:1},{x:1,y:5}],
     initMovables:[
         {type:"donut",level:3,positions:[{x:2,y:2}]},
         {type:"donut",level:3,positions:[{x:2,y:4}]},
@@ -2268,6 +2335,7 @@ rooms.push({
     enemyPool:[{type:"popcorn"},{type:"mushmellow"},{type:"lolipop"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles4x7,
+    exits:[{x:1,y:1},{x:4,y:7},{x:4,y:1},{x:1,y:7}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -2299,6 +2367,7 @@ rooms.push({
     enemyPool:[{type:"lolipop"},{type:"archer"},{type:"jelly"}],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x7X,
+    exits:[{x:1,y:1},{x:7,y:7},{x:7,y:1},{x:1,y:7}],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:4,y:4}]}),
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -2338,6 +2407,7 @@ rooms.push({
         {type:"nail",subtype:"normal",position:{x:6,y:2}},
         {type:"nail",subtype:"normal",position:{x:7,y:2}}
     ]),
+    exits:[{x:1,y:1},{x:7,y:3},{x:7,y:1},{x:1,y:3}],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:4,y:1}]}),
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -2369,6 +2439,7 @@ rooms.push({
         {type:"pit",subtype:"normal",position:{x:4,y:3}},
         {type:"pit",subtype:"normal",position:{x:5,y:3}}
     ]),
+    exits:[{x:1,y:1},{x:5,y:5},{x:5,y:1},{x:1,y:5}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -2395,6 +2466,7 @@ rooms.push({
     ],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x7Y,
+    exits:[{x:1,y:7},{x:7,y:7},{x:4,y:1}],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:4,y:3}]}),
     choicePool:STANDARD_CHOICE_POOL,
     unlocks:[{type:"enemy", subtype:"eggroll"}]
@@ -2445,6 +2517,7 @@ rooms.push({
         {type:"nail",subtype:"normal",position:{x:1,y:3}},
         {type:"nail",subtype:"normal",position:{x:1,y:2}}
     ]),
+    exits:[{x:3,y:3}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -2471,6 +2544,7 @@ rooms.push({
     ],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x7Y,
+    exits:[{x:1,y:1},{x:7,y:7},{x:4,y:1}],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:4,y:3}]}),
     choicePool:STANDARD_CHOICE_POOL,
     initHand:[{type:"meteor-shower"}],
@@ -2505,6 +2579,7 @@ rooms.push({
     enemyLevelPool: [1,2],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles5x5,
+    exits:[{x:1,y:1},{x:5,y:5},{x:5,y:1},{x:5,y:1}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -2537,11 +2612,12 @@ rooms.push({
     enemyLevelPool:[1,2],
     itemPool:STANDARD_ITEM_POOL,
     initTiles: tiles6x5Wang,
+    exits:[{x:1,y:1},{x:6,y:5},{x:6,y:1},{x:1,y:5}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room75
+//room75 TODO
 rooms.push({
     turnLimit:30,
     scoreCondition: [2100, 2400, 2800],
@@ -2569,6 +2645,7 @@ rooms.push({
     enemyLevelPool:[1,2],
     itemPool:STANDARD_ITEM_POOL,
     initTiles: tiles6x5Wang,
+    exits:[{x:1,y:1},{x:6,y:5},{x:6,y:1},{x:1,y:5}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });

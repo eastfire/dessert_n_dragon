@@ -91,6 +91,19 @@ TILE_MODEL_MAP.portal = RoomTileModel.extend({
     }
 })
 
+TILE_MODEL_MAP["room-portal"] = RoomTileModel.extend({
+    defaults:function(){
+        return _.extend(RoomTileModel.prototype.defaults.apply(this),{
+            type: "room-portal",
+            subtype: "normal"
+        });
+    },
+    onTurnStart:function(){
+        RoomTileModel.prototype.onTurnStart.call(this);
+        currentRoom.switchRoom();
+    }
+})
+
 TILE_MODEL_MAP.pit = RoomTileModel.extend({
     defaults:function(){
         return _.extend(RoomTileModel.prototype.defaults.apply(this),{
