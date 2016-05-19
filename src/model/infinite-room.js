@@ -40,5 +40,9 @@ GEN_ENEMY_STRATEGY_MAP.infinite = GenEnemyStrategy.extend({
 })
 
 ROOM_MODEL_MAP.infinite = RoomModel.extend({
-
+    defaults:function(){
+        return _.extend(RoomModel.prototype.defaults.call(this),{
+            type : "infinite"
+        })
+    }
 });
