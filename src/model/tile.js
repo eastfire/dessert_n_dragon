@@ -100,7 +100,12 @@ TILE_MODEL_MAP["room-portal"] = RoomTileModel.extend({
     },
     onTurnStart:function(){
         RoomTileModel.prototype.onTurnStart.call(this);
-        currentRoom.switchRoom();
+        var movableModel = currentRoom.getMovableByTile(this);
+        if ( movableModel && movableModel instanceof HeroModel ){
+            currentRoom.trigger("before-switch-room");
+            return true;
+        }
+        return false;
     }
 })
 

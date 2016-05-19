@@ -17,7 +17,7 @@ var MainLayer = cc.Layer.extend({
         this._super();
 
         var roomType = options.roomEntry.type || "normal";
-        var room = new ROOM_MODEL_MAP[roomType](RoomModel(options.roomEntry));
+        var room = new ROOM_MODEL_MAP[roomType](options.roomEntry);
         this.maxScore = options.maxScore;
 
         window.currentRoom = room;
@@ -490,6 +490,7 @@ var MainLayer = cc.Layer.extend({
         this.showChoiceDialog();
     },
     showChoiceDialog:function(){
+        cc.log("showChoiceDialog")
         var layer = new ModalDialogLayer({
 
         });
@@ -508,6 +509,7 @@ var MainLayer = cc.Layer.extend({
         dialog.appear();
     },
     showMovableInfoDialog:function(movableModel){
+        currentRoom.blockInput();
         var layer = new ModalDialogLayer({
             clickSideCancel: true
         });

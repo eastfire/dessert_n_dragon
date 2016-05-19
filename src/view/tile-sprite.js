@@ -11,7 +11,12 @@ var TileSprite = BaseSprite.extend({
         if ( this.model.get("cloud") ) {
             this.cloudAppear();
         }
+
+        this.initEvent();
+    },
+    initEvent:function(){
         this.model.on("change:cloud", this.onCloudChange, this)
+        this.model.on("changeModel", this.changeModel, this)
     },
     getInitFrameName:function(){
         return this.model.get("type")+"-"+this.model.get("subtype")+".png"
@@ -50,6 +55,16 @@ var TileSprite = BaseSprite.extend({
                 )
             );
         },0.01);
+    },
+    changeModel:function(model){
+        this.model.off();
+        this.model.destroy();
+
+        this.model = model;
+        this.model.on("destroy", this.onDestroy, this) //parent event
+        this.initEvent();
+
+        this.setSpriteFrame(this.getInitFrame())
     }
 })
 

@@ -248,6 +248,7 @@
                 <file name="src/model/room.js"/>
                 <file name="src/model/card.js"/>
                 <file name="src/model/tiles-set.js"/>
+                <file name="src/model/infinite-room.js"/>
                 <file name="src/model/room-entry.js"/>
                 <file name="src/model/unlockable-entry.js"/>
                 <file name="src/model/commodity-entry.js"/>

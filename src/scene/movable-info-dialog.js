@@ -5,8 +5,6 @@ var MovableInfoDialog = cc.Scale9Sprite.extend({
         this.model = options.model;
         this.modalLayer = options.modalLayer;
 
-        cc.log(this.model.get("type"))
-
         this.dialogWidth = cc.winSize.width - 50;
         this.dialogHeight = 400;
         this.attr({
@@ -19,8 +17,6 @@ var MovableInfoDialog = cc.Scale9Sprite.extend({
         if ( this.model instanceof EnemyModel || this.model instanceof NeutralMovable || this.model instanceof ItemModel ) {
             this.initMovableLabel();
         }
-
-        currentRoom.blockInput();
         currentRoomSprite.stopClock();
     },
     initMovableLabel:function(){
@@ -84,7 +80,7 @@ var MovableInfoDialog = cc.Scale9Sprite.extend({
     },
     disappear:function(){
         this.runAction(cc.sequence(
-            cc.moveBy(times.gameOverDialog, cc.winSize.width, 0),
+            cc.moveBy(times.gameOverDialog/3, cc.winSize.width, 0),
             cc.removeSelf(),
             cc.callFunc(function(){
                 currentRoom.unblockInput();

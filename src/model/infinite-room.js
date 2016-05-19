@@ -13,11 +13,11 @@ GEN_ENEMY_STRATEGY_MAP.infinite = GenEnemyStrategy.extend({
             _.each(roomModel.get("baseEnemyPool"),function(enemy){
                 allEnemyPool.push(enemy);
             },this);
-            _.each(unlockedStatus.get("enemy"),function(value, key){
-                allEnemyPool.push({
-                    type: key
-                });
-            },this);
+//            _.each(unlockedStatus.get("enemy"),function(value, key){
+//                allEnemyPool.push({
+//                    type: key
+//                });
+//            },this);
             var currentEnemyPool = roomModel.get("enemyPool");
             var availableEnemyPool = _.filter(allEnemyPool,function(enemy){
                 return !_.any(currentEnemyPool, function(currentEnemy){
@@ -46,19 +46,25 @@ ROOM_MODEL_MAP.infinite = RoomModel.extend({
         })
     },
     switchRoom:function(){
+        this.foreachTile(function(tileModel){
+            tileModel.destroy();
+        },this)
+        this.foreachMovable(function(movableModel){
+            if (!( movableModel instanceof HeroModel ))
+                movableModel.destroy();
+        });
+
         var randomRoomEntry = _.sample(rooms)
+        this.set("exits",clone(randomRoomEntry.exits));
         this.set("initTiles", clone(randomRoomEntry.initTiles) );
         this.initTiles();
 
-        _.each(this.__movables,function(movableModel){
-            if ( !(movableModel instanceof HeroModel) ) {
-                movableModel.destroy();
-            }
-        },this)
-        this.__movables = [];
-        this._hero.set("positions", clone(randomRoomEntry.initHero.positions));
+        this.set("initMovables", randomRoomEntry.initMovables);
+        this.initMovables();
         this.__movables.push(this.__hero);
-        
+        this.__hero.set("positions", clone(randomRoomEntry.initHero.positions));
+        this.__hero.calculateEdgePositions();
+
         this.__genMovableMap();
         
         this.trigger("switch-room",this);
@@ -66,9 +72,24 @@ ROOM_MODEL_MAP.infinite = RoomModel.extend({
     initialize:function(){
         if ( this.get("turnNumber") === 0 ) {
             var randomRoomEntry = _.sample(rooms)
+            this.set("exits",clone(randomRoomEntry.exits));
             this.set("initTiles", clone(randomRoomEntry.initTiles) );
             this.get("initHero").positions = clone(randomRoomEntry.initHero.positions);
         }
         RoomModel.prototype.initialize.call(this);
     },
+    turnEnd:function(){
+        if ( (this.get("turnNumber")+30) % 73 === 0 ) {
+            var exits = _.sample(this.get("exits"), Math.round(Math.random()*this.get("exits").length)+1);
+            _.each(exits,function(position){
+                var tileModel = this.getTile(position)
+                var newTileModel = new TILE_MODEL_MAP["room-portal"]({
+                    position:position
+                });
+                tileModel.trigger("changeModel", newTileModel );
+                this.__tiles[position.x][position.y] = newTileModel;
+            },this)
+        }
+        RoomModel.prototype.turnEnd.call(this)
+    }
 });

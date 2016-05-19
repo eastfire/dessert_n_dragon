@@ -84,6 +84,10 @@ var RoomSprite = BaseSprite.extend({
             x: (movableModel.get("positions")[0].x + 0.5)* dimens.tileSize.width,
             y: (movableModel.get("positions")[0].y + 0.5)* dimens.tileSize.height
         })
+        if ( movableModel instanceof  HeroModel ) {
+            this.heroSprite = movableSprite;
+            movableSprite.zIndex = 5;
+        }
     },
     getDrawPosition:function(x,y){
         if ( x instanceof  Object ) {
@@ -98,10 +102,41 @@ var RoomSprite = BaseSprite.extend({
     initEvent:function(){
         this.model.on("turn-start",this.onTurnStart, this)
         this.model.on("generate-movable",this.generateMovable, this)
+
+        this.model.on("before-switch-room",this.onBeforeSwitchRoom,this);
+        this.model.on("switch-room",this.onSwitchRoom,this);
     },
     onTurnStart:function(){
         this.scheduleOnce(function(){
             this.model.afterTurnStart();
         }, 0.4);
+    },
+    onBeforeSwitchRoom:function(){
+        this.heroSprite.runAction(cc.sequence(cc.spawn(
+            cc.moveBy(times.teleport/2,0,60),
+            cc.scaleTo(times.teleport/2, 1, 1),
+            cc.fadeOut(times.teleport)
+        ),cc.callFunc(function(){
+            this.model.switchRoom();
+        },this)));
+    },
+    onSwitchRoom:function(){
+        this.heroSprite.model.off();
+        this.heroSprite.model = null;
+        this.heroSprite.removeFromParent();
+        this.renderAllTile();
+        this.renderAllMovable();
+        this.heroSprite.attr({
+            x: (this.model.getHero().get("positions")[0].x + 0.5)* dimens.tileSize.width,
+            y: (this.model.getHero().get("positions")[0].y + 0.5)* dimens.tileSize.height + 60,
+            opacity: 0
+        })
+        this.heroSprite.runAction(cc.sequence(cc.spawn(
+            cc.moveBy(times.teleport/2,0,-60),
+            cc.scaleTo(times.teleport/2, 1, 1),
+            cc.fadeIn(times.teleport/2)
+        ),cc.callFunc(function(){
+            this.onTurnStart();
+        },this)))
     }
 })

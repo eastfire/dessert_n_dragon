@@ -47,7 +47,16 @@ var infiniteRoom = {
         {type:"icecream"},
         {type:"creampuff"},
         {type:"souffle"},
-        {type:"archer"}
+        {type:"archer"},
+
+        //unlock
+        {type:"chocolate-cake"},
+        {type:"donut"},
+        {type:"eggroll"},
+        {type:"jelly"},
+        {type:"lolipop"},
+        {type:"popcorn"},
+        {type:"mushmellow"}
     ],
     enemyPool:[{
         type:"pudding", subtype:"red"
@@ -66,7 +75,7 @@ var infiniteRoom = {
         { type:"getCard", opt:{type:"cunning"}},
         { type:"getCard", opt:{type:"dexterity"}},
         { type:"getCard", opt:{type:"dodge"}}
-    ]),
+    ])
 };
 
 //初始 room1

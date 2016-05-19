@@ -35,6 +35,7 @@
         "src/model/room.js",
         "src/model/card.js",
         "src/model/tiles-set.js",
+        "src/model/infinite-room.js",
         "src/model/room-entry.js",
         "src/model/unlockable-entry.js",
         "src/model/commodity-entry.js",

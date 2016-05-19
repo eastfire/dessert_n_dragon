@@ -437,13 +437,14 @@ var RoomModel = Backbone.Model.extend({
             }
         },this)
 
+        var needStop = false;
         this.foreachTile(function(tileModel){
             if ( tileModel.onTurnStart ) {
-                tileModel.onTurnStart.call(tileModel);
+                needStop = tileModel.onTurnStart.call(tileModel);
             }
         },this);
 
-        this.trigger("turn-start",this)
+        if ( !needStop ) this.trigger("turn-start",this)
     },
     afterTurnStart:function(){
         //maintain movable
@@ -486,6 +487,8 @@ var RoomModel = Backbone.Model.extend({
             this.__movableMap[position.x][position.y] = model;
             this.trigger("generate-movable", this, model);
             model.generate();
+        } else {
+            cc.error("type:"+type+" is not define in MOVABLE_MODEL_MAP")
         }
     },
     generateEnemy:function(){
@@ -509,7 +512,9 @@ var RoomModel = Backbone.Model.extend({
                 //no enemy can gen
                 this.nextPhase();
             }
+            cc.log("genEnemyCount:"+genEnemyCount)
         } else { //no gen enemy strategy
+            cc.log("no gen enemy strategy")
             this.nextPhase();
         }
         var newMovable = this.getNewMovable();
@@ -550,9 +555,11 @@ var RoomModel = Backbone.Model.extend({
         return this.__blockInputCount <= 0;
     },
     blockInput:function(){
+        cc.log("blockInput")
         this.__blockInputCount++;
     },
     unblockInput:function(){
+        cc.log("unblockInput")
         if ( this.__blockInputCount ) this.__blockInputCount--;
     },
     shift:function(direction){
