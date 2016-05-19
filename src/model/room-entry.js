@@ -32,6 +32,7 @@ var rooms = [];
 
 //无尽关卡
 var infiniteRoom = { 
+    type:"infinite",
     stageNumber: 0,
     scoreCondition: null,
     winEveryConditions:[
