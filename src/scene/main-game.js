@@ -60,12 +60,6 @@ var MainLayer = cc.Layer.extend({
 
         this.initScoreBar();
 
-        var firstMovable = room.getNewMovable();
-        if ( firstMovable ){
-            this.showMovableInfoDialog(firstMovable);
-            gameStatus.passTutorial(firstMovable.get("type"));
-        }
-
         if ( room.get("phase") === PHASE_TURN_START ) {
             room.turnStart();
         }
@@ -536,6 +530,8 @@ var MainLayer = cc.Layer.extend({
         currentRoom.on("change:statistic",this.onStatisticChange,this);
         currentRoom.on("change:deck",this.renderDeck,this);
         currentRoom.on("game-over",this.onGameOver,this);
+        currentRoom.on("new-movable",this.showMovableInfoDialog,this)
+        
         unlockedStatus.on("unlocked",this.onUnlocked,this);
 
         if ('keyboard' in cc.sys.capabilities) {
