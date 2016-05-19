@@ -553,6 +553,11 @@ var RoomModel = Backbone.Model.extend({
         } else { //no gen enemy strategy
             this.nextPhase();
         }
+        var newMovable = this.getNewMovable();
+        if ( newMovable ){
+            this.trigger("new-movable",newMovable);
+            gameStatus.passTutorial(newMovable.get("type"));
+        }
     },
     generateOneItemType:function(){
         return _.sample( this.get("itemPool"));
