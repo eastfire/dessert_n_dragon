@@ -326,6 +326,9 @@ var MainLayer = cc.Layer.extend({
 
         this.renderDeck();
     },
+    switchRoom:function(){
+        
+    },
     renderDeck:function(){
         if ( currentRoom.getHand().length + currentRoom.getDeck().length + currentRoom.getDiscard().length > 0 ){
             this.deckIcon.setVisible(true);
@@ -531,6 +534,7 @@ var MainLayer = cc.Layer.extend({
         currentRoom.on("change:deck",this.renderDeck,this);
         currentRoom.on("game-over",this.onGameOver,this);
         currentRoom.on("new-movable",this.showMovableInfoDialog,this)
+        currentRoom.on("switch-room",this.switchRoom,this)
         
         unlockedStatus.on("unlocked",this.onUnlocked,this);
 
@@ -648,6 +652,8 @@ var MainLayer = cc.Layer.extend({
         currentRoom.off("change:deck",this.renderDeck,this);
         currentRoom.off("game-over",this.onGameOver,this)
         unlockedStatus.off("unlocked",this.onUnlocked,this);
+        currentRoom.off("new-movable",this.showMovableInfoDialog,this)
+        currentRoom.off("switch-room",this.switchRoom,this)
 
         if ('keyboard' in cc.sys.capabilities) {
             cc.eventManager.removeListeners(cc.EventListener.KEYBOARD);
