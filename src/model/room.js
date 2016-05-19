@@ -102,6 +102,7 @@ var GEN_ENEMY_STRATEGY_MAP = {
 var RoomModel = Backbone.Model.extend({
     defaults:function(){
         return {
+            type:"normal",
             difficulty: "normal", //normal , difficult, easy, na
             winAnyConditions:[], // any pass to win
             winEveryConditions:[], // every pass to win
