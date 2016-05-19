@@ -16,7 +16,8 @@ var MainLayer = cc.Layer.extend({
     ctor:function (options) {
         this._super();
 
-        var room = new RoomModel(options.roomEntry);
+        var roomType = options.roomEntry.type || "normal";
+        var room = new ROOM_MODEL_MAP[roomType](RoomModel(options.roomEntry));
         this.maxScore = options.maxScore;
 
         window.currentRoom = room;
