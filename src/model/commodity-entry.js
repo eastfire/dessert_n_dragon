@@ -1,15 +1,21 @@
 COMMODITY_ENTRY_LIST = [
     {
-        cost: 100,
-        type:"hand3"
+        maxLevel: 3,
+        cost: function(level){
+            return Math.pow(100,level);
+        },
+        type:function(level){
+            return "card"+(level+2);
+        }
     },
     {
-        cost: 1000,
-        type:"hand4"
-    },
-    {
-        cost: 10000,
-        type:"hand5"
+        maxLevel: 10,
+        cost: function(level){
+            return Math.pow(2,level)*100;
+        },
+        type:function(level){
+            return "initHp"+level;
+        }
     },
     {
         cost: 100,
@@ -34,16 +40,6 @@ COMMODITY_ENTRY_LIST = [
         valid:{
             unlockType:"shop",
             unlockSubtype: "cross-fire"
-        }
-    },
-    {
-        cost: 500,
-        type: "card",
-        subtype: "recovery",
-        unlockHint: "通过35关后解锁",
-        valid: {
-            unlockType: "shop",
-            unlockSubtype: "recovery"
         }
     },
     {
