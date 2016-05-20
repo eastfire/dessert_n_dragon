@@ -250,8 +250,7 @@ var texts_locale = {
             },
 
             hand3: "手牌上限加１",
-            hand4: "手牌上限加１",
-            hand5: "手牌上限加１",
+            initHp: "初始生命+10",
             //card
             card:{
                 "vertical-fire":"在任意关卡中使用纵向火焰",
@@ -537,6 +536,8 @@ var texts_locale = {
 
     }
 }
+
+texts_locale.zh.unlock.hand4=texts_locale.zh.unlock.hand5=texts_locale.zh.unlock.hand3;
 
 texts_locale.zh.movable["vertical-log7"]=texts_locale.zh.movable["vertical-log6"]=texts_locale.zh.movable["vertical-log5"]=texts_locale.zh.movable["vertical-log4"]=texts_locale.zh.movable["vertical-log3"]=texts_locale.zh.movable["vertical-log2"]
 texts_locale.zh.movable["horizontal-log7"]=texts_locale.zh.movable["horizontal-log6"]=texts_locale.zh.movable["horizontal-log5"]=texts_locale.zh.movable["horizontal-log4"]=texts_locale.zh.movable["horizontal-log3"]=texts_locale.zh.movable["horizontal-log2"]=texts_locale.zh.movable["horizontal-log2"]
