@@ -340,9 +340,33 @@ var MainLayer = cc.Layer.extend({
         var prevForbid = currentRoom.getHero().previous("forbidDraw");
         var currentForbid = currentRoom.getHero().get("forbidDraw");
         if ( prevForbid && !currentForbid ) {
-//TODO
+            if ( this.forbidDrawIcon ) {
+                this.forbidDrawIcon.runAction(cc.sequence(
+                    cc.spawn(
+                        cc.scaleTo(0.3,0.3,0.3),
+                        cc.fadeOut(0.3)
+                    ),
+                    cc.removeSelf(),
+                    cc.callFunc(function(){
+                        this.forbidDrawIcon = null;
+                    },this)
+                    ))
+            }
         } else if ( !prevForbid && currentForbid ) {
-
+            if ( !this.forbidDrawIcon ) {
+                this.forbidDrawIcon = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("forbid.png"));
+                this.deckIcon.addChild(this.forbidDrawIcon);
+                this.forbidDrawIcon.attr({
+                    scaleX: 2,
+                    scaleY: 2,
+                    opacity: 0
+                })
+                this.forbidDrawIcon.runAction(
+                    cc.spawn(
+                        cc.scaleTo(0.3,1,1) ),
+                        cc.fadeIn(0.3)
+                    )
+            }
         }
     },
     renderConditionLabel:function(condition){
