@@ -3,6 +3,7 @@ var CUNNING_EFFECT = 0.01;
 var DEXTERITY_EFFECT = 0.01;
 var DODGE_EFFECT = 0.01;
 var RECOVERY_EFFECT = 0.01;
+var CONSTITUTION_EFFECT = 10;
 
 var HeroModel = MovableModel.extend({
     defaults:function(){
@@ -39,6 +40,11 @@ var HeroModel = MovableModel.extend({
     initialize:function(){
         MovableModel.prototype.initialize.call(this);
         this.set("maxHp",this.get("maxHp") || this.maxHpOfLevel());
+        for ( var i = 1; i <= 10; i++ ) {
+            if ( unlockedStatus.isUnlocked("initHp"+i) ) {
+                this.set("maxHp",this.get("maxHp")+CONSTITUTION_EFFECT);
+            }
+        }
         this.set("hp",this.get("hp") || this.get("maxHp"));
         this.set("requireExp",this.get("requireExp") || this.requireExpOfLevel());
     },
@@ -286,7 +292,7 @@ var HeroModel = MovableModel.extend({
         this.set("dizzy",amount);
     },
     getForbidDraw:function(amount){
-        this.set("forbidDraw",amount);
+        this.set("forbidDraw",Math.max(amount,this.get("forbidDraw")));
     },
     getDisturb:function(amount){
         _.each(currentRoom.getHand(),function(cardModel){

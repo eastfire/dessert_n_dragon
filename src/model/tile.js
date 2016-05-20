@@ -95,7 +95,9 @@ TILE_MODEL_MAP["room-portal"] = RoomTileModel.extend({
     defaults:function(){
         return _.extend(RoomTileModel.prototype.defaults.apply(this),{
             type: "room-portal",
-            subtype: "normal"
+            subtype: "normal",
+            isCapture: true,
+            canGenEnemy: false
         });
     },
     onTurnStart:function(){

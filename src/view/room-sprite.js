@@ -121,7 +121,7 @@ var RoomSprite = BaseSprite.extend({
         },this)));
     },
     onSwitchRoom:function(){
-        this.heroSprite.model.off();
+        this.heroSprite.model.off(null,null,this.heroSprite);
         this.heroSprite.model = null;
         this.heroSprite.removeFromParent();
         this.renderAllTile();

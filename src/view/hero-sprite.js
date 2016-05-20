@@ -127,9 +127,8 @@ var HeroSprite = MovableSprite.extend({
         ))
     },
     miss:function(heroModel, enemyModel){
-        //TODO icon-miss
         effectIconMananger.enqueue(this, {
-            icon: "icon-miss",
+            icon: "miss",
             offset: {x:-20, y:-20},
             scaleX: 0.7,
             scaleY: 0.7

@@ -2,10 +2,13 @@ COMMODITY_ENTRY_LIST = [
     {
         maxLevel: 3,
         cost: function(level){
-            return Math.pow(100,level);
+            return Math.pow(10,level)*10;
         },
         type:function(level){
-            return "card"+(level+2);
+            return "hand"+(level+2);
+        },
+        desc:function(level){
+            return texts.unlock.handLimit;
         }
     },
     {

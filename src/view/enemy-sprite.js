@@ -39,9 +39,8 @@ var EnemySprite = MovableSprite.extend({
         this.model.afterHit(hero);
     },
     miss:function(enemyModel, hero){
-        //TODO icon-miss
         effectIconMananger.enqueue(this, {
-            icon: "icon-miss",
+            icon: "miss",
             offset: {x:-20, y:-20},
             scaleX: 0.7,
             scaleY: 0.7

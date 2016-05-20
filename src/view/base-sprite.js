@@ -9,7 +9,7 @@ var BaseSprite = cc.Sprite.extend({
         this.model.on("destroy", this.onDestroy, this)
     },
     onDestroy:function(){
-        this.model.off();
+        this.model.off(null,null,this);
         this.removeAllChildren(true);
         this.removeFromParent(true);
         this.model = null;

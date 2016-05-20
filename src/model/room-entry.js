@@ -50,6 +50,7 @@ var infiniteRoom = {
         {type:"archer"},
 
         //unlock
+        {type:"baozi"},
         {type:"chocolate-cake"},
         {type:"donut"},
         {type:"eggroll"},
@@ -2050,7 +2051,7 @@ rooms.push({
         {type:"belt",subtype:"es",position:{x:5,y:5}},
         {type:"belt",subtype:"sw",position:{x:5,y:4}}
     ]),
-    exits:[{x:3,y:3}],
+    exits:[{x:3,y:3},{x:1,y:3},{x:5,y:3},{x:3,y:1},{x:3,y:5}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
@@ -2622,7 +2623,42 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room75 TODO
+//room75 baozi
+rooms.push({
+    turnLimit:30,
+    scoreCondition: [2100, 2400, 2800],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"baozi",
+            number: 10
+        },
+        {
+            conditionType:"kill-level",
+            type:"eggroll",
+            number: 10
+        },
+        {
+            conditionType:"kill-level",
+            type:"chocolate-cake",
+            number: 10
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"baozi"},{type:"eggroll"},{type:"chocolate-cake"}],
+    enemyLevelPool:[1,2],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles: tiles5x5,
+    initHand:[{type:"tail-slash"},{type:"tail-slash"} ],
+    exits:[{x:1,y:1},{x:6,y:5},{x:6,y:1},{x:1,y:5}],
+    initHero: STANDARD_HERO,
+    choicePool:STANDARD_CHOICE_POOL
+});
+
+
+//room76 TODO
 rooms.push({
     turnLimit:30,
     scoreCondition: [2100, 2400, 2800],

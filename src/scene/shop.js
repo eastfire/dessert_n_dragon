@@ -23,6 +23,8 @@ var ShopLayer = cc.Layer.extend({
         this.addChild(this.scrollView);
 
         var commodityItems = _.map(commodities, function(entry){
+            var cost = this.getCost(entry);
+
             var item = new cc.MenuItemImage(
                 cc.spriteFrameCache.getSpriteFrame("button-short-default.png"),
                 cc.spriteFrameCache.getSpriteFrame("button-short-press.png"),
@@ -30,10 +32,21 @@ var ShopLayer = cc.Layer.extend({
                     if ( item.opacity <= 128 ) {
                         toast(entry.unlockHint, {parent: this})
                     } else {
-                        if (entry.cost <= gameStatus.get("money")) {
-                            unlockedStatus.unlock(entry.type, entry.subtype)
-                            gameStatus.useMoney(entry.cost);
-                            item.setVisible(false);
+                        var cost = this.getCost(entry)
+                        if (cost <= gameStatus.get("money")) {
+                            if ( entry.maxLevel > 1 ) {
+                                unlockedStatus.unlock(entry.type(this.getCurrentLevel(entry)))
+                                if ( this.getCurrentLevel(entry) > 0 ) {
+                                    itemName.setString(this.getDesc(entry));
+                                    costLabel.setString("-"+this.getCost(entry)+"$")
+                                } else {
+                                    item.setVisible(false);
+                                }
+                            } else {
+                                unlockedStatus.unlock(entry.type, entry.subtype)
+                                item.setVisible(false);
+                            }
+                            gameStatus.useMoney(cost);
                         } else {
                             toast("$不足", {parent: this})
                         }
@@ -46,20 +59,15 @@ var ShopLayer = cc.Layer.extend({
                 anchorY: 0.5
             });
 
-            var text;
-            if ( entry.type === "card") {
-                text = texts.unlock.card[entry.subtype]
-            } else {
-                text = texts.unlock[entry.type]
-            }
+            var text = this.getDesc(entry);
 
-
-            var isValid;
+            /*var isValid;
             if ( entry.valid ) {
                 isValid = unlockedStatus.isUnlocked(entry.valid.unlockType, entry.valid.unlockSubtype);
             } else {
                 isValid = true;
-            }
+            }*/
+            var isValid = true;
 //            item.setEnabled( isValid )
             if ( !isValid ) {
                 text+="(未解锁)"
@@ -76,7 +84,7 @@ var ShopLayer = cc.Layer.extend({
             });
             this.scrollView.addChild(itemName);
 
-            var costLabel = new cc.LabelTTF("-"+entry.cost+"$", null, 22 );
+            var costLabel = new cc.LabelTTF("-"+cost+"$", null, 22 );
             costLabel.attr({
                 color: cc.color.BLACK,
                 x: 50,
@@ -98,15 +106,53 @@ var ShopLayer = cc.Layer.extend({
         })
         this.scrollView.addChild(menu);
     },
-    getCommodities:function(){
-        return _.filter(COMMODITY_ENTRY_LIST,function(entry){
+    getCurrentLevel:function(entry){
+        var currentLevel = 1;
+        for ( ;currentLevel <= entry.maxLevel; currentLevel++ ) {
+            if ( !unlockedStatus.isUnlocked(entry.type(currentLevel))) {
+                break;
+            }
+        }
+        if ( currentLevel > entry.maxLevel) return -1;
+        return currentLevel;
+    },
+    getCost:function(entry){
+        if ( entry.maxLevel > 1 ) {
+            var currentLevel = this.getCurrentLevel(entry);
+            return entry.cost(currentLevel);
+        } else {
+            return entry.cost;
+        }
+    },
+    getDesc:function(entry){
+        if ( entry.desc ) {
+            if ( typeof entry.desc === "string" ) return entry.desc;
+            var currentLevel = this.getCurrentLevel(entry);
+            return entry.desc(currentLevel);
+        } else {
+            if ( entry.type === "card") {
+                return texts.unlock.card[entry.subtype]
+            } else {
+                return texts.unlock[entry.type]
+            }
+        }
+    },
+    checkValid:function(entry){
+        if ( entry.maxLevel > 1 ) {
+            return this.getCurrentLevel(entry) > 0;
+        } else {
             if ( entry.type === "card" ) {
                 return !unlockedStatus.isUnlocked(entry.type, entry.subtype)
             } else {
                 return !unlockedStatus.isUnlocked(entry.type)
             }
             return true;
-        })
+        }
+    },
+    getCommodities:function(){
+        return _.filter(COMMODITY_ENTRY_LIST,function(entry){
+            return this.checkValid(entry)
+        },this)
     },
     initMoney:function(){
         var topbar = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( "topbar.png" ))

@@ -352,19 +352,21 @@ var MainLayer = cc.Layer.extend({
                     },this)
                     ))
             }
-        } else if ( !prevForbid && currentForbid ) {
+        } else if ( currentForbid ) {
             if ( !this.forbidDrawIcon ) {
                 this.forbidDrawIcon = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("forbid.png"));
                 this.deckIcon.addChild(this.forbidDrawIcon);
                 this.forbidDrawIcon.attr({
+                    x:20,
+                    y:30,
                     scaleX: 2,
                     scaleY: 2,
                     opacity: 0
                 })
                 this.forbidDrawIcon.runAction(
                     cc.spawn(
-                        cc.scaleTo(0.3,1,1) ),
-                        cc.fadeIn(0.3)
+                        cc.scaleTo(0.3,0.8,0.8),
+                        cc.fadeIn(0.3))
                     )
             }
         }

@@ -222,7 +222,7 @@ MOVABLE_MODEL_MAP.baozi = EnemyModel.extend({
         return l*EXP_INFLATION_RATE*3+1;
     },
     afterHit:function(heroModel){
-        heroModel.getForbidDraw(Math.min(8,this.get("level")/3)+1);
+        heroModel.getForbidDraw(Math.min(8,Math.round(this.get("level")/3))+2);
     },
     attackOfLevel:function(l){
         return Math.round(l*3/2);

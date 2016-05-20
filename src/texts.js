@@ -249,7 +249,7 @@ var texts_locale = {
                 collector:"收集技能可以在商店中解锁了"
             },
 
-            hand3: "手牌上限加１",
+            handLimit: "手牌上限加１",
             initHp: "初始生命+10",
             //card
             card:{
@@ -536,8 +536,6 @@ var texts_locale = {
 
     }
 }
-
-texts_locale.zh.unlock.hand4=texts_locale.zh.unlock.hand5=texts_locale.zh.unlock.hand3;
 
 texts_locale.zh.movable["vertical-log7"]=texts_locale.zh.movable["vertical-log6"]=texts_locale.zh.movable["vertical-log5"]=texts_locale.zh.movable["vertical-log4"]=texts_locale.zh.movable["vertical-log3"]=texts_locale.zh.movable["vertical-log2"]
 texts_locale.zh.movable["horizontal-log7"]=texts_locale.zh.movable["horizontal-log6"]=texts_locale.zh.movable["horizontal-log5"]=texts_locale.zh.movable["horizontal-log4"]=texts_locale.zh.movable["horizontal-log3"]=texts_locale.zh.movable["horizontal-log2"]=texts_locale.zh.movable["horizontal-log2"]
