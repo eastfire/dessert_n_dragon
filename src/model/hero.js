@@ -23,7 +23,7 @@ var HeroModel = MovableModel.extend({
             maxDodge: 75,
             luck: 5,
             maxLuck: 60,
-            recovery: 40,
+            recovery: 100,
             maxRecovery: 100,
             collector: 0,
             maxCollector: 10,
