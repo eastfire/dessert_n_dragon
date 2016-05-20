@@ -15,6 +15,9 @@ COMMODITY_ENTRY_LIST = [
         },
         type:function(level){
             return "initHp"+level;
+        },
+        desc:function(level){
+            return texts.unlock.initHp;
         }
     },
     {
