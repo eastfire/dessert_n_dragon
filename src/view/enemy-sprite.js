@@ -39,7 +39,14 @@ var EnemySprite = MovableSprite.extend({
         this.model.afterHit(hero);
     },
     miss:function(enemyModel, hero){
-        //TODO animation
+        //TODO icon-miss
+        effectIconMananger.enqueue(this, {
+            icon: "icon-miss",
+            offset: {x:-20, y:-20},
+            scaleX: 0.7,
+            scaleY: 0.7
+        });
+        
         this.model.afterMiss(hero);
     },
     beHit:function(enemyModel, hero){
