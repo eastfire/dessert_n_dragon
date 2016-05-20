@@ -46,7 +46,8 @@ var HeroModel = MovableModel.extend({
         MovableModel.prototype.onTurnStart.call(this);
         this.set({
             buff:{},
-            dizzy: Math.max(0, this.get("dizzy") - 1 )
+            dizzy: Math.max(0, this.get("dizzy") - 1 ),
+            forbidDraw: Math.max(0, this.get("forbidDraw") - 1 )
         });
     },
     getPosition:function(){
@@ -277,8 +278,15 @@ var HeroModel = MovableModel.extend({
             movable.taken();
         }
     },
+    getDrawCount:function(){
+        if (this.get("forbidDraw") ) return 0;
+        else return this.get("drawEachTurn")
+    },
     getDizzy:function(amount){
         this.set("dizzy",amount);
+    },
+    getForbidDraw:function(amount){
+        this.set("forbidDraw",amount);
     },
     getDisturb:function(amount){
         _.each(currentRoom.getHand(),function(cardModel){

@@ -337,6 +337,13 @@ var MainLayer = cc.Layer.extend({
         } else {
             this.deckIcon.setVisible(false);
         }
+        var prevForbid = currentRoom.getHero().previous("forbidDraw");
+        var currentForbid = currentRoom.getHero().get("forbidDraw");
+        if ( prevForbid && !currentForbid ) {
+//TODO
+        } else if ( !prevForbid && currentForbid ) {
+
+        }
     },
     renderConditionLabel:function(condition){
         var label = this.conditionLabels[condition.conditionType+"_"+condition.type+( condition.subtype ? ("_"+condition.subtype):"")];
@@ -531,6 +538,7 @@ var MainLayer = cc.Layer.extend({
         currentRoom.getHero().on("change:exp",this.onExpChange, this);
         currentRoom.getHero().on("change:requireExp",this.onRequireExpChange, this);
         currentRoom.getHero().on("levelUp",this.onLevelUp, this);
+        currentRoom.getHero().on("change:forbidDraw",this.renderDeck, this);
         currentRoom.on("change:turnNumber",this.onTurnNumberChange,this);
         currentRoom.on("change:turnLimit",this.onTurnNumberChange,this);
         currentRoom.on("change:timeNumber",this.onTimeNumberChange,this);
@@ -651,6 +659,7 @@ var MainLayer = cc.Layer.extend({
         currentRoom.getHero().off("change:exp",this.onExpChange, this);
         currentRoom.getHero().off("change:requireExp",this.onRequireExpChange, this);
         currentRoom.getHero().off("levelUp",this.onLevelUp, this);
+        currentRoom.getHero().off("change:forbidDraw",this.renderDeck, this);
         currentRoom.off("change:turnNumber",this.onTurnNumberChange,this);
         currentRoom.off("change:turnLimit",this.onTurnNumberChange,this);
         currentRoom.off("change:statistic",this.onStatisticChange,this);

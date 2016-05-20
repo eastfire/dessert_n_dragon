@@ -34,6 +34,10 @@ var texts_locale = {
                 name:"豌豆糕射手",
                 desc:"远程攻击。\n攻击力低。\n饱腹度一般。\n\n是的，他的前世绝对是射手，天敌是僵尸。"
             },
+            baozi: {
+                name:"豆沙包封印师",
+                desc:"攻击造成封魔效果（使你无法摸牌）。\n攻击力较低。\n饱腹度较高。"
+            },
             cherrycake: {
                 name: "纸杯蛋糕下士",
                 desc: "攻击力一般。\n饱腹度一般。"
@@ -267,6 +271,7 @@ var texts_locale = {
             
             //enemy
             enemy:{
+                baozi:"豆沙包封印师将在无尽关卡中出现",
                 "chocolate-cake":"黑森林武士将在无尽关卡中出现",
                 donut:"甜甜圈骑士将在无尽关卡中出现",
                 eggroll:"蛋卷吹箭手将在无尽关卡中出现",
@@ -508,6 +513,22 @@ var texts_locale = {
                 },
                 desc: function (level) {
                     return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-eggroll"].requirement(level) + "或以上的蛋卷吹箭手"
+                }
+            },
+            "kill-level-baozi": {
+                name:function(level){
+                    return "豆沙包杀手"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-baozi"].requirement(level) + "的豆沙包封印师"
+                }
+            },
+            "kill-max-level-baozi": {
+                name:function(level){
+                    return "精英豆沙包杀手"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-baozi"].requirement(level) + "或以上的豆沙包封印师"
                 }
             }
         }

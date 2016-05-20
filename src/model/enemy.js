@@ -211,6 +211,24 @@ MOVABLE_MODEL_MAP.archer = EnemyModel.extend({
     }
 })
 
+MOVABLE_MODEL_MAP.baozi = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "baozi",
+            attackType: ATTACK_TYPE_MELEE
+        } )
+    },
+    expOfLevel:function(l){
+        return l*EXP_INFLATION_RATE*3+1;
+    },
+    afterHit:function(heroModel){
+        heroModel.getForbidDraw(Math.min(8,this.get("level")/3)+1);
+    },
+    attackOfLevel:function(l){
+        return Math.round(l*3/2);
+    }
+})
+
 MOVABLE_MODEL_MAP.cherrycake = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
