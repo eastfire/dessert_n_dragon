@@ -1289,7 +1289,7 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL
 });
 
-//room35 recovery skill card
+//room35 
 rooms.push({
     turnLimit:30,
     scoreCondition: [2000, 2500, 3000],
@@ -1312,11 +1312,7 @@ rooms.push({
     genEnemyStrategy: [{type:"random", number: 3, last: 0}],
     initTiles:tiles7x7Cross7x3,
     exits:[{x:3,y:1},{x:5,y:7},{x:1,y:3},{x:7,y:5}],
-    initHero: _.extend(clone(STANDARD_HERO),{hp:30, positions: [{x:4,y:4}]}),
-    choicePool:_.union(STANDARD_CHOICE_POOL,[
-        { type:"getCard", opt:{type:"recovery"}}
-        ]),
-    unlocks: [{type:"shop", subtype:"recovery"}]
+    initHero: _.extend(clone(STANDARD_HERO),{hp:30, positions: [{x:4,y:4}]})
 });
 
 //room36 icecream donut
