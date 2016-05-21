@@ -36,7 +36,9 @@ var EnemySprite = MovableSprite.extend({
     },
     hit:function(enemyModel, hero){
         //TODO animation
-        this.model.afterHit(hero);
+        this.scheduleOnce(function(){
+            this.model.afterHit(hero);
+        },times.enemyAttack/2);
     },
     miss:function(enemyModel, hero){
         effectIconMananger.enqueue(this, {

@@ -389,6 +389,7 @@ var RoomModel = Backbone.Model.extend({
             case PHASE_WAIT_USE_INPUT: //wait use input, phase will not forward if someone call next phase in this phase;
                 break;
             case PHASE_MOVE:
+                this.afterAllMove();
                 this.heroNormalAttack();
                 break;
             case PHASE_HERO_ATTACK:
@@ -669,6 +670,11 @@ var RoomModel = Backbone.Model.extend({
         },this)
 
         return maxStep;
+    },
+    afterAllMove:function(){
+        this.foreachMovable(function(movable){
+            movable.afterAllMove();
+        },this)
     },
     heroNormalAttack:function(){
         cc.log("heroNormalAttack")

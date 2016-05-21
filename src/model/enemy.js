@@ -298,6 +298,37 @@ MOVABLE_MODEL_MAP.donut = EnemyModel.extend({
     }
 })
 
+MOVABLE_MODEL_MAP.dumpling = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "dumpling"
+        } )
+    },
+    afterAllMove:function(movable){
+        EnemyModel.prototype.afterAllMove.call(this,movable);
+        //recalcute attack
+        var myPosition = this.get("positions")[0];
+        var sameClassCount = 1;
+
+        _.each(DIRECTIONS,function(direction){
+            var position = getIncrementPosition(myPosition,direction);
+            var movable = currentRoom.getMovableByPosition(position);
+            if ( movable instanceof MOVABLE_MODEL_MAP.dumpling) {
+                sameClassCount++;
+            }
+        },this);
+
+        cc.log(sameClassCount)
+        this.set("baseAttack", this.attackOfLevel(this.get("level"))*sameClassCount);
+    },
+    expOfLevel:function(l){
+        return (l+1)*EXP_INFLATION_RATE*2;
+    },
+    attackOfLevel:function(l){
+        return l;
+    }
+})
+
 MOVABLE_MODEL_MAP.eggroll = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
@@ -516,17 +547,30 @@ MOVABLE_MODEL_MAP.souffle = EnemyModel.extend({
     }
 })
 
-//TODO sweet-dumpling 汤圆 回合开始时如果为双数等级且能分开则分开
+MOVABLE_MODEL_MAP["strawberry-pie"] = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "strawberry-pie"
+        } )
+    },
+    expOfLevel:function(l){
+        return (l*l+1)*EXP_INFLATION_RATE
+    },
+    attackOfLevel:function(l){
+        return l*l;
+    },
+    afterHit:function(heroModel){
+        this.levelUp(1);
+    }
+})
 
-//TODO 封魔
+//TODO sweet-dumpling 汤圆 回合开始时如果为双数等级且能分开则分开
 
 //TODO 偷道具升级
 
 //TODO 防魔
 
 //TODO 变瞎
-
-//TODO 吸血升级
 
 //TODO 将攻击导向周围敌人
 

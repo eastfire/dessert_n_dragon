@@ -34,7 +34,9 @@ var HeroModel = MovableModel.extend({
             isShowLevel:false,
             
             buff: {},
-            debuff: {}
+            debuff: {},
+
+            forbidDraw: 0
         } )
     },
     initialize:function(){
@@ -130,7 +132,6 @@ var HeroModel = MovableModel.extend({
     },
     checkLevelUp:function(){
         if ( currentRoom.get("rules").heroCanLevelUp && this.get("exp") >= this.get("requireExp") ) {
-            cc.log("checkLevelUp Y")
             this.set({
                 exp: 0,
                 requireExp: this.requireExpOfLevel(this.get("level") + 1)

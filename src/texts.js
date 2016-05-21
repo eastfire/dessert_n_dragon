@@ -36,7 +36,7 @@ var texts_locale = {
             },
             baozi: {
                 name:"豆沙包封印师",
-                desc:"攻击造成封魔效果（使你无法摸牌）。\n攻击力较低。\n饱腹度较高。"
+                desc:"击中造成封魔效果（使你无法摸牌）（等级越高持续时间越长）。\n攻击力较低。\n饱腹度较高。"
             },
             cherrycake: {
                 name: "纸杯蛋糕下士",
@@ -53,6 +53,10 @@ var texts_locale = {
             donut:{
                 name:"甜甜圈骑士",
                 desc:"攻击力超高。\n饱腹度超高。\n\n别被他圆圆的外表欺骗"
+            },
+            dumpling: {
+                name:"汤圆军团",
+                desc:"周围有几个其他汤圆军团，攻击力就加几倍。\n攻击力一般。\n饱腹度一般。"
             },
             eggroll:{
                 name:"蛋卷吹箭手",
@@ -89,6 +93,10 @@ var texts_locale = {
             souffle: {
                 name:"蛋奶酥祭司",
                 desc:"合并时自己和周围敌人升级。\n攻击力一般。\n饱腹度一般。"
+            },
+            "strawberry-pie":{
+                name:"草莓派将军",
+                desc:"击中时自己升级1级。\攻击力超高。\n饱腹度超高。"
             }
         },
         card:{
@@ -270,14 +278,16 @@ var texts_locale = {
             
             //enemy
             enemy:{
-                baozi:"豆沙包封印师将在无尽关卡中出现",
                 "chocolate-cake":"黑森林武士将在无尽关卡中出现",
                 donut:"甜甜圈骑士将在无尽关卡中出现",
                 eggroll:"蛋卷吹箭手将在无尽关卡中出现",
                 jelly:"果冻侦察兵将在无尽关卡中出现",
                 lolipop:"棒棒糖兄弟将在无尽关卡中出现",
                 popcorn:"爆米花掷弹兵将在无尽关卡中出现",
-                mushmellow:"棉花糖召唤师将在无尽关卡中出现"
+                mushmellow:"棉花糖召唤师将在无尽关卡中出现",
+                baozi:"豆沙包封印师将在无尽关卡中出现",
+                "strawberry-pie":"草莓派将军将无尽关卡中出现",
+                dumpling:"汤圆军团将无尽关卡中出现"
             }
         },
 
@@ -528,6 +538,38 @@ var texts_locale = {
                 },
                 desc: function (level) {
                     return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-baozi"].requirement(level) + "或以上的豆沙包封印师"
+                }
+            },
+            "kill-level-strawberry-pie": {
+                name:function(level){
+                    return "草莓派杀手"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-strawberry-pie"].requirement(level) + "的草莓派将军"
+                }
+            },
+            "kill-max-level-strawberry-pie": {
+                name:function(level){
+                    return "精英草莓派杀手"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-strawberry-pie"].requirement(level) + "或以上的草莓派将军"
+                }
+            },
+            "kill-level-dumpling": {
+                name:function(level){
+                    return "汤圆杀手"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-dumpling"].requirement(level) + "的汤圆军团"
+                }
+            },
+            "kill-max-level-dumpling": {
+                name:function(level){
+                    return "精英汤圆杀手"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-dumpling"].requirement(level) + "或以上的汤圆军团"
                 }
             }
         }

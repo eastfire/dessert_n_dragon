@@ -173,6 +173,8 @@ var MovableModel = Backbone.Model.extend({
 
         this.levelUp(movable.get("level"));
     },
+    afterAllMove:function(){
+    },
     beforeLevelUp:function(level){
     },
     levelUp:function(level){

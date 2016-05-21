@@ -50,14 +50,16 @@ var infiniteRoom = {
         {type:"archer"},
 
         //unlock
-        {type:"baozi"},
         {type:"chocolate-cake"},
         {type:"donut"},
         {type:"eggroll"},
         {type:"jelly"},
         {type:"lolipop"},
         {type:"popcorn"},
-        {type:"mushmellow"}
+        {type:"mushmellow"},
+        {type:"baozi"},
+        {type:"strawberry-pie"},
+        {type:"dumpling"}
     ],
     enemyPool:[{
         type:"pudding", subtype:"red"
@@ -2665,12 +2667,12 @@ rooms.push({
     winEveryConditions:[
         {
             conditionType:"kill-max-level",
-            type:"icecream",
+            type:"strawberry-pie",
             number: 7
         },
         {
             conditionType:"kill-max-level",
-            type:"eggroll",
+            type:"dumpling",
             number: 7
         },
         {
@@ -2682,7 +2684,7 @@ rooms.push({
     loseAnyConditions:[
         "outOfTurn"
     ],
-    enemyPool:[{type:"icecream"},{type:"eggroll"},{type:"chocolate-cake"}],
+    enemyPool:[{type:"strawberry-pie"},{type:"dumpling"},{type:"chocolate-cake"}],
     enemyLevelPool:[1,2],
     itemPool:STANDARD_ITEM_POOL,
     initTiles: tiles6x5Wang,
