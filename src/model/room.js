@@ -760,9 +760,7 @@ var RoomModel = Backbone.Model.extend({
         var reason;
         _.any(this.__winEveryConditions,function(conditionCallback){
             var conditionEntry = conditions[i];
-            cc.log(conditionEntry)
             if ( !conditionCallback.call(this, this) ) {
-                cc.log()
                 if ( typeof conditionEntry === "string" && conditionEntry === "enoughScore") { //predefined condition
                     reason = "分数沒有达到目标"
                     return true;

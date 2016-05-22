@@ -8,7 +8,7 @@ COMMODITY_ENTRY_LIST = [
             return "hand"+(level+2);
         },
         desc:function(level){
-            return texts.unlock.handLimit;
+            return texts.unlock.handLimit+"  LV"+level;
         }
     },
     {
@@ -20,7 +20,7 @@ COMMODITY_ENTRY_LIST = [
             return "initHp"+level;
         },
         desc:function(level){
-            return texts.unlock.initHp;
+            return texts.unlock.initHp+"  LV"+level;
         }
     },
     {

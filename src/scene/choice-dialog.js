@@ -75,6 +75,8 @@ var ChoiceDialog = cc.Scale9Sprite.extend({
                         this.model.set("refreshCount", this.model.get("refreshCount") + 1);
                         this.menu.removeFromParent(true);
                         this.initMenu();
+                    } else {
+                        toast("$不足",{parent:this});
                     }
                 }, this);
 

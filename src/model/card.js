@@ -567,20 +567,23 @@ CARD_MODEL_MAP.constitution = CardModel.extend({
     },
     onLevelUp:function(){
         var hero = currentRoom.getHero();
-        var diff = CARD_MODEL_MAP.constitution.getEffectDiff(this.get("level"));
-        hero.set("maxHp",hero.get("maxHp") + diff )
+        var currentMaxHp = hero.get("maxHp");
+        hero.set("constitution",hero.get("constitution")+1);
+        hero.calculateMaxHp();
+        var diff = hero.get("maxHp") - currentMaxHp;
         hero.set("hp", hero.get("hp") + diff );
     },
     onGain:function(){
         var hero = currentRoom.getHero();
-        var effect = CARD_MODEL_MAP.constitution.getEffect(this.get("level"));
-        hero.set("maxHp",hero.get("maxHp") + effect )
-        hero.set("hp", hero.get("hp") + effect );
+        var currentMaxHp = hero.get("maxHp");
+        hero.set("constitution",hero.get("constitution")+(this.get("level")+1));
+        hero.calculateMaxHp();
+        var diff = hero.get("maxHp") - currentMaxHp;
+        hero.set("hp", hero.get("hp") + diff );
     },
     onExile:function(){
         var hero = currentRoom.getHero();
-        var effect = CARD_MODEL_MAP.constitution.getEffect(this.get("level"));
-        hero.set("maxHp",hero.get("maxHp") - effect )
+        hero.set("constitution",hero.get("constitution")-(this.get("level")+1));
         hero.set("hp",Math.min(hero.get("hp"), hero.get("maxHp") ) )
     },
     onUse:function(){
@@ -590,11 +593,11 @@ CARD_MODEL_MAP.constitution = CardModel.extend({
 CARD_MODEL_MAP.constitution.maxCount = 2;
 CARD_MODEL_MAP.constitution.getEffect = function(level){
     level = level || 1;
-    return level*5+5;
+    return (level+1)*CONSTITUTION_EFFECT;
 }
 CARD_MODEL_MAP.constitution.getEffectDiff = function(currentLevel, targetLevel){
     targetLevel = targetLevel || currentLevel+1;
-    return 5;
+    return CONSTITUTION_EFFECT;
 }
 CARD_MODEL_MAP.constitution.getUseEffect = 2;
 
@@ -613,6 +616,7 @@ CARD_MODEL_MAP.cunning = CardModel.extend({
     onLevelUp:function(){
         var hero = currentRoom.getHero();
         hero.set("cunning",hero.get("cunning") + CARD_MODEL_MAP.cunning.getEffectDiff(this.get("level")) )
+        //recalculate require exp
         hero.set({
             requireExp: hero.requireExpOfLevel(hero.get("level"))
         });
@@ -620,10 +624,18 @@ CARD_MODEL_MAP.cunning = CardModel.extend({
     onGain:function(){
         var hero = currentRoom.getHero();
         hero.set("cunning",hero.get("cunning") + CARD_MODEL_MAP.cunning.getEffect(this.get("level")) )
+        //recalculate require exp
+        hero.set({
+            requireExp: hero.requireExpOfLevel(hero.get("level"))
+        });
     },
     onExile:function(){
         var hero = currentRoom.getHero();
         hero.set("cunning",hero.get("cunning") - CARD_MODEL_MAP.cunning.getEffect(this.get("level")) )
+        //recalculate require exp
+        hero.set({
+            requireExp: hero.requireExpOfLevel(hero.get("level"))
+        });
     },
     onUse:function(){
         currentRoom.getHero().gainExp(CARD_MODEL_MAP.cunning.getUseEffect);
@@ -785,7 +797,7 @@ CARD_MODEL_MAP.recovery = CardModel.extend({
         currentRoom.getHero().gainHp(CARD_MODEL_MAP.recovery.getUseEffect);
     }
 })
-CARD_MODEL_MAP.recovery.maxCount = 2;
+CARD_MODEL_MAP.recovery.maxCount = 0;
 CARD_MODEL_MAP.recovery.getEffect = function(level){
     level = level || 1;
     return level*5+5;

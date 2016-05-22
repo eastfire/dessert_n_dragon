@@ -3,7 +3,7 @@ var CUNNING_EFFECT = 0.01;
 var DEXTERITY_EFFECT = 0.01;
 var DODGE_EFFECT = 0.01;
 var RECOVERY_EFFECT = 0.01;
-var CONSTITUTION_EFFECT = 10;
+var CONSTITUTION_EFFECT = 5;
 
 var HeroModel = MovableModel.extend({
     defaults:function(){
@@ -15,7 +15,7 @@ var HeroModel = MovableModel.extend({
             forwardAfterKillEnemy: false,
             choiceNumber: 3,
             //passive status
-            constitute: 0,
+            constitution: 4,
             cunning: 0,
             maxCunning: 50,
             dexterity: 0,
@@ -41,12 +41,14 @@ var HeroModel = MovableModel.extend({
     },
     initialize:function(){
         MovableModel.prototype.initialize.call(this);
-        this.set("maxHp",this.get("maxHp") || this.maxHpOfLevel());
         for ( var i = 1; i <= 10; i++ ) {
             if ( unlockedStatus.isUnlocked("initHp"+i) ) {
-                this.set("maxHp",this.get("maxHp")+CONSTITUTION_EFFECT);
+                this.set("constitution",this.get("constitution")+2);
             }
         }
+
+        this.set("maxHp",this.get("maxHp") || this.maxHpOfLevel());
+
         this.set("hp",this.get("hp") || this.get("maxHp"));
         this.set("requireExp",this.get("requireExp") || this.requireExpOfLevel());
     },
@@ -62,12 +64,7 @@ var HeroModel = MovableModel.extend({
         return this.get("positions")[0];
     },
     maxHpOfLevel:function(lv){
-        if ( !this.get("maxHpStrategy") || this.get("maxHpStrategy").type === "normal" ) {
-            var level = lv || this.get("level");
-            return level * 5 + 5;
-        } else if ( this.get("maxHpStrategy").type === "fix" ) {
-            return this.get("maxHpStrategy").value;
-        }
+        return this.get("constitution")*CONSTITUTION_EFFECT;
     },
     requireExpOfLevel:function(lv){
         if ( !this.get("expStrategy") || this.get("expStrategy").type === "normal" ) {
@@ -136,11 +133,17 @@ var HeroModel = MovableModel.extend({
                 exp: 0,
                 requireExp: this.requireExpOfLevel(this.get("level") + 1)
             });
-            this.gainHp(this.get("maxHp")*this.get("recovery")*RECOVERY_EFFECT);
+            this.set("constitution",this.get("constitution")+2);
+            this.calculateMaxHp();
+            this.gainHp(this.get("maxHp") - this.get("hp"));
             this.levelUp(1);
             return true;
         }
         return false;
+    },
+    calculateMaxHp:function(){
+        this.set("maxHp", this.maxHpOfLevel(this.get("level")));
+        this.set("hp", Math.min(this.get("hp"),this.get("maxHp")));
     },
     canAttack:function(){
         return true

@@ -43,18 +43,33 @@ var CHOICE_FACTORY_MAP = {
             }
         }
     },
-    levelUpCard:function(roomModel){
+    levelUpRandomCard:function(roomModel){
         var allCard = _.union(roomModel.getHand(),roomModel.getDeck(), roomModel.getDiscard());
         var validCards = _.filter(allCard, function(cardModel){
             return cardModel.canLevelUp()
         })
-        var levelUpCard = _.sample(validCards);
-        var type = levelUpCard.get("type")
-        var targetLevel = levelUpCard.get("level")+1
+        var cardModel = _.sample(validCards);
+        var type = cardModel.get("type")
+        var targetLevel = cardModel.get("level")+1
         return {
             description:"将"+getCardName(type)+"升级到"+targetLevel+"级\n"+getCardLevelUpDesc( type, targetLevel),
             onChosen:function(roomModel){
-                levelUpCard.levelUp(1);
+                cardModel.levelUp(1);
+            }
+        }
+    },
+    levelUpCard:function(roomModel,opt){
+        var type = opt.type;
+        var allCard = _.union(roomModel.getHand(),roomModel.getDeck(), roomModel.getDiscard());
+        var validCards = _.filter(allCard, function(cardModel){
+            return cardModel.canLevelUp() && cardModel.get("type") === type;
+        })
+        var cardModel = _.sample(validCards);
+        var targetLevel = cardModel.get("level")+1
+        return {
+            description:"将"+getCardName(type)+"升级到"+targetLevel+"级\n"+getCardLevelUpDesc( type, targetLevel),
+            onChosen:function(roomModel){
+                cardModel.levelUp(1);
             }
         }
     },
@@ -110,7 +125,15 @@ CHOICE_VALIDATE_MAP = {
         })
         return thisTypeCards.length < CARD_MODEL_MAP[opt.type].maxCount;
     },
-    levelUpCard:function(roomModel){
+    levelUpCard:function(roomModel, choiceEntry){
+        var opt = choiceEntry.opt || {};
+        var allCard = _.union(roomModel.getHand(),roomModel.getDeck(), roomModel.getDiscard());
+        var hasCard = _.filter(allCard, function(cardModel){
+            return cardModel.get("type") === opt.type && cardModel.canLevelUp();
+        })
+        return hasCard.length;
+    },
+    levelUpRandomCard:function(roomModel){
         var allCard = _.union(roomModel.getHand(),roomModel.getDeck(), roomModel.getDiscard());
         var validCards = _.filter(allCard, function(cardModel){
             return cardModel.canLevelUp()
@@ -138,7 +161,15 @@ var GEN_CHOICE_STRATEGY_MAP = {
                 }
             }
         },this);
-        var allChoices = _.union(roomModel.get("choicePool"), unlockedChoices );
+        var unlockedChoices2 = _.map( unlockedStatus.get("card"), function( value, key ) {
+            return {
+                type:"levelUpCard",
+                opt:{
+                    type:key
+                }
+            }
+        },this);
+        var allChoices = _.union(roomModel.get("choicePool"), unlockedChoices, unlockedChoices2 );
         var validChoices = getValidChoices(roomModel, allChoices);
         return _.sample(validChoices, roomModel.getHero().get("choiceNumber"));
     }

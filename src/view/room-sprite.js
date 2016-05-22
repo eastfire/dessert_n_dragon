@@ -11,7 +11,6 @@ var RoomSprite = BaseSprite.extend({
     getMovableByTouchPosition:function(x,y){
         var px = Math.floor((x - (this.x - (this.model.getWidth()-2)/2*dimens.tileSize.width*this.scaleX))/(dimens.tileSize.width*this.scaleX))+1;
         var py = Math.floor((y - (this.y - (this.model.getHeight()-2)/2*dimens.tileSize.height*this.scaleX))/(dimens.tileSize.height*this.scaleX))+1;
-//        cc.log("px"+px+" py"+py)
         if ( px >= 0 && py >= 0 ) {
             return this.model.getMovableByPosition(px,py);
         }

@@ -8,7 +8,7 @@ GEN_ENEMY_STRATEGY_MAP.infinite = GenEnemyStrategy.extend({
     },
     maintain:function(roomModel){
         if ( !roomModel.get("turnNumber") ) return;
-        if ( (roomModel.get("turnNumber")) % this.get("enemyPoolChangePerTurn") === 0 ) {
+        if ( (14+roomModel.get("turnNumber")) % this.get("enemyPoolChangePerTurn") === 0 ) {
             var allEnemyPool = [];
             _.each(roomModel.get("baseEnemyPool"),function(enemy){
                 allEnemyPool.push(enemy);

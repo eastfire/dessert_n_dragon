@@ -101,7 +101,6 @@ var MovableSprite = BaseSprite.extend({
         ))
     },
     beltTo:function(newPosition){
-        cc.log(newPosition)
         this.runAction(cc.sequence(
             cc.moveTo(times.teleport-0.1,(newPosition.x + 0.5)* dimens.tileSize.width,(newPosition.y + 0.5)* dimens.tileSize.height),
             cc.callFunc(function(){

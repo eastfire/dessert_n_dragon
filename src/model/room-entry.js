@@ -4,14 +4,11 @@ var STANDARD_CHOICE_POOL = [
     { type:"getRandomMove", opt:{ from:3, to:5} },
     { type:"getRandomTime", opt:{ from:10, to:20} },
     { type:"getCard", opt:{type:"heal"}},
+    { type:"levelUpCard", opt:{type:"heal"}},
     { type:"getCard", opt:{type:"tail-slash"}},
-//    { type:"getCard", opt:{type:"vertical-fire"}},
-//    { type:"getCard", opt:{type:"horizontal-fire"}},
-//    { type:"getCard", opt:{type:"cross-fire"}},
-//    { type:"getCard", opt:{type:"whirl-slash"}},
+    { type:"levelUpCard", opt:{type:"tail-slash"}},
     { type:"reduceRandomWait", opt:{ from:4, to:6}},
-    { type:"reduceAllWait"},
-    { type:"levelUpCard"}
+    { type:"reduceAllWait"}
 ]
 
 var STANDARD_ITEM_POOL = ["potion","money"];
@@ -19,10 +16,6 @@ var STANDARD_ITEM_POOL = ["potion","money"];
 var STANDARD_HERO = {
         type:"normalHero",
         positions: [{x:3,y:3}],
-        maxHp: 100,
-        maxHpStrategy:{
-            type: "normal"
-        },
         expStrategy: {
             type: "normal"
         } //normal, fix
@@ -77,7 +70,13 @@ var infiniteRoom = {
         { type:"getCard", opt:{type:"constitution"}},
         { type:"getCard", opt:{type:"cunning"}},
         { type:"getCard", opt:{type:"dexterity"}},
-        { type:"getCard", opt:{type:"dodge"}}
+        { type:"getCard", opt:{type:"dodge"}},
+
+        { type:"levelUpCard", opt:{type:"luck"}},
+        { type:"levelUpCard", opt:{type:"constitution"}},
+        { type:"levelUpCard", opt:{type:"cunning"}},
+        { type:"levelUpCard", opt:{type:"dexterity"}},
+        { type:"levelUpCard", opt:{type:"dodge"}}
     ])
 };
 
