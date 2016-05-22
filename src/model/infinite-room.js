@@ -32,8 +32,15 @@ GEN_ENEMY_STRATEGY_MAP.infinite = GenEnemyStrategy.extend({
             var levelPool = roomModel.get("enemyLevelPool");
             var maxLevel = _.last(levelPool);
             var newMaxLevel = Math.min(MAX_ENEMY_LEVEL , maxLevel+1)
-            for ( var i = 1; i <= newMaxLevel; i++){
+            for ( var i = Math.max(1,newMaxLevel-3); i <= newMaxLevel; i++){
                 levelPool.push(i);
+            }
+            var firstLevel = levelPool[0];
+            if ( newMaxLevel - firstLevel >= 4 ) {
+                //remove all firstLevel
+                roomModel.set("enemyLevelPool", _.reject(levelPool,function(level){
+                   return level === firstLevel;
+                },this));
             }
         }
     }

@@ -34,7 +34,7 @@ var infiniteRoom = {
     rules:{
     },
     genEnemyStrategy: [{type:"infinite", number: 2, last: 0}],
-    baseEnemyPool:[{ type:"pudding", subtype:"red"},
+    baseEnemyPool:[ //remove pudding
         {type:"cherrycake"},
         {type:"ricecake"},
         {type:"icecream"},

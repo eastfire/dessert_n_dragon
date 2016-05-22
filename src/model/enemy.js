@@ -193,6 +193,46 @@ var EnemyModel = MovableModel.extend({
 
 
 
+//超低
+//always 1
+
+//极低
+//Math.round(Math.log(l+1)*2)
+//[1, 2, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6]
+
+//很低
+//Math.round(l/2)
+//[1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10]
+
+//较低
+//l
+//[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+//Math.round(l*3/2) - 1
+//[1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29]
+
+//一般
+//l*2-1
+//[1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39]
+
+//较高
+//l*3-2
+//[1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, 52, 55, 58]
+//Math.round(Math.log(l+1)*l)
+//[1, 2, 4, 6, 9, 12, 15, 18, 21, 24, 27, 31, 34, 38, 42, 45, 49, 53, 57, 61]
+
+//很高
+//Math.round(Math.log(l+1)*l)*2-1
+//[1, 3, 7, 11, 17, 23, 29, 35, 41, 47, 53, 61, 67, 75, 83, 89, 97, 105, 113, 121]
+
+//极高
+//(l+1)/2*l
+//[1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66, 78, 91, 105, 120, 136, 153, 171, 190, 210]
+
+//超高
+//l*l
+//[1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361, 400]
+
+
 MOVABLE_MODEL_MAP.archer = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
@@ -203,10 +243,10 @@ MOVABLE_MODEL_MAP.archer = EnemyModel.extend({
     checkRange:function(hero){
         return true;
     },
-    expOfLevel:function(l){
-        return l*EXP_INFLATION_RATE*2
+    expOfLevel:function(l){ //一般
+        return l*2*EXP_INFLATION_RATE;
     },
-    attackOfLevel:function(l){
+    attackOfLevel:function(l){ //很低
         return Math.round(l/2);
     }
 })
@@ -218,13 +258,13 @@ MOVABLE_MODEL_MAP.baozi = EnemyModel.extend({
             attackType: ATTACK_TYPE_MELEE
         } )
     },
-    expOfLevel:function(l){
-        return l*EXP_INFLATION_RATE*3+1;
+    expOfLevel:function(l){ //一般
+        return l*2*EXP_INFLATION_RATE;
     },
     afterHit:function(heroModel){
         heroModel.getForbidDraw(Math.min(8,Math.round(this.get("level")/3))+2);
     },
-    attackOfLevel:function(l){
+    attackOfLevel:function(l){ //较低
         return Math.round(l*3/2);
     }
 })
@@ -235,10 +275,10 @@ MOVABLE_MODEL_MAP["cake-roll"] = EnemyModel.extend({
             type: "cake-roll"
         } )
     },
-    expOfLevel:function(l){
+    expOfLevel:function(l){ //较高
         return Math.round(Math.log(l+1)*l)*EXP_INFLATION_RATE
     },
-    attackOfLevel:function(l){
+    attackOfLevel:function(l){ //较高
         return Math.round(Math.log(l+1)*l)
     },
     checkHit:function(hero, options){
@@ -259,11 +299,11 @@ MOVABLE_MODEL_MAP.candy = EnemyModel.extend({
     afterHit:function(heroModel){
         this.checkCurse(heroModel);
     },
-    expOfLevel:function(l){
-        return Math.round(l*EXP_INFLATION_RATE*2.5)
+    expOfLevel:function(l){ //一般
+        return (l*2-1)*EXP_INFLATION_RATE;
     },
-    attackOfLevel:function(l){
-        return Math.round(l/2);
+    attackOfLevel:function(l){ //较低
+        return l;
     },
     getCurseRate:function(heroModel){
         var level = this.get("level");
@@ -283,11 +323,11 @@ MOVABLE_MODEL_MAP.cherrycake = EnemyModel.extend({
             type: "cherrycake"
         } )
     },
-    expOfLevel:function(l){
-        return l*EXP_INFLATION_RATE*2
+    expOfLevel:function(l){ //一般
+        return l*2*EXP_INFLATION_RATE
     },
-    attackOfLevel:function(l){
-        return l;
+    attackOfLevel:function(l){ //一般
+        return l*2-1;
     }
 })
 
@@ -297,11 +337,11 @@ MOVABLE_MODEL_MAP["chocolate-cake"] = EnemyModel.extend({
             type: "chocolate-cake"
         } )
     },
-    expOfLevel:function(l){
-        return (l*3-1)*EXP_INFLATION_RATE
+    expOfLevel:function(l){ //较高
+        return (Math.round(Math.log(l+1)*l)+1)*EXP_INFLATION_RATE
     },
-    attackOfLevel:function(l){
-        return l*2;
+    attackOfLevel:function(l){ //较高
+        return Math.round(Math.log(l+1)*l)+1;
     }
 })
 
@@ -324,11 +364,11 @@ MOVABLE_MODEL_MAP.creampuff = EnemyModel.extend({
             },this );
         }
     },
-    expOfLevel:function(l){
-        return (l+1)*EXP_INFLATION_RATE*2;
+    expOfLevel:function(l){ //一般
+        return (l*2-1)*EXP_INFLATION_RATE;
     },
-    attackOfLevel:function(l){
-        return l;
+    attackOfLevel:function(l){ //一般
+        return l*2-1;
     }
 })
 
@@ -338,10 +378,10 @@ MOVABLE_MODEL_MAP.donut = EnemyModel.extend({
             type: "donut"
         } )
     },
-    expOfLevel:function(l){
+    expOfLevel:function(l){ //超高
         return (l*l+1)*EXP_INFLATION_RATE
     },
-    attackOfLevel:function(l){
+    attackOfLevel:function(l){  //超高
         return l*l+1;
     }
 })
@@ -356,22 +396,22 @@ MOVABLE_MODEL_MAP.dumpling = EnemyModel.extend({
         EnemyModel.prototype.afterAllMove.call(this,movable);
         //recalcute attack
         var myPosition = this.get("positions")[0];
-        var sameClassCount = 1;
-
-        _.each(DIRECTIONS,function(direction){
-            var position = getIncrementPosition(myPosition,direction);
-            var movable = currentRoom.getMovableByPosition(position);
-            if ( movable instanceof MOVABLE_MODEL_MAP.dumpling) {
-                sameClassCount++;
+        var sameClassCount = 0;
+        for ( var i = myPosition.x-1; i < myPosition.x+2; i++ ) {
+            for ( var j = myPosition.y-1; j < myPosition.y+2; j++ ) {
+                var movable = currentRoom.getMovableByPosition(i, j);
+                if (movable instanceof MOVABLE_MODEL_MAP.dumpling) {
+                    sameClassCount++;
+                }
             }
-        },this);
+        }
 
         this.set("baseAttack", this.attackOfLevel(this.get("level"))*sameClassCount);
     },
-    expOfLevel:function(l){
-        return (l+1)*EXP_INFLATION_RATE*2;
+    expOfLevel:function(l){ //一般
+        return (l*2-1)*EXP_INFLATION_RATE;
     },
-    attackOfLevel:function(l){
+    attackOfLevel:function(l){ //较低
         return l;
     }
 })
@@ -387,28 +427,11 @@ MOVABLE_MODEL_MAP.eggroll = EnemyModel.extend({
         return hero.get("positions")[0].x === this.get("positions")[0].x ||
              hero.get("positions")[0].y === this.get("positions")[0].y;
     },
-    expOfLevel:function(l){
-        return l*(l+1)/2*EXP_INFLATION_RATE
+    expOfLevel:function(l){ //很高
+        return (Math.round(Math.log(l+1)*l)*2-1)*EXP_INFLATION_RATE
     },
-    attackOfLevel:function(l){
-        return l*2+1;
-    }
-})
-
-MOVABLE_MODEL_MAP.jelly = EnemyModel.extend({
-    defaults:function(){
-        return _.extend( EnemyModel.prototype.defaults.call(this),{
-            type: "jelly"
-        } )
-    },
-    expOfLevel:function(l){
-        return (l+1)*EXP_INFLATION_RATE;
-    },
-    attackOfLevel:function(l){
-        return Math.round(l/2);
-    },
-    dexterityOfLevel:function(l){
-        return Math.min(75, l*(l+1)/2);
+    attackOfLevel:function(l){ //很高
+        return Math.round(Math.log(l+1)*l)*2-1;
     }
 })
 
@@ -434,11 +457,11 @@ MOVABLE_MODEL_MAP.icecream = EnemyModel.extend({
     afterHit:function(heroModel){
         this.checkFreeze(heroModel);
     },
-    expOfLevel:function(l){
-        return Math.round(l*EXP_INFLATION_RATE*2.5)
+    expOfLevel:function(l){ //一般
+        return (Math.round(l*2.5)-1)*EXP_INFLATION_RATE
     },
-    attackOfLevel:function(l){
-        return l;
+    attackOfLevel:function(l){ //一般
+        return l*2-1;
     },
     getFreezeRate:function(heroModel){
         var level = this.get("level");
@@ -452,6 +475,23 @@ MOVABLE_MODEL_MAP.icecream = EnemyModel.extend({
     }
 })
 
+MOVABLE_MODEL_MAP.jelly = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "jelly"
+        } )
+    },
+    expOfLevel:function(l){ //较低
+        return l*EXP_INFLATION_RATE;
+    },
+    attackOfLevel:function(l){ //很低
+        return Math.round(l/2);
+    },
+    dexterityOfLevel:function(l){
+        return Math.min(75, l*(l+1)/2);
+    }
+})
+
 MOVABLE_MODEL_MAP.lolipop = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
@@ -461,11 +501,11 @@ MOVABLE_MODEL_MAP.lolipop = EnemyModel.extend({
     afterHit:function(heroModel){
         this.checkDisturb(heroModel);
     },
-    expOfLevel:function(l){
+    expOfLevel:function(l){ //一般
         return Math.round(l*EXP_INFLATION_RATE*2.5)
     },
-    attackOfLevel:function(l){
-        return l;
+    attackOfLevel:function(l){ //一般
+        return 2*l-1;
     },
     getDisturbRate:function(heroModel){
         var level = this.get("level");
@@ -507,11 +547,11 @@ MOVABLE_MODEL_MAP.mushmellow = EnemyModel.extend({
     getCloudTime:function(){
         return Math.min(3, Math.ceil(this.get("level") / 6 ))+2;
     },
-    expOfLevel:function(l){
-        return Math.round(Math.log(l+1)*l)*EXP_INFLATION_RATE
+    expOfLevel:function(l){ //较低
+        return (Math.round(l*3/2) - 1)*EXP_INFLATION_RATE
     },
-    attackOfLevel:function(l){
-        return Math.round(l/2);
+    attackOfLevel:function(l){ //较低
+        return l;
     }
 })
 
@@ -525,8 +565,8 @@ MOVABLE_MODEL_MAP.popcorn = EnemyModel.extend({
     checkRange:function(hero){
         return true;
     },
-    expOfLevel:function(l){
-        return l*EXP_INFLATION_RATE*3
+    expOfLevel:function(l){ //较高
+        return (l*3-1)*EXP_INFLATION_RATE
     },
     afterHit:function(heroModel){
         if (this.getDizzyRate(heroModel) > Math.random() ){
@@ -536,10 +576,9 @@ MOVABLE_MODEL_MAP.popcorn = EnemyModel.extend({
     getDizzyRate:function(heroModel){
         var level = this.get("level");
         return Math.min(0.7,level*5/200+0.1);
-//        return 1;
     },
-    attackOfLevel:function(l){
-        return l;
+    attackOfLevel:function(l){ //一般
+        return Math.round(l*3/2) - 1;
     }
 })
 
@@ -548,6 +587,9 @@ MOVABLE_MODEL_MAP.pudding = EnemyModel.extend({
         return _.extend( EnemyModel.prototype.defaults.call(this),{
             type: "pudding"
         } )
+    },
+    expOfLevel:function(l){ //极低
+        return Math.round(Math.log(l+1)*2)*EXP_INFLATION_RATE
     }
 })
 
@@ -558,10 +600,10 @@ MOVABLE_MODEL_MAP.ricecake = EnemyModel.extend({
             isMovable: false
         } )
     },
-    expOfLevel:function(l){
+    expOfLevel:function(l){ //一般
         return (l*2-1)*EXP_INFLATION_RATE
     },
-    attackOfLevel:function(l){
+    attackOfLevel:function(l){ //较高
         return l*3;
     }
 })
@@ -586,11 +628,11 @@ MOVABLE_MODEL_MAP.souffle = EnemyModel.extend({
             },this );
         }
     },
-    expOfLevel:function(l){
-        return l*EXP_INFLATION_RATE*2;
+    expOfLevel:function(l){ //一般
+        return (l*2-1)*EXP_INFLATION_RATE;
     },
-    attackOfLevel:function(l){
-        return l;
+    attackOfLevel:function(l){ //一般
+        return l*2-1;
     }
 })
 
@@ -600,10 +642,10 @@ MOVABLE_MODEL_MAP["strawberry-pie"] = EnemyModel.extend({
             type: "strawberry-pie"
         } )
     },
-    expOfLevel:function(l){
-        return (l*l+1)*EXP_INFLATION_RATE
+    expOfLevel:function(l){ //超高
+        return (l*l)*EXP_INFLATION_RATE
     },
-    attackOfLevel:function(l){
+    attackOfLevel:function(l){ //超高
         return l*l;
     },
     afterHit:function(heroModel){
