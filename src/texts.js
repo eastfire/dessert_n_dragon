@@ -38,6 +38,14 @@ var texts_locale = {
                 name:"豆沙包封印师",
                 desc:"击中造成封魔效果（使你无法摸牌）（等级越高持续时间越长）。\n攻击力较低。\n饱腹度较高。"
             },
+            "cake-roll":{
+                name:"蛋糕卷猎魔者",
+                desc:"你的魔法攻击对他无效，且会让他升级。\n攻击力较高。\n饱腹度较高。"
+            },
+            candy: {
+                name:"奶糖咒术师",
+                desc:"击中时有一定概率使你被诅咒（下一次恢复生命量减半）（等级越高概率越高）。\n攻击力弱。\n饱腹度一般。"
+            },
             cherrycake: {
                 name: "纸杯蛋糕下士",
                 desc: "攻击力一般。\n饱腹度一般。"
@@ -56,7 +64,7 @@ var texts_locale = {
             },
             dumpling: {
                 name:"汤圆军团",
-                desc:"周围有几个其他汤圆军团，攻击力就加几倍。\n攻击力一般。\n饱腹度一般。"
+                desc:"周围有几个其他汤圆军团，攻击力就加几倍。\n攻击力一般～很高。\n饱腹度一般。"
             },
             eggroll:{
                 name:"蛋卷吹箭手",
@@ -287,7 +295,9 @@ var texts_locale = {
                 mushmellow:"棉花糖召唤师将在无尽关卡中出现",
                 baozi:"豆沙包封印师将在无尽关卡中出现",
                 "strawberry-pie":"草莓派将军将无尽关卡中出现",
-                dumpling:"汤圆军团将无尽关卡中出现"
+                dumpling:"汤圆军团将无尽关卡中出现",
+                candy:"奶糖诅咒师将在无尽关卡中出现",
+                "cake-roll":"蛋糕卷猎魔者将在无尽关卡中出现"
             }
         },
 
@@ -570,6 +580,38 @@ var texts_locale = {
                 },
                 desc: function (level) {
                     return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-dumpling"].requirement(level) + "或以上的汤圆军团"
+                }
+            },
+            "kill-level-candy": {
+                name:function(level){
+                    return "奶糖杀手"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-candy"].requirement(level) + "的奶糖咒术师"
+                }
+            },
+            "kill-max-level-candy": {
+                name:function(level){
+                    return "精英奶糖杀手"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-candy"].requirement(level) + "或以上的奶糖咒术师"
+                }
+            },
+            "kill-level-cake-roll": {
+                name:function(level){
+                    return "蛋糕卷杀手"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-cake-roll"].requirement(level) + "的蛋糕卷猎魔者"
+                }
+            },
+            "kill-max-level-cake-roll": {
+                name:function(level){
+                    return "精英蛋糕卷杀手"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-cake-roll"].requirement(level) + "或以上的蛋糕卷猎魔者"
                 }
             }
         }

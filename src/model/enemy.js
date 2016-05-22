@@ -229,6 +229,54 @@ MOVABLE_MODEL_MAP.baozi = EnemyModel.extend({
     }
 })
 
+MOVABLE_MODEL_MAP["cake-roll"] = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "cake-roll"
+        } )
+    },
+    expOfLevel:function(l){
+        return Math.round(Math.log(l+1)*l)*EXP_INFLATION_RATE
+    },
+    attackOfLevel:function(l){
+        return Math.round(Math.log(l+1)*l)
+    },
+    checkHit:function(hero, options){
+        if ( options.attackType === ATTACK_TYPE_MAGIC ) {
+            this.levelUp(1);
+            return false;
+        }
+        return EnemyModel.prototype.checkHit.call(this,hero,options);
+    }
+})
+
+MOVABLE_MODEL_MAP.candy = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "candy"
+        } )
+    },
+    afterHit:function(heroModel){
+        this.checkCurse(heroModel);
+    },
+    expOfLevel:function(l){
+        return Math.round(l*EXP_INFLATION_RATE*2.5)
+    },
+    attackOfLevel:function(l){
+        return Math.round(l/2);
+    },
+    getCurseRate:function(heroModel){
+        var level = this.get("level");
+        return level/10;
+//        return 1;
+    },
+    checkCurse:function(model){
+        if (this.getCurseRate(model) > Math.random() ){
+            model.getCursed();
+        }
+    }
+})
+
 MOVABLE_MODEL_MAP.cherrycake = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
@@ -318,7 +366,6 @@ MOVABLE_MODEL_MAP.dumpling = EnemyModel.extend({
             }
         },this);
 
-        cc.log(sameClassCount)
         this.set("baseAttack", this.attackOfLevel(this.get("level"))*sameClassCount);
     },
     expOfLevel:function(l){
@@ -564,7 +611,9 @@ MOVABLE_MODEL_MAP["strawberry-pie"] = EnemyModel.extend({
     }
 })
 
-//TODO sweet-dumpling 汤圆 回合开始时如果为双数等级且能分开则分开
+//TODO 诅咒
+
+//TODO 中毒
 
 //TODO 偷道具升级
 

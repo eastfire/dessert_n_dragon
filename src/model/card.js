@@ -722,13 +722,13 @@ CARD_MODEL_MAP.dodge = CardModel.extend({
 CARD_MODEL_MAP.dodge.maxCount = 2;
 CARD_MODEL_MAP.dodge.getEffect = function(level){
     level = level || 1;
-    return level*2+3;
+    return level*3+2;
 }
 CARD_MODEL_MAP.dodge.getEffectDiff = function(currentLevel, targetLevel){
     targetLevel = targetLevel || currentLevel+1;
-    return 2;
+    return 3;
 }
-CARD_MODEL_MAP.dodge.getUseEffect = 5;
+CARD_MODEL_MAP.dodge.getUseEffect = 3;
 
 CARD_MODEL_MAP.luck = CardModel.extend({
     defaults: function () {

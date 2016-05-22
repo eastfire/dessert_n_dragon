@@ -52,7 +52,9 @@ var infiniteRoom = {
         {type:"mushmellow"},
         {type:"baozi"},
         {type:"strawberry-pie"},
-        {type:"dumpling"}
+        {type:"dumpling"},
+        {type:"candy"},
+        {type:"cake-roll"}
     ],
     enemyPool:[{
         type:"pudding", subtype:"red"
@@ -2666,7 +2668,7 @@ rooms.push({
     winEveryConditions:[
         {
             conditionType:"kill-max-level",
-            type:"strawberry-pie",
+            type:"cake-roll",
             number: 7
         },
         {
@@ -2676,18 +2678,19 @@ rooms.push({
         },
         {
             conditionType:"kill-max-level",
-            type:"chocolate-cake",
+            type:"candy",
             number: 7
         }
     ],
     loseAnyConditions:[
         "outOfTurn"
     ],
-    enemyPool:[{type:"strawberry-pie"},{type:"dumpling"},{type:"chocolate-cake"}],
+    enemyPool:[{type:"cake-roll"},{type:"dumpling"},{type:"candy"}],
     enemyLevelPool:[1,2],
     itemPool:STANDARD_ITEM_POOL,
     initTiles: tiles6x5Wang,
     exits:[{x:1,y:1},{x:6,y:5},{x:6,y:1},{x:1,y:5}],
     initHero: STANDARD_HERO,
+    initHand:[{type:"horizontal-fire"},{type:"vertical-fire"}],
     choicePool:STANDARD_CHOICE_POOL
 });

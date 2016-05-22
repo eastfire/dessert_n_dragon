@@ -75,6 +75,7 @@ var MovableSprite = BaseSprite.extend({
         this.renderOneStatus("frozen", position)
         this.renderOneStatus("angry", position)
         this.renderOneStatus("dizzy", position)
+        this.renderOneStatus("cursed", position)
     },
     teleport:function(newPosition){
 

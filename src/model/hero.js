@@ -36,7 +36,8 @@ var HeroModel = MovableModel.extend({
             buff: {},
             debuff: {},
 
-            forbidDraw: 0
+            forbidDraw: 0,
+            cursed: 0
         } )
     },
     initialize:function(){
@@ -88,11 +89,16 @@ var HeroModel = MovableModel.extend({
         this.trigger("die",this, cause);
     },
     gainHp:function(amount){
-        this.set("hp", Math.min(this.get("maxHp"), this.get("hp") + amount) )
+        var realAmount = Math.min( this.get("maxHp") - this.get("hp"), amount);
+        if ( this.get("cursed") ) {
+            realAmount = Math.round(realAmount/2);
+            this.set("cursed",0);
+        }
+        this.set("hp", this.get("hp") + realAmount );
 
         //statistic
         statistic["gain-hp"] = statistic["gain-hp"] || 0;
-        statistic["gain-hp"]+=amount;
+        statistic["gain-hp"]+=realAmount;
     },
     gainExp:function(amount){
         if ( currentRoom.get("rules").heroCanGetExp ) {
@@ -304,6 +310,9 @@ var HeroModel = MovableModel.extend({
                 cardModel.disturb(amount);
             }
         });
+    },
+    getCursed:function(){
+        this.set("cursed",1)
     }
 })
 

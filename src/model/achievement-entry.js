@@ -384,5 +384,49 @@ ACHIEVEMENT_ENTRY_MAP = {
             return level*5+5
         },
         validation: "statistic"
+    },
+    "kill-level-candy": {
+        index: 35,
+        maxLevel: 5,
+        reward: function (level) {
+            return level * 50;
+        },
+        requirement: function (level) {
+            return Math.pow(10, level) * 10
+        },
+        validation: "statistic"
+    },
+    "kill-max-level-candy": {
+        index: 36,
+        maxLevel: 4,
+        reward: function (level) {
+            return level * 100;
+        },
+        requirement: function (level) {
+            return level*5+5
+        },
+        validation: "statistic"
+    },
+    "kill-level-cake-roll": {
+        index: 37,
+        maxLevel: 5,
+        reward: function (level) {
+            return level * 50;
+        },
+        requirement: function (level) {
+            return Math.pow(10, level) * 10
+        },
+        validation: "statistic"
+    },
+    "kill-max-level-cake-roll": {
+        index: 38,
+        maxLevel: 4,
+        reward: function (level) {
+            return level * 100;
+        },
+        requirement: function (level) {
+            return level*5+5
+        },
+        validation: "statistic"
     }
 }
