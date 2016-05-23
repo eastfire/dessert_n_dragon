@@ -549,11 +549,11 @@ CARD_MODEL_MAP.collector = CardModel.extend({
 CARD_MODEL_MAP.collector.maxCount = 2;
 CARD_MODEL_MAP.collector.getEffect = function(level){
     level = level || 1;
-    return level*2+1;
+    return level+1;
 }
 CARD_MODEL_MAP.collector.getEffectDiff = function(currentLevel, targetLevel){
     targetLevel = targetLevel || currentLevel+1;
-    return 2;
+    return 1;
 }
 CARD_MODEL_MAP.collector.getUseEffect = 2;
 
