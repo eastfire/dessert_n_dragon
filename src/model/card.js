@@ -467,7 +467,7 @@ CARD_MODEL_MAP.teleport = CardModel.extend({
         if ( tiles.length ) {
             var candidate = _.sample(tiles);
             var newPosition = candidate.get("position");
-            currentRoom.getHero().teleport(newPosition);
+            currentRoom.getHero().teleport(newPosition, false);
         }
     },
     onLevelUp:function(){

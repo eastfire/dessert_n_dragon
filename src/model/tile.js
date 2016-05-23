@@ -82,7 +82,7 @@ TILE_MODEL_MAP.portal = RoomTileModel.extend({
                 if ( !targetMovable ) { //target portal is empty
                     cc.log("teleport"+movableModel.get("type"))
                     movableModel.__teleportTurn = currentRoom.get("turnNumber"); //防止反复传送
-                    movableModel.teleport(tiles[0].get("position"));
+                    movableModel.teleport(tiles[0].get("position"), true);
                 }
             } else {
                 cc.error("stage error! portal not appear in pair.")

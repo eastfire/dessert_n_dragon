@@ -325,7 +325,13 @@ MOVABLE_MODEL_MAP.cane = EnemyModel.extend({
     },
     afterAllMove:function(movable){
         EnemyModel.prototype.afterAllMove.call(this,movable);
-        //recalcute attack
+        this.reCalculateAttack();
+    },
+    afterGenerate:function(){
+        this.reCalculateAttack();
+        EnemyModel.prototype.afterGenerate.call(this);
+    },
+    reCalculateAttack:function(){
         var myPosition = this.get("positions")[0];
         var itemClassCount = 0;
         for ( var i = myPosition.x-1; i < myPosition.x+2; i++ ) {
@@ -336,14 +342,14 @@ MOVABLE_MODEL_MAP.cane = EnemyModel.extend({
                 }
             }
         }
-
+        cc.log(itemClassCount)
         this.set("baseAttack", this.attackOfLevel(this.get("level"))*(itemClassCount+1));
     },
     expOfLevel:function(l){ //一般
         return (l*2-1)*EXP_INFLATION_RATE;
     },
-    attackOfLevel:function(l){ //较低
-        return l;
+    attackOfLevel:function(l){ //一般
+        return l*2-1;
     }
 })
 

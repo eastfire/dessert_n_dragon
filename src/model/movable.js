@@ -209,10 +209,15 @@ var MovableModel = Backbone.Model.extend({
         },this);
         this.calculateEdgePositions();
     },
-    teleport:function(newPosition){
+    teleport:function(newPosition, isTurnStart){
         this.trigger("teleport", newPosition);
-        this.__changePositionAtTurnStart = currentRoom.get("turnNumber");
-        this.__newPositionAtTurnStart = newPosition;
+        if ( isTurnStart ) {
+            this.__changePositionAtTurnStart = currentRoom.get("turnNumber");
+            this.__newPositionAtTurnStart = newPosition;
+        } else {
+            this.__removeOldMapping();
+            this.setNewPosition(newPosition);
+        }
     },
     afterTeleport:function(){
     },
