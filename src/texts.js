@@ -42,6 +42,10 @@ var texts_locale = {
                 name:"蛋糕卷猎魔者",
                 desc:"你的魔法攻击对他无效，且会让他升级。\n攻击力很高。\n饱腹度很高。"
             },
+            cane: {
+                name:"拐杖糖盗贼",
+                desc:"周围8个格子有几个道具，攻击力就加几倍。\n攻击力一般～很高。\n饱腹度一般。"
+            },
             candy: {
                 name:"奶糖咒术师",
                 desc:"击中时有一定概率使你被诅咒（下一次恢复生命量减半）（等级越高概率越高）。\n攻击力较低。\n饱腹度一般。"
@@ -297,7 +301,8 @@ var texts_locale = {
                 "strawberry-pie":"草莓派将军将无尽关卡中出现",
                 dumpling:"汤圆军团将无尽关卡中出现",
                 candy:"奶糖诅咒师将在无尽关卡中出现",
-                "cake-roll":"蛋糕卷猎魔者将在无尽关卡中出现"
+                "cake-roll":"蛋糕卷猎魔者将在无尽关卡中出现",
+                cane:"拐杖糖盗贼将在无尽关卡中出现"
             }
         },
 
@@ -612,6 +617,22 @@ var texts_locale = {
                 },
                 desc: function (level) {
                     return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-cake-roll"].requirement(level) + "或以上的蛋糕卷猎魔者"
+                }
+            },
+            "kill-level-cane": {
+                name:function(level){
+                    return "拐杖糖杀手"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-cane"].requirement(level) + "的拐杖糖盗贼"
+                }
+            },
+            "kill-max-level-cane": {
+                name:function(level){
+                    return "精英拐杖糖杀手"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-cane"].requirement(level) + "或以上的拐杖糖盗贼"
                 }
             }
         }

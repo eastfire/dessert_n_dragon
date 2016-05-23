@@ -54,7 +54,8 @@ var infiniteRoom = {
         {type:"strawberry-pie"},
         {type:"dumpling"},
         {type:"candy"},
-        {type:"cake-roll"}
+        {type:"cake-roll"},
+        {type:"cane"}
     ],
     enemyPool:[{
         type:"pudding", subtype:"red"

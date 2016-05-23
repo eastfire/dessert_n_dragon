@@ -139,7 +139,7 @@ var HeroModel = MovableModel.extend({
                 exp: 0,
                 requireExp: this.requireExpOfLevel(this.get("level") + 1)
             });
-            this.set("constitution",this.get("constitution")+2);
+            this.set("constitution",this.get("constitution")+1);
             this.calculateMaxHp();
             this.gainHp(this.get("maxHp") - this.get("hp"));
             this.levelUp(1);

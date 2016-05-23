@@ -276,10 +276,10 @@ MOVABLE_MODEL_MAP["cake-roll"] = EnemyModel.extend({
         } )
     },
     expOfLevel:function(l){ //较高
-        return Math.round(Math.log(l+1)*l)*EXP_INFLATION_RATE
+        return Math.round(Math.log(l+1)*l+1)*EXP_INFLATION_RATE
     },
     attackOfLevel:function(l){ //较高
-        return Math.round(Math.log(l+1)*l)
+        return Math.round(Math.log(l+1)*l+1)
     },
     checkHit:function(hero, options){
         if ( options.attackType === ATTACK_TYPE_MAGIC ) {
@@ -314,6 +314,36 @@ MOVABLE_MODEL_MAP.candy = EnemyModel.extend({
         if (this.getCurseRate(model) > Math.random() ){
             model.getCursed();
         }
+    }
+})
+
+MOVABLE_MODEL_MAP.cane = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "cane"
+        } )
+    },
+    afterAllMove:function(movable){
+        EnemyModel.prototype.afterAllMove.call(this,movable);
+        //recalcute attack
+        var myPosition = this.get("positions")[0];
+        var itemClassCount = 0;
+        for ( var i = myPosition.x-1; i < myPosition.x+2; i++ ) {
+            for ( var j = myPosition.y-1; j < myPosition.y+2; j++ ) {
+                var movable = currentRoom.getMovableByPosition(i, j);
+                if (movable instanceof ItemModel) {
+                    itemClassCount++;
+                }
+            }
+        }
+
+        this.set("baseAttack", this.attackOfLevel(this.get("level"))*(itemClassCount+1));
+    },
+    expOfLevel:function(l){ //一般
+        return (l*2-1)*EXP_INFLATION_RATE;
+    },
+    attackOfLevel:function(l){ //较低
+        return l;
     }
 })
 
@@ -428,10 +458,10 @@ MOVABLE_MODEL_MAP.eggroll = EnemyModel.extend({
              hero.get("positions")[0].y === this.get("positions")[0].y;
     },
     expOfLevel:function(l){ //很高
-        return (Math.round(Math.log(l+1)*l)*2-1)*EXP_INFLATION_RATE
+        return (Math.round(Math.log(l+1)*l)*2)*EXP_INFLATION_RATE
     },
     attackOfLevel:function(l){ //很高
-        return Math.round(Math.log(l+1)*l)*2-1;
+        return Math.round(Math.log(l+1)*l)*2;
     }
 })
 
