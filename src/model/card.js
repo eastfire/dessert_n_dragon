@@ -494,7 +494,7 @@ CARD_MODEL_MAP.tornado = CardModel.extend({
         },this);
 
         var targetTiles = _.sample( currentRoom.filterTile(function(tileModel){
-            return tileModel.get("canGenEnemy") && !currentRoom.getMovableByTile(tileModel);
+            return tileModel.isPassable() && !currentRoom.getMovableByTile(tileModel);
         },this),candidates.length)
 
         var i = 0;
