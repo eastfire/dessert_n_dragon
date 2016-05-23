@@ -125,9 +125,10 @@ var MovableSprite = BaseSprite.extend({
     },
     onLevelChange:function(){
         this.renderLevel();
+        var diff = this.model.get("level")-this.model.previous("level");
         effectIconMananger.enqueue(this, {
             icon: "icon-level",
-            text: this.model.get("level"),
+            text: diff > 0 ? ("+"+diff):diff,
             offset: {x:-20, y:-20},
             scaleX: 0.7,
             scaleY: 0.7
