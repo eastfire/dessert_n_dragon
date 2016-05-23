@@ -32,86 +32,107 @@ var texts_locale = {
             //enemy
             archer:{
                 name:"豌豆糕射手",
+                briefName:"豌豆糕",
                 desc:"远程攻击。\n攻击力很低。\n饱腹度一般。\n\n是的，他的前世绝对是射手，天敌是僵尸。"
             },
             baozi: {
                 name:"豆沙包封印师",
+                briefName:"豆沙包",
                 desc:"击中造成封魔效果（使你无法摸牌）（等级越高持续时间越长）。\n攻击力较低。\n饱腹度一般。"
             },
             "cake-roll":{
                 name:"蛋糕卷猎魔者",
+                briefName:"蛋糕卷",
                 desc:"你的魔法攻击对他无效，且会让他升级。\n攻击力很高。\n饱腹度很高。"
             },
             candy: {
                 name:"奶糖咒术师",
+                briefName:"奶糖",
                 desc:"击中时有一定概率使你被诅咒（下一次恢复生命量减半）（等级越高概率越高）。\n攻击力较低。\n饱腹度一般。"
             },
             cane: {
                 name:"拐杖糖盗贼",
+                briefName:"拐杖糖",
                 desc:"周围8个格子有几个道具，攻击力就加几倍。\n攻击力一般～很高。\n饱腹度一般。"
             },
             catapult: {
                 name:"琥珀核桃投石车",
+                briefName:"琥珀核桃",
                 desc:"远程攻击，距离你越远攻击力越高。距离1～3格内不会攻击。\n攻击力极低～很高。\n饱腹度极高。"
             },
             cherrycake: {
                 name: "纸杯蛋糕下士",
+                briefName:"纸杯蛋糕",
                 desc: "攻击力一般。\n饱腹度一般。"
             },
             "chocolate-cake":{
                 name:"黑森林武士",
+                briefName:"黑森林",
                 desc:"\n攻击力高。\n饱腹度高。\n\n呼～～呼"
             },
             creampuff: {
                 name:"奶油泡芙酋长",
+                briefName:"奶油泡芙",
                 desc:"合并时周围敌人变得愤怒（攻击力加倍）。\n攻击力一般。\n饱腹度一般。\n\n(Buff by Puff)"
             },
             donut:{
                 name:"甜甜圈骑士",
+                briefName:"甜甜圈",
                 desc:"攻击力超高。\n饱腹度超高。\n\n别被他圆圆的外表欺骗"
             },
             dumpling: {
                 name:"汤圆军团",
+                briefName:"汤圆",
                 desc:"周围8个格子有几个其他汤圆军团，攻击力就加几倍。\n攻击力较低～很高。\n饱腹度一般。"
             },
             eggroll:{
                 name:"蛋卷吹箭手",
+                briefName:"蛋卷",
                 desc:"远程攻击。仅当与你同一行或同一列时攻击。\n攻击力较高。\n饱腹度较高。"
             },
             icecream: {
                 name:"冰激凌法师",
+                briefName:"冰激凌",
                 desc:"合并或攻击时有一定概率冰冻周围角色（等级越高概率越高）。\n攻击力一般。\n饱腹度一般。\n\n他的法师帽戴反了吗？"
             },
             jelly:{
                 name:"果冻侦察兵",
+                briefName:"果冻",
                 desc:"一定概率躲过近距离攻击（等级越高概率越高）。\n攻击力很低。\n饱腹度较低。"
             },
             lolipop: {
                 name:"棒棒糖兄弟",
+                briefName:"棒棒糖",
                 desc:"攻击时有一定概率使你的卡牌等待时间延长（等级越高概率越高，效果越明显）。\n攻击力一般。\n饱腹度一般。\n\n这就是人棒合一的境界"
             },
             mushmellow:{
                 name:"棉花糖召唤师",
+                briefName:"棉花糖",
                 desc:"合并时召唤云朵遮挡视线（等级越高云朵越多）。\n攻击力较低。\n饱腹度较低。"
             },
             popcorn:{
                 name:"爆米花掷弹兵",
+                briefName:"爆米花",
                 desc:"远程攻击。攻击时有一定概率造成眩晕（等级越高概率越高）。\n攻击力一般。\n饱腹度较高。"
             },
             pudding:{
                 name:"布丁巡逻兵",
+                briefName:"布丁核桃",
                 desc:"软绵无力的巡逻小兵。\n攻击力始终为1。\n饱腹度极低。"
             },
             ricecake:{
                 name:"年糕守卫",
+                briefName:"年糕",
                 desc:"始终粘着不动。\n攻击力较高。\n饱腹度一般。"
             },
             souffle: {
                 name:"蛋奶酥祭司",
+                briefName:"蛋奶酥",
                 desc:"合并时自己和周围敌人升级。\n攻击力一般。\n饱腹度一般。"
             },
             "strawberry-pie":{
                 name:"草莓派将军",
+                briefName:"草莓派",
                 desc:"击中时自己升级1级。\攻击力超高。\n饱腹度超高。"
             }
         },
@@ -259,56 +280,16 @@ var texts_locale = {
         unlock:{
             "infinite":"你解锁了无尽关卡",
             "shop-entry":"你可以访问商店解锁新技能",
-            shop:{
-                "cross-fire":"十字火焰可以在商店中解锁了",
-                "whirl-slash":"回旋扫尾可以在商店中解锁了",
-                "big-whirl-slash":"大回旋扫尾可以在商店中解锁了",
-                cooldown:"冷静技能可以在商店中解锁了",
-                freeze:"冰冻技能可以在商店中解锁了",
-                teleport:"传送技能可以在商店中解锁了",
-                "meteor-shower":"陨石雨技能可以在商店中解锁了",
-                tornado:"狂风技能可以在商店中解锁了",
-                //passive
-                recovery:"恢复技能可以在商店中解锁了",
-                collector:"收集技能可以在商店中解锁了"
-            },
+            //shop unlock maintain in later code
+            shop:{},
 
             handLimit: "手牌上限加１",
             initHp: "初始生命+10",
-            //card
-            card:{
-                "vertical-fire":"在任意关卡中使用纵向火焰",
-                "horizontal-fire":"在任意关卡中使用横向火焰",
-                "cross-fire":"在任意关卡中使用十字火焰",
-                "whirl-slash":"在任意关卡中使用回旋扫尾",
-                "big-whirl-slash":"在任意关卡中使用大回旋扫尾",
-                cooldown:"在任意关卡中使用冷静技能",
-                freeze:"在任意关卡中使用冰冻技能",
-                teleport:"在任意关卡中使用传送技能",
-                tornado:"在任意关卡中使用狂风技能",
-                "meteor-shower":"在任意关卡中使用陨石雨技能",
-                //passive
-                recovery:"在任意关卡中使用恢复技能",
-                collector:"在任意关卡中使用收集技能"
-            },
+            //card unlock maintain in later code
+            card:{},
             
-            //enemy
-            enemy:{
-                "chocolate-cake":"黑森林武士将在无尽关卡中出现",
-                donut:"甜甜圈骑士将在无尽关卡中出现",
-                eggroll:"蛋卷吹箭手将在无尽关卡中出现",
-                jelly:"果冻侦察兵将在无尽关卡中出现",
-                lolipop:"棒棒糖兄弟将在无尽关卡中出现",
-                popcorn:"爆米花掷弹兵将在无尽关卡中出现",
-                mushmellow:"棉花糖召唤师将在无尽关卡中出现",
-                baozi:"豆沙包封印师将在无尽关卡中出现",
-                "strawberry-pie":"草莓派将军将无尽关卡中出现",
-                dumpling:"汤圆军团将无尽关卡中出现",
-                candy:"奶糖诅咒师将在无尽关卡中出现",
-                "cake-roll":"蛋糕卷猎魔者将在无尽关卡中出现",
-                cane:"拐杖糖盗贼将在无尽关卡中出现",
-                catapult:"琥珀核桃投石车将在无尽关卡中出现"
-            }
+            //enemy unlock maintain in later code
+            enemy:{}
         },
 
         achievement:{
@@ -318,342 +299,6 @@ var texts_locale = {
                 },
                 desc: function (level) {
                     return "失去所有生命" + ACHIEVEMENT_ENTRY_MAP["hero-die"].requirement(level) + "次"
-                }
-            },
-            "kill-level-pudding": {
-                name:function(level){
-                    return "布丁杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-pudding"].requirement(level) + "的布丁巡逻兵"
-                }
-            },
-            "kill-max-level-pudding": {
-                name:function(level){
-                    return "精英布丁杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-pudding"].requirement(level) + "或以上的布丁巡逻兵"
-                }
-            },
-            "kill-level-cherrycake": {
-                name:function(level){
-                    return "纸杯蛋糕杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-cherrycake"].requirement(level) + "的纸杯蛋糕下士"
-                }
-            },
-            "kill-max-level-cherrycake": {
-                name:function(level){
-                    return "精英纸杯蛋糕杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-cherrycake"].requirement(level) + "或以上的纸杯蛋糕下士"
-                }
-            },
-            "kill-level-ricecake": {
-                name:function(level){
-                    return "年糕杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-ricecake"].requirement(level) + "的年糕守卫"
-                }
-            },
-            "kill-max-level-ricecake": {
-                name:function(level){
-                    return "精英年糕杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-ricecake"].requirement(level) + "或以上的年糕守卫"
-                }
-            },
-            "kill-level-icecream": {
-                name:function(level){
-                    return "冰激凌杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-icecream"].requirement(level) + "的冰激凌法师"
-                }
-            },
-            "kill-max-level-icecream": {
-                name:function(level){
-                    return "精英冰激凌杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-icecream"].requirement(level) + "或以上的冰激凌法师"
-                }
-            },
-            "kill-level-creampuff": {
-                name:function(level){
-                    return "奶油泡芙杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-creampuff"].requirement(level) + "的奶油泡芙酋长"
-                }
-            },
-            "kill-max-level-creampuff": {
-                name:function(level){
-                    return "精英奶油泡芙杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-creampuff"].requirement(level) + "或以上的奶油泡芙酋长"
-                }
-            },
-            "kill-level-souffle": {
-                name:function(level){
-                    return "蛋奶酥杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-souffle"].requirement(level) + "的蛋奶酥祭司"
-                }
-            },
-            "kill-max-level-souffle": {
-                name:function(level){
-                    return "精英蛋奶酥杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-souffle"].requirement(level) + "或以上的蛋奶酥祭司"
-                }
-            },
-            "kill-level-archer": {
-                name:function(level){
-                    return "豌豆糕杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-archer"].requirement(level) + "的豌豆糕射手"
-                }
-            },
-            "kill-max-level-archer": {
-                name:function(level){
-                    return "精英豌豆糕杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-archer"].requirement(level) + "或以上的豌豆糕射手"
-                }
-            },
-            "kill-level-chocolate-cake": {
-                name:function(level){
-                    return "黑森林杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-chocolate-cake"].requirement(level) + "的黑森林武士"
-                }
-            },
-            "kill-max-level-chocolate-cake": {
-                name:function(level){
-                    return "精英黑森林杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-chocolate-cake"].requirement(level) + "或以上的黑森林武士"
-                }
-            },
-            "kill-level-donut": {
-                name:function(level){
-                    return "甜甜圈杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-donut"].requirement(level) + "的甜甜圈骑士"
-                }
-            },
-            "kill-max-level-donut": {
-                name:function(level){
-                    return "精英甜甜圈杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-donut"].requirement(level) + "或以上的甜甜圈骑士"
-                }
-            },
-            "kill-level-jelly": {
-                name:function(level){
-                    return "果冻杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-jelly"].requirement(level) + "的果冻侦察兵"
-                }
-            },
-            "kill-max-level-jelly": {
-                name:function(level){
-                    return "精英果冻杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-jelly"].requirement(level) + "或以上的果冻侦察兵"
-                }
-            },
-            "kill-level-popcorn": {
-                name:function(level){
-                    return "爆米花杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-popcorn"].requirement(level) + "的爆米花掷弹兵"
-                }
-            },
-            "kill-max-level-popcorn": {
-                name:function(level){
-                    return "精英爆米花杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-popcorn"].requirement(level) + "或以上的爆米花掷弹兵"
-                }
-            },
-            "kill-level-mushmellow": {
-                name:function(level){
-                    return "棉花糖杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-mushmellow"].requirement(level) + "的棉花糖召唤师"
-                }
-            },
-            "kill-max-level-mushmellow": {
-                name:function(level){
-                    return "精英棉花糖杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-mushmellow"].requirement(level) + "或以上的棉花糖召唤师"
-                }
-            },
-            "kill-level-lolipop": {
-                name:function(level){
-                    return "棒棒糖杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-lolipop"].requirement(level) + "的棒棒糖兄弟"
-                }
-            },
-            "kill-max-level-lolipop": {
-                name:function(level){
-                    return "精英棒棒糖杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-lolipop"].requirement(level) + "或以上的棒棒糖兄弟"
-                }
-            },
-            "kill-level-eggroll": {
-                name:function(level){
-                    return "蛋卷杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-eggroll"].requirement(level) + "的蛋卷吹箭手"
-                }
-            },
-            "kill-max-level-eggroll": {
-                name:function(level){
-                    return "精英蛋卷杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-eggroll"].requirement(level) + "或以上的蛋卷吹箭手"
-                }
-            },
-            "kill-level-baozi": {
-                name:function(level){
-                    return "豆沙包杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-baozi"].requirement(level) + "的豆沙包封印师"
-                }
-            },
-            "kill-max-level-baozi": {
-                name:function(level){
-                    return "精英豆沙包杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-baozi"].requirement(level) + "或以上的豆沙包封印师"
-                }
-            },
-            "kill-level-strawberry-pie": {
-                name:function(level){
-                    return "草莓派杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-strawberry-pie"].requirement(level) + "的草莓派将军"
-                }
-            },
-            "kill-max-level-strawberry-pie": {
-                name:function(level){
-                    return "精英草莓派杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-strawberry-pie"].requirement(level) + "或以上的草莓派将军"
-                }
-            },
-            "kill-level-dumpling": {
-                name:function(level){
-                    return "汤圆杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-dumpling"].requirement(level) + "的汤圆军团"
-                }
-            },
-            "kill-max-level-dumpling": {
-                name:function(level){
-                    return "精英汤圆杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-dumpling"].requirement(level) + "或以上的汤圆军团"
-                }
-            },
-            "kill-level-candy": {
-                name:function(level){
-                    return "奶糖杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-candy"].requirement(level) + "的奶糖咒术师"
-                }
-            },
-            "kill-max-level-candy": {
-                name:function(level){
-                    return "精英奶糖杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-candy"].requirement(level) + "或以上的奶糖咒术师"
-                }
-            },
-            "kill-level-cake-roll": {
-                name:function(level){
-                    return "蛋糕卷杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-cake-roll"].requirement(level) + "的蛋糕卷猎魔者"
-                }
-            },
-            "kill-max-level-cake-roll": {
-                name:function(level){
-                    return "精英蛋糕卷杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-cake-roll"].requirement(level) + "或以上的蛋糕卷猎魔者"
-                }
-            },
-            "kill-level-cane": {
-                name:function(level){
-                    return "拐杖糖杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-cane"].requirement(level) + "的拐杖糖盗贼"
-                }
-            },
-            "kill-max-level-cane": {
-                name:function(level){
-                    return "精英拐杖糖杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-cane"].requirement(level) + "或以上的拐杖糖盗贼"
-                }
-            },
-            "kill-level-catapult": {
-                name:function(level){
-                    return "琥珀核桃杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-catapult"].requirement(level) + "的琥珀核桃投石车"
-                }
-            },
-            "kill-max-level-catapult": {
-                name:function(level){
-                    return "精英琥珀核桃杀手"+LEVEL_TEXT_MAP[level];
-                },
-                desc: function (level) {
-                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-catapult"].requirement(level) + "或以上的琥珀核桃投石车"
                 }
             }
         }
@@ -665,3 +310,42 @@ var texts_locale = {
 
 texts_locale.zh.movable["vertical-log7"]=texts_locale.zh.movable["vertical-log6"]=texts_locale.zh.movable["vertical-log5"]=texts_locale.zh.movable["vertical-log4"]=texts_locale.zh.movable["vertical-log3"]=texts_locale.zh.movable["vertical-log2"]
 texts_locale.zh.movable["horizontal-log7"]=texts_locale.zh.movable["horizontal-log6"]=texts_locale.zh.movable["horizontal-log5"]=texts_locale.zh.movable["horizontal-log4"]=texts_locale.zh.movable["horizontal-log3"]=texts_locale.zh.movable["horizontal-log2"]=texts_locale.zh.movable["horizontal-log2"]
+
+//unlock shop
+_.each(["cross-fire","whirl-slash","big-whirl-slash","cooldown",
+    "freeze","teleport","tornado","meteor-shower","collector"],function(cardName){
+    texts_locale.zh.unlock.shop[cardName] = texts_locale.zh.card[cardName].name+"可以在商店中解锁了"
+})
+
+//unlock card
+_.each(["vertical-fire","horizontal-fire","cross-fire","whirl-slash","big-whirl-slash","cooldown",
+    "freeze","teleport","tornado","meteor-shower","collector"],function(cardName){
+    texts_locale.zh.unlock.card[cardName] = "在任意关卡中使用"+texts_locale.zh.card[cardName].name+"技能"
+})
+
+//unlock enemy
+_.each(["baozi","cake-roll","candy","cane","catapult","chocolate-cake",
+    "donut","dumpling","eggroll","jelly","lolipop","mushmellow","popcorn","strawberry-pie"],function(enemyName){
+    texts_locale.zh.unlock.enemy[enemyName] = texts_locale.zh.movable[enemyName].name+"将在无尽关卡中出现"
+})
+
+//kill achievement
+_.each(["archer","baozi","cake-roll","candy","cane","catapult","cherrycake","chocolate-cake","creampuff",
+    "donut","dumpling","eggroll","icecream","jelly","lolipop","mushmellow","popcorn","pudding","ricecake","souffle","strawberry-pie"],function(enemyName){
+    texts_locale.zh.achievement["kill-level-"+enemyName] = {
+        name:function(level){
+            return texts_locale.zh.movable[enemyName].briefName+"杀手"+LEVEL_TEXT_MAP[level];
+        },
+        desc: function (level) {
+            return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-"+enemyName].requirement(level) + "的"+texts_locale.zh.movable[enemyName].name
+        }
+    }
+    texts_locale.zh.achievement["kill-max-level-"+enemyName] = {
+        name:function(level){
+            return texts_locale.zh.movable[enemyName].briefName+"杀手"+LEVEL_TEXT_MAP[level];
+        },
+        desc: function (level) {
+            return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-"+enemyName].requirement(level) + "或以上的"+texts_locale.zh.movable[enemyName].name
+        }
+    }
+})
