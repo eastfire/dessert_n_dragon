@@ -450,5 +450,27 @@ ACHIEVEMENT_ENTRY_MAP = {
             return level*5+5
         },
         validation: "statistic"
+    },
+    "kill-level-catapult": {
+        index: 41,
+        maxLevel: 5,
+        reward: function (level) {
+            return level * 50;
+        },
+        requirement: function (level) {
+            return Math.pow(10, level) * 10
+        },
+        validation: "statistic"
+    },
+    "kill-max-level-catapult": {
+        index: 42,
+        maxLevel: 4,
+        reward: function (level) {
+            return level * 100;
+        },
+        requirement: function (level) {
+            return level*5+5
+        },
+        validation: "statistic"
     }
 }

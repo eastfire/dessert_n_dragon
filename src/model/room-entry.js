@@ -55,15 +55,10 @@ var infiniteRoom = {
         {type:"dumpling"},
         {type:"candy"},
         {type:"cake-roll"},
-        {type:"cane"}
+        {type:"cane"},
+        {type:"catapult"}
     ],
-    enemyPool:[{
-        type:"pudding", subtype:"red"
-    },{
-        type:"pudding", subtype:"yellow"
-    },{
-        type:"pudding", subtype:"blue"
-    }],
+    enemyPool:[{type:"pudding", subtype:"red"},{type:"pudding", subtype:"yellow"},{type:"pudding", subtype:"blue"}],
     itemPool:STANDARD_ITEM_POOL,
     exits:[{x:1,y:1},{x:5,y:5}],
     initTiles: tiles5x5,
@@ -2686,12 +2681,12 @@ rooms.push({
     loseAnyConditions:[
         "outOfTurn"
     ],
-    enemyPool:[{type:"cake-roll"},{type:"dumpling"},{type:"candy"}],
+    enemyPool:[{type:"catapult"},{type:"dumpling"},{type:"candy"}],
     enemyLevelPool:[1,2],
     itemPool:STANDARD_ITEM_POOL,
-    initTiles: tiles6x5Wang,
+    initTiles:tiles7x6SplitAndPortal,
     exits:[{x:1,y:1},{x:6,y:5},{x:6,y:1},{x:1,y:5}],
     initHero: STANDARD_HERO,
-    initHand:[{type:"horizontal-fire"},{type:"vertical-fire"}],
+    initHand:[ {type:"teleport"} ],
     choicePool:STANDARD_CHOICE_POOL
 });

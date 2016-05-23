@@ -313,6 +313,14 @@ var HeroModel = MovableModel.extend({
     },
     getCursed:function(){
         this.set("cursed",1)
+    },
+    afterTeleport:function(){
+        MovableModel.prototype.afterTeleport.call(this);
+        currentRoom.foreachMovable(function(movable){
+            if (!( movable instanceof HeroModel )) {
+                movable.afterHeroTeleport();
+            }
+        },this);
     }
 })
 

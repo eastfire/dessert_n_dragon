@@ -455,6 +455,9 @@ var RoomModel = Backbone.Model.extend({
         _.each(this.__movables,function(movableModel){
             movableModel.afterTurnStartStep2()
         },this)
+        _.each(this.__movables,function(movableModel){
+            movableModel.afterTurnStartStep3()
+        },this)
 
         if ( this.passCheckCondition() ) {
             this.nextPhase();

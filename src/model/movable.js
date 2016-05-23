@@ -221,6 +221,8 @@ var MovableModel = Backbone.Model.extend({
     },
     afterTeleport:function(){
     },
+    afterHeroTeleport:function(){
+    },
     beltTo:function(newPosition){
         this.trigger("beltTo", newPosition);
         this.__changePositionAtTurnStart = currentRoom.get("turnNumber");
@@ -237,6 +239,8 @@ var MovableModel = Backbone.Model.extend({
         if ( this.__changePositionAtTurnStart === currentRoom.get("turnNumber") ) {
             this.setNewPosition(this.__newPositionAtTurnStart);
         }
+    },
+    afterTurnStartStep3:function(){
     }
 })
 

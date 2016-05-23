@@ -353,6 +353,51 @@ MOVABLE_MODEL_MAP.cane = EnemyModel.extend({
     }
 })
 
+MOVABLE_MODEL_MAP.catapult = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "catapult"
+        } )
+    },
+    afterAllMove:function(movable){
+        EnemyModel.prototype.afterAllMove.call(this,movable);
+        this.reCalculateAttack();
+    },
+    afterGenerate:function(){
+        this.reCalculateAttack();
+        EnemyModel.prototype.afterGenerate.call(this);
+    },
+    afterTurnStartStep3:function(){
+        EnemyModel.prototype.afterTurnStartStep3.call(this);
+        this.reCalculateAttack();
+    },
+    afterHeroTeleport:function(){
+        EnemyModel.prototype.afterHeroTeleport.call(this);
+        this.reCalculateAttack();
+    },
+    afterTeleport:function(){
+        EnemyModel.prototype.afterTeleport.call(this);
+        this.reCalculateAttack();
+    },
+    reCalculateAttack:function(){
+        var myPosition = this.get("positions")[0];
+        var heroPosition = currentRoom.getHero().get("positions")[0];
+        var rate = Math.max(0, Math.abs(heroPosition.x - myPosition.x)+Math.abs(heroPosition.y - myPosition.y)-3);
+        this.set("baseAttack", this.attackOfLevel(this.get("level"))*Math.round(rate/2));
+    },
+    checkRange:function(hero){
+        var myPosition = this.get("positions")[0];
+        var heroPosition = currentRoom.getHero().get("positions")[0];
+        return Math.abs(heroPosition.x - myPosition.x)+Math.abs(heroPosition.y - myPosition.y) > 3
+    },
+    expOfLevel:function(l){ //极高
+        return ((l+1)/2*l+1)*EXP_INFLATION_RATE;
+    },
+    attackOfLevel:function(l){ //极低
+        return Math.round(Math.log(l+1)*2);
+    }
+})
+
 MOVABLE_MODEL_MAP.cherrycake = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{

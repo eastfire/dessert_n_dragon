@@ -60,7 +60,7 @@ var EnemySprite = MovableSprite.extend({
     }
 });
 
-MOVABLE_SPRITE_MAP["archer"] = EnemySprite.extend({
+MOVABLE_SPRITE_MAP.archer = EnemySprite.extend({
     attack:function(enemyModel, hero){
         var heroPosition = hero.getPosition()
         var point = this.model.getClosestPoint(heroPosition)
@@ -80,4 +80,4 @@ MOVABLE_SPRITE_MAP["archer"] = EnemySprite.extend({
     }
 });
 
-MOVABLE_SPRITE_MAP["eggroll"] = MOVABLE_SPRITE_MAP["popcorn"] = MOVABLE_SPRITE_MAP["archer"]
+MOVABLE_SPRITE_MAP.catapult = MOVABLE_SPRITE_MAP.eggroll = MOVABLE_SPRITE_MAP.popcorn = MOVABLE_SPRITE_MAP.archer

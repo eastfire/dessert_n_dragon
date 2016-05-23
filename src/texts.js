@@ -42,13 +42,17 @@ var texts_locale = {
                 name:"蛋糕卷猎魔者",
                 desc:"你的魔法攻击对他无效，且会让他升级。\n攻击力很高。\n饱腹度很高。"
             },
+            candy: {
+                name:"奶糖咒术师",
+                desc:"击中时有一定概率使你被诅咒（下一次恢复生命量减半）（等级越高概率越高）。\n攻击力较低。\n饱腹度一般。"
+            },
             cane: {
                 name:"拐杖糖盗贼",
                 desc:"周围8个格子有几个道具，攻击力就加几倍。\n攻击力一般～很高。\n饱腹度一般。"
             },
-            candy: {
-                name:"奶糖咒术师",
-                desc:"击中时有一定概率使你被诅咒（下一次恢复生命量减半）（等级越高概率越高）。\n攻击力较低。\n饱腹度一般。"
+            catapult: {
+                name:"琥珀核桃投石车",
+                desc:"远程攻击，距离你越远攻击力越高。距离1～3格内不会攻击。\n攻击力极低～很高。\n饱腹度极高。"
             },
             cherrycake: {
                 name: "纸杯蛋糕下士",
@@ -302,7 +306,8 @@ var texts_locale = {
                 dumpling:"汤圆军团将无尽关卡中出现",
                 candy:"奶糖诅咒师将在无尽关卡中出现",
                 "cake-roll":"蛋糕卷猎魔者将在无尽关卡中出现",
-                cane:"拐杖糖盗贼将在无尽关卡中出现"
+                cane:"拐杖糖盗贼将在无尽关卡中出现",
+                catapult:"琥珀核桃投石车将在无尽关卡中出现"
             }
         },
 
@@ -633,6 +638,22 @@ var texts_locale = {
                 },
                 desc: function (level) {
                     return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-cane"].requirement(level) + "或以上的拐杖糖盗贼"
+                }
+            },
+            "kill-level-catapult": {
+                name:function(level){
+                    return "琥珀核桃杀手"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-catapult"].requirement(level) + "的琥珀核桃投石车"
+                }
+            },
+            "kill-max-level-catapult": {
+                name:function(level){
+                    return "精英琥珀核桃杀手"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-catapult"].requirement(level) + "或以上的琥珀核桃投石车"
                 }
             }
         }
