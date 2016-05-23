@@ -518,7 +518,7 @@ MOVABLE_MODEL_MAP.jelly = EnemyModel.extend({
         return Math.round(l/2);
     },
     dexterityOfLevel:function(l){
-        return Math.min(75, l*(l+1)/2);
+        return Math.min(83, l*(l+1)/2+5);
     }
 })
 
