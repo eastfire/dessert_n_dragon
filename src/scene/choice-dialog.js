@@ -64,6 +64,8 @@ var ChoiceDialog = cc.Scale9Sprite.extend({
             if ( choice.type === "card" || choice.type === "levelUpCard" ) {
                 var cardSprite = new CardSprite({
                     isDemo: true,
+                    showDetail: true,
+                    isLevelUp : choice.type === "levelUpCard",
                     model: new CARD_MODEL_MAP[choice.cardType]({level:choice.cardLevel})
                 })
                 cardSprite.attr({

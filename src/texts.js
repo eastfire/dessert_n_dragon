@@ -215,61 +215,61 @@ var texts_locale = {
             collector: {
                 name:"收集",
                 desc: function(level){
-                    return "被动：获得道具的效果+"+CARD_MODEL_MAP.collector.getEffect(level)+"（当前"+currentRoom.getHero().get("collector")+"）\n使用时：1回合内暂时提升幸运"+CARD_MODEL_MAP.collector.getUseEffect;
+                    return "被动：获得道具的效果+"+CARD_MODEL_MAP.collector.getEffect(level)+"\n（当前"+currentRoom.getHero().get("collector")+"）\n使用时：1回合内暂时提升幸运"+CARD_MODEL_MAP.collector.getUseEffect;
                 },
                 levelUpDesc: function(level){
-                    return "被动：获得道具的效果+"+CARD_MODEL_MAP.collector.getEffect(level)+"(↑"+CARD_MODEL_MAP.collector.getEffectDiff(level)+")（当前"+currentRoom.getHero().get("collector")+"）\n使用时：1回合内暂时提升幸运"+CARD_MODEL_MAP.collector.getUseEffect;
+                    return "被动：获得道具的效果+"+CARD_MODEL_MAP.collector.getEffect(level)+"(↑"+CARD_MODEL_MAP.collector.getEffectDiff(level)+")\n（当前"+currentRoom.getHero().get("collector")+"）\n使用时：1回合内暂时提升幸运"+CARD_MODEL_MAP.collector.getUseEffect;
                 }
             },
             constitution: {
                 name:"强壮",
                 desc: function(level){
-                    return "被动：生命上限+"+CARD_MODEL_MAP.constitution.getEffect(level)+"\n使用时：恢复"+CARD_MODEL_MAP.constitution.getUseEffect+"点生命";
+                    return "被动：生命上限+"+CARD_MODEL_MAP.constitution.getEffect(level)+"\n主动：恢复"+CARD_MODEL_MAP.constitution.getUseEffect+"点生命";
                 },
                 levelUpDesc: function(level){
-                    return "被动：生命上限+"+CARD_MODEL_MAP.constitution.getEffect(level)+"(↑"+CARD_MODEL_MAP.constitution.getEffectDiff(level)+")\n使用时：恢复"+CARD_MODEL_MAP.constitution.getUseEffect+"点生命";
+                    return "被动：生命上限+"+CARD_MODEL_MAP.constitution.getEffect(level)+"(↑"+CARD_MODEL_MAP.constitution.getEffectDiff(level)+")\n主动：恢复"+CARD_MODEL_MAP.constitution.getUseEffect+"点生命";
                 }
             },
             cunning: {
                 name:"健身",
                 desc: function(level){
-                    return "被动：升级需要的饱腹度减少"+CARD_MODEL_MAP.cunning.getEffect(level)+"% 当前"+currentRoom.getHero().get("cunning")+"%\n使用时：获得"+CARD_MODEL_MAP.cunning.getUseEffect+"点饱腹度";
+                    return "被动：升级需要的饱腹度减少"+CARD_MODEL_MAP.cunning.getEffect(level)+"%\n当前"+currentRoom.getHero().get("cunning")+"%\n主动：获得"+CARD_MODEL_MAP.cunning.getUseEffect+"点饱腹度";
                 },
                 levelUpDesc: function(level){
-                    return "被动：升级需要的饱腹度减少"+CARD_MODEL_MAP.cunning.getEffect(level)+"%(↑"+CARD_MODEL_MAP.cunning.getEffectDiff(level)+"%) 当前"+currentRoom.getHero().get("cunning")+"%\n使用时：获得"+CARD_MODEL_MAP.cunning.getUseEffect+"点饱腹度";
+                    return "被动：升级需要的饱腹度减少"+CARD_MODEL_MAP.cunning.getEffect(level)+"%(↑"+CARD_MODEL_MAP.cunning.getEffectDiff(level)+"%)\n当前"+currentRoom.getHero().get("cunning")+"%\n主动：获得"+CARD_MODEL_MAP.cunning.getUseEffect+"点饱腹度";
                 }
             },
             dexterity: {
                 name:"敏捷",
                 desc: function(level){
-                    return "被动：躲开敌人近战攻击的概率+"+CARD_MODEL_MAP.dexterity.getEffect(level)+"% 当前"+currentRoom.getHero().get("dexterity")+"%\n使用时：1回合内暂时提升敏捷"+CARD_MODEL_MAP.dexterity.getUseEffect;
+                    return "被动：躲开敌人近战攻击的概率+"+CARD_MODEL_MAP.dexterity.getEffect(level)+"%\n当前"+currentRoom.getHero().get("dexterity")+"%\n主动：1回合内暂时提升敏捷"+CARD_MODEL_MAP.dexterity.getUseEffect;
                 },
                 levelUpDesc: function(level){
-                    return "被动：躲开敌人近战攻击的概率+"+CARD_MODEL_MAP.dexterity.getEffect(level)+"%(↑"+CARD_MODEL_MAP.dexterity.getEffectDiff(level)+") 当前"+currentRoom.getHero().get("dexterity")+"%\n使用时：1回合内暂时提升敏捷"+CARD_MODEL_MAP.dexterity.getUseEffect;
+                    return "被动：躲开敌人近战攻击的概率+"+CARD_MODEL_MAP.dexterity.getEffect(level)+"%(↑"+CARD_MODEL_MAP.dexterity.getEffectDiff(level)+")\n当前"+currentRoom.getHero().get("dexterity")+"%\n主动：1回合内暂时提升敏捷"+CARD_MODEL_MAP.dexterity.getUseEffect;
                 }
             },
             dodge: {
                 name:"闪躲",
                 desc: function(level){
-                    return "被动：躲开敌人远程攻击的概率+"+CARD_MODEL_MAP.dodge.getEffect(level)+"% 当前"+currentRoom.getHero().get("dodge")+"%\n使用时：1回合内暂时提升闪躲"+CARD_MODEL_MAP.dodge.getUseEffect;
+                    return "被动：躲开敌人远程攻击的概率+"+CARD_MODEL_MAP.dodge.getEffect(level)+"%\n当前"+currentRoom.getHero().get("dodge")+"%\n主动：1回合内暂时提升闪躲"+CARD_MODEL_MAP.dodge.getUseEffect;
                 },
                 levelUpDesc: function(level){
-                    return "被动：躲开敌人远程攻击的概率+"+CARD_MODEL_MAP.dodge.getEffect(level)+"%(↑"+CARD_MODEL_MAP.dodge.getEffectDiff(level)+") 当前"+currentRoom.getHero().get("dodge")+"%\n使用时：1回合内暂时提升闪躲"+CARD_MODEL_MAP.dodge.getUseEffect;
+                    return "被动：躲开敌人远程攻击的概率+"+CARD_MODEL_MAP.dodge.getEffect(level)+"%(↑"+CARD_MODEL_MAP.dodge.getEffectDiff(level)+")\n当前"+currentRoom.getHero().get("dodge")+"%\n主动：1回合内暂时提升闪躲"+CARD_MODEL_MAP.dodge.getUseEffect;
                 }
             },
             luck: {
                 name:"幸运",
                 desc: function(level){
-                    return "被动：幸运+"+CARD_MODEL_MAP.luck.getEffect(level)+"（当前"+currentRoom.getHero().get("luck")+"）\n使用时：1回合内暂时提升幸运"+CARD_MODEL_MAP.luck.getUseEffect;
+                    return "被动：道具掉落概率+"+CARD_MODEL_MAP.luck.getEffect(level)+"％\n（当前"+currentRoom.getHero().get("luck")+"％）\n主动：1回合内暂时提升道具掉落概率"+CARD_MODEL_MAP.luck.getUseEffect+"％";
                 },
                 levelUpDesc: function(level){
-                    return "被动：幸运+"+CARD_MODEL_MAP.luck.getEffect(level)+"(↑"+1+")（当前"+currentRoom.getHero().get("luck")+"）\n使用时：1回合内暂时提升幸运"+CARD_MODEL_MAP.luck.getUseEffect;
+                    return "被动：道具掉落概率+"+CARD_MODEL_MAP.luck.getEffect(level)+"(↑"+1+"％)\n（当前"+currentRoom.getHero().get("luck")+"）\n主动：1回合内暂时提升道具掉落概率"+CARD_MODEL_MAP.luck.getUseEffect+"％";
                 }
             },
             recovery: {
                 name:"恢复",
                 desc: function(level){
-                    return "被动：升级时多恢复"+CARD_MODEL_MAP.recovery.getEffect(level)+"%生命 当前"+currentRoom.getHero().get("recovery")+"%\n使用时：恢复"+CARD_MODEL_MAP.recovery.getUseEffect+"点生命";;
+                    return "被动：升级时多恢复"+CARD_MODEL_MAP.recovery.getEffect(level)+"%生命 当前"+currentRoom.getHero().get("recovery")+"%\n主动：恢复"+CARD_MODEL_MAP.recovery.getUseEffect+"点生命";;
                 },
                 levelUpDesc: function(level){
                     return "升级时再多恢复"+CARD_MODEL_MAP.recovery.getEffectDiff(level)+"%生命 当前"+currentRoom.getHero().get("recovery")+"%";

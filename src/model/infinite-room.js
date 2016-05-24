@@ -77,11 +77,12 @@ ROOM_MODEL_MAP.infinite = RoomModel.extend({
         this.trigger("switch-room",this);
     },
     initialize:function(){
-        if ( this.get("turnNumber") === 0 ) {
+        if ( this.get("turnNumber") === 0 && !this.get("roomInitialized")) {
             var randomRoomEntry = _.sample(rooms)
             this.set("exits",clone(randomRoomEntry.exits));
             this.set("initTiles", clone(randomRoomEntry.initTiles) );
             this.get("initHero").positions = clone(randomRoomEntry.initHero.positions);
+            this.set("roomInitialized",true);
         }
         RoomModel.prototype.initialize.call(this);
     },

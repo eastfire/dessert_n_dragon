@@ -1,8 +1,12 @@
+var LONG_CLICK_THRESHOLD = 1200;
+
 var CardSprite = BaseSprite.extend({
     ctor: function (options) {
         this._super(options);
 
         this.isDemo = options.isDemo;
+        this.isLevelUp = options.isLevelUp;
+        this.showDetail = options.showDetail;
         this.setName(this.model.cid);
         this.initCardLayout();
         this.renderWait();
@@ -36,9 +40,8 @@ var CardSprite = BaseSprite.extend({
                 }
                 if (currentRoom.isAcceptInput()) {
                     if (cc.rectContainsPoint(rect, locationInNode)) {
-                        if ( target.model.canUse()) {
-                            return true;
-                        }
+                        self.__clickTime = new Date().getTime();
+                        return true;
                     }
                 }
                 return false;
@@ -50,9 +53,49 @@ var CardSprite = BaseSprite.extend({
             onTouchEnded: function (touch, event) {
                 var target = event.getCurrentTarget();
                 if ( self.isDemo ) {
-                    //TODO show card info dialog
+                    var layer = new ModalDialogLayer({
+                        maskColor:cc.color.WHITE,
+                        clickSideCancel: true
+                    });
+                    mainLayer.addChild(layer,250);
+
+                    var dialog = new CardInfoDialog({
+                        model: self.model,
+                        modalLayer: layer,
+                        isLevelUp: self.isLevelUp
+                    })
+                    layer.setDialogSprite(dialog);
+                    layer.addChild(dialog);
+                    dialog.appear();
                 } else {
-                    target.model.use();
+                    var currentTime = new Date().getTime();
+                    if ( currentTime - self.__clickTime > LONG_CLICK_THRESHOLD ) {
+                        //TODO
+                       /* var layer = new ModalDialogLayer({
+                            maskColor:cc.color.WHITE,
+                            clickSideCancel: true
+                        });
+                        mainLayer.addChild(layer,250);
+
+                        currentRoom.blockInput();
+                        currentRoomSprite.stopClock();
+
+                        var dialog = new CardInfoDialog({
+                            model: new CARD_MODEL_MAP[choice.cardType](self.model.toJSON()),
+                            modalLayer: layer,
+                            callback:function(){
+                                currentRoom.unblockInput();
+                                currentRoomSprite.startClock();
+                            }
+                        })
+                        layer.setDialogSprite(dialog);
+                        layer.addChild(dialog);
+                        dialog.appear();*/
+                    } else {
+                        if (target.model.canUse()) {
+                            target.model.use();
+                        }
+                    }
                 }
             }
         }, this);
@@ -109,11 +152,19 @@ var CardSprite = BaseSprite.extend({
         }
     },
     renderWait:function(){
-        if ( this.model.get("waitTurn") ){
+        var waitTurn = this.model.getWait();
+        if ( this.showDetail ) {
+            waitTurn = this.model.waitTurnOfLevel(this.model.get("level"));
+        }
+        if ( waitTurn ){
             this.waitIcon.setVisible(true);
             this.waitLabel.setVisible(true);
-            this.waitLabel.setString(this.model.getWait())
-            this.disableMask.setVisible(true);
+            this.waitLabel.setString(waitTurn)
+            if ( this.showDetail ) {
+                this.disableMask.setVisible(false);
+            } else {
+                this.disableMask.setVisible(true);
+            }
         }  else {
             this.waitIcon.setVisible(false);
             this.waitLabel.setVisible(false);

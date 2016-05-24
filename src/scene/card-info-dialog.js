@@ -5,6 +5,7 @@ var CardInfoDialog = cc.Sprite.extend({
         this.model = options.model;
         this.isLevelUp = options.isLevelUp;
         this.modalLayer = options.modalLayer;
+        this.callback = options.callback;
 
         this.attr({
             x:cc.winSize.width/2,
@@ -13,12 +14,15 @@ var CardInfoDialog = cc.Sprite.extend({
             height: 600
         })
 
-        var cardSprite = new CardSprite({model:this.model});
+        var cardSprite = new CardSprite({
+            showDetail: true,
+            model:this.model
+        });
         cardSprite.attr({
             x: this.width/2,
-            y: this.height/2,
-            scaleX: 3,
-            scaleY: 3
+            y: this.height/2+50,
+            scaleX: 2,
+            scaleY: 2
         })
         this.addChild(cardSprite);
 
@@ -26,19 +30,19 @@ var CardInfoDialog = cc.Sprite.extend({
         cardNameLabel.attr({
             color: colors.gameOver.ok,
             x: this.width/2,
-            y: this.height - 50,
+            y: this.height - 40,
             anchorX: 0.5,
             anchorY: 0.5
         });
         this.addChild(cardNameLabel)
 
-        var desc;
+        var desc = "最大等级"+this.model.get("maxLevel")+"\n";
         if (this.isLevelUp){
-            desc = getCardLevelUpDesc( this.model.get("type"), this.model.get("level"));
+            desc += getCardLevelUpDesc( this.model.get("type"), this.model.get("level"));
         } else {
-            desc = getCardDesc( this.model.get("type"), this.model.get("level"));
+            desc += getCardDesc( this.model.get("type"), this.model.get("level"));
         }
-        var cardDescLabel = new cc.LabelTTF(desc, null, 24 );
+        var cardDescLabel = new cc.LabelTTF(desc, null, 22 );
         cardDescLabel.attr({
             color: colors.gameOver.ok,
             x: this.width/2,
@@ -51,13 +55,14 @@ var CardInfoDialog = cc.Sprite.extend({
     appear:function(){
 //        this.runAction( cc.moveBy(times.gameOverDialog, 0, -cc.winSize.height).easing(cc.easeBounceOut())  )
     },
-    disappear:function(callback){
+    disappear:function(){
+        var callback = this.callback || function(){}
         this.runAction(cc.sequence(
-//            cc.moveBy(times.gameOverDialog, 0, cc.winSize.height),
+            cc.delayTime(0.01),
             cc.removeSelf(),
             cc.callFunc(callback,this),
             cc.callFunc(function(){
-
+                this.modalLayer.removeFromParent();
             },this)
         ))
     }

@@ -709,8 +709,8 @@ var RoomScene = cc.Scene.extend({
     },
     onEnter:function () {
         this._super();
-        var layer = new MainLayer(this.options);
-        this.addChild(layer);
+        window.mainLayer = new MainLayer(this.options);
+        this.addChild(window.mainLayer);
     }
 });
 
