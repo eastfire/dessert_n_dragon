@@ -3,6 +3,7 @@ var CardInfoDialog = cc.Sprite.extend({
         this._super();
 
         this.model = options.model;
+        this.isLevelUp = options.isLevelUp;
         this.modalLayer = options.modalLayer;
 
         this.attr({
@@ -19,10 +20,27 @@ var CardInfoDialog = cc.Sprite.extend({
             scaleX: 3,
             scaleY: 3
         })
-
         this.addChild(cardSprite);
 
+        var cardNameLabel = new cc.LabelTTF(getCardName(this.model.get("type")), null, 30 );
+        cardNameLabel.attr({
+            color: colors.gameOver.ok,
+            x: this.width/2,
+            y: this.height - 50,
+            anchorX: 0.5,
+            anchorY: 0.5
+        });
+        this.addChild(cardNameLabel)
 
+        var cardDescLabel = new cc.LabelTTF(getCardLevelUpDesc( this.model.get("type"), this.model.get("level"), this.isLevelUp), null, 24 );
+        cardDescLabel.attr({
+            color: colors.gameOver.ok,
+            x: this.width/2,
+            y: 100,
+            anchorX: 0.5,
+            anchorY: 0.5
+        });
+        this.addChild(cardDescLabel)
     },
     appear:function(){
 //        this.runAction( cc.moveBy(times.gameOverDialog, 0, -cc.winSize.height).easing(cc.easeBounceOut())  )
