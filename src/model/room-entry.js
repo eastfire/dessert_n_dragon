@@ -2651,7 +2651,7 @@ rooms.push({
     itemPool:STANDARD_ITEM_POOL,
     initTiles: tiles5x5,
     initHand:[{type:"tail-slash"},{type:"tail-slash"} ],
-    exits:[{x:1,y:1},{x:6,y:5},{x:6,y:1},{x:1,y:5}],
+    exits:[{x:1,y:1},{x:5,y:5},{x:5,y:1},{x:1,y:5}],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL
 });
