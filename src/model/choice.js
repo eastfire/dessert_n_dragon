@@ -37,7 +37,10 @@ var CHOICE_FACTORY_MAP = {
     },
     getCard:function(roomModel,opt){
         return {
-            description:"获得技能卡："+getCardName(opt.type)+"\n"+getCardDesc(opt.type, opt.level || 1),
+            type:"card",
+            cardType: opt.type,
+            cardLevel: opt.level || 1,
+            description:"获得技能卡："+getCardName(opt.type)+"\n点击卡牌查看详情",
             onChosen:function(roomModel){
                 roomModel.gainCard(opt);
             }
@@ -52,7 +55,10 @@ var CHOICE_FACTORY_MAP = {
         var type = cardModel.get("type")
         var targetLevel = cardModel.get("level")+1
         return {
-            description:"将"+getCardName(type)+"升级到"+targetLevel+"级\n"+getCardLevelUpDesc( type, targetLevel),
+            type:"levelUpCard",
+            cardType: type,
+            cardLevel: targetLevel,
+            description:"将"+getCardName(type)+"升级到"+targetLevel+"级\n点击卡牌查看详情",
             onChosen:function(roomModel){
                 cardModel.levelUp(1);
             }
@@ -67,7 +73,10 @@ var CHOICE_FACTORY_MAP = {
         var cardModel = _.sample(validCards);
         var targetLevel = cardModel.get("level")+1
         return {
-            description:"将"+getCardName(type)+"升级到"+targetLevel+"级\n"+getCardLevelUpDesc( type, targetLevel),
+            type:"levelUpCard",
+            cardType: type,
+            cardLevel: targetLevel,
+            description:"将"+getCardName(type)+"升级到"+targetLevel+"级\nn点击卡牌查看详情",
             onChosen:function(roomModel){
                 cardModel.levelUp(1);
             }

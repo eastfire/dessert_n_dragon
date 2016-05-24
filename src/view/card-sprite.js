@@ -2,6 +2,7 @@ var CardSprite = BaseSprite.extend({
     ctor: function (options) {
         this._super(options);
 
+        this.isDemo = options.isDemo;
         this.setName(this.model.cid);
         this.initCardLayout();
         this.renderWait();
@@ -21,15 +22,19 @@ var CardSprite = BaseSprite.extend({
         this.model.on("use",this.useCard,this);
         this.model.on("discard",this.onDestroy,this);
 
+        var self = this;
         cc.eventManager.addListener(this.listener = {
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             swallowTouches: true,
             onTouchBegan: function (touch, event) {
+                var target = event.getCurrentTarget();
+                var locationInNode = target.convertToNodeSpace(touch.getLocation());
+                var s = target.getContentSize();
+                var rect = cc.rect(0, 0, s.width, s.height);
+                if ( self.isDemo && cc.rectContainsPoint(rect, locationInNode) ) {
+                    return true;
+                }
                 if (currentRoom.isAcceptInput()) {
-                    var target = event.getCurrentTarget();
-                    var locationInNode = target.convertToNodeSpace(touch.getLocation());
-                    var s = target.getContentSize();
-                    var rect = cc.rect(0, 0, s.width, s.height);
                     if (cc.rectContainsPoint(rect, locationInNode)) {
                         if ( target.model.canUse()) {
                             return true;
@@ -44,7 +49,11 @@ var CardSprite = BaseSprite.extend({
             //Process the touch end event
             onTouchEnded: function (touch, event) {
                 var target = event.getCurrentTarget();
-                target.model.use();
+                if ( self.isDemo ) {
+                    //TODO show card info dialog
+                } else {
+                    target.model.use();
+                }
             }
         }, this);
     },

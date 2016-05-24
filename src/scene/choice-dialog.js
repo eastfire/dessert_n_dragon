@@ -53,13 +53,27 @@ var ChoiceDialog = cc.Scale9Sprite.extend({
             var descLabel = new cc.LabelTTF(choice.description, null, 20 );
             descLabel.attr({
                 color: colors.gameOver.ok,
-                x: this.dialogWidth/2,
+                x: 50,
                 y: 50,
-                anchorX: 0.5,
+                anchorX: 0,
                 anchorY: 0.5
             });
             menuItem.addChild(descLabel);
             menus.push(menuItem)
+
+            if ( choice.type === "card" || choice.type === "levelUpCard" ) {
+                var cardSprite = new CardSprite({
+                    isDemo: true,
+                    model: new CARD_MODEL_MAP[choice.cardType]({level:choice.cardLevel})
+                })
+                cardSprite.attr({
+                    x: 335,
+                    y: 50,
+                    scaleX: 0.5,
+                    scaleY: 0.5
+                })
+                menuItem.addChild(cardSprite);
+            }
 
             y -= stepY;
         },this);
