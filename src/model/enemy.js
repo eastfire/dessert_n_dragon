@@ -332,18 +332,13 @@ MOVABLE_MODEL_MAP.cane = EnemyModel.extend({
         EnemyModel.prototype.afterGenerate.call(this);
     },
     reCalculateAttack:function(){
-        var myPosition = this.get("positions")[0];
         var itemClassCount = 0;
-        for ( var i = myPosition.x-1; i < myPosition.x+2; i++ ) {
-            for ( var j = myPosition.y-1; j < myPosition.y+2; j++ ) {
-                var movable = currentRoom.getMovableByPosition(i, j);
-                if (movable instanceof ItemModel) {
-                    itemClassCount++;
-                }
+        currentRoom.foreachMovable(function(movableModel){
+            if (movable instanceof ItemModel) {
+                itemClassCount++;
             }
-        }
-        cc.log(itemClassCount)
-        this.set("baseAttack", this.attackOfLevel(this.get("level"))*(itemClassCount+1));
+        },this);
+        this.set("baseAttack", this.attackOfLevel(this.get("level"))*(Math.round(itemClassCount/2)+1));
     },
     expOfLevel:function(l){ //一般
         return (l*2-1)*EXP_INFLATION_RATE;
@@ -475,19 +470,21 @@ MOVABLE_MODEL_MAP.dumpling = EnemyModel.extend({
     },
     afterAllMove:function(movable){
         EnemyModel.prototype.afterAllMove.call(this,movable);
-        //recalcute attack
-        var myPosition = this.get("positions")[0];
+        this.reCalculateAttack
+    },
+    afterGenerate:function(){
+        this.reCalculateAttack();
+        EnemyModel.prototype.afterGenerate.call(this);
+    },
+    reCalculateAttack:function(){
         var sameClassCount = 0;
-        for ( var i = myPosition.x-1; i < myPosition.x+2; i++ ) {
-            for ( var j = myPosition.y-1; j < myPosition.y+2; j++ ) {
-                var movable = currentRoom.getMovableByPosition(i, j);
-                if (movable instanceof MOVABLE_MODEL_MAP.dumpling) {
-                    sameClassCount++;
-                }
+        currentRoom.foreachMovable(function(movableModel){
+            if (movable instanceof MOVABLE_MODEL_MAP.dumpling) {
+                sameClassCount++;
             }
-        }
-
-        this.set("baseAttack", this.attackOfLevel(this.get("level"))*sameClassCount);
+        },this);
+        
+        this.set("baseAttack", this.attackOfLevel(this.get("level"))*(Math.round(sameClassCount/2));
     },
     expOfLevel:function(l){ //一般
         return (l*2-1)*EXP_INFLATION_RATE;
