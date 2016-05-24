@@ -486,8 +486,8 @@ MOVABLE_MODEL_MAP.dumpling = EnemyModel.extend({
         
         this.set("baseAttack", this.attackOfLevel(this.get("level"))*(Math.round(sameClassCount/2));
     },
-    expOfLevel:function(l){ //一般
-        return (l*2-1)*EXP_INFLATION_RATE;
+    expOfLevel:function(l){ //较高
+        return Math.round(Math.log(l+1)*l)*EXP_INFLATION_RATE;
     },
     attackOfLevel:function(l){ //较低
         return l;
