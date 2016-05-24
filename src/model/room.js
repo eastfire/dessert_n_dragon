@@ -384,6 +384,7 @@ var RoomModel = Backbone.Model.extend({
                 this.generateEnemy();
                 break;
             case PHASE_GEN_ENEMY:
+                this.afterAllGen();
                 this.waitUserInput();
                 break;
             case PHASE_WAIT_USE_INPUT: //wait use input, phase will not forward if someone call next phase in this phase;
@@ -677,6 +678,11 @@ var RoomModel = Backbone.Model.extend({
     afterAllMove:function(){
         this.foreachMovable(function(movable){
             movable.afterAllMove();
+        },this)
+    },
+    afterAllGen:function(){
+        this.foreachMovable(function(movable){
+            movable.afterAllGen();
         },this)
     },
     heroNormalAttack:function(){
