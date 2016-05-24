@@ -327,9 +327,9 @@ MOVABLE_MODEL_MAP.cane = EnemyModel.extend({
         EnemyModel.prototype.afterAllMove.call(this,movable);
         this.reCalculateAttack();
     },
-    afterGenerate:function(){
+    afterAllGen:function(){
+        EnemyModel.prototype.afterAllGen.call(this);
         this.reCalculateAttack();
-        EnemyModel.prototype.afterGenerate.call(this);
     },
     reCalculateAttack:function(){
         var itemClassCount = 0;
@@ -472,9 +472,9 @@ MOVABLE_MODEL_MAP.dumpling = EnemyModel.extend({
         EnemyModel.prototype.afterAllMove.call(this,movable);
         this.reCalculateAttack
     },
-    afterGenerate:function(){
+    afterAllGen:function(){
+        EnemyModel.prototype.afterAllGen.call(this);
         this.reCalculateAttack();
-        EnemyModel.prototype.afterGenerate.call(this);
     },
     reCalculateAttack:function(){
         var sameClassCount = 0;
