@@ -334,11 +334,11 @@ MOVABLE_MODEL_MAP.cane = EnemyModel.extend({
     reCalculateAttack:function(){
         var itemClassCount = 0;
         currentRoom.foreachMovable(function(movableModel){
-            if (movable instanceof ItemModel) {
+            if (movableModel instanceof ItemModel) {
                 itemClassCount++;
             }
         },this);
-        this.set("baseAttack", this.attackOfLevel(this.get("level"))*(Math.round(itemClassCount/2)+1));
+        this.set("baseAttack", this.attackOfLevel(this.get("level"))*(itemClassCount+1));
     },
     expOfLevel:function(l){ //一般
         return (l*2-1)*EXP_INFLATION_RATE;
@@ -385,11 +385,11 @@ MOVABLE_MODEL_MAP.catapult = EnemyModel.extend({
         var heroPosition = currentRoom.getHero().get("positions")[0];
         return Math.abs(heroPosition.x - myPosition.x)+Math.abs(heroPosition.y - myPosition.y) > 3
     },
-    expOfLevel:function(l){ //极高
-        return ((l+1)/2*l+1)*EXP_INFLATION_RATE;
+    expOfLevel:function(l){ //很高
+        return (Math.round(Math.log(l+1)*l)*2-1)*EXP_INFLATION_RATE;
     },
-    attackOfLevel:function(l){ //极低
-        return Math.round(Math.log(l+1)*2);
+    attackOfLevel:function(l){ //很低
+        return Math.round(l/2);
     }
 })
 
@@ -479,12 +479,12 @@ MOVABLE_MODEL_MAP.dumpling = EnemyModel.extend({
     reCalculateAttack:function(){
         var sameClassCount = 0;
         currentRoom.foreachMovable(function(movableModel){
-            if (movable instanceof MOVABLE_MODEL_MAP.dumpling) {
+            if (movableModel instanceof MOVABLE_MODEL_MAP.dumpling) {
                 sameClassCount++;
             }
         },this);
         
-        this.set("baseAttack", this.attackOfLevel(this.get("level"))*Math.round(sameClassCount/2));
+        this.set("baseAttack", this.attackOfLevel(this.get("level"))*(Math.round(sameClassCount/2)));
     },
     expOfLevel:function(l){ //较高
         return Math.round(Math.log(l+1)*l)*EXP_INFLATION_RATE;

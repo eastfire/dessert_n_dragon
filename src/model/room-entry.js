@@ -2681,7 +2681,7 @@ rooms.push({
     loseAnyConditions:[
         "outOfTurn"
     ],
-    enemyPool:[{type:"catapult"},{type:"dumpling"},{type:"candy"}],
+    enemyPool:[{type:"catapult"},{type:"dumpling"},{type:"cane"}],
     enemyLevelPool:[1,2],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x6SplitAndPortal,
