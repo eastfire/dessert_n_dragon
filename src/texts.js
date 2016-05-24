@@ -83,7 +83,7 @@ var texts_locale = {
             dumpling: {
                 name:"汤圆军团",
                 briefName:"汤圆",
-                desc:"场上的其他汤圆军团越多，攻击力就越高。\n攻击力较低～很高。\n饱腹度一般。"
+                desc:"场上的其他汤圆军团越多，攻击力就越高。\n攻击力较低～很高。\n饱腹度较高。"
             },
             eggroll:{
                 name:"蛋卷吹箭手",
