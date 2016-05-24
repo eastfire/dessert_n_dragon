@@ -144,38 +144,38 @@ var texts_locale = {
                     return "恢复"+CARD_MODEL_MAP.heal.getEffect(level)+"点生命。"
                 },
                 levelUpDesc: function(level){
-                    return "多恢复5点生命(当前"+CARD_MODEL_MAP.heal.getEffect(level)+")。但等待时间+1"
+                    return "恢复"+CARD_MODEL_MAP.heal.getEffect(level)+"(↑"+5+")点生命\n但等待时间+1"
                 }
             },
             "tail-slash":{
                 name:"扫尾",
                 desc: "攻击尾部的一个敌人。",
-                levelUpDesc: "但等待时间-1"
+                levelUpDesc: "攻击尾部的一个敌人\n等待时间-1"
             },
             "vertical-fire":{
                 name:"纵向火焰",
                 desc: "用火焰攻击所在列所有的敌人",
-                levelUpDesc: "等待时间-1"
+                levelUpDesc: "用火焰攻击所在列所有的敌人\n等待时间-1"
             },
             "horizontal-fire":{
                 name:"横向火焰",
                 desc: "用火焰攻击所在行所有的敌人",
-                levelUpDesc: "等待时间-1"
+                levelUpDesc: "用火焰攻击所在行所有的敌人\n等待时间-1"
             },
             "cross-fire":{
                 name:"十字火焰",
                 desc: "用火焰攻击所在行和所在列所有的敌人",
-                levelUpDesc: "等待时间-2"
+                levelUpDesc: "用火焰攻击所在行和所在列所有的敌人\n等待时间-2"
             },
             "whirl-slash":{
                 name:"回旋扫尾",
                 desc: "攻击上下左右4个格子的所有的敌人",
-                levelUpDesc: "等待时间-1"
+                levelUpDesc: "攻击上下左右4个格子的所有的敌人\n等待时间-1"
             },
             "big-whirl-slash":{
                 name:"大回旋扫尾",
                 desc: "攻击周围8个格子的所有的敌人",
-                levelUpDesc: "等待时间-2"
+                levelUpDesc: "攻击周围8个格子的所有的敌人\n等待时间-2"
             },
             cooldown:{
                 name:"冷静",
@@ -183,13 +183,13 @@ var texts_locale = {
                     return "手中所有牌的等待时间减" + CARD_MODEL_MAP.cooldown.getEffect();
                 },
                 levelUpDesc:function(level){
-                    return "等待时间多减少"+CARD_MODEL_MAP.cooldown.getEffectDiff()
+                    return "手中所有牌的等待时间减"+CARD_MODEL_MAP.cooldown.getEffect()+"(↑"+CARD_MODEL_MAP.cooldown.getEffectDiff()+")"
                 }
             },
             freeze:{
                 name:"冰冻",
                 desc: "所有敌人不能移动1回合",
-                levelUpDesc: "等待时间-1"
+                levelUpDesc: "所有敌人不能移动1回合\n等待时间-1"
             },
             "meteor-shower":{
                 name:"陨石雨",
@@ -197,13 +197,13 @@ var texts_locale = {
                     return "用陨石雨随机消灭" + CARD_MODEL_MAP["meteor-shower"].getEffect()+"个敌人";
                 },
                 levelUpDesc:function(level){
-                    return "多消灭"+CARD_MODEL_MAP["meteor-shower"].getEffectDiff()+"个敌人";
+                    return "用陨石雨随机消灭" + CARD_MODEL_MAP["meteor-shower"].getEffect()+"(↑"+CARD_MODEL_MAP["meteor-shower"].getEffectDiff()+")个敌人";
                 }
             },
             teleport:{
                 name:"传送",
                 desc: "随机传送到另一格空的地方",
-                levelUpDesc: "等待时间-1"
+                levelUpDesc: "随机传送到另一格空的地方\n等待时间-1"
             },
             tornado:{
                 name:"狂风",
@@ -215,28 +215,28 @@ var texts_locale = {
             collector: {
                 name:"收集",
                 desc: function(level){
-                    return "持续：获得道具的效果+"+CARD_MODEL_MAP.collector.getEffect(level)+"（当前"+currentRoom.getHero().get("collector")+"）\n使用时：1回合内暂时提升幸运"+CARD_MODEL_MAP.collector.getUseEffect;
+                    return "被动：获得道具的效果+"+CARD_MODEL_MAP.collector.getEffect(level)+"（当前"+currentRoom.getHero().get("collector")+"）\n使用时：1回合内暂时提升幸运"+CARD_MODEL_MAP.collector.getUseEffect;
                 },
                 levelUpDesc: function(level){
-                    return "获得道具的效果多+"+CARD_MODEL_MAP.collector.getEffectDiff(level)+"（当前"+currentRoom.getHero().get("collector")+"）";
+                    return "被动：获得道具的效果+"+CARD_MODEL_MAP.collector.getEffect(level)+"(↑"+CARD_MODEL_MAP.collector.getEffectDiff(level)+")（当前"+currentRoom.getHero().get("collector")+"）\n使用时：1回合内暂时提升幸运"+CARD_MODEL_MAP.collector.getUseEffect;
                 }
             },
             constitution: {
                 name:"强壮",
                 desc: function(level){
-                    return "持续：生命上限+"+CARD_MODEL_MAP.constitution.getEffect(level)+"\n使用时：恢复"+CARD_MODEL_MAP.constitution.getUseEffect+"点生命";
+                    return "被动：生命上限+"+CARD_MODEL_MAP.constitution.getEffect(level)+"\n使用时：恢复"+CARD_MODEL_MAP.constitution.getUseEffect+"点生命";
                 },
                 levelUpDesc: function(level){
-                    return "生命上限多+"+CARD_MODEL_MAP.constitution.getEffectDiff(level);
+                    return "被动：生命上限+"+CARD_MODEL_MAP.constitution.getEffect(level)+"(↑"+CARD_MODEL_MAP.constitution.getEffectDiff(level)+")\n使用时：恢复"+CARD_MODEL_MAP.constitution.getUseEffect+"点生命";
                 }
             },
             cunning: {
                 name:"健身",
                 desc: function(level){
-                    return "持续：升级需要的饱腹度减少"+CARD_MODEL_MAP.cunning.getEffect(level)+"% 当前"+currentRoom.getHero().get("cunning")+"%\n使用时：获得"+CARD_MODEL_MAP.cunning.getUseEffect+"点饱腹度";
+                    return "被动：升级需要的饱腹度减少"+CARD_MODEL_MAP.cunning.getEffect(level)+"% 当前"+currentRoom.getHero().get("cunning")+"%\n使用时：获得"+CARD_MODEL_MAP.cunning.getUseEffect+"点饱腹度";
                 },
                 levelUpDesc: function(level){
-                    return "升级需要的饱腹度再减少"+CARD_MODEL_MAP.cunning.getEffectDiff(level)+"% 当前"+currentRoom.getHero().get("cunning")+"%";
+                    return "被动：升级需要的饱腹度减少"+CARD_MODEL_MAP.cunning.getEffect(level)+"%(↑"+CARD_MODEL_MAP.cunning.getEffectDiff(level)+"%) 当前"+currentRoom.getHero().get("cunning")+"%\n使用时：获得"+CARD_MODEL_MAP.cunning.getUseEffect+"点饱腹度";
                 }
             },
             dexterity: {
@@ -245,7 +245,7 @@ var texts_locale = {
                     return "被动：躲开敌人近战攻击的概率+"+CARD_MODEL_MAP.dexterity.getEffect(level)+"% 当前"+currentRoom.getHero().get("dexterity")+"%\n使用时：1回合内暂时提升敏捷"+CARD_MODEL_MAP.dexterity.getUseEffect;
                 },
                 levelUpDesc: function(level){
-                    return "躲开敌人近战攻击的概率多+"+CARD_MODEL_MAP.dexterity.getEffectDiff(level)+"% 当前"+currentRoom.getHero().get("dexterity")+"%";
+                    return "被动：躲开敌人近战攻击的概率+"+CARD_MODEL_MAP.dexterity.getEffect(level)+"%(↑"+CARD_MODEL_MAP.dexterity.getEffectDiff(level)+") 当前"+currentRoom.getHero().get("dexterity")+"%\n使用时：1回合内暂时提升敏捷"+CARD_MODEL_MAP.dexterity.getUseEffect;
                 }
             },
             dodge: {
@@ -254,16 +254,16 @@ var texts_locale = {
                     return "被动：躲开敌人远程攻击的概率+"+CARD_MODEL_MAP.dodge.getEffect(level)+"% 当前"+currentRoom.getHero().get("dodge")+"%\n使用时：1回合内暂时提升闪躲"+CARD_MODEL_MAP.dodge.getUseEffect;
                 },
                 levelUpDesc: function(level){
-                    return "躲开敌人远程攻击的概率多+"+CARD_MODEL_MAP.dodge.getEffectDiff(level)+"% 当前"+currentRoom.getHero().get("dodge")+"%";
+                    return "被动：躲开敌人远程攻击的概率+"+CARD_MODEL_MAP.dodge.getEffect(level)+"%(↑"+CARD_MODEL_MAP.dodge.getEffectDiff(level)+") 当前"+currentRoom.getHero().get("dodge")+"%\n使用时：1回合内暂时提升闪躲"+CARD_MODEL_MAP.dodge.getUseEffect;
                 }
             },
             luck: {
                 name:"幸运",
                 desc: function(level){
-                    return "持续：幸运+"+CARD_MODEL_MAP.luck.getEffect(level)+"（当前"+currentRoom.getHero().get("luck")+"）\n使用时：1回合内暂时提升幸运"+CARD_MODEL_MAP.luck.getUseEffect;
+                    return "被动：幸运+"+CARD_MODEL_MAP.luck.getEffect(level)+"（当前"+currentRoom.getHero().get("luck")+"）\n使用时：1回合内暂时提升幸运"+CARD_MODEL_MAP.luck.getUseEffect;
                 },
                 levelUpDesc: function(level){
-                    return "幸运多+"+CARD_MODEL_MAP.luck.getEffectDiff(level)+"（当前"+currentRoom.getHero().get("luck")+"）";
+                    return "被动：幸运+"+CARD_MODEL_MAP.luck.getEffect(level)+"(↑"+1+")（当前"+currentRoom.getHero().get("luck")+"）\n使用时：1回合内暂时提升幸运"+CARD_MODEL_MAP.luck.getUseEffect;
                 }
             },
             recovery: {
