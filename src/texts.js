@@ -53,7 +53,7 @@ var texts_locale = {
             cane: {
                 name:"拐杖糖盗贼",
                 briefName:"拐杖糖",
-                desc:"周围8个格子有几个道具，攻击力就加几倍。\n攻击力一般～很高。\n饱腹度一般。"
+                desc:"场上道具道具越多，攻击力就越高。\n攻击力一般～很高。\n饱腹度一般。"
             },
             catapult: {
                 name:"琥珀核桃投石车",
@@ -83,7 +83,7 @@ var texts_locale = {
             dumpling: {
                 name:"汤圆军团",
                 briefName:"汤圆",
-                desc:"周围8个格子有几个其他汤圆军团，攻击力就加几倍。\n攻击力较低～很高。\n饱腹度一般。"
+                desc:"场上的其他汤圆军团越多，攻击力就越高。\n攻击力较低～很高。\n饱腹度一般。"
             },
             eggroll:{
                 name:"蛋卷吹箭手",
