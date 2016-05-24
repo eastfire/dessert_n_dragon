@@ -32,7 +32,13 @@ var CardInfoDialog = cc.Sprite.extend({
         });
         this.addChild(cardNameLabel)
 
-        var cardDescLabel = new cc.LabelTTF(getCardLevelUpDesc( this.model.get("type"), this.model.get("level"), this.isLevelUp), null, 24 );
+        var desc;
+        if (this.isLevelUp){
+            desc = getCardLevelUpDesc( this.model.get("type"), this.model.get("level"));
+        } else {
+            desc = getCardDesc( this.model.get("type"), this.model.get("level"));
+        }
+        var cardDescLabel = new cc.LabelTTF(desc, null, 24 );
         cardDescLabel.attr({
             color: colors.gameOver.ok,
             x: this.width/2,
