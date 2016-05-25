@@ -1,4 +1,5 @@
 var ORIGIN_CONSTITUTION_EFFECT = 5;
+var ORIGIN_CHOICE_NUMBER = 3;
 
 var LUCK_EFFECT = 0.01;
 var CUNNING_EFFECT = 0.01;
@@ -15,7 +16,7 @@ var HeroModel = MovableModel.extend({
             unusedExp: 0,
 
             forwardAfterKillEnemy: false,
-            choiceNumber: 3,
+            choiceNumber: ORIGIN_CHOICE_NUMBER,
             //passive status
             constitution: 4,
             cunning: 0,
