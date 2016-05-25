@@ -62,6 +62,7 @@ var MainLayer = cc.Layer.extend({
         this.initScoreBar();
 
         if ( room.get("phase") === PHASE_TURN_START ) {
+            hookManager.trigger("before-game-start");
             room.turnStart();
         }
 
