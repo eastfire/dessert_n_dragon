@@ -3,7 +3,9 @@ var GameStatusModel = Backbone.Model.extend({
         return {
             money: 100,
             achievements: {},
-            tutorials:{}
+            tutorials:{},
+            perks:null,
+            scoreScale:1
         }
     },
     initialize:function(){
