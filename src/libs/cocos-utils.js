@@ -230,58 +230,6 @@ var EffectIconManager = Backbone.Model.extend({
     }
 })
 
-var HookManager = Backbone.Model.extend({
-    initialize:function(){
-        this.__targetMap = {};
-
-    },
-    registerHook:function(timing, modelId, callback, context, params){
-        this.__targetMap[timing] = this.__targetMap[timing] || [];
-        var timingMap = this.__targetMap[timing];
-        var entry = {
-            modelId: modelId,
-            callback: callback,
-            context: context,
-            params: params
-        }
-        timingMap.push(entry);
-    },
-    registerOnce:function(timing, modelId, callback, context, params){
-        var entry = this.registerHook(timing, modelId, callback, context, params)
-        entry.once = true;
-    },
-    removeHook:function(timing, modelId){
-        var timingMap = this.__targetMap[timing] || [];
-        this.__targetMap[timing] = _.reject(timingMap,function(value){
-            return value.modelId == modelId;
-        })
-    },
-    callAllHook:function(timing, extraParams){
-        this.__targetMap[timing] = this.__targetMap[timing] || {};
-        var timingMap = this.__targetMap[timing];
-        _.each(timingMap, function(value){
-            if ( value.callback ) {
-                value.callback.call(value.context, value.params, extraParams);
-            }
-        })
-        this.__targetMap[timing] = _.reject(timingMap,function(value){
-            return value.once;
-        })
-    },
-    callTargetHook:function(timing,modelId, extraParams){
-        this.__targetMap[timing] = this.__targetMap[timing] || {};
-        var timingMap = this.__targetMap[timing];
-        _.each(timingMap, function(value){
-            if ( value.modelId == modelId && value.callback ) {
-                value.callback.call(value.context, value.params, extraParams);
-            }
-        })
-        this.__targetMap[timing] = _.reject(timingMap,function(value){
-            return value.modelId == modelId && value.once;
-        })
-    }
-});
-
 var toast = function(text, options){
     options = options || {};
     var parent = options.parent;
