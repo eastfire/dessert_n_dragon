@@ -57,6 +57,7 @@
         "src/scene/movable-info-dialog.js",
         "src/scene/unlocked-info-dialog.js",
         "src/scene/card-info-dialog.js",
+        "src/scene/select-perk.js",
         "src/scene/select-room.js",
         "src/scene/main-game.js",
         "src/scene/achievement-list.js",

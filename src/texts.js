@@ -301,6 +301,33 @@ var texts_locale = {
                     return "失去所有生命" + ACHIEVEMENT_ENTRY_MAP["hero-die"].requirement(level) + "次"
                 }
             }
+        },
+
+        perk:{
+            halfHpMore:{
+                name:"强壮",
+                desc:"生命多５０％"
+            },
+            moreChoice:{
+                name:"多变",
+                desc:"升级时多１选择项"
+            },
+            draw2: {
+                name:"熟练",
+                desc:"每回合多抽１张牌"
+            },
+            halfHpLess:{
+                name:"虚弱",
+                desc:"生命少５０％"
+            },
+            halfInitHp:{
+                name:"受伤",
+                desc:"初始生命少５０％"
+            },
+            lessChoice:{
+                name:"僵化",
+                desc:"升级时少１选择项"
+            }
         }
     },
     en: {

@@ -191,7 +191,7 @@ var ShopLayer = cc.Layer.extend({
             cc.spriteFrameCache.getSpriteFrame("close-default.png"),
             cc.spriteFrameCache.getSpriteFrame("close-press.png"),
             function () {
-                cc.director.runScene(new SelectRoomScene());
+                cc.director.popScene();
             }, this);
 
         closeItem.attr({

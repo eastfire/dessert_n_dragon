@@ -1061,7 +1061,8 @@ rooms.push({
         {type:"cross-fire"}
     ],
     choicePool:STANDARD_CHOICE_POOL,
-    unlocks:[{type:"shop", subtype:"cross-fire"}]
+    unlocks:[{type:"shop", subtype:"cross-fire"}],
+    notForInfinity: true
 });
 
 //room29 log in h
@@ -1193,7 +1194,8 @@ rooms.push({
     initTiles:tiles7x7Snake2,
     exits:[{x:3,y:5},{x:1,y:1}],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:3,y:5}]}),
-    choicePool:STANDARD_CHOICE_POOL
+    choicePool:STANDARD_CHOICE_POOL,
+    notForInfinity: true
 });
 
 //room32 N

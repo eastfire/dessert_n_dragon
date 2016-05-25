@@ -190,7 +190,7 @@ var SelectRoomLayer = cc.Layer.extend({
             }, this);
 
         infiniteItem.attr({
-            x: cc.winSize.width/2,
+            x: cc.winSize.width/10,
             y: 0,
             anchorX: 0.5,
             anchorY: 0
@@ -203,12 +203,12 @@ var SelectRoomLayer = cc.Layer.extend({
                 if ( !unlockedStatus.isUnlocked("shop-entry") ) {
                     toast("通过第4关后解锁",{parent:this})
                 } else {
-                    cc.director.runScene(new ShopScene());
+                    cc.director.pushScene(new ShopScene());
                 }
             }, this);
 
         shopItem.attr({
-            x: cc.winSize.width*3/4,
+            x: cc.winSize.width*7/10,
             y: 0,
             anchorX: 0.5,
             anchorY: 0
@@ -218,18 +218,31 @@ var SelectRoomLayer = cc.Layer.extend({
             cc.spriteFrameCache.getSpriteFrame("achievement.png"),
             cc.spriteFrameCache.getSpriteFrame("achievement.png"),
             function () {
-                cc.director.runScene(new AchievementScene());
+                cc.director.pushScene(new AchievementScene());
             }, this);
 
         achievementItem.attr({
-            x: cc.winSize.width/4,
+            x: cc.winSize.width*3/10,
             y: 0,
             anchorX: 0.5,
             anchorY: 0
         });
 
+        var perkItem = new cc.MenuItemImage(
+            cc.spriteFrameCache.getSpriteFrame("perk.png"),
+            cc.spriteFrameCache.getSpriteFrame("perk.png"),
+            function () {
+                cc.director.pushScene(new SelectPerkScene());
+            }, this);
 
-        var menu = new cc.Menu([closeItem,infiniteItem,shopItem, achievementItem]);
+        perkItem.attr({
+            x: cc.winSize.width*5/10,
+            y: 0,
+            anchorX: 0.5,
+            anchorY: 0
+        });
+
+        var menu = new cc.Menu([closeItem,infiniteItem,shopItem, achievementItem,perkItem]);
         this.addChild(menu,100);
         menu.attr({
             x:0,
@@ -258,7 +271,7 @@ var SelectRoomLayer = cc.Layer.extend({
 });
 
 var SelectRoomScene = cc.Scene.extend({
-    onEnter:function () {
+    ctor:function () {
         this._super();
         var layer = new SelectRoomLayer();
         this.addChild(layer);

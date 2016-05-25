@@ -61,7 +61,9 @@ ROOM_MODEL_MAP.infinite = RoomModel.extend({
                 movableModel.destroy();
         });
 
-        var randomRoomEntry = _.sample(rooms)
+        var randomRoomEntry = _.sample(_.filter(rooms,function(entry){
+            return !entry.notForInfinity;
+        }))
         this.set("exits",clone(randomRoomEntry.exits));
         this.set("initTiles", clone(randomRoomEntry.initTiles) );
         this.initTiles();
@@ -78,7 +80,9 @@ ROOM_MODEL_MAP.infinite = RoomModel.extend({
     },
     initialize:function(){
         if ( this.get("turnNumber") === 0 && !this.get("roomInitialized")) {
-            var randomRoomEntry = _.sample(rooms)
+            var randomRoomEntry = _.sample(_.filter(rooms,function(entry){
+                return !entry.notForInfinity;
+            }))
             this.set("exits",clone(randomRoomEntry.exits));
             this.set("initTiles", clone(randomRoomEntry.initTiles) );
             this.get("initHero").positions = clone(randomRoomEntry.initHero.positions);
