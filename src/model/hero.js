@@ -1,9 +1,11 @@
+var ORIGIN_CONSTITUTION_EFFECT = 5;
+
 var LUCK_EFFECT = 0.01;
 var CUNNING_EFFECT = 0.01;
 var DEXTERITY_EFFECT = 0.01;
 var DODGE_EFFECT = 0.01;
 var RECOVERY_EFFECT = 0.01;
-var CONSTITUTION_EFFECT = 5;
+var CONSTITUTION_EFFECT = ORIGIN_CONSTITUTION_EFFECT;
 
 var HeroModel = MovableModel.extend({
     defaults:function(){
@@ -65,7 +67,7 @@ var HeroModel = MovableModel.extend({
         return this.get("positions")[0];
     },
     maxHpOfLevel:function(lv){
-        return this.get("constitution")*CONSTITUTION_EFFECT;
+        return Math.round(this.get("constitution")*CONSTITUTION_EFFECT);
     },
     requireExpOfLevel:function(lv){
         if ( !this.get("expStrategy") || this.get("expStrategy").type === "normal" ) {

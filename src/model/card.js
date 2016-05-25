@@ -593,11 +593,11 @@ CARD_MODEL_MAP.constitution = CardModel.extend({
 CARD_MODEL_MAP.constitution.maxCount = 2;
 CARD_MODEL_MAP.constitution.getEffect = function(level){
     level = level || 1;
-    return (level+1)*CONSTITUTION_EFFECT;
+    return Math.round((level+1)*CONSTITUTION_EFFECT);
 }
 CARD_MODEL_MAP.constitution.getEffectDiff = function(currentLevel, targetLevel){
     targetLevel = targetLevel || currentLevel+1;
-    return CONSTITUTION_EFFECT;
+    return CARD_MODEL_MAP.constitution.getEffect(targetLevel) - CARD_MODEL_MAP.constitution.getEffect(currentLevel);
 }
 CARD_MODEL_MAP.constitution.getUseEffect = 2;
 

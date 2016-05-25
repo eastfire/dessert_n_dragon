@@ -32,6 +32,7 @@
         "src/model/tile.js",
         "src/model/condition.js",
         "src/model/choice.js",
+        "src/model/perk.js",
         "src/model/room.js",
         "src/model/card.js",
         "src/model/tiles-set.js",
