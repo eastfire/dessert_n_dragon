@@ -180,6 +180,8 @@ var InfiniteGameOverDialog = cc.Scale9Sprite.extend({
                         level: this.model.getHero().get("level"),
                         heroType: this.model.getHero().get("type"),
                         turnNumber: this.model.get("turnNumber"),
+                        perks:gameStatus.get("perks"),
+                        scoreScale:gameStatus.get("scoreScale"),
                         killedBy: this.model.get("killedBy")
                     },function(s){
                         self.currentScoreObject = s;
