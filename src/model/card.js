@@ -1,4 +1,6 @@
 var CARD_MODEL_MAP = {};
+var ORIGIN_CARD_LEVEL_ADJUST = 0;
+var CARD_LEVEL_ADJUST = ORIGIN_CARD_LEVEL_ADJUST;
 
 var getCardName = function(type){
     return texts.card[type].name;
@@ -36,6 +38,9 @@ var CardModel = Backbone.Model.extend({
     },
     getDescription:function(){
         return getCardDesc(this.get("type"), this.get("level"));
+    },
+    getMaxLevel:function(){
+        return this.get("maxLevel")+CARD_LEVEL_ADJUST;
     },
     getWait:function(){
         return this.get("waitTurn")
