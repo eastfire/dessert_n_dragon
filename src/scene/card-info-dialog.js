@@ -36,7 +36,7 @@ var CardInfoDialog = cc.Sprite.extend({
         });
         this.addChild(cardNameLabel)
 
-        var desc = "最大等级"+this.model.get("maxLevel")+"\n";
+        var desc = "最大等级"+this.model.getMaxLevel()+"\n";
         if (this.isLevelUp){
             desc += getCardLevelUpDesc( this.model.get("type"), this.model.get("level"));
         } else {
