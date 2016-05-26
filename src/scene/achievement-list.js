@@ -2,8 +2,6 @@ var AchievementLayer = cc.Layer.extend({
     ctor: function () {
         this._super();
 
-        var currentY = 40;
-
         this.initMoney();
 
         this.initMenu();
@@ -20,7 +18,7 @@ var AchievementLayer = cc.Layer.extend({
 
         var achievements = this.getAchievements();
         this.scrollView.setInnerContainerSize(cc.size(this.scrollView.width, Math.max(this.scrollView.height, achievements.length * stepY)));
-        currentY = this.scrollView.getInnerContainerSize().height - stepY/2;
+        var currentY = this.scrollView.getInnerContainerSize().height - stepY/2;
 
         this.addChild(this.scrollView);
 
