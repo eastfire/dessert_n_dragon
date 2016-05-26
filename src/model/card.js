@@ -1,6 +1,8 @@
 var CARD_MODEL_MAP = {};
 var ORIGIN_CARD_LEVEL_ADJUST = 0;
 var CARD_LEVEL_ADJUST = ORIGIN_CARD_LEVEL_ADJUST;
+var ORIGIN_ACTIVE_CARD_NUMBER = 3;
+var ACTIVE_CARD_NUMBER = ORIGIN_ACTIVE_CARD_NUMBER;
 
 var getCardName = function(type){
     return texts.card[type].name;
@@ -78,7 +80,7 @@ var CardModel = Backbone.Model.extend({
         this.onLevelUp();
     },
     canLevelUp:function(){
-        return this.get("level") < this.get("maxLevel")
+        return this.get("level") < this.getMaxLevel()
     },
     onLevelUp:function(){
 
