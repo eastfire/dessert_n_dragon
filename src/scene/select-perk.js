@@ -10,7 +10,7 @@ var SelectPerkLayer = cc.Layer.extend({
             }
         }
 
-        var stepY = 110;
+        var stepY = 90;
 
         this.scrollView = new ccui.ScrollView();
         this.scrollView.setDirection(ccui.ScrollView.DIR_VERTICAL);
@@ -32,20 +32,39 @@ var SelectPerkLayer = cc.Layer.extend({
                 cc.spriteFrameCache.getSpriteFrame("choice-default.png"),
                 cc.spriteFrameCache.getSpriteFrame("choice-press.png"),
                 function () {
-
+                    if ( this.isPerkSelected(perkName) ) {
+                        this.unSelectPerk(perkName)
+                    } else {
+                        if ( this.perkNumber > this.perks.length ) {
+                            this.selectPerk(perkName)
+                        } else {
+                            toast("只能选择"+this.perkNumber+"个特性",{parent:this})
+                        }
+                    }
+                    this.renderMenuItem(menuItem)
+                    this.renderScoreScale();
                 }, this);
 
             menuItem.attr({
-                x: cc.winSize.width/2,
-                y: currentY
+                x: 385,
+                y: currentY,
+                scaleY:0.8,
+                scaleX:0.2
             });
 
+            var bg = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("choice-default.png"))
+            bg.attr({
+                x: cc.winSize.width/2,
+                y: currentY,
+                scaleY:0.8
+            })
+            this.scrollView.addChild(bg);
             //TODO icon
 
             var descLabel = new cc.LabelTTF(texts.perk[perkName].desc, null, 20 );
             descLabel.attr({
                 color: cc.color.BLACK,
-                x: 90,
+                x: 95,
                 y: currentY,
                 anchorX: 0,
                 anchorY: 0.5
@@ -88,8 +107,23 @@ var SelectPerkLayer = cc.Layer.extend({
         this.initBottomBar();
         this.renderScoreScale()
     },
-    renderMenuItem:function(){
-
+    isPerkSelected:function(perkName){
+        return _.contains(this.perks, perkName);
+    },
+    selectPerk:function(perkName){
+        this.perks.push(perkName);
+    },
+    unSelectPerk:function(perkName){
+        this.perks = _.reject(this.perks,function(name){
+            return name === perkName;
+        });
+    },
+    renderMenuItem:function(menuItem){
+        if (this.isPerkSelected(menuItem.perkName) ) {
+            menuItem.checkBox.setSpriteFrame(cc.spriteFrameCache.getSpriteFrame("checkbox-checked.png"));
+        } else {
+            menuItem.checkBox.setSpriteFrame(cc.spriteFrameCache.getSpriteFrame("checkbox-unchecked.png"));
+        }
     },
     calScoreScale:function(perkPoint){
         return Math.round((Math.log10(perkPoint) * perkPoint * 16.61)*0.5)+5
@@ -106,15 +140,22 @@ var SelectPerkLayer = cc.Layer.extend({
         var perkPoint = _.reduce(this.perks, function(memo, perkName){
             return memo + PERK_MAP[perkName].value;
         }, 0, this);
+
         if ( perkPoint === 0 ) {
             this.scoreScaleLabel.setVisible(false)
+            this.scoreScale = 1;
         } else if ( perkPoint > 0 ){
             this.scoreScaleLabel.setVisible(true)
-            this.scoreScaleLabel.setString("总计+"+perkPoint+"点  得分修正"+(100-this.calScoreScale(perkPoint))+"%")
+            this.scoreScaleLabel.setString("总计+"+perkPoint+"点  得分惩罚"+this.calScoreScale(perkPoint)+"%")
+            this.scoreScaleLabel.color = cc.color.RED;
+            this.scoreScale = 1-this.calScoreScale(perkPoint)*0.01;
         } else if ( perkPoint < 0 ){
             this.scoreScaleLabel.setVisible(true)
-            this.scoreScaleLabel.setString("总计"+perkPoint+"点  得分修正"+(100+this.calScoreScale(-perkPoint))+"%")
+            this.scoreScaleLabel.setString("总计"+perkPoint+"点  得分奖励"+this.calScoreScale(-perkPoint)+"%")
+            this.scoreScale = 1+this.calScoreScale(-perkPoint)*0.01;
+            this.scoreScaleLabel.color = cc.color.BLUE;
         }
+        cc.log(this.scoreScale)
     },
     initBottomBar:function(){
         var bottombar = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( "bottombar.png" ))
@@ -149,7 +190,7 @@ var SelectPerkLayer = cc.Layer.extend({
             cc.spriteFrameCache.getSpriteFrame("button-short-default.png"),
             cc.spriteFrameCache.getSpriteFrame("button-short-press.png"),
             function () {
-                //TODO save perk
+                gameStatus.selectPerks(this.perks, this.scoreScale);
                 cc.director.popScene();
             }, this);
 
@@ -174,7 +215,7 @@ var SelectPerkLayer = cc.Layer.extend({
             anchorY: 0
         })
 
-        this.perkLeftLabel = new cc.LabelTTF("", null, 25 );
+        this.perkLeftLabel = new cc.LabelTTF("", null, 20 );
         this.perkLeftLabel.attr({
             color: cc.color.BLACK,
             x: 80,
@@ -182,10 +223,10 @@ var SelectPerkLayer = cc.Layer.extend({
         });
         this.addChild(this.perkLeftLabel);
 
-        this.scoreScaleLabel = new cc.LabelTTF("", null, 25 );
+        this.scoreScaleLabel = new cc.LabelTTF("", null, 23 );
         this.scoreScaleLabel.attr({
             color: cc.color.BLACK,
-            x: 390,
+            x: 300,
             y: 70
         });
         this.addChild(this.scoreScaleLabel);

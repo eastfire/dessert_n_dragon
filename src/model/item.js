@@ -1,3 +1,6 @@
+var ORIGIN_ITEM_LEVEL_ADJUST = 0;
+var ITEM_LEVEL_ADJUST = ORIGIN_ITEM_LEVEL_ADJUST;
+
 var ItemModel = MovableModel.extend({
     defaults:function(){
         return _.extend( MovableModel.prototype.defaults.call(this),{

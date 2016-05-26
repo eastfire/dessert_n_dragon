@@ -285,6 +285,7 @@ var texts_locale = {
 
             handLimit: "手牌上限加１",
             initHp: "初始生命+10",
+            perk:"可选特性数+1",
             //card unlock maintain in later code
             card:{},
             
@@ -316,6 +317,24 @@ var texts_locale = {
                 name:"熟练",
                 desc:"每回合多抽１张牌"
             },
+            moreMaxLevel:{
+                name:"巨大潜力",
+                desc:"所有卡牌等级上限+1"
+            },
+            passRoomRecovery:{
+                name:"恢复力",
+                desc:"无尽模式\n传送过房间时恢复所有生命"
+            },
+            moreItemLevel:{
+                name:"敛财",
+                desc:"道具掉落的等级+1"
+            },
+            lessNegativeTime:{
+                name:"免疫",
+                desc:"异常状态影响-1回合/效果"
+            },
+
+            //disadvantage
             halfHpLess:{
                 name:"虚弱",
                 desc:"生命少５０％"
@@ -327,6 +346,18 @@ var texts_locale = {
             lessChoice:{
                 name:"僵化",
                 desc:"升级时少１选择项"
+            },
+            lessMaxLevel:{
+                name:"缺乏潜力",
+                desc:"所有卡牌等级上限-1"
+            },
+            lessItemLevel:{
+                name:"失财",
+                desc:"道具掉落的等级-1\n可能造成不掉落"
+            },
+            moreNegativeTime:{
+                name:"过敏",
+                desc:"异常状态影响+1回合/效果"
             }
         }
     },

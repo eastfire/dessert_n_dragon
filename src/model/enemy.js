@@ -543,8 +543,8 @@ MOVABLE_MODEL_MAP.icecream = EnemyModel.extend({
     },
     getFreezeRate:function(heroModel){
         var level = this.get("level");
-        return Math.min(0.7,level*5/200+0.1);
 //        return 1;
+        return Math.min(0.7,level*5/200+0.1);
     },
     checkFreeze:function(model){
         if (this.getFreezeRate(model) > Math.random() ){
@@ -623,7 +623,7 @@ MOVABLE_MODEL_MAP.mushmellow = EnemyModel.extend({
         return Math.min(3, Math.ceil(this.get("level") / 10 ));
     },
     getCloudTime:function(){
-        return Math.min(3, Math.ceil(this.get("level") / 6 ))+2;
+        return Math.min(3, Math.ceil(this.get("level") / 6 ))+2+NEGATIVE_EFFECT_TIME_ADJUST;
     },
     expOfLevel:function(l){ //较低
         return (Math.round(l*3/2) - 1)*EXP_INFLATION_RATE
@@ -696,7 +696,7 @@ MOVABLE_MODEL_MAP.souffle = EnemyModel.extend({
         EnemyModel.prototype.afterBeMerged.call(this,movable);
         this.levelUp(1);
         if ( movable instanceof MOVABLE_MODEL_MAP.souffle ) {
-            //freeze around
+            //effect around
             var position = this.get("positions")[0];
             _.each( INCREMENTS, function(increment){
                 var model = currentRoom.getMovableByPosition(position.x+increment.x, position.y+increment.y);

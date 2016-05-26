@@ -245,6 +245,7 @@
                 <file name="src/model/tile.js"/>
                 <file name="src/model/condition.js"/>
                 <file name="src/model/choice.js"/>
+                <file name="src/model/perk.js"/>
                 <file name="src/model/room.js"/>
                 <file name="src/model/card.js"/>
                 <file name="src/model/tiles-set.js"/>
@@ -269,6 +270,7 @@
                 <file name="src/scene/movable-info-dialog.js"/>
                 <file name="src/scene/unlocked-info-dialog.js"/>
                 <file name="src/scene/card-info-dialog.js"/>
+                <file name="src/scene/select-perk.js"/>
                 <file name="src/scene/select-room.js"/>
                 <file name="src/scene/main-game.js"/>
                 <file name="src/scene/achievement-list.js"/>

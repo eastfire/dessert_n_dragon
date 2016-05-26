@@ -91,6 +91,7 @@ var HandSprite = BaseSprite.extend({
                 this.addChild(sprite);
             }
             if ( sprite.x != x || sprite.y != y) {
+                sprite.stopAllActions();
                 sprite.runAction(
                     cc.spawn(
                         cc.moveTo(times.card_sort, realX, realY),

@@ -222,7 +222,7 @@ var SelectRoomLayer = cc.Layer.extend({
             }, this);
 
         achievementItem.attr({
-            x: cc.winSize.width*3/10,
+            x: cc.winSize.width*5/10,
             y: 0,
             anchorX: 0.5,
             anchorY: 0
@@ -236,7 +236,7 @@ var SelectRoomLayer = cc.Layer.extend({
             }, this);
 
         perkItem.attr({
-            x: cc.winSize.width*5/10,
+            x: cc.winSize.width*3/10,
             y: 0,
             anchorX: 0.5,
             anchorY: 0

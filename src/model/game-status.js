@@ -13,6 +13,7 @@ var GameStatusModel = Backbone.Model.extend({
         if (store) {
             this.set(JSON.parse(store));
         }
+        this.initPerks();
     },
     save:function(){
         cc.sys.localStorage.setItem(APP_NAME+".gameStatus", JSON.stringify(this.toJSON()));
@@ -31,5 +32,25 @@ var GameStatusModel = Backbone.Model.extend({
     passTutorial:function(item){
         this.get("tutorials")[item] = 1;
         this.save();
+    },
+    initPerks:function(){
+        this.__perkModel = _.map(this.get("perks"),function(perkName){
+            return new PERK_MAP[perkName]();
+        },this);
+    },
+    clearPerks:function(){
+        _.each(this.__perkModel,function(perkModel){
+            perkModel.destroy();
+        });
+        this.__perkModel = [];
+    },
+    selectPerks:function(perks, scoreScale){
+        this.clearPerks();
+        this.set({
+            perks:perks,
+            scoreScale:scoreScale
+        });
+        this.save();
+        this.initPerks();
     }
 })

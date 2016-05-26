@@ -24,6 +24,18 @@ COMMODITY_ENTRY_LIST = [
         }
     },
     {
+        maxLevel: 3,
+        cost: function(level){
+            return Math.pow(5,level)*80;
+        },
+        type:function(level){
+            return "perk"+level;
+        },
+        desc:function(level){
+            return texts.unlock.perk+"  LV"+level;
+        }
+    },
+    {
         cost: 100,
         type:"card",
         subtype: "horizontal-fire"

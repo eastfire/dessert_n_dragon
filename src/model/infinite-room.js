@@ -75,7 +75,8 @@ ROOM_MODEL_MAP.infinite = RoomModel.extend({
         this.__hero.calculateEdgePositions();
 
         this.__genMovableMap();
-        
+
+        hookManager.trigger("after-pass-room");
         this.trigger("switch-room",this);
     },
     initialize:function(){

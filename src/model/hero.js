@@ -8,6 +8,8 @@ var DODGE_EFFECT = 0.01;
 var RECOVERY_EFFECT = 0.01;
 var CONSTITUTION_EFFECT = ORIGIN_CONSTITUTION_EFFECT;
 
+var NEGATIVE_EFFECT_TIME_ADJUST = 0;
+
 var HeroModel = MovableModel.extend({
     defaults:function(){
         return _.extend( MovableModel.prototype.defaults.call(this),{
@@ -301,16 +303,19 @@ var HeroModel = MovableModel.extend({
         if (this.get("forbidDraw") ) return 0;
         else return this.get("drawEachTurn")
     },
+    getFrozen:function(amount){
+        this.set("frozen",Math.max(0,amount+NEGATIVE_EFFECT_TIME_ADJUST));
+    },
     getDizzy:function(amount){
-        this.set("dizzy",amount);
+        this.set("dizzy",Math.max(0,amount+NEGATIVE_EFFECT_TIME_ADJUST));
     },
     getForbidDraw:function(amount){
-        this.set("forbidDraw",Math.max(amount,this.get("forbidDraw")));
+        this.set("forbidDraw",Math.max(0,Math.max(amount,this.get("forbidDraw"))+NEGATIVE_EFFECT_TIME_ADJUST));
     },
     getDisturb:function(amount){
         _.each(currentRoom.getHand(),function(cardModel){
             if ( cardModel.get("waitTurn") ) {
-                cardModel.disturb(amount);
+                cardModel.disturb(amount+NEGATIVE_EFFECT_TIME_ADJUST);
             }
         });
     },

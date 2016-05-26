@@ -535,9 +535,11 @@ var RoomModel = Backbone.Model.extend({
         return Math.min(9,Math.ceil(enemyLevel/4));
     },
     generateOneItem:function(position, enemyLevel){
-        cc.log("generateOneItem")
         if ( this.get("itemPool").length ) {
-            this.generateOneMovable(position, this.generateOneItemType(), this.generateOneItemLevel(enemyLevel))
+            var itemLevel = this.generateOneItemLevel(enemyLevel) + ITEM_LEVEL_ADJUST;
+            if ( itemLevel <= 0 ) return;
+            cc.log("generateOneItem")
+            this.generateOneMovable(position, this.generateOneItemType(),itemLevel )
         }
     },
     waitUserInput:function(){
@@ -842,7 +844,7 @@ var RoomModel = Backbone.Model.extend({
             statistic[statisticItem]=enemyModel.get("level");
     },
     getScore:function(score){
-        this.set("score",this.get("score")+score);
+        this.set("score",this.get("score")+Math.round(score*gameStatus.get("scoreScale")));
         //statistic
         statistic["get-score"] = statistic["get-score"] || 0;
         statistic["get-score"]+=score;
