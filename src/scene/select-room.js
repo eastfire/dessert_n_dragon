@@ -263,6 +263,7 @@ var SelectRoomLayer = cc.Layer.extend({
     onEnter:function(){
         this._super();
         gameStatus.on("change:money",this.renderMoney,this)
+        this.renderMoney();
     },
     onExit:function(){
         gameStatus.off("change:money")
