@@ -468,7 +468,8 @@ var RoomModel = Backbone.Model.extend({
         cc.log("drawCardPhase");
         this.set("phase", PHASE_DRAW);
         //draw card
-        for ( var i = 0; i < this.canDrawCard() && this.__hero.getDrawCount(); i++ ) {
+        var drawCount = this.__hero.getDrawCount();
+        for ( var i = 0; this.canDrawCard() && i < drawCount; i++ ) {
             this.drawCard();
         }
 
