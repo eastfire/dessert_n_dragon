@@ -34,8 +34,12 @@ var GameStatusModel = Backbone.Model.extend({
         this.save();
     },
     initPerks:function(){
-        this.__perkModel = _.map(this.get("perks"),function(perkName){
-            return new PERK_MAP[perkName]();
+        this.__perkModel = [];
+        _.each(this.get("perks"),function(perkName){
+            var perkClass = PERK_MAP[perkName];
+            if ( perkClass ) {
+                this.__perkModel.push(new PERK_MAP[perkName]());
+            }
         },this);
     },
     clearPerks:function(){
