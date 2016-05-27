@@ -155,7 +155,6 @@ var SelectPerkLayer = cc.Layer.extend({
             this.scoreScale = 1+this.calScoreScale(-perkPoint)*0.01;
             this.scoreScaleLabel.color = cc.color.BLUE;
         }
-        cc.log(this.scoreScale)
     },
     initBottomBar:function(){
         var bottombar = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( "bottombar.png" ))
