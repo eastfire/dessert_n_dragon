@@ -16,7 +16,7 @@ var dimens = {
         x: 14,
         y: 14,
         outlineWidth: 2,
-        fontSize: 28
+        fontSize: 30
     },
 
     moneyLabel:{
