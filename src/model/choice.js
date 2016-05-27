@@ -127,12 +127,12 @@ CHOICE_VALIDATE_MAP = {
     },
     getCard:function(roomModel, choiceEntry){
         var opt = choiceEntry.opt || {};
-        if ( !CARD_MODEL_MAP[opt.type].maxCount ) return true;
+        var maxCount = CARD_MODEL_MAP[opt.type].maxCount || ( CARD_MODEL_MAP[opt.type].isActive ? ACTIVE_CARD_NUMBER: PASSIVE_CARD_NUMBER );
         var allCard = _.union(roomModel.getHand(),roomModel.getDeck(), roomModel.getDiscard());
         var thisTypeCards = _.filter(allCard,function(cardModel){
             return cardModel.get("type") === opt.type;
         })
-        return thisTypeCards.length < CARD_MODEL_MAP[opt.type].maxCount;
+        return thisTypeCards.length < maxCount;
     },
     levelUpCard:function(roomModel, choiceEntry){
         var opt = choiceEntry.opt || {};
