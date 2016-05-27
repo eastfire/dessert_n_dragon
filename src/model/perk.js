@@ -2,8 +2,8 @@ var PERK_MAP = {};
 
 var hookManager = new Backbone.Model();
 
-var PERK_LIST = ["halfHpMore", "moreChoice", "draw2","moreMaxLevel","passRoomRecovery","moreItemLevel","lessNegativeTime",
-    "halfHpLess","halfInitHp","lessChoice","lessMaxLevel","lessItemLevel","moreNegativeTime"];
+var PERK_LIST = ["halfHpMore", "moreChoice", "draw2","moreMaxLevel","passRoomRecovery","moreItemLevel","lessNegativeTime","lessCardWait",
+    "halfHpLess","initHp5","lessChoice","lessMaxLevel","lessItemLevel","moreNegativeTime","moreCardWait"];
 //advantage
 PERK_MAP.halfHpMore = Backbone.Model.extend({
     initialize:function(){
@@ -94,21 +94,32 @@ PERK_MAP.lessNegativeTime = Backbone.Model.extend({
 })
 PERK_MAP.lessNegativeTime.value = 2;
 
+PERK_MAP.lessCardWait = Backbone.Model.extend({
+    initialize:function(){
+        CARD_WAIT_ADJUST = CARD_WAIT_ADJUST-1;
+    },
+    destroy:function(){
+        CARD_WAIT_ADJUST = CARD_WAIT_ADJUST+1;
+        Backbone.Model.prototype.destroy.call(this)
+    }
+})
+PERK_MAP.lessCardWait.value = 1;
+
 //disadvantage
-PERK_MAP.halfInitHp = Backbone.Model.extend({
+PERK_MAP.initHp5 = Backbone.Model.extend({
     initialize:function(){
         hookManager.on("before-game-start",this.effect, this)
     },
     effect:function(params, extraParams){
         var hero = currentRoom.getHero()
-        hero.set("hp",Math.max(1,Math.round(hero.get("hp")/2)))
+        hero.set("hp",5)
     },
     destroy:function(){
         hookManager.off("before-game-start",this.effect, this)
         Backbone.Model.prototype.destroy.call(this)
     }
 })
-PERK_MAP.halfInitHp.value = -1;
+PERK_MAP.initHp5.value = -1;
 
 PERK_MAP.halfHpLess = Backbone.Model.extend({
     initialize:function(){
@@ -168,4 +179,15 @@ PERK_MAP.moreNegativeTime = Backbone.Model.extend({
     }
 })
 PERK_MAP.moreNegativeTime.value = -2;
+
+PERK_MAP.moreCardWait = Backbone.Model.extend({
+    initialize:function(){
+        CARD_WAIT_ADJUST = CARD_WAIT_ADJUST+1;
+    },
+    destroy:function(){
+        CARD_WAIT_ADJUST = CARD_WAIT_ADJUST-1;
+        Backbone.Model.prototype.destroy.call(this)
+    }
+})
+PERK_MAP.moreCardWait.value = -1;
 

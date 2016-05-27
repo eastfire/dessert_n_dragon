@@ -333,15 +333,18 @@ var texts_locale = {
                 name:"免疫",
                 desc:"异常状态影响-1回合/效果"
             },
-
+            lessCardWait:{
+                name:"飞行",
+                desc:"卡牌的等待时间-1"
+            },
             //disadvantage
             halfHpLess:{
                 name:"虚弱",
                 desc:"生命少５０％"
             },
-            halfInitHp:{
+            initHp5:{
                 name:"受伤",
-                desc:"初始生命少５０％"
+                desc:"初始生命为５"
             },
             lessChoice:{
                 name:"僵化",
@@ -358,6 +361,10 @@ var texts_locale = {
             moreNegativeTime:{
                 name:"过敏",
                 desc:"异常状态影响+1回合/效果"
+            },
+            moreCardWait:{
+                name:"飞行",
+                desc:"卡牌的等待时间+1"
             }
         }
     },

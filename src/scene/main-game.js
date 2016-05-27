@@ -699,7 +699,7 @@ var MainLayer = cc.Layer.extend({
         if ('keyboard' in cc.sys.capabilities) {
             cc.eventManager.removeListeners(cc.EventListener.KEYBOARD);
         }
-        cc.eventManager.removeListeners(cc.EventListener.TOUCH_ONE_BY_ONE);
+//        cc.eventManager.removeListeners(cc.EventListener.TOUCH_ONE_BY_ONE);
     }
 });
 

@@ -1,8 +1,8 @@
 var CARD_MODEL_MAP = {};
-var ORIGIN_CARD_LEVEL_ADJUST = 0;
-var CARD_LEVEL_ADJUST = ORIGIN_CARD_LEVEL_ADJUST;
+var CARD_LEVEL_ADJUST = 0;
 var ORIGIN_ACTIVE_CARD_NUMBER = 3;
 var ACTIVE_CARD_NUMBER = ORIGIN_ACTIVE_CARD_NUMBER;
+var CARD_WAIT_ADJUST = 0;
 
 var getCardName = function(type){
     return texts.card[type].name;
@@ -73,7 +73,7 @@ var CardModel = Backbone.Model.extend({
     onExile:function(){
     },
     onDraw:function(){
-        this.set("waitTurn",this.waitTurnOfLevel(this.get("level")));
+        this.set("waitTurn",this.getWaitTurnOfLevel(this.get("level")));
     },
     levelUp:function(amount){
         this.set("level",this.get("level")+amount)
@@ -93,6 +93,9 @@ var CardModel = Backbone.Model.extend({
     },
     restoreToOrigin:function(){
         //TODO restore status that card buff or debuff
+    },
+    getWaitTurnOfLevel:function(level){
+        return Math.max(0,this.waitTurnOfLevel(level || this.get("level") ) + CARD_WAIT_ADJUST);
     },
     waitTurnOfLevel:function(level){
         return 0;

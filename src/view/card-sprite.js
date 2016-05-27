@@ -104,7 +104,7 @@ var CardSprite = BaseSprite.extend({
         this.model.off("change:waitTurn",this.renderWait);
         this.model.off("change:level",this.renderLevel);
         this.model.off("discard",this.onDestroy);
-        cc.eventManager.removeListener(cc.EventListener.TOUCH_ONE_BY_ONE);
+//        cc.eventManager.removeListener(cc.EventListener.TOUCH_ONE_BY_ONE);
     },
     initCardLayout:function(){
         this.disableMask = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("card-disabled-mask.png"));
@@ -154,7 +154,7 @@ var CardSprite = BaseSprite.extend({
     renderWait:function(){
         var waitTurn = this.model.getWait();
         if ( this.showDetail ) {
-            waitTurn = this.model.waitTurnOfLevel(this.model.get("level"));
+            waitTurn = this.model.getWaitTurnOfLevel(this.model.get("level"));
         }
         if ( waitTurn ){
             this.waitIcon.setVisible(true);
