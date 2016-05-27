@@ -569,7 +569,6 @@ var RoomModel = Backbone.Model.extend({
         if ( this.__blockInputCount ) this.__blockInputCount--;
     },
     shift:function(direction){
-        cc.log("shift"+direction);
         this.set("phase", PHASE_MOVE);
         this.blockInput();
         var maxStep = 0;
