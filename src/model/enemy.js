@@ -1,5 +1,7 @@
 var SCORE_INFLATION_RATE = 20;
 var EXP_INFLATION_RATE = 10;
+var MORE_EXP_ABOVE12 = false;
+var LESS_EXP_BELOW6 = false;
 
 var EnemyModel = MovableModel.extend({
     defaults:function(){
@@ -77,7 +79,13 @@ var EnemyModel = MovableModel.extend({
         this.trigger("die",this, hero)
     },
     afterDie:function(hero){ //called by view
-        currentRoom.getHero().gainExp(this.get("exp"));
+        var realExp = this.get("exp");
+        if ( this.get("level") >= 12 && MORE_EXP_ABOVE12) {
+            realExp = Math.round(realExp*1.5);
+        } else if ( this.get("level") <= 6 && LESS_EXP_BELOW6) {
+            realExp = Math.round(realExp*0.5);
+        }
+        currentRoom.getHero().gainExp(realExp);
         currentRoom.getScore(this.get("score"));
 
         currentRoom.logEnemyDie(this);

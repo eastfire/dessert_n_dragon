@@ -317,6 +317,10 @@ var texts_locale = {
                 name:"熟练",
                 desc:"每回合多抽１张牌"
             },
+            moreExpAbove12:{
+                name:"精英",
+                desc:"吃掉12级或以上的敌人\n饱腹肚＋50%"
+            },
             moreMaxLevel:{
                 name:"巨大潜力",
                 desc:"所有卡牌等级上限+1"
@@ -337,6 +341,7 @@ var texts_locale = {
                 name:"飞行",
                 desc:"卡牌的等待时间-1"
             },
+
             //disadvantage
             halfHpLess:{
                 name:"虚弱",
@@ -349,6 +354,10 @@ var texts_locale = {
             lessChoice:{
                 name:"僵化",
                 desc:"升级时少１选择项"
+            },
+            lessExpBelow6:{
+                name:"挑食",
+                desc:"吃掉6级或以下的敌人\n饱腹肚－50%"
             },
             lessMaxLevel:{
                 name:"缺乏潜力",
@@ -366,6 +375,7 @@ var texts_locale = {
                 name:"飞行",
                 desc:"卡牌的等待时间+1"
             }
+
         }
     },
     en: {

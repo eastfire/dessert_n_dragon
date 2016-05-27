@@ -595,7 +595,7 @@ var MainLayer = cc.Layer.extend({
         var self = this;
         this.roomRect = cc.rect(currentRoomSprite.x - cc.winSize.width / 2, currentRoomSprite.y - cc.winSize.width / 2,
             cc.winSize.width, cc.winSize.width);
-        cc.eventManager.addListener({
+        cc.eventManager.addListener(this.listener = {
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             swallowTouches: true,
             onTouchBegan: function (touch, event) {
@@ -699,7 +699,7 @@ var MainLayer = cc.Layer.extend({
         if ('keyboard' in cc.sys.capabilities) {
             cc.eventManager.removeListeners(cc.EventListener.KEYBOARD);
         }
-//        cc.eventManager.removeListeners(cc.EventListener.TOUCH_ONE_BY_ONE);
+        cc.eventManager.removeListeners(this.listener);
     }
 });
 

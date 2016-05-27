@@ -38,7 +38,7 @@ var SelectPerkLayer = cc.Layer.extend({
                         if ( this.perkNumber > this.perks.length ) {
                             this.selectPerk(perkName)
                         } else {
-                            toast("只能选择"+this.perkNumber+"个特性 可去商店解锁特性数量限制",{parent:this})
+                            toast("只能选择"+this.perkNumber+"个特性\n可去商店解锁特性数量限制",{parent:this})
                         }
                     }
                     this.renderMenuItem(menuItem)
@@ -134,7 +134,7 @@ var SelectPerkLayer = cc.Layer.extend({
             this.perkLeftLabel.setVisible(false)
         } else {
             this.perkLeftLabel.setVisible(true)
-            this.perkLeftLabel.setString("可选"+left+"特性")
+            this.perkLeftLabel.setString("还可选"+left+"特性")
         }
 
         var perkPoint = _.reduce(this.perks, function(memo, perkName){

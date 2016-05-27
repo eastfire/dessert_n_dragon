@@ -2,8 +2,8 @@ var PERK_MAP = {};
 
 var hookManager = new Backbone.Model();
 
-var PERK_LIST = ["halfHpMore", "moreChoice", "draw2","moreMaxLevel","passRoomRecovery","moreItemLevel","lessNegativeTime","lessCardWait",
-    "halfHpLess","initHp5","lessChoice","lessMaxLevel","lessItemLevel","moreNegativeTime","moreCardWait"];
+var PERK_LIST = ["halfHpMore", "moreChoice", "draw2","moreExpAbove12","moreMaxLevel","passRoomRecovery","moreItemLevel","lessNegativeTime","lessCardWait",
+    "halfHpLess","initHp5","lessChoice","lessExpBelow6","lessMaxLevel","lessItemLevel","moreNegativeTime","moreCardWait"];
 //advantage
 PERK_MAP.halfHpMore = Backbone.Model.extend({
     initialize:function(){
@@ -105,6 +105,17 @@ PERK_MAP.lessCardWait = Backbone.Model.extend({
 })
 PERK_MAP.lessCardWait.value = 1;
 
+PERK_MAP.moreExpAbove12 = Backbone.Model.extend({
+    initialize:function(){
+        MORE_EXP_ABOVE12 = true;
+    },
+    destroy:function(){
+        MORE_EXP_ABOVE12 = false;
+        Backbone.Model.prototype.destroy.call(this)
+    }
+})
+PERK_MAP.moreExpAbove12.value = 2;
+
 //disadvantage
 PERK_MAP.initHp5 = Backbone.Model.extend({
     initialize:function(){
@@ -190,4 +201,15 @@ PERK_MAP.moreCardWait = Backbone.Model.extend({
     }
 })
 PERK_MAP.moreCardWait.value = -1;
+
+PERK_MAP.lessExpBelow6 = Backbone.Model.extend({
+    initialize:function(){
+        LESS_EXP_BELOW6 = true;
+    },
+    destroy:function(){
+        LESS_EXP_BELOW6 = false;
+        Backbone.Model.prototype.destroy.call(this)
+    }
+})
+PERK_MAP.lessExpBelow6.value = -2;
 

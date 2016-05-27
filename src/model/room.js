@@ -208,16 +208,17 @@ var RoomModel = Backbone.Model.extend({
     },
     initEnemyPool:function(){
     },
+    __genModelsByEntries:function(entries){
+        return _.map(_.filter(entries,function(cardEntry){
+            return CARD_MODEL_MAP[cardEntry.type];
+        }),function(cardEntry){
+            return new CARD_MODEL_MAP[cardEntry.type](cardEntry)
+        });
+    },
     initSkill:function(){
-        this.__hand = _.map(this.get("initHand"),function(cardEntry){
-            return new CARD_MODEL_MAP[cardEntry.type](cardEntry)
-        });
-        this.__deck = _.map(this.get("initDeck"),function(cardEntry){
-            return new CARD_MODEL_MAP[cardEntry.type](cardEntry)
-        });
-        this.__discard = _.map(this.get("initDiscard"),function(cardEntry){
-            return new CARD_MODEL_MAP[cardEntry.type](cardEntry)
-        });
+        this.__hand = this.__genModelsByEntries(this.get("initHand"));
+        this.__deck = this.__genModelsByEntries(this.get("initDeck"));
+        this.__discard = this.__genModelsByEntries(this.get("initDiscard"));
     },
     initEvents:function(){
         this.on("turn-complete", this.turnStart, this)
@@ -856,7 +857,9 @@ var RoomModel = Backbone.Model.extend({
         return maxHand
     },
     gainCard:function(opt){
-        var cardModel = new CARD_MODEL_MAP[opt.type](opt);
+        var cardClass = CARD_MODEL_MAP[opt.type];
+        if ( !cardClass ) return;
+        var cardModel = new cardClass(opt);
         cardModel.onGain();
         if ( this.canDrawCard() ) {
             this.__hand.push(cardModel);

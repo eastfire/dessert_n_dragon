@@ -104,7 +104,7 @@ var CardSprite = BaseSprite.extend({
         this.model.off("change:waitTurn",this.renderWait);
         this.model.off("change:level",this.renderLevel);
         this.model.off("discard",this.onDestroy);
-//        cc.eventManager.removeListener(cc.EventListener.TOUCH_ONE_BY_ONE);
+        cc.eventManager.removeListener(this.listener);
     },
     initCardLayout:function(){
         this.disableMask = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("card-disabled-mask.png"));
