@@ -2,6 +2,7 @@ var CARD_MODEL_MAP = {};
 var CARD_LEVEL_ADJUST = 0;
 var ORIGIN_ACTIVE_CARD_NUMBER = 3;
 var ACTIVE_CARD_NUMBER = ORIGIN_ACTIVE_CARD_NUMBER;
+var PASSIVE_CARD_NUMBER = 2;
 var CARD_WAIT_ADJUST = 0;
 
 var getCardName = function(type){
@@ -124,7 +125,7 @@ CARD_MODEL_MAP.heal.getEffect = function(level){
     level = level || 1;
     return 5*level;
 }
-CARD_MODEL_MAP.heal.maxCount = 4;
+CARD_MODEL_MAP.heal.isActive = true;
 
 CARD_MODEL_MAP["tail-slash"] = CardModel.extend({
     defaults: function () {
@@ -157,7 +158,7 @@ CARD_MODEL_MAP["tail-slash"] = CardModel.extend({
         this.reduceWait(1);
     }
 })
-CARD_MODEL_MAP["tail-slash"].maxCount = 4;
+CARD_MODEL_MAP["tail-slash"].isActive = true;
 
 CARD_MODEL_MAP["vertical-fire"] = CardModel.extend({
     defaults: function () {
@@ -194,7 +195,7 @@ CARD_MODEL_MAP["vertical-fire"] = CardModel.extend({
         this.reduceWait(1);
     }
 })
-CARD_MODEL_MAP["vertical-fire"].maxCount = 4;
+CARD_MODEL_MAP["vertical-fire"].isActive = true;
 
 CARD_MODEL_MAP["horizontal-fire"] = CardModel.extend({
     defaults: function () {
@@ -231,7 +232,7 @@ CARD_MODEL_MAP["horizontal-fire"] = CardModel.extend({
         this.reduceWait(1);
     }
 })
-CARD_MODEL_MAP["horizontal-fire"].maxCount = 4;
+CARD_MODEL_MAP["horizontal-fire"].isActive = true;
 
 CARD_MODEL_MAP["cross-fire"] = CardModel.extend({
     defaults: function () {
@@ -285,7 +286,7 @@ CARD_MODEL_MAP["cross-fire"] = CardModel.extend({
         this.reduceWait(2);
     }
 })
-CARD_MODEL_MAP["cross-fire"].maxCount = 4;
+CARD_MODEL_MAP["cross-fire"].isActive = true;
 
 CARD_MODEL_MAP["whirl-slash"] = CardModel.extend({
     defaults: function () {
@@ -325,7 +326,7 @@ CARD_MODEL_MAP["whirl-slash"] = CardModel.extend({
         this.reduceWait(2);
     }
 })
-CARD_MODEL_MAP["whirl-slash"].maxCount = 4;
+CARD_MODEL_MAP["whirl-slash"].isActive = true;
 
 CARD_MODEL_MAP["big-whirl-slash"] = CardModel.extend({
     defaults: function () {
@@ -364,7 +365,7 @@ CARD_MODEL_MAP["big-whirl-slash"] = CardModel.extend({
         this.reduceWait(2);
     }
 })
-CARD_MODEL_MAP["big-whirl-slash"].maxCount = 4;
+CARD_MODEL_MAP["big-whirl-slash"].isActive = true;
 
 CARD_MODEL_MAP.cooldown = CardModel.extend({
     defaults: function () {
@@ -383,7 +384,7 @@ CARD_MODEL_MAP.cooldown = CardModel.extend({
         },this);
     }
 })
-CARD_MODEL_MAP.cooldown.maxCount = 4;
+CARD_MODEL_MAP.cooldown.isActive = true;
 CARD_MODEL_MAP.cooldown.getEffect = function(level){
     level = level || 1;
     return level+4;
@@ -449,7 +450,7 @@ CARD_MODEL_MAP["meteor-shower"] = CardModel.extend({
         this.reduceWait(CARD_MODEL_MAP["meteor-shower"].getEffectDiff());
     }
 })
-CARD_MODEL_MAP["meteor-shower"].maxCount = 4;
+CARD_MODEL_MAP["meteor-shower"].isActive = true;
 CARD_MODEL_MAP["meteor-shower"].getEffect = function(level){
     level = level || 1;
     return level+4;
@@ -556,7 +557,6 @@ CARD_MODEL_MAP.collector = CardModel.extend({
         currentRoom.getHero().gainBuff("luck", CARD_MODEL_MAP.collector.getUseEffect);
     }
 })
-CARD_MODEL_MAP.collector.maxCount = 2;
 CARD_MODEL_MAP.collector.getEffect = function(level){
     level = level || 1;
     return level+1;
@@ -600,7 +600,6 @@ CARD_MODEL_MAP.constitution = CardModel.extend({
         currentRoom.getHero().gainHp(CARD_MODEL_MAP.constitution.getUseEffect);
     }
 })
-CARD_MODEL_MAP.constitution.maxCount = 2;
 CARD_MODEL_MAP.constitution.getEffect = function(level){
     level = level || 1;
     return Math.round((level+1)*CONSTITUTION_EFFECT);
@@ -651,7 +650,6 @@ CARD_MODEL_MAP.cunning = CardModel.extend({
         currentRoom.getHero().gainExp(CARD_MODEL_MAP.cunning.getUseEffect);
     }
 })
-CARD_MODEL_MAP.cunning.maxCount = 2;
 CARD_MODEL_MAP.cunning.getEffect = function(level){
     level = level || 1;
     return level+2;
@@ -690,7 +688,6 @@ CARD_MODEL_MAP.dexterity = CardModel.extend({
         currentRoom.getHero().gainBuff("dexterity", CARD_MODEL_MAP.dexterity.getUseEffect);
     }
 })
-CARD_MODEL_MAP.dexterity.maxCount = 2;
 CARD_MODEL_MAP.dexterity.getEffect = function(level){
     level = level || 1;
     return level*2+1;
@@ -729,7 +726,6 @@ CARD_MODEL_MAP.dodge = CardModel.extend({
         currentRoom.getHero().gainBuff("dodge", CARD_MODEL_MAP.dodge.getUseEffect);
     }
 })
-CARD_MODEL_MAP.dodge.maxCount = 2;
 CARD_MODEL_MAP.dodge.getEffect = function(level){
     level = level || 1;
     return level*3+2;
@@ -768,7 +764,6 @@ CARD_MODEL_MAP.luck = CardModel.extend({
         currentRoom.getHero().gainBuff("luck", CARD_MODEL_MAP.luck.getUseEffect);
     }
 })
-CARD_MODEL_MAP.luck.maxCount = 2;
 CARD_MODEL_MAP.luck.getEffect = function(level){
     level = level || 1;
     return level*2+1;
@@ -779,44 +774,6 @@ CARD_MODEL_MAP.luck.getEffectDiff = function(currentLevel, targetLevel){
 }
 CARD_MODEL_MAP.luck.getUseEffect = 3;
 
-CARD_MODEL_MAP.recovery = CardModel.extend({
-    defaults: function () {
-        return _.extend(CardModel.prototype.defaults.call(this),{
-            type: "recovery",
-            isPassive: true,
-            maxLevel: 8
-        })
-    },
-    canLevelUp:function(){
-        var hero = currentRoom.getHero();
-        return CardModel.prototype.canLevelUp.call(this) && hero.get("recovery") < hero.get("maxRecovery")
-    },
-    onLevelUp:function(){
-        var hero = currentRoom.getHero();
-        hero.set("recovery",hero.get("recovery") + CARD_MODEL_MAP.recovery.getEffectDiff(this.get("level")) )
-    },
-    onGain:function(){
-        var hero = currentRoom.getHero();
-        hero.set("recovery",hero.get("recovery") + CARD_MODEL_MAP.recovery.getEffect(this.get("level")) )
-    },
-    onExile:function(){
-        var hero = currentRoom.getHero();
-        hero.set("recovery",hero.get("recovery") - CARD_MODEL_MAP.recovery.getEffect(this.get("level")) )
-    },
-    onUse:function(){
-        currentRoom.getHero().gainHp(CARD_MODEL_MAP.recovery.getUseEffect);
-    }
-})
-CARD_MODEL_MAP.recovery.maxCount = 0;
-CARD_MODEL_MAP.recovery.getEffect = function(level){
-    level = level || 1;
-    return level*5+5;
-}
-CARD_MODEL_MAP.recovery.getEffectDiff = function(currentLevel, targetLevel){
-    targetLevel = targetLevel || currentLevel+1;
-    return 5;
-}
-CARD_MODEL_MAP.recovery.getUseEffect = 2;
 
 //TODO regeneration
 
