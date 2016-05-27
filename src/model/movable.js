@@ -98,12 +98,10 @@ var MovableModel = Backbone.Model.extend({
         })
     },
     generate:function(){
-        cc.log("generate")
         this.set("generateOver",false);
         this.trigger("generate",this)
     },
     afterGenerate:function(){ //called by view
-        cc.log("afterGenerate")
         this.set("generateOver",true)
         currentRoom.checkAllMovableGenerated();
     },
