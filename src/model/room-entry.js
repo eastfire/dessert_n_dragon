@@ -2689,6 +2689,6 @@ rooms.push({
     initTiles:tiles7x6SplitAndPortal,
     exits:[{x:1,y:1},{x:6,y:5},{x:6,y:1},{x:1,y:5}],
     initHero: STANDARD_HERO,
-    initHand:[ {type:"teleport"} ],
+    initHand:[ {type:"lightening"} ],
     choicePool:STANDARD_CHOICE_POOL
 });

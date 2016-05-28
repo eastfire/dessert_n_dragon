@@ -102,6 +102,25 @@ var HeroSprite = MovableSprite.extend({
                     context:this
                 })
                 break;
+            case "lightening":
+                var targetSprite = currentRoomSprite.getChildByName(enemyModel.cid);
+                effectIconMananger.fly(this, targetSprite, {
+                    icon:"lightening",
+                    fromOffset:{
+                        x: -23,
+                        y: -23
+                    },
+                    toOffset:{
+                        x: -23,
+                        y: -23
+                    },
+                    time: times.useCard,
+                    callback:function(){
+                        this.model.hitOrMiss(enemyModel, options)
+                    },
+                    context:this
+                })
+                break;
             default :
                 this.model.hitOrMiss(enemyModel, options)
         }

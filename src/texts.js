@@ -28,6 +28,10 @@ var texts_locale = {
                 name: "钱",
                 desc: "用途你懂的。\n等级越高金额越高。"
             },
+            "poison-potion": {
+                name: "毒药",
+                desc: "降低你的生命5点。无论什么等级"
+            },
 
             //enemy
             archer:{
@@ -191,6 +195,11 @@ var texts_locale = {
                 desc: "所有敌人不能移动1回合",
                 levelUpDesc: "所有敌人不能移动1回合\n等待时间-1"
             },
+            lightening:{
+                name: "闪电链",
+                desc: "消灭所有与你周围的某敌人相同类型的敌人",
+                levelUpDesc: "消灭所有与你周围的某敌人相同类型的敌人\n等待时间-2"
+            },
             "meteor-shower":{
                 name:"陨石雨",
                 desc: function(level) {
@@ -301,6 +310,14 @@ var texts_locale = {
                 desc: function (level) {
                     return "失去所有生命" + ACHIEVEMENT_ENTRY_MAP["hero-die"].requirement(level) + "次"
                 }
+            },
+            "gain-card": {
+                name:function(level){
+                    return "卡牌达人"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "获得技能牌" + ACHIEVEMENT_ENTRY_MAP["gain-card"].requirement(level) + "次"
+                }
             }
         },
 
@@ -319,7 +336,11 @@ var texts_locale = {
             },
             moreExpAbove12:{
                 name:"精英",
-                desc:"吃掉12级或以上的敌人\n饱腹肚＋50%"
+                desc:"12级或以上的敌人\n提供的饱腹肚＋50%"
+            },
+            forwardAfterKill:{
+                name:"莽撞",
+                desc:"吃掉普通敌人后前进\n而不是退回原地"
             },
             moreMaxLevel:{
                 name:"巨大潜力",
@@ -357,7 +378,7 @@ var texts_locale = {
             },
             lessExpBelow6:{
                 name:"挑食",
-                desc:"吃掉6级或以下的敌人\n饱腹肚－50%"
+                desc:"6级或以下的敌人\n提供的饱腹肚－50%"
             },
             lessMaxLevel:{
                 name:"缺乏潜力",
@@ -388,13 +409,13 @@ texts_locale.zh.movable["horizontal-log7"]=texts_locale.zh.movable["horizontal-l
 
 //unlock shop
 _.each(["cross-fire","whirl-slash","big-whirl-slash","cooldown",
-    "freeze","teleport","tornado","meteor-shower","collector"],function(cardName){
+    "freeze","teleport","tornado","meteor-shower","collector","lightening"],function(cardName){
     texts_locale.zh.unlock.shop[cardName] = texts_locale.zh.card[cardName].name+"可以在商店中解锁了"
 })
 
 //unlock card
 _.each(["vertical-fire","horizontal-fire","cross-fire","whirl-slash","big-whirl-slash","cooldown",
-    "freeze","teleport","tornado","meteor-shower","collector"],function(cardName){
+    "freeze","teleport","tornado","meteor-shower","collector","lightening"],function(cardName){
     texts_locale.zh.unlock.card[cardName] = "在任意关卡中使用"+texts_locale.zh.card[cardName].name+"技能"
 })
 

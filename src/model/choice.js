@@ -85,7 +85,7 @@ var CHOICE_FACTORY_MAP = {
     reduceRandomWait:function(roomModel, opt){
         var number = Math.round(Math.random()*(opt.to-opt.from)+opt.from);
         return {
-            description:"手中每张技能卡的等待时间减少"+number,
+            description:"临时减少手中所有技能卡等待时间"+number,
             onChosen:function(roomModel){
                 _.each(roomModel.getHand(),function(cardModel){
                     cardModel.reduceWait(number)
@@ -95,7 +95,7 @@ var CHOICE_FACTORY_MAP = {
     },
     reduceAllWait:function(roomModel, opt){
         return {
-            description:"手中所有技能卡等待时间变为0",
+            description:"临时将手中所有技能卡等待时间变为0",
             onChosen:function(roomModel){
                 _.each(roomModel.getHand(),function(cardModel){
                     cardModel.reduceWait(1000) //FIXME just a big number here

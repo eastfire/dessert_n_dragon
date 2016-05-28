@@ -92,13 +92,20 @@ var EnemyModel = MovableModel.extend({
         var enemyLevel = this.get("level");
         var dropItem = false;
         var p = null;
-        _.any(this.get("positions"),function(position){ //generate one item is enough ?
-            if ( this.checkDropItem() ) {
+        if ( this.__dropItemPredetermined ) {
+            if ( this.__willDropItem ) {
                 dropItem = true;
-                p = position;
-                return true;
+                p = this.get("positions")[0];
             }
-        },this);
+        } else {
+            _.any(this.get("positions"), function (position) { //generate one item is enough ?
+                if (this.checkDropItem()) {
+                    dropItem = true;
+                    p = position;
+                    return true;
+                }
+            }, this);
+        }
 
         currentRoom.removeMovable(this);
         if ( dropItem ) {
@@ -196,6 +203,12 @@ var EnemyModel = MovableModel.extend({
     },
     getAttackPoint:function(){
         return this.get("baseAttack") * (this.get("angry")?2:1);
+    },
+    heroCanMoveForward:function(){
+        if ( this.get("positions").length > 1 ) return false;
+        this.__willDropItem = this.checkDropItem();
+        this.__dropItemPredetermined = true;
+        return !this.__willDropItem;
     }
 })
 

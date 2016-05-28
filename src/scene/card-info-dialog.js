@@ -36,7 +36,8 @@ var CardInfoDialog = cc.Sprite.extend({
         });
         this.addChild(cardNameLabel)
 
-        var desc = "最大等级"+this.model.getMaxLevel()+"\n";
+        var desc = "最大等级"+this.model.getMaxLevel();
+        desc += "  最多可得到"+(CARD_MODEL_MAP[this.model.get("type")].isActive?ACTIVE_CARD_NUMBER:PASSIVE_CARD_NUMBER)+"张"+"\n";
         if (this.isLevelUp){
             desc += getCardLevelUpDesc( this.model.get("type"), this.model.get("level"));
         } else {

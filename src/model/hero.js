@@ -203,7 +203,7 @@ var HeroModel = MovableModel.extend({
     },
     hit:function(enemy, options){
         this.beforeHit(enemy, options);
-        if ( enemy.get("heroForwardAfterKillMe") && this.get("forwardAfterKillEnemy")) {
+        if ( enemy.heroCanMoveForward() && this.get("forwardAfterKillEnemy")) {
             this.__forwardAfterKill = true;
             this.trigger("hitForward", this, enemy);
         } else {

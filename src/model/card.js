@@ -110,7 +110,7 @@ CARD_MODEL_MAP.heal = CardModel.extend({
     defaults: function () {
         return _.extend(CardModel.prototype.defaults.call(this),{
             type: "heal",
-            maxLevel: 20
+            maxLevel: 10
         })
     },
 
@@ -416,6 +416,56 @@ CARD_MODEL_MAP.freeze = CardModel.extend({
     }
 })
 
+CARD_MODEL_MAP.lightening = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "lightening",
+            maxLevel: 5
+        })
+    },
+    waitTurnOfLevel:function(level){
+        return 28-level*2;
+    },
+    onUse:function(){
+        var hero = currentRoom.getHero();
+        var heroPosition = hero.get("positions")[0]
+        var attackEnemyModel = _.sample(_.filter(_.map( [{ x:heroPosition.x-1, y:heroPosition.y},
+            { x:heroPosition.x+1, y:heroPosition.y},
+            { x:heroPosition.x, y:heroPosition.y-1},
+            { x:heroPosition.x, y:heroPosition.y+1}], function(position){
+            return currentRoom.getMovableByPosition(position.x, position.y);
+        },this ),function(movableModel){
+            return movableModel instanceof EnemyModel
+        }));
+        if ( attackEnemyModel ) { //found one
+            var attackType = attackEnemyModel.get("type");
+            var attackSubtype = attackEnemyModel.get("subtype");
+            _.each(currentRoom.filterMovable(function(movableModel){
+                return movableModel.get("type") === attackType && movableModel.get("subtype") === attackSubtype;
+            },this),function(movableModel){
+                hero.attack(movableModel, {
+                    attackType: ATTACK_TYPE_MAGIC,
+                    attackAction: "lightening",
+                    onHit: function (enemy, opt) {
+                        enemy.beHit(hero, opt);
+                    },
+                    onMiss: function (enemy, opt) {
+                        enemy.dodgeAttack(hero, opt);
+                    },
+                    context: this
+                });
+            },this);
+        }
+    },
+    onLevelUp:function(){
+        this.reduceWait(CARD_MODEL_MAP.lightening.getEffectDiff());
+    }
+})
+CARD_MODEL_MAP.lightening.isActive = true;
+CARD_MODEL_MAP.lightening.getEffectDiff = function(currentLevel, targetLevel){
+    return 2;
+}
+
 CARD_MODEL_MAP["meteor-shower"] = CardModel.extend({
     defaults: function () {
         return _.extend(CardModel.prototype.defaults.call(this),{
@@ -445,9 +495,6 @@ CARD_MODEL_MAP["meteor-shower"] = CardModel.extend({
                 });
             }
         ,this)
-    },
-    onLevelUp:function(){
-        this.reduceWait(CARD_MODEL_MAP["meteor-shower"].getEffectDiff());
     }
 })
 CARD_MODEL_MAP["meteor-shower"].isActive = true;

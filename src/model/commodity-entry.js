@@ -130,4 +130,14 @@ COMMODITY_ENTRY_LIST = [
             unlockSubtype: "collector"
         }
     },
+    {
+        cost: 1000,
+        type: "card",
+        subtype: "lightening",
+        unlockHint: "通过82关后解锁",
+        valid: {
+            unlockType: "shop",
+            unlockSubtype: "lightening"
+        }
+    }
 ]

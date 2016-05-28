@@ -13,10 +13,10 @@ var dimens = {
     },
 
     levelLabel:{
-        x: 14,
-        y: 14,
+        x: 16,
+        y: 16,
         outlineWidth: 2,
-        fontSize: 30
+        fontSize: 35
     },
 
     moneyLabel:{

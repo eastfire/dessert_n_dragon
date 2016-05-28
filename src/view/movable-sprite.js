@@ -125,14 +125,21 @@ var MovableSprite = BaseSprite.extend({
     },
     onLevelChange:function(){
         this.renderLevel();
-        var diff = this.model.get("level")-this.model.previous("level");
-        effectIconMananger.enqueue(this, {
-            icon: "icon-level",
-            text: diff > 0 ? ("+"+diff):diff,
-            offset: {x:-20, y:-20},
-            scaleX: 0.7,
-            scaleY: 0.7
-        });
+        if ( this.levelLabel ) {
+            this.levelLabel.stopAllActions()
+            this.levelLabel.runAction(cc.sequence(
+                cc.scaleTo(0.15, 2, 2),
+                cc.scaleTo(0.1, 1, 1)
+            ))
+        }
+//        var diff = this.model.get("level")-this.model.previous("level");
+//        effectIconMananger.enqueue(this, {
+//            icon: "icon-level",
+//            text: diff > 0 ? ("+"+diff):diff,
+//            offset: {x:-20, y:-20},
+//            scaleX: 0.7,
+//            scaleY: 0.7
+//        });
     },
     renderLevel:function(){
         if ( !this.model.get("isShowLevel") ) return;

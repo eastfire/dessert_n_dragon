@@ -11,6 +11,17 @@ ACHIEVEMENT_ENTRY_MAP = {
         },
         validation: "statistic"
     },
+    "gain-card": {
+        index: 0,
+        maxLevel: 5,
+        reward: function (level) {
+            return level * 100;
+        },
+        requirement: function (level) {
+            return Math.pow(5, level)*10
+        },
+        validation: "statistic"
+    },
     "kill-level-pudding": {
         index: 1,
         maxLevel: 5,
