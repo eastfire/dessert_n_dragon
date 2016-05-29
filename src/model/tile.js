@@ -134,7 +134,11 @@ TILE_MODEL_MAP.nail = RoomTileModel.extend({
         if ( movableModel ){
             if ( movableModel instanceof HeroModel ) {
                 this.trigger("attacking",this);
-                currentRoom.getHero().loseHp(this.getEffect(), this);
+                currentRoom.getHero().loseHp(this.getEffect(), {
+                    category:"tile",
+                    type:this.get("type"),
+                    subtype:this.get("subtype")
+                });
             }
         }
     },

@@ -2,7 +2,8 @@ var PERK_MAP = {};
 
 var hookManager = new Backbone.Model();
 
-var PERK_LIST = ["halfHpMore", "moreChoice", "draw2","moreExpAbove12","forwardAfterKill","moreMaxLevel","passRoomRecovery","moreItemLevel","lessNegativeTime","lessCardWait",
+var PERK_LIST = ["halfHpMore", "moreChoice", "draw2","moreExpAbove12","moreMaxLevel","passRoomRecovery","moreItemLevel","lessNegativeTime","lessCardWait",
+    "forwardAfterKill",
     "halfHpLess","initHp5","lessChoice","lessExpBelow6","lessMaxLevel","lessItemLevel","moreNegativeTime","moreCardWait"];
 //advantage
 PERK_MAP.halfHpMore = Backbone.Model.extend({
@@ -129,7 +130,7 @@ PERK_MAP.forwardAfterKill = Backbone.Model.extend({
         Backbone.Model.prototype.destroy.call(this)
     }
 })
-PERK_MAP.forwardAfterKill.value = 2;
+PERK_MAP.forwardAfterKill.value = 0;
 
 
 //disadvantage

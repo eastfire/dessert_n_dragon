@@ -2683,12 +2683,12 @@ rooms.push({
     loseAnyConditions:[
         "outOfTurn"
     ],
-    enemyPool:[{type:"catapult"},{type:"dumpling"},{type:"cane"}],
+    enemyPool:[{type:"baozi"},{type:"candy"},{type:"lolipop"}],
     enemyLevelPool:[1,2],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x6SplitAndPortal,
     exits:[{x:1,y:1},{x:6,y:5},{x:6,y:1},{x:1,y:5}],
     initHero: STANDARD_HERO,
-    initHand:[ {type:"lightening"} ],
+    initHand:[ {type:"dispel"} ],
     choicePool:STANDARD_CHOICE_POOL
 });

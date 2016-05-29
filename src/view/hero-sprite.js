@@ -2,7 +2,7 @@ var HeroSprite = MovableSprite.extend({
     ctor: function (options) {
         this._super(options);
 
-
+        this.renderDispel();
     },
 
     initEvent:function(){
@@ -13,6 +13,7 @@ var HeroSprite = MovableSprite.extend({
         this.model.on("miss", this.miss, this)
         this.model.on("change:hp", this.onChangeHp, this)
         this.model.on("change:cursed",this.renderStatus,this);
+        this.model.on("change:dispel",this.renderDispel,this);
     },
     attack:function(enemyModel, options){
         switch ( options.attackAction ) {
@@ -176,6 +177,39 @@ var HeroSprite = MovableSprite.extend({
             scaleX: 0.7,
             scaleY: 0.7
         });
+    },
+    renderDispel:function(){
+        var prevDispel = this.model.previous("dispel")
+        var dispel = this.model.get("dispel")
+        if ( prevDispel && !dispel ) {
+            if ( this.dispelSprite ) {
+                this.dispelSprite.runAction(cc.sequence(cc.spawn(
+                    cc.fadeOut(0.3),
+                    cc.scaleTo(0.3, 0.1, 0.1)
+                    ),
+                    cc.callFunc(function(){
+                        this.dispelSprite = null;
+                    },this),
+                    cc.removeSelf()
+                ));
+            }
+        } else if ( dispel ) {
+            if ( !this.dispelSprite ) {
+                this.dispelSprite = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("dispel.png"))
+                this.addChild(this.dispelSprite)
+                this.dispelSprite.attr({
+                    opacity: 0,
+                    x: dimens.tileSize.width/2,
+                    y: dimens.tileSize.height/2,
+                    scaleX: 0.1,
+                    scaleY: 0.1
+                })
+                this.dispelSprite.runAction(cc.spawn(
+                    cc.fadeIn(0.3),
+                    cc.scaleTo(0.3, 1, 1)
+                ));
+            }
+        }
     }
 });
 MOVABLE_SPRITE_MAP.normalHero = HeroSprite

@@ -36,6 +36,16 @@ COMMODITY_ENTRY_LIST = [
         }
     },
     {
+        cost: 50,
+        type:"card",
+        subtype: "fire-ball"
+    },
+    {
+        cost: 100,
+        type:"card",
+        subtype: "vertical-fire"
+    },
+    {
         cost: 100,
         type:"card",
         subtype: "horizontal-fire"
@@ -138,6 +148,16 @@ COMMODITY_ENTRY_LIST = [
         valid: {
             unlockType: "shop",
             unlockSubtype: "lightening"
+        }
+    },
+    {
+        cost: 100,
+        type: "card",
+        subtype: "dispel",
+        unlockHint: "通过85关后解锁",
+        valid: {
+            unlockType: "shop",
+            unlockSubtype: "dispel"
         }
     }
 ]

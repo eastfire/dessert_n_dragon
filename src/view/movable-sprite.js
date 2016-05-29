@@ -8,6 +8,8 @@ var MovableSprite = BaseSprite.extend({
         this.initLabel();
         this.initEvent();
         this.initAnimation();
+
+        this.renderStatus();
     },
     getInitFrameName:function(){
         var name;

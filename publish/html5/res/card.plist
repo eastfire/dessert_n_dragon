@@ -124,7 +124,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-dodge.png</key>
+            <key>card-dispel.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -139,7 +139,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-freeze.png</key>
+            <key>card-dodge.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -154,7 +154,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-heal.png</key>
+            <key>card-fire-ball.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -169,7 +169,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-horizontal-fire.png</key>
+            <key>card-freeze.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -184,7 +184,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-lightening.png</key>
+            <key>card-heal.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -199,7 +199,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-luck.png</key>
+            <key>card-horizontal-fire.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -214,7 +214,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-meteor-shower.png</key>
+            <key>card-lightening.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -229,7 +229,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-recovery.png</key>
+            <key>card-luck.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -244,7 +244,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-tail-slash.png</key>
+            <key>card-meteor-shower.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -259,7 +259,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-teleport.png</key>
+            <key>card-recovery.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -274,7 +274,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-tornado.png</key>
+            <key>card-tail-slash.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -289,7 +289,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-vertical-fire.png</key>
+            <key>card-teleport.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -304,7 +304,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-whirl-slash.png</key>
+            <key>card-tornado.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -319,6 +319,36 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>card-vertical-fire.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{120,168}</string>
+                <key>spriteSourceSize</key>
+                <string>{120,168}</string>
+                <key>textureRect</key>
+                <string>{{124,1702},{120,168}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>card-whirl-slash.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{120,168}</string>
+                <key>spriteSourceSize</key>
+                <string>{120,168}</string>
+                <key>textureRect</key>
+                <string>{{2,1872},{120,168}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>
@@ -327,9 +357,9 @@
             <key>realTextureFileName</key>
             <string>card.png</string>
             <key>size</key>
-            <string>{246,1872}</string>
+            <string>{246,2042}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:5393a52a9bfd12f9f4c6cd9fdfc68628:425ded0143af47d95259dc8d2b2a4eeb:ac15c2787776c146127be3982bd2a622$</string>
+            <string>$TexturePacker:SmartUpdate:0f44149b128923e53e44e09dda27a321:d03f8f59ba0d105af9846e9e6b0332f9:ac15c2787776c146127be3982bd2a622$</string>
             <key>textureFileName</key>
             <string>card.png</string>
         </dict>

@@ -50,7 +50,7 @@ var InfiniteGameOverDialog = cc.Scale9Sprite.extend({
         this.attr({
             x:cc.winSize.width/2,
             y:cc.winSize.height*3/2,
-            width: cc.winSize.width - 50,
+            width: cc.winSize.width - 20,
             height: 700
         })
 
@@ -182,7 +182,7 @@ var InfiniteGameOverDialog = cc.Scale9Sprite.extend({
                         turnNumber: this.model.get("turnNumber"),
                         perks:gameStatus.get("perks"),
                         scoreScale:gameStatus.get("scoreScale"),
-                        killedBy: this.model.get("killedBy")
+                        killedBy: this.model.getHero().get("killedBy")
                     },function(s){
                         self.currentScoreObject = s;
                         currentStorageStrategy.fetchScores(function(scores){
@@ -228,7 +228,7 @@ var InfiniteGameOverDialog = cc.Scale9Sprite.extend({
         this.scrollView = new ccui.ScrollView();
         this.scrollView.setDirection(ccui.ScrollView.DIR_VERTICAL);
         this.scrollView.setTouchEnabled(true);
-        this.scrollView.setContentSize(cc.size(this.width - 50, this.height - 140));
+        this.scrollView.setContentSize(cc.size(this.width - 20, this.height - 140));
 
         this.scrollView.x = 0;
         this.scrollView.y = 90;
@@ -240,28 +240,14 @@ var InfiniteGameOverDialog = cc.Scale9Sprite.extend({
                 return this.currentScoreObject.id !== score.id
             },this);
         }
-        cc.log(needExtraScoreEntry)
+
         this.scrollView.setInnerContainerSize(cc.size(this.scrollView.width, Math.max(this.scrollView.height,
                 ( needExtraScoreEntry ? TOP_SCORE_NUMBER + 2 : TOP_SCORE_NUMBER ) * stepY)));
-        currentY = this.scrollView.getInnerContainerSize().height - stepY/2;
+        this.currentY = this.scrollView.getInnerContainerSize().height - stepY/2;
 
         _.each(scores,function(score){
-            var text = score.get("scoreValue")+"分 "+score.get("name")+" LV"+score.get("level")+" "+score.get("turnNumber")+"回合 "+
-                moment(score.createdAt).locale("zh-cn").fromNow();
-            var descLabel = new cc.LabelTTF(text, null, 18 );
-            var labelColor = cc.color.BLACK
-            if ( this.currentScoreObject && this.currentScoreObject.id === score.id ) {
-                labelColor = cc.color.RED
-            }
-            descLabel.attr({
-                color: labelColor,
-                x: 20,
-                y: currentY,
-                anchorX: 0,
-                anchorY: 0.5
-            });
-            this.scrollView.addChild(descLabel);
-            currentY-=stepY;
+            this.renderScoreEntry(score);
+            this.currentY-=stepY;
         },this)
 
         if ( needExtraScoreEntry ) {
@@ -269,27 +255,65 @@ var InfiniteGameOverDialog = cc.Scale9Sprite.extend({
             descLabel.attr({
                 color: cc.color.BLACK,
                 x: 20,
-                y: currentY,
+                y: this.currentY,
                 anchorX: 0,
                 anchorY: 0.5
             });
             this.scrollView.addChild(descLabel);
-            currentY-=stepY;
-            var text = this.currentScoreObject.get("scoreValue")+"分 "+this.currentScoreObject.get("name")+
-                " LV"+this.currentScoreObject.get("level")+" "+this.currentScoreObject.get("turnNumber")+"回合 "+
-                moment(this.currentScoreObject.createdAt).locale("zh-cn").fromNow();
-            var descLabel = new cc.LabelTTF(text, null, 18 );
-            descLabel.attr({
-                color: cc.color.RED,
-                x: 20,
-                y: currentY,
-                anchorX: 0,
-                anchorY: 0.5
-            });
-            this.scrollView.addChild(descLabel);
+            this.currentY-=stepY;
+            this.renderScoreEntry(this.currentScoreObject);
         }
 
         this.addChild(this.scrollView)
+    },
+    renderScoreEntry:function(score){
+        var text = score.get("scoreValue")+"分 "+score.get("name")+" lv"+score.get("level")+" "+score.get("turnNumber")+"回合 "+
+            moment(score.createdAt).locale("zh-cn").fromNow();
+        var descLabel = new cc.LabelTTF(text, null, 18 );
+        var labelColor = cc.color.BLACK
+        if ( this.currentScoreObject && this.currentScoreObject.id === score.id ) {
+            labelColor = cc.color.RED
+        }
+        descLabel.attr({
+            color: labelColor,
+            x: 20,
+            y: this.currentY,
+            anchorX: 0,
+            anchorY: 0.5
+        });
+        this.scrollView.addChild(descLabel);
+
+        cc.log(score)
+        var killedBy = score.get("killedBy");
+        if ( killedBy ) {
+            cc.log("aaa")
+            var killerImageName;
+            cc.log("aaa1")
+            if ( killedBy.category === "enemy" ) {
+                var killedByLevel = new cc.LabelTTF("lv" + killedBy.level, null, 16);
+                killedByLevel.attr({
+                    color: labelColor,
+                    x: 375,
+                    y: this.currentY,
+                    anchorX: 1,
+                    anchorY: 0.5
+                });
+            }
+            cc.log("aaa2")
+            killerImageName = killedBy.type+(killedBy.subtype?("-"+killedBy.subtype):"")+".png";
+            var killerImage = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( killerImageName ))
+            killerImage.attr({
+                x: 390,
+                y: this.currentY,
+                scaleX: 0.25,
+                scaleY: 0.25
+            })
+            cc.log("aaa3")
+            this.scrollView.addChild(killedByLevel);
+            this.scrollView.addChild(killerImage);
+
+            //TODO render perks
+        }
     },
     appear:function(){
         this.runAction( cc.moveBy(times.gameOverDialog, 0, -cc.winSize.height).easing(cc.easeBounceOut())  )

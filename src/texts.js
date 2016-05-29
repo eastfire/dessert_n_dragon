@@ -190,6 +190,16 @@ var texts_locale = {
                     return "手中所有牌的等待时间减"+CARD_MODEL_MAP.cooldown.getEffect()+"(↑"+CARD_MODEL_MAP.cooldown.getEffectDiff()+")"
                 }
             },
+            dispel:{
+                name:"驱散",
+                desc:"驱散所有异常状态\n且本轮不会获得异常状态",
+                desc:"驱散所有异常状态\n且本轮不会获得异常状态\n等待时间-1"
+            },
+            "fire-ball":{
+                name:"小火球",
+                desc: "朝前发射小火球，消灭遇到的第一个敌人\n被挡住就没用了。",
+                levelUpDesc: "朝前发射火球，消灭遇到的第一个敌人\n被挡住就没用了。等待时间-1"
+            },
             freeze:{
                 name:"冰冻",
                 desc: "所有敌人不能移动1回合",
@@ -408,13 +418,13 @@ texts_locale.zh.movable["vertical-log7"]=texts_locale.zh.movable["vertical-log6"
 texts_locale.zh.movable["horizontal-log7"]=texts_locale.zh.movable["horizontal-log6"]=texts_locale.zh.movable["horizontal-log5"]=texts_locale.zh.movable["horizontal-log4"]=texts_locale.zh.movable["horizontal-log3"]=texts_locale.zh.movable["horizontal-log2"]=texts_locale.zh.movable["horizontal-log2"]
 
 //unlock shop
-_.each(["cross-fire","whirl-slash","big-whirl-slash","cooldown",
+_.each(["cross-fire","whirl-slash","big-whirl-slash","cooldown","dispel",
     "freeze","teleport","tornado","meteor-shower","collector","lightening"],function(cardName){
     texts_locale.zh.unlock.shop[cardName] = texts_locale.zh.card[cardName].name+"可以在商店中解锁了"
 })
 
 //unlock card
-_.each(["vertical-fire","horizontal-fire","cross-fire","whirl-slash","big-whirl-slash","cooldown",
+_.each(["vertical-fire","horizontal-fire","cross-fire","whirl-slash","big-whirl-slash","cooldown","dispel","fire-ball",
     "freeze","teleport","tornado","meteor-shower","collector","lightening"],function(cardName){
     texts_locale.zh.unlock.card[cardName] = "在任意关卡中使用"+texts_locale.zh.card[cardName].name+"技能"
 })

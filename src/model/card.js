@@ -139,7 +139,7 @@ CARD_MODEL_MAP["tail-slash"] = CardModel.extend({
     },
     onUse:function(){
         var hero = currentRoom.getHero();
-        var movable = currentRoom.getMovableByPosition(getDecrementsPosition(hero.get("positions")[0], hero.get("face")));
+        var movable = currentRoom.getMovableByPosition(getDecrementPosition(hero.get("positions")[0], hero.get("face")));
         if (movable instanceof EnemyModel && movable.canBeAttack("skill")) {
             hero.attack(movable,{
                 attackType : ATTACK_TYPE_MELEE,
@@ -394,6 +394,73 @@ CARD_MODEL_MAP.cooldown.getEffectDiff = function(currentLevel, targetLevel){
     return 1;
 }
 
+CARD_MODEL_MAP.dispel = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "dispel",
+            maxLevel: 5
+        })
+    },
+    waitTurnOfLevel:function(level){
+        return 8-level;
+    },
+    onUse:function(){
+        currentRoom.getHero().dispel();
+    },
+    onLevelUp:function(){
+        this.reduceWait(1);
+    }
+})
+CARD_MODEL_MAP.dispel.isActive = true;
+
+CARD_MODEL_MAP["fire-ball"] = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "fire-ball",
+            maxLevel: 5
+        })
+    },
+    waitTurnOfLevel:function(level){
+        return 7-level;
+    },
+    onUse:function(){
+        var hero = currentRoom.getHero();
+        var currentPosition = hero.get("positions")[0];
+        do {
+            var position = getIncrementPosition(currentPosition, hero.get("face"));
+            var tile = currentRoom.getTile(position)
+            if ( tile && tile.isPassable()) {
+                var movable = currentRoom.getMovableByPosition(position);
+                if ( movable ) {
+                    if ( movable instanceof EnemyModel && movable.canBeAttack("magic") ) {
+                        hero.attack(movable,{
+                            attackType : ATTACK_TYPE_MAGIC,
+                            attackAction: "fire",
+                            onHit: function(enemy, opt){
+                                enemy.beHit(hero, opt);
+                            },
+                            onMiss: function(enemy, opt){
+                                enemy.dodgeAttack(hero, opt);
+                            },
+                            context: this
+                        });
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            } else {
+                break;
+            }
+            currentPosition = position;
+        } while ( true );
+    },
+    onLevelUp:function(){
+        this.reduceWait(1);
+    }
+})
+CARD_MODEL_MAP["fire-ball"].isActive = true;
+
 CARD_MODEL_MAP.freeze = CardModel.extend({
     defaults: function () {
         return _.extend(CardModel.prototype.defaults.call(this),{
@@ -415,6 +482,7 @@ CARD_MODEL_MAP.freeze = CardModel.extend({
         this.reduceWait(1);
     }
 })
+CARD_MODEL_MAP.freeze.isActive = true;
 
 CARD_MODEL_MAP.lightening = CardModel.extend({
     defaults: function () {
@@ -532,6 +600,7 @@ CARD_MODEL_MAP.teleport = CardModel.extend({
         this.reduceWait(1);
     }
 })
+CARD_MODEL_MAP.teleport.isActive = true;
 
 CARD_MODEL_MAP.tornado = CardModel.extend({
     defaults: function () {
@@ -566,6 +635,7 @@ CARD_MODEL_MAP.tornado = CardModel.extend({
         this.reduceWait(1);
     }
 })
+CARD_MODEL_MAP.tornado.isActive = true
 
 //TODO dispel 驱散
 

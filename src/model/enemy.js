@@ -283,7 +283,7 @@ MOVABLE_MODEL_MAP.baozi = EnemyModel.extend({
         return l*2*EXP_INFLATION_RATE;
     },
     afterHit:function(heroModel){
-        heroModel.getForbidDraw(Math.min(8,Math.round(this.get("level")/3))+2);
+        heroModel.getNegativeEffect("forbidDraw",Math.min(8,Math.round(this.get("level")/3))+2);
     },
     attackOfLevel:function(l){ //较低
         return Math.round(l*3/2);
@@ -328,12 +328,12 @@ MOVABLE_MODEL_MAP.candy = EnemyModel.extend({
     },
     getCurseRate:function(heroModel){
         var level = this.get("level");
-        return level/10;
 //        return 1;
+        return level/10;
     },
     checkCurse:function(model){
         if (this.getCurseRate(model) > Math.random() ){
-            model.getCursed();
+            model.getNegativeEffect("cursed",10); //make sure not effect by perk
         }
     }
 })
@@ -608,8 +608,8 @@ MOVABLE_MODEL_MAP.lolipop = EnemyModel.extend({
     },
     getDisturbRate:function(heroModel){
         var level = this.get("level");
-        return level/15+0.3;
         //return 1;
+        return level/15+0.3;
     },
     getDisturbEffect:function(heroModel){
         var level = this.get("level");
@@ -669,11 +669,12 @@ MOVABLE_MODEL_MAP.popcorn = EnemyModel.extend({
     },
     afterHit:function(heroModel){
         if (this.getDizzyRate(heroModel) > Math.random() ){
-            heroModel.getDizzy(2);
+            heroModel.getNegativeEffect("dizzy",2+Math.round(this.get("level")/6));
         }
     },
     getDizzyRate:function(heroModel){
         var level = this.get("level");
+//        return 1;
         return Math.min(0.7,level*5/200+0.1);
     },
     attackOfLevel:function(l){ //一般

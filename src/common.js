@@ -46,7 +46,7 @@ var getIncrementPosition = function(x, y, direction){
     }
 }
 
-var getDecrementsPosition = function(x, y, direction){
+var getDecrementPosition = function(x, y, direction){
     if ( x instanceof  Object ) {
         direction = y;
         y = x.y;

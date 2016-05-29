@@ -158,15 +158,13 @@ var getValidChoices = function(roomModel, choicePool){
     });
 }
 
-var DEFAULT_MAX_CARD_COUNT = 5;
 var GEN_CHOICE_STRATEGY_MAP = {
     random: function(roomModel, opt){
         var unlockedChoices = _.map( unlockedStatus.get("card"), function( value, key ) {
             return {
                 type:"getCard",
                 opt:{
-                    type:key,
-                    maxCount:CARD_MODEL_MAP[key].maxCount || DEFAULT_MAX_CARD_COUNT
+                    type:key
                 }
             }
         },this);

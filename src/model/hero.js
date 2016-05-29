@@ -10,6 +10,8 @@ var CONSTITUTION_EFFECT = ORIGIN_CONSTITUTION_EFFECT;
 
 var NEGATIVE_EFFECT_TIME_ADJUST = 0;
 
+var NEGATIVE_EFFECTS = ["frozen","cursed","dizzy","forbidDraw"]
+
 var HeroModel = MovableModel.extend({
     defaults:function(){
         return _.extend( MovableModel.prototype.defaults.call(this),{
@@ -62,6 +64,7 @@ var HeroModel = MovableModel.extend({
         MovableModel.prototype.onTurnStart.call(this);
         this.set({
             buff:{},
+            dispel: Math.max(0, this.get("dispel") - 1 ),
             dizzy: Math.max(0, this.get("dizzy") - 1 ),
             forbidDraw: Math.max(0, this.get("forbidDraw") - 1 )
         });
@@ -91,7 +94,8 @@ var HeroModel = MovableModel.extend({
         statistic["hero-die"] = statistic["hero-die"] || 0;
         statistic["hero-die"]++;
 
-        this.trigger("die",this, cause);
+        this.set("killedBy",cause);
+        this.trigger("die",this);
     },
     gainHp:function(amount){
         var realAmount = Math.min( this.get("maxHp") - this.get("hp"), amount);
@@ -290,7 +294,12 @@ var HeroModel = MovableModel.extend({
     takeDamage:function(enemy, damage){
         this.beforeTakeDamage(enemy, damage)
         this.trigger("takeDamage", this, enemy, damage);
-        this.loseHp(damage, enemy);
+        this.loseHp(damage, {
+            category:"enemy",
+            type:enemy.get("type"),
+            subtype:enemy.get("subtype"),
+            level: enemy.get("level")
+        });
     },
     afterTakeDamage:function(enemy, damage){ //called by view
     },
@@ -303,24 +312,20 @@ var HeroModel = MovableModel.extend({
         if (this.get("forbidDraw") ) return 0;
         else return this.get("drawEachTurn")
     },
+    getNegativeEffect:function(negative, amount){
+        if ( this.get("dispel") ) return;
+        this.set(negative,Math.max(0,Math.max(amount,this.get(negative))+NEGATIVE_EFFECT_TIME_ADJUST));
+    },
     getFrozen:function(amount){
-        this.set("frozen",Math.max(0,amount+NEGATIVE_EFFECT_TIME_ADJUST));
-    },
-    getDizzy:function(amount){
-        this.set("dizzy",Math.max(0,amount+NEGATIVE_EFFECT_TIME_ADJUST));
-    },
-    getForbidDraw:function(amount){
-        this.set("forbidDraw",Math.max(0,Math.max(amount,this.get("forbidDraw"))+NEGATIVE_EFFECT_TIME_ADJUST));
+        this.getNegativeEffect("frozen",amount);
     },
     getDisturb:function(amount){
+        if ( this.get("dispel") ) return;
         _.each(currentRoom.getHand(),function(cardModel){
             if ( cardModel.get("waitTurn") ) {
                 cardModel.disturb(amount+NEGATIVE_EFFECT_TIME_ADJUST);
             }
         });
-    },
-    getCursed:function(){
-        this.set("cursed",1)
     },
     afterTeleport:function(){
         MovableModel.prototype.afterTeleport.call(this);
@@ -328,6 +333,14 @@ var HeroModel = MovableModel.extend({
             if (!( movable instanceof HeroModel )) {
                 movable.afterHeroTeleport();
             }
+        },this);
+    },
+    dispel:function(){
+        this.set({
+                dispel: 1
+            });
+        _.each(NEGATIVE_EFFECTS,function(negative){
+            this.set(negative, 0)
         },this);
     }
 })
