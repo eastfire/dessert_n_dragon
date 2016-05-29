@@ -931,7 +931,45 @@ var clearRoom = function(){
 var loadRoom = function(){
     var data = cc.sys.localStorage.getItem(APP_NAME+".current");
     if (data) {
-        return JSON.parse(data);
+        var room = JSON.parse(data);
+        //check validation
+        cc.log(room)
+        if ( room.initTiles ) {
+            if( _.any(room.initTiles, function (tileColumn) {
+                return _.any(tileColumn,function(tileEntry){
+                    if ( !tileEntry ) return false;
+                    return !TILE_MODEL_MAP[tileEntry.type]
+                })
+            }, this) ){
+                cc.log("invalid tile")
+                return null;
+            }
+        }
+        if( _.any(room.initMovables,function(movableEntry){
+            return !MOVABLE_MODEL_MAP[movableEntry.type]
+        })) {
+            cc.log("invalid movable")
+            return null;
+        }
+        if( _.any(room.initHand,function(cardEntry){
+            return !CARD_MODEL_MAP[cardEntry.type]
+        })) {
+            cc.log("invalid hand")
+            return null;
+        }
+        if( _.any(room.initDeck,function(cardEntry){
+            return !CARD_MODEL_MAP[cardEntry.type]
+        })) {
+            cc.log("invalid deck")
+            return null;
+        }
+        if( _.any(room.initDiscard,function(cardEntry){
+            return !CARD_MODEL_MAP[cardEntry.type]
+        })) {
+            cc.log("invalid discard")
+            return null;
+        }
+        return room;
     }
     return null;
 }

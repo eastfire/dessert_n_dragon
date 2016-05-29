@@ -127,6 +127,7 @@ CHOICE_VALIDATE_MAP = {
     },
     getCard:function(roomModel, choiceEntry){
         var opt = choiceEntry.opt || {};
+        if ( !CARD_MODEL_MAP[opt.type] ) return false;
         var maxCount = CARD_MODEL_MAP[opt.type].maxCount || ( CARD_MODEL_MAP[opt.type].isActive ? ACTIVE_CARD_NUMBER: PASSIVE_CARD_NUMBER );
         var allCard = _.union(roomModel.getHand(),roomModel.getDeck(), roomModel.getDiscard());
         var thisTypeCards = _.filter(allCard,function(cardModel){
