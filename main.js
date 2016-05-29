@@ -116,15 +116,7 @@ cc.game.onStart = function(){
         cc.spriteFrameCache.addSpriteFrames(res.game_plist);
         cc.spriteFrameCache.addSpriteFrames(res.card_plist);
 
-        var savedRoom = loadRoom();
-        if ( savedRoom ) {
-            cc.director.runScene(new RoomScene({
-                roomEntry: clone(savedRoom),
-                maxScore: score[savedRoom.stageNumber]
-            }));
-        } else {
-            cc.director.runScene(new IntroScene());
-        }
+        cc.director.runScene(new IntroScene());
     }, this);
 };
 cc.game.run();
