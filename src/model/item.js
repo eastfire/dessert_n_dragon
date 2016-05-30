@@ -59,3 +59,21 @@ MOVABLE_MODEL_MAP.money = ItemModel.extend({
         return (l+1)*l/2*5;
     }
 })
+
+MOVABLE_MODEL_MAP["poison-potion"] = ItemModel.extend({
+    defaults:function(){
+        return _.extend( ItemModel.prototype.defaults.call(this),{
+            type: "potion"
+        } )
+    },
+    onTaken:function(){
+        currentRoom.getHero().loseHp(this.getEffect()+currentRoom.getHero().get("collector"),{
+            category:"item",
+            type:"poison-potion"
+        });
+    },
+    getEffect:function(l){
+        l = l || this.get("level");
+        return 5;
+    }
+})

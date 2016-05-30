@@ -286,9 +286,7 @@ var InfiniteGameOverDialog = cc.Scale9Sprite.extend({
         cc.log(score)
         var killedBy = score.get("killedBy");
         if ( killedBy ) {
-            cc.log("aaa")
             var killerImageName;
-            cc.log("aaa1")
             if ( killedBy.category === "enemy" ) {
                 var killedByLevel = new cc.LabelTTF("lv" + killedBy.level, null, 16);
                 killedByLevel.attr({
@@ -299,7 +297,6 @@ var InfiniteGameOverDialog = cc.Scale9Sprite.extend({
                     anchorY: 0.5
                 });
             }
-            cc.log("aaa2")
             killerImageName = killedBy.type+(killedBy.subtype?("-"+killedBy.subtype):"")+".png";
             var killerImage = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( killerImageName ))
             killerImage.attr({
@@ -308,7 +305,6 @@ var InfiniteGameOverDialog = cc.Scale9Sprite.extend({
                 scaleX: 0.25,
                 scaleY: 0.25
             })
-            cc.log("aaa3")
             this.scrollView.addChild(killedByLevel);
             this.scrollView.addChild(killerImage);
 

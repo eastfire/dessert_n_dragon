@@ -369,8 +369,12 @@ var texts_locale = {
                 desc:"异常状态影响-1回合/效果"
             },
             lessCardWait:{
-                name:"飞行",
+                name:"勤奋",
                 desc:"卡牌的等待时间-1"
+            },
+            moreCardBuyable:{
+                name:"买卡",
+                desc:"可购买的相同主动牌数量\n从2张改为3张"
             },
 
             //disadvantage
@@ -403,8 +407,12 @@ var texts_locale = {
                 desc:"异常状态影响+1回合/效果"
             },
             moreCardWait:{
-                name:"飞行",
+                name:"懒惰",
                 desc:"卡牌的等待时间+1"
+            },
+            poisonPotion:{
+                name:"毒药",
+                desc:"掉落道具时可能会掉落毒药"
             }
 
         }

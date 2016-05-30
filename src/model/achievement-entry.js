@@ -1,5 +1,5 @@
 
-ACHIEVEMENT_ENTRY_LIST = {
+ACHIEVEMENT_ENTRY_LIST = [
     {
         name: "hero-die",
         maxLevel: 5,
@@ -111,7 +111,7 @@ ACHIEVEMENT_ENTRY_LIST = {
         }
     },
     {
-        name:"kill-max-level-creampuff"
+        name:"kill-max-level-creampuff",
         maxLevel: 4,
         reward: function (level) {
             return level * 100;
@@ -200,7 +200,8 @@ ACHIEVEMENT_ENTRY_LIST = {
             return level*5+5
         }
     },
-    "kill-level-jelly": {
+    {
+        name:"kill-level-jelly",
         maxLevel: 5,
         reward: function (level) {
             return level * 50;
@@ -441,7 +442,7 @@ ACHIEVEMENT_ENTRY_LIST = {
             return level*5+5
         }
     }
-}
+]
 
 var ACHIEVEMENT_ENTRY_MAP = {};
 var i = 0;
