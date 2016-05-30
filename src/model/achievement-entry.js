@@ -1,435 +1,396 @@
 
-ACHIEVEMENT_ENTRY_MAP = {
-    "hero-die": {
-        index: 0,
+ACHIEVEMENT_ENTRY_LIST = {
+    {
+        name: "hero-die",
         maxLevel: 5,
         reward: function (level) {
             return level * 20;
         },
         requirement: function (level) {
             return Math.pow(5, level)
-        },
-        validation: "statistic"
+        }
     },
-    "gain-card": {
-        index: 0,
+    {
+        name: "gain-card",
         maxLevel: 5,
         reward: function (level) {
             return level * 100;
         },
         requirement: function (level) {
             return Math.pow(5, level)*10
-        },
-        validation: "statistic"
+        }
     },
-    "kill-level-pudding": {
-        index: 1,
+    {
+        name:"kill-level-pudding",
         maxLevel: 5,
         reward: function (level) {
             return level * 25;
         },
         requirement: function (level) {
             return Math.pow(10, level) * 10
-        },
-        validation: "statistic"
+        }
     },
-    "kill-max-level-pudding": {
-        index: 2,
+    {
+        name:"kill-max-level-pudding",
         maxLevel: 4,
         reward: function (level) {
             return level * 50;
         },
         requirement: function (level) {
             return level*5+5
-        },
-        validation: "statistic"
+        }
     },
-    "kill-level-cherrycake": {
-        index: 3,
+    {
+        name:"kill-level-cherrycake",
         maxLevel: 5,
         reward: function (level) {
             return level * 50;
         },
         requirement: function (level) {
             return Math.pow(10, level) * 10
-        },
-        validation: "statistic"
+        }
     },
-    "kill-max-level-cherrycake": {
-        index: 4,
+    {
+        name:"kill-max-level-cherrycake",
         maxLevel: 4,
         reward: function (level) {
             return level * 100;
         },
         requirement: function (level) {
             return level*5+5
-        },
-        validation: "statistic"
+        }
     },
-    "kill-level-ricecake": {
-        index: 5,
+    {
+        name: "kill-level-ricecake",
         maxLevel: 5,
         reward: function (level) {
             return level * 50;
         },
         requirement: function (level) {
             return Math.pow(10, level) * 10
-        },
-        validation: "statistic"
+        }
     },
-    "kill-max-level-ricecake": {
-        index: 6,
+    {
+        name:"kill-max-level-ricecake",
         maxLevel: 4,
         reward: function (level) {
             return level * 500;
         },
         requirement: function (level) {
             return level*3+2
-        },
-        validation: "statistic"
+        }
     },
-    "kill-level-icecream": {
-        index: 7,
+    {
+        name:"kill-level-icecream",
         maxLevel: 5,
         reward: function (level) {
             return level * 50;
         },
         requirement: function (level) {
             return Math.pow(10, level) * 10
-        },
-        validation: "statistic"
+        }
     },
-    "kill-max-level-icecream": {
-        index: 8,
+    {
+        name:"kill-max-level-icecream",
         maxLevel: 4,
         reward: function (level) {
             return level * 100;
         },
         requirement: function (level) {
             return level*5+5
-        },
-        validation: "statistic"
+        }
     },
-    "kill-level-creampuff": {
-        index: 9,
+    {
+        name:"kill-level-creampuff",
         maxLevel: 5,
         reward: function (level) {
             return level * 50;
         },
         requirement: function (level) {
             return Math.pow(10, level) * 10
-        },
-        validation: "statistic"
+        }
     },
-    "kill-max-level-creampuff": {
-        index: 10,
+    {
+        name:"kill-max-level-creampuff"
         maxLevel: 4,
         reward: function (level) {
             return level * 100;
         },
         requirement: function (level) {
             return level*5+5
-        },
-        validation: "statistic"
+        }
     },
-    "kill-level-souffle": {
-        index: 11,
+    {
+        name:"kill-level-souffle",
         maxLevel: 5,
         reward: function (level) {
             return level * 40;
         },
         requirement: function (level) {
             return Math.pow(10, level) * 20
-        },
-        validation: "statistic"
+        }
     },
-    "kill-max-level-souffle": {
-        index: 12,
+    {
+        name:"kill-max-level-souffle",
         maxLevel: 4,
         reward: function (level) {
             return level * 100;
         },
         requirement: function (level) {
             return level*8+2
-        },
-        validation: "statistic"
+        }
     },
-    "kill-level-archer": {
-        index: 13,
+    {
+        name:"kill-level-archer",
         maxLevel: 5,
         reward: function (level) {
             return level * 50;
         },
         requirement: function (level) {
             return Math.pow(10, level) * 10
-        },
-        validation: "statistic"
+        }
     },
-    "kill-max-level-archer": {
-        index: 14,
+    {
+        name:"kill-max-level-archer",
         maxLevel: 4,
         reward: function (level) {
             return level * 150;
         },
         requirement: function (level) {
             return level*5+5
-        },
-        validation: "statistic"
+        }
     },
-    "kill-level-chocolate-cake": {
-        index: 15,
+    {
+        name:"kill-level-chocolate-cake",
         maxLevel: 5,
         reward: function (level) {
             return level * 100;
         },
         requirement: function (level) {
             return Math.pow(10, level) * 10
-        },
-        validation: "statistic"
+        }
     },
-    "kill-max-level-chocolate-cake": {
-        index: 16,
+    {
+        name:"kill-max-level-chocolate-cake",
         maxLevel: 4,
         reward: function (level) {
             return level * 200;
         },
         requirement: function (level) {
             return level*5+5
-        },
-        validation: "statistic"
+        }
     },
-    "kill-level-donut": {
-        index: 17,
+    {
+        name:"kill-level-donut",
         maxLevel: 5,
         reward: function (level) {
             return level * 250;
         },
         requirement: function (level) {
             return Math.pow(10, level) * 10
-        },
-        validation: "statistic"
+        }
     },
-    "kill-max-level-donut": {
-        index: 18,
+    {
+        name:"kill-max-level-donut",
         maxLevel: 4,
         reward: function (level) {
             return level * 400;
         },
         requirement: function (level) {
             return level*5+5
-        },
-        validation: "statistic"
+        }
     },
     "kill-level-jelly": {
-        index: 19,
         maxLevel: 5,
         reward: function (level) {
             return level * 50;
         },
         requirement: function (level) {
             return Math.pow(10, level) * 10
-        },
-        validation: "statistic"
+        }
     },
-    "kill-max-level-jelly": {
-        index: 20,
+    {
+        name:"kill-max-level-jelly",
         maxLevel: 4,
         reward: function (level) {
             return level * 100;
         },
         requirement: function (level) {
             return level*5+5
-        },
-        validation: "statistic"
+        }
     },
-    "kill-level-popcorn": {
-        index: 21,
+    {
+        name:"kill-level-popcorn",
         maxLevel: 5,
         reward: function (level) {
             return level * 50;
         },
         requirement: function (level) {
             return Math.pow(10, level) * 10
-        },
-        validation: "statistic"
+        }
     },
-    "kill-max-level-popcorn": {
-        index: 22,
+    {
+        name:"kill-max-level-popcorn",
+        maxLevel: 4,
+        reward: function (level) {
+            return level * 200;
+        },
+        requirement: function (level) {
+            return level*5+5
+        }
+    },
+    {
+        name:"kill-level-mushmellow",
+        maxLevel: 5,
+        reward: function (level) {
+            return level * 50;
+        },
+        requirement: function (level) {
+            return Math.pow(10, level) * 10
+        }
+    },
+    {
+        name:"kill-max-level-mushmellow",
         maxLevel: 4,
         reward: function (level) {
             return level * 100;
         },
         requirement: function (level) {
             return level*5+5
-        },
-        validation: "statistic"
+        }
     },
-    "kill-level-mushmellow": {
-        index: 23,
+    {
+        name:"kill-level-lolipop",
         maxLevel: 5,
         reward: function (level) {
             return level * 50;
         },
         requirement: function (level) {
             return Math.pow(10, level) * 10
-        },
-        validation: "statistic"
+        }
     },
-    "kill-max-level-mushmellow": {
-        index: 24,
+    {
+        name:"kill-max-level-lolipop",
         maxLevel: 4,
         reward: function (level) {
             return level * 100;
         },
         requirement: function (level) {
             return level*5+5
-        },
-        validation: "statistic"
+        }
     },
-    "kill-level-lolipop": {
-        index: 25,
+    {
+        name:"kill-level-eggroll",
         maxLevel: 5,
         reward: function (level) {
             return level * 50;
         },
         requirement: function (level) {
             return Math.pow(10, level) * 10
-        },
-        validation: "statistic"
+        }
     },
-    "kill-max-level-lolipop": {
-        index: 26,
+    {
+        name:"kill-max-level-eggroll",
+        maxLevel: 4,
+        reward: function (level) {
+            return level * 200;
+        },
+        requirement: function (level) {
+            return level*5+5
+        }
+    },
+    {
+        name:"kill-level-baozi",
+        maxLevel: 5,
+        reward: function (level) {
+            return level * 50;
+        },
+        requirement: function (level) {
+            return Math.pow(10, level) * 10
+        }
+    },
+    {
+        name:"kill-max-level-baozi",
         maxLevel: 4,
         reward: function (level) {
             return level * 100;
         },
         requirement: function (level) {
             return level*5+5
-        },
-        validation: "statistic"
+        }
     },
-    "kill-level-eggroll": {
-        index: 27,
+    {
+        name:"kill-level-strawberry-pie",
         maxLevel: 5,
         reward: function (level) {
             return level * 50;
         },
         requirement: function (level) {
             return Math.pow(10, level) * 10
-        },
-        validation: "statistic"
+        }
     },
-    "kill-max-level-eggroll": {
-        index: 28,
+    {
+        name:"kill-max-level-strawberry-pie",
         maxLevel: 4,
         reward: function (level) {
             return level * 100;
         },
         requirement: function (level) {
             return level*5+5
-        },
-        validation: "statistic"
+        }
     },
-    "kill-level-baozi": {
-        index: 29,
+    {
+        name:"kill-level-dumpling",
         maxLevel: 5,
         reward: function (level) {
             return level * 50;
         },
         requirement: function (level) {
             return Math.pow(10, level) * 10
-        },
-        validation: "statistic"
+        }
     },
-    "kill-max-level-baozi": {
-        index: 30,
+    {
+        name:"kill-max-level-dumpling",
         maxLevel: 4,
         reward: function (level) {
             return level * 100;
         },
         requirement: function (level) {
             return level*5+5
-        },
-        validation: "statistic"
+        }
     },
-    "kill-level-strawberry-pie": {
-        index: 31,
+    {
+        name:"kill-level-candy",
         maxLevel: 5,
         reward: function (level) {
             return level * 50;
         },
         requirement: function (level) {
             return Math.pow(10, level) * 10
-        },
-        validation: "statistic"
+        }
     },
-    "kill-max-level-strawberry-pie": {
-        index: 32,
+    {
+        name:"kill-max-level-candy",
         maxLevel: 4,
         reward: function (level) {
             return level * 100;
         },
         requirement: function (level) {
             return level*5+5
-        },
-        validation: "statistic"
+        }
     },
-    "kill-level-dumpling": {
-        index: 33,
+    {
+        name:"kill-level-cake-roll",
         maxLevel: 5,
         reward: function (level) {
             return level * 50;
         },
         requirement: function (level) {
             return Math.pow(10, level) * 10
-        },
-        validation: "statistic"
+        }
     },
-    "kill-max-level-dumpling": {
-        index: 34,
-        maxLevel: 4,
-        reward: function (level) {
-            return level * 100;
-        },
-        requirement: function (level) {
-            return level*5+5
-        },
-        validation: "statistic"
-    },
-    "kill-level-candy": {
-        index: 35,
-        maxLevel: 5,
-        reward: function (level) {
-            return level * 50;
-        },
-        requirement: function (level) {
-            return Math.pow(10, level) * 10
-        },
-        validation: "statistic"
-    },
-    "kill-max-level-candy": {
-        index: 36,
-        maxLevel: 4,
-        reward: function (level) {
-            return level * 100;
-        },
-        requirement: function (level) {
-            return level*5+5
-        },
-        validation: "statistic"
-    },
-    "kill-level-cake-roll": {
-        index: 37,
-        maxLevel: 5,
-        reward: function (level) {
-            return level * 50;
-        },
-        requirement: function (level) {
-            return Math.pow(10, level) * 10
-        },
-        validation: "statistic"
-    },
-    "kill-max-level-cake-roll": {
+    {
+        name:"kill-max-level-cake-roll",
         index: 38,
         maxLevel: 4,
         reward: function (level) {
@@ -437,10 +398,10 @@ ACHIEVEMENT_ENTRY_MAP = {
         },
         requirement: function (level) {
             return level*5+5
-        },
-        validation: "statistic"
+        }
     },
-    "kill-level-cane": {
+    {
+        name:"kill-level-cane",
         index: 39,
         maxLevel: 5,
         reward: function (level) {
@@ -448,40 +409,45 @@ ACHIEVEMENT_ENTRY_MAP = {
         },
         requirement: function (level) {
             return Math.pow(10, level) * 10
-        },
-        validation: "statistic"
+        }
     },
-    "kill-max-level-cane": {
-        index: 40,
+    {
+        name:"kill-max-level-cane",
         maxLevel: 4,
         reward: function (level) {
-            return level * 100;
+            return level * 150;
         },
         requirement: function (level) {
             return level*5+5
-        },
-        validation: "statistic"
+        }
     },
-    "kill-level-catapult": {
-        index: 41,
+    {
+        name:"kill-level-catapult",
         maxLevel: 5,
         reward: function (level) {
             return level * 50;
         },
         requirement: function (level) {
             return Math.pow(10, level) * 10
-        },
-        validation: "statistic"
+        }
     },
-    "kill-max-level-catapult": {
-        index: 42,
+    {
+        name:"kill-max-level-catapult",
         maxLevel: 4,
         reward: function (level) {
             return level * 100;
         },
         requirement: function (level) {
             return level*5+5
-        },
-        validation: "statistic"
+        }
     }
 }
+
+var ACHIEVEMENT_ENTRY_MAP = {};
+var i = 0;
+_.each(ACHIEVEMENT_ENTRY_LIST,function(entry){
+    entry.index = i;
+    entry.validation = entry.validation || "statistic";
+    ACHIEVEMENT_ENTRY_MAP[entry.name] = entry;
+    i++;
+})
