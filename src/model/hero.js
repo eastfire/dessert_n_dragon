@@ -10,7 +10,8 @@ var CONSTITUTION_EFFECT = ORIGIN_CONSTITUTION_EFFECT;
 
 var NEGATIVE_EFFECT_TIME_ADJUST = 0;
 
-var NEGATIVE_EFFECTS = ["frozen","cursed","dizzy","forbidDraw"]
+var NEGATIVE_EFFECTS = ["frozen","cursed","dizzy","forbidDraw","poison"]
+var AUTO_DECREASE_EFFECTS = ["dizzy","forbidDraw","dispel","poison"] //freeze is handle in Movable
 
 var HeroModel = MovableModel.extend({
     defaults:function(){
@@ -62,12 +63,22 @@ var HeroModel = MovableModel.extend({
     },
     onTurnStart:function(){
         MovableModel.prototype.onTurnStart.call(this);
-        this.set({
-            buff:{},
-            dispel: Math.max(0, this.get("dispel") - 1 ),
-            dizzy: Math.max(0, this.get("dizzy") - 1 ),
-            forbidDraw: Math.max(0, this.get("forbidDraw") - 1 )
-        });
+        this.checkPoison();
+        this.set({buff:{}});
+        _.each(AUTO_DECREASE_EFFECTS,function(effect){
+            this.set(effect, Math.max(0, this.get(effect) - 1 ))
+        },this);
+    },
+    getPoisonEffect:function(){
+        return 1;
+    },
+    checkPoison:function(){
+        if (this.get("poison")) {
+            this.loseHp(this.getPoisonEffect(), {
+                category: "poison",
+                type:"poison"
+            });
+        }
     },
     getPosition:function(){
         return this.get("positions")[0];
