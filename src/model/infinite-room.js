@@ -82,7 +82,7 @@ ROOM_MODEL_MAP.infinite = RoomModel.extend({
     initialize:function(){
         if ( this.get("turnNumber") === 0 && !this.get("roomInitialized")) {
             var randomRoomEntry = _.sample(_.filter(rooms,function(entry){
-                return !entry.notForInfinity;
+                return !entry.notForInfinity && !entry.notForInfiniteStart;
             }))
             this.set("exits",clone(randomRoomEntry.exits));
             this.set("initTiles", clone(randomRoomEntry.initTiles) );
