@@ -12,8 +12,12 @@ var HeroSprite = MovableSprite.extend({
         this.model.on("hitMoveBack", this.hitMoveBack, this)
         this.model.on("miss", this.miss, this)
         this.model.on("change:hp", this.onChangeHp, this)
-        this.model.on("change:cursed",this.renderStatus,this);
-        this.model.on("change:poison",this.renderStatus,this);
+        
+        //status
+        _.each(["dizzy","cursed","poison"],function(status){
+            this.model.on("change:"+status,this.renderStatus,this);
+        },this)
+        
         this.model.on("change:dispel",this.renderDispel,this);
     },
     attack:function(enemyModel, options){
