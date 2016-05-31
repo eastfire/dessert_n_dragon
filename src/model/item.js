@@ -71,9 +71,13 @@ MOVABLE_MODEL_MAP["poison-potion"] = ItemModel.extend({
             category:"item",
             type:"poison-potion"
         });
+        currentRoom.getHero().getNegativeEffect("poison", this.getPoisonLength())
     },
     getEffect:function(l){
         l = l || this.get("level");
         return 5;
+    },
+    getPoisonLength:function(){
+        return this.get("level")+2;
     }
 })
