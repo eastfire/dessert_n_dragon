@@ -30,9 +30,12 @@ var MovableSprite = BaseSprite.extend({
         this.model.on("beMerged", this.beMerged, this)
         this.model.on("change:level",this.onLevelChange,this)
         this.model.on("change:face",this.renderFace,this)
+        
+        //status
         this.model.on("change:frozen",this.renderStatus,this);
         this.model.on("change:angry",this.renderStatus,this);
-        this.model.on("change:dizzy",this.renderStatus,this);
+        
+        //action
         this.model.on("teleport",this.teleport,this)
         this.model.on("beltTo",this.beltTo,this)
     },
@@ -74,10 +77,9 @@ var MovableSprite = BaseSprite.extend({
             x :dimens.statusIcon.width/2,
             y : dimens.tileSize.height - dimens.statusIcon.height/2
         };
-        this.renderOneStatus("frozen", position)
-        this.renderOneStatus("angry", position)
-        this.renderOneStatus("dizzy", position)
-        this.renderOneStatus("cursed", position)
+        _.each(["frozen","angry","dizzy","cursed","poison"],function(effect){
+            this.renderOneStatus(effect, position)
+        },this)
     },
     teleport:function(newPosition){
 
