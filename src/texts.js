@@ -450,15 +450,15 @@ _.each(["archer","baozi","cake-roll","candy","cane","catapult","cherrycake","cho
             return texts_locale.zh.movable[enemyName].briefName+"杀手"+LEVEL_TEXT_MAP[level];
         },
         desc: function (level) {
-            return "吃掉总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-"+enemyName].requirement(level) + "的"+texts_locale.zh.movable[enemyName].name
+            return "杀死总等级" + ACHIEVEMENT_ENTRY_MAP["kill-level-"+enemyName].requirement(level) + "的"+texts_locale.zh.movable[enemyName].name
         }
     }
     texts_locale.zh.achievement["kill-max-level-"+enemyName] = {
         name:function(level){
-            return texts_locale.zh.movable[enemyName].briefName+"杀手"+LEVEL_TEXT_MAP[level];
+            return "精英"+texts_locale.zh.movable[enemyName].briefName+"杀手"+LEVEL_TEXT_MAP[level];
         },
         desc: function (level) {
-            return "吃掉等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-"+enemyName].requirement(level) + "或以上的"+texts_locale.zh.movable[enemyName].name
+            return "杀死等级" + ACHIEVEMENT_ENTRY_MAP["kill-max-level-"+enemyName].requirement(level) + "或以上的"+texts_locale.zh.movable[enemyName].name
         }
     }
 })
