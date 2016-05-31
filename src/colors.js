@@ -3,6 +3,10 @@ var colors = {
         outline: cc.color.BLACK,
         inside: cc.color.WHITE
     },
+    attackLabel:{
+        outline: cc.color.BLACK,
+        inside: cc.color.RED
+    },
 
     moneyLabel:{
         outline: cc.color.BLACK,

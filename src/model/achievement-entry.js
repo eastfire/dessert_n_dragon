@@ -464,6 +464,26 @@ ACHIEVEMENT_ENTRY_LIST = [
         requirement: function (level) {
             return level*5+5
         }
+    },
+    {
+        name:"kill-level-snake",
+        maxLevel: 5,
+        reward: function (level) {
+            return level * 50;
+        },
+        requirement: function (level) {
+            return Math.pow(10, level) * 10
+        }
+    },
+    {
+        name:"kill-max-level-snake",
+        maxLevel: 4,
+        reward: function (level) {
+            return level * 100;
+        },
+        requirement: function (level) {
+            return level*5+5
+        }
     }
 ]
 

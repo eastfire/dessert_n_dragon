@@ -44,8 +44,11 @@ var HeroModel = MovableModel.extend({
             buff: {},
             debuff: {},
 
+            //status
+            dizzy: 0,
             forbidDraw: 0,
-            cursed: 0
+            cursed: 0,
+            poison: 0
         } )
     },
     initialize:function(){
@@ -115,6 +118,7 @@ var HeroModel = MovableModel.extend({
             this.set("cursed",0);
         }
         this.set("hp", this.get("hp") + realAmount );
+        this.set("poison",0);
 
         //statistic
         statistic["gain-hp"] = statistic["gain-hp"] || 0;

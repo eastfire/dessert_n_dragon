@@ -72,7 +72,7 @@ var texts_locale = {
             "chocolate-cake":{
                 name:"食人魔",
                 briefName:"食人魔",
-                desc:"\n攻击力高。\n经验值高。\n\n呼～～呼"
+                desc:"\n攻击力高。\n经验值高。"
             },
             creampuff: {
                 name:"萨满",
@@ -82,16 +82,16 @@ var texts_locale = {
             donut:{
                 name:"牛头人",
                 briefName:"牛头人",
-                desc:"攻击力超高。\n经验值超高。\n\n别被他圆圆的外表欺骗"
+                desc:"攻击力超高。\n经验值超高。"
             },
             dumpling: {
-                name:"地精小队",
-                briefName:"地精小队",
-                desc:"场上的其他地精小队越多，攻击力就越高。\n攻击力较低～很高。\n经验值较高。"
+                name:"杀人蜂",
+                briefName:"杀人蜂",
+                desc:"场上的其他杀人蜂越多，攻击力就越高。\n攻击力较低～很高。\n经验值较高。"
             },
             eggroll:{
-                name:"重弩机",
-                briefName:"重弩机",
+                name:"弩车",
+                briefName:"弩车",
                 desc:"远程攻击。仅当与你同一行或同一列时攻击。\n攻击力较高。\n经验值较高。"
             },
             icecream: {
@@ -112,12 +112,12 @@ var texts_locale = {
             mushmellow:{
                 name:"召唤师",
                 briefName:"召唤师",
-                desc:"合并时召唤云朵遮挡视线（等级越高云朵越多）。\n攻击力较低。\n经验值较低。"
+                desc:"合并时召唤乌云遮挡视线（等级越高云朵越多）。\n攻击力较低。\n经验值较低。"
             },
             popcorn:{
                 name:"巨魔",
                 briefName:"巨魔",
-                desc:"远程攻击。攻击时有一定概率造成眩晕（等级越高概率越高）。\n攻击力一般。\n经验值较高。"
+                desc:"远程攻击。攻击时有一定概率造成眩晕（行动与操作相反）（等级越高概率越高）。\n攻击力一般。\n经验值较高。"
             },
             pudding:{
                 name:"史莱姆",
@@ -125,8 +125,8 @@ var texts_locale = {
                 desc:"\n攻击力始终为1。\n经验值极低。"
             },
             ricecake:{
-                name:"石卫兵",
-                briefName:"石卫兵",
+                name:"树人",
+                briefName:"树人",
                 desc:"始终站着不动。\n攻击力较高。\n经验值一般。"
             },
             snake:{
@@ -443,13 +443,13 @@ _.each(["vertical-fire","horizontal-fire","cross-fire","whirl-slash","big-whirl-
 
 //unlock enemy
 _.each(["baozi","cake-roll","candy","cane","catapult","chocolate-cake",
-    "donut","dumpling","eggroll","jelly","lolipop","mushmellow","popcorn","strawberry-pie"],function(enemyName){
+    "donut","dumpling","eggroll","jelly","lolipop","mushmellow","popcorn","snake","strawberry-pie"],function(enemyName){
     texts_locale.zh.unlock.enemy[enemyName] = texts_locale.zh.movable[enemyName].name+"将在无尽关卡中出现"
 })
 
 //kill achievement
 _.each(["archer","baozi","cake-roll","candy","cane","catapult","cherrycake","chocolate-cake","creampuff",
-    "donut","dumpling","eggroll","icecream","jelly","lolipop","mushmellow","popcorn","pudding","ricecake","souffle","strawberry-pie"],function(enemyName){
+    "donut","dumpling","eggroll","icecream","jelly","lolipop","mushmellow","popcorn","pudding","ricecake","snake","souffle","strawberry-pie"],function(enemyName){
     texts_locale.zh.achievement["kill-level-"+enemyName] = {
         name:function(level){
             return texts_locale.zh.movable[enemyName].briefName+"杀手"+LEVEL_TEXT_MAP[level];

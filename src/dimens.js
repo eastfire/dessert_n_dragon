@@ -18,6 +18,10 @@ var dimens = {
         outlineWidth: 2,
         fontSize: 35
     },
+    attackLabel:{
+        x: 120-16,
+        y: 16
+    },
 
     moneyLabel:{
         x: 50,

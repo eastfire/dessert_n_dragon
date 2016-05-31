@@ -56,7 +56,8 @@ var infiniteRoom = {
         {type:"candy"},
         {type:"cake-roll"},
         {type:"cane"},
-        {type:"catapult"}
+        {type:"catapult"},
+        {type:"snake"}
     ],
     enemyPool:[{type:"pudding", subtype:"red"},{type:"pudding", subtype:"yellow"},{type:"pudding", subtype:"blue"}],
     itemPool:STANDARD_ITEM_POOL,
@@ -2700,7 +2701,7 @@ rooms.push({
     loseAnyConditions:[
         "outOfTurn"
     ],
-    enemyPool:[{type:"baozi"},{type:"candy"},{type:"lolipop"}],
+    enemyPool:[{type:"snake"},{type:"candy"},{type:"lolipop"}],
     enemyLevelPool:[1,2],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x6SplitAndPortal,

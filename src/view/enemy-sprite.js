@@ -12,11 +12,32 @@ var EnemySprite = MovableSprite.extend({
         this.model.on("miss", this.miss, this)
         this.model.on("beHit", this.beHit, this)
         this.model.on("die", this.die, this)
+        this.model.on("change:baseAttack", this.onAttackChange,this)
+        this.renderAttack();
     },
     initLabel:function(){
         this._super();
     },
-
+    renderAttack:function(){
+        if ( this.attackLabel ) this.attackLabel.removeFromParent(true);
+        this.attackLabel = new ccui.Text(this.model.getAttackPoint(), "Arial", dimens.levelLabel.fontSize );
+        this.attackLabel.enableOutline(colors.levelLabel.outline, dimens.levelLabel.outlineWidth);
+        this.attackLabel.setTextColor(colors.attackLabel.inside);
+        this.attackLabel.attr({
+            //color: colors.tableLabel,
+            x: dimens.attackLabel.x,
+            y: dimens.attackLabel.y
+        });
+        this.addChild(this.attackLabel);
+    },
+    onAttackChange:function(){
+        this.renderAttack();
+        this.attackLabel.stopAllActions()
+        this.attackLabel.runAction(cc.sequence(
+            cc.scaleTo(0.15, 2, 2),
+            cc.scaleTo(0.1, 1, 1)
+        ))
+    },
     attack:function(enemyModel, hero){
         var heroPosition = hero.getPosition()
         var point = this.model.getClosestPoint(heroPosition)

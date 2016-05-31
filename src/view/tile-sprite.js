@@ -84,15 +84,41 @@ var TileSprite = BaseSprite.extend({
 
 var TILE_SPRITE_MAP = {};
 
-TILE_SPRITE_MAP.nail = TileSprite.extend({
+TILE_SPRITE_MAP.floor = TileSprite.extend({
+    ctor: function (options) {
+        this._super(options);
+        if ( this.isOnFloor ) {
+            this.foregroundSprite = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame(this.model.get("type")+"-"+this.model.get("subtype")+".png"))
+            this.foregroundSprite.attr({
+                x: dimens.tileSize.width / 2,
+                y: dimens.tileSize.height / 2
+            })
+            this.addChild(this.foregroundSprite);
+        }
+    },
+    getInitFrameName:function(){
+        return "floor-normal"+Math.floor(Math.random()*9.9)+".png";
+    }
+});
+
+TILE_SPRITE_MAP.pit = TILE_SPRITE_MAP.floor.extend({
+    isOnFloor: true
+});
+
+TILE_SPRITE_MAP.belt = TILE_SPRITE_MAP.floor.extend({
+    isOnFloor: true
+});
+
+TILE_SPRITE_MAP.nail = TILE_SPRITE_MAP.floor.extend({
+    isOnFloor:true,
     ctor:function(options) {
         this._super(options);
         this.model.on("attacking", this.onAttacking, this)
     },
     onAttacking:function(){
-        this.setSpriteFrame(cc.spriteFrameCache.getSpriteFrame("nail-attacking.png"));
+        this.foregroundSprite.setSpriteFrame(cc.spriteFrameCache.getSpriteFrame("nail-attacking.png"));
         this.scheduleOnce(function() {
-            this.setSpriteFrame(cc.spriteFrameCache.getSpriteFrame("nail-normal.png"));
+            this.foregroundSprite.setSpriteFrame(cc.spriteFrameCache.getSpriteFrame("nail-normal.png"));
         }, times.teleport);
     }
 })

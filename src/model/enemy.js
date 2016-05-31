@@ -732,6 +732,7 @@ MOVABLE_MODEL_MAP.snake = EnemyModel.extend({
         return Math.floor(this.get("level")/4) + 3;
     },
     checkPoison:function(model){
+
         if (this.getPoisonRate(model) > Math.random() ){
             model.getNegativeEffect("poison",this.getPoisionLength()); //make sure not effect by perk
         }
@@ -782,14 +783,6 @@ MOVABLE_MODEL_MAP["strawberry-pie"] = EnemyModel.extend({
         this.levelUp(1);
     }
 })
-
-//TODO 诅咒
-
-//TODO 中毒
-
-//TODO 偷道具升级
-
-//TODO 防魔
 
 //TODO 变瞎
 
