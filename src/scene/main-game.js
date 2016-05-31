@@ -222,9 +222,9 @@ var MainLayer = cc.Layer.extend({
         })
 
         var conditionStrMap = {
-            "kill": "吃掉足够多数量的敌人",
-            "kill-level": "吃掉足够多等级的敌人",
-            "kill-max-level": "吃掉等级足够高的敌人",
+            "kill": "杀死足够多数量的敌人",
+            "kill-level": "杀死足够多等级的敌人",
+            "kill-max-level": "杀死等级足够高的敌人",
             "outOfTurn":"生存",
             getScore:(score[0]?("目标：最高分"+score[0]):"尽可能获得高分")
         };
