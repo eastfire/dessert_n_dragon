@@ -354,7 +354,7 @@ var texts_locale = {
             },
             forwardAfterKill:{
                 name:"莽撞",
-                desc:"吃掉普通敌人后前进\n而不是退回原地"
+                desc:"杀死普通敌人后前进\n而不是退回原地"
             },
             moreMaxLevel:{
                 name:"巨大潜力",
