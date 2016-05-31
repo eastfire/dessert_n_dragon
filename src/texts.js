@@ -313,6 +313,14 @@ var texts_locale = {
         },
 
         achievement:{
+            "pass-room": {
+                name:function(level){
+                    return "冲关达人"+LEVEL_TEXT_MAP[level];
+                },
+                desc: function (level) {
+                    return "通过第" + ACHIEVEMENT_ENTRY_MAP["pass-room"].requirement(level) + "关"
+                }
+            },
             "hero-die": {
                 name:function(level){
                     return "百折不挠"+LEVEL_TEXT_MAP[level];

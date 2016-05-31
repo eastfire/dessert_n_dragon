@@ -104,6 +104,15 @@ var AchievementLayer = cc.Layer.extend({
             } else {
                 desc+="（"+current+"/"+requirement+"）"
             }
+        } else if ( typeof entry.validation === "function") {
+            var requirement = entry.requirement(showingLevel)
+            var current = entry.validation();
+            if ( current >= requirement ) {
+                desc+="（已完成）"
+                passed = true;
+            } else {
+                desc+="（"+current+"/"+requirement+"）"
+            }
         }
         entry.descLabel.setString(desc);
 
@@ -122,12 +131,13 @@ var AchievementLayer = cc.Layer.extend({
             cloneEntry.reward = value.reward;
             cloneEntry.requirement = value.requirement;
             cloneEntry.name = key;
+            cloneEntry.validation = value.validation;
             return cloneEntry;
         },this),function(entry){
             var currentAchievements = gameStatus.get("achievements");
             var currentLevel = currentAchievements[entry.name] || 0;
             return currentLevel < entry.maxLevel;
-        },this), function(value){
+        },this),function(value){
             return value.index;
         },this);
         return achievements

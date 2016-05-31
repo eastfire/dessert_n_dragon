@@ -1,5 +1,28 @@
-
 ACHIEVEMENT_ENTRY_LIST = [
+    {
+        name: "pass-room",
+        maxLevel: 10,
+        reward: function( level ){
+            return level*100;
+        },
+        requirement: function (level) {
+            return level*20
+        },
+        validation:function(){
+            var stageNumber;
+            for(stageNumber = 1; stageNumber <= rooms.length; stageNumber++) {
+                var roomEntry = rooms[stageNumber-1];
+                var roomScore = score[stageNumber];
+                var scoreCondition = roomEntry.scoreCondition;
+                if ((!scoreCondition && roomScore ) || (scoreCondition && roomScore >= scoreCondition[0] )) {
+
+                } else {
+                    break;
+                }
+            }
+            return stageNumber;
+        }
+    },
     {
         name: "hero-die",
         maxLevel: 5,
