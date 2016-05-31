@@ -708,6 +708,36 @@ MOVABLE_MODEL_MAP.ricecake = EnemyModel.extend({
     }
 })
 
+MOVABLE_MODEL_MAP.snake = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "snake"
+        } )
+    },
+    afterHit:function(heroModel){
+        this.checkPoison(heroModel);
+    },
+    expOfLevel:function(l){ //一般
+        return (l*2-1)*EXP_INFLATION_RATE;
+    },
+    attackOfLevel:function(l){ //较低
+        return l;
+    },
+    getPoisonRate:function(heroModel){
+        var level = this.get("level");
+//        return 1;
+        return level/10;
+    },
+    getPoisionLength:function(){
+        return Math.floor(this.get("level")/4) + 3;
+    },
+    checkPoison:function(model){
+        if (this.getPoisonRate(model) > Math.random() ){
+            model.getNegativeEffect("poison",this.getPoisionLength()); //make sure not effect by perk
+        }
+    }
+})
+
 MOVABLE_MODEL_MAP.souffle = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{
