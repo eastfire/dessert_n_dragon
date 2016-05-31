@@ -6,7 +6,7 @@ ACHIEVEMENT_ENTRY_LIST = [
             return level*100;
         },
         requirement: function (level) {
-            return level*20
+            return level*20 - 10
         },
         validation:function(){
             var stageNumber;
