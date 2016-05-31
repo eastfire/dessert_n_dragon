@@ -15,7 +15,7 @@ var ChoiceDialog = cc.Scale9Sprite.extend({
             height: 650
         })
 
-        var titleLabel = new cc.LabelTTF("嗝，吃饱了。升到第"+this.level+"级了\n请选择一个奖励", null, 25 );
+        var titleLabel = new cc.LabelTTF("恭喜你，升到第"+this.level+"级了\n请选择一个奖励", null, 25 );
         titleLabel.attr({
             color: colors.gameOver.ok,
             x: this.dialogWidth/2,
