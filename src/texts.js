@@ -30,7 +30,7 @@ var texts_locale = {
             },
             "poison-potion": {
                 name: "毒药",
-                desc: "降低你的生命5点。无论什么等级"
+                desc: "降低你的生命5点。无论什么等级效果相同"
             },
 
             //enemy
@@ -50,8 +50,8 @@ var texts_locale = {
                 desc:"你的魔法攻击对他无效，且会让他升级。\n攻击力很高。\n经验值很高。"
             },
             candy: {
-                name:"咒术师",
-                briefName:"咒术师",
+                name:"木乃伊",
+                briefName:"木乃伊",
                 desc:"击中时有一定概率使你被诅咒（下一次恢复生命量减半）（等级越高概率越高）。\n攻击力较低。\n经验值一般。"
             },
             cane: {
