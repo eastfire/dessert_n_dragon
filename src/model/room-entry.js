@@ -322,7 +322,8 @@ rooms.push({
         {type:"cherrycake",positions: [{x:4,y:4}]}
     ],
     initHero: STANDARD_HERO,
-    choicePool:STANDARD_CHOICE_POOL
+    choicePool:STANDARD_CHOICE_POOL,
+    notForInfiniteStart : true
 });
 
 //第一次出现回复药和道具掉落 room7
@@ -420,7 +421,8 @@ rooms.push({
         {type:"ricecake",positions: [{x:5,y:5}]}
     ],
     initHero: STANDARD_HERO,
-    choicePool:STANDARD_CHOICE_POOL
+    choicePool:STANDARD_CHOICE_POOL,
+    notForInfiniteStart : true
 });
 
 //第一次要求敌人等级　room10
@@ -651,7 +653,8 @@ rooms.push({
         { type:"icecream", positions: [{x:7,y:7}] }
     ],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:4,y:4}]}),
-    choicePool:STANDARD_CHOICE_POOL
+    choicePool:STANDARD_CHOICE_POOL,
+    notForInfiniteStart : true
 });
 
 //room16 第一次出现creampuff
@@ -696,7 +699,8 @@ rooms.push({
         {type:"creampuff",positions: [{x:3,y:6}]}
     ],
     initHero: STANDARD_HERO,
-    choicePool:STANDARD_CHOICE_POOL
+    choicePool:STANDARD_CHOICE_POOL,
+    notForInfiniteStart : true
 });
 
 //room17 ice and fire
@@ -764,7 +768,8 @@ rooms.push({
         {type:"souffle",positions: [{x:6,y:6}]}
     ],
     initHero: STANDARD_HERO,
-    choicePool:STANDARD_CHOICE_POOL
+    choicePool:STANDARD_CHOICE_POOL,
+    notForInfiniteStart : true
 });
 
 //room19 第一次出现滚木
@@ -837,7 +842,8 @@ rooms.push({
         { type:"ricecake", positions: [{x:6,y:2}] }
     ],
     initHero: STANDARD_HERO,
-    choicePool:STANDARD_CHOICE_POOL
+    choicePool:STANDARD_CHOICE_POOL,
+    notForInfiniteStart : true
 });
 
 //第一次出现archer 对远程兵种的生存1 room21
@@ -858,7 +864,8 @@ rooms.push({
         { type:"archer", positions: [{x:6,y:5}] }],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL,
-    unlocks:["infinite"]
+    unlocks:["infinite"],
+    notForInfiniteStart : true
 });
 
 //room22 第一次出现chocolate cake
@@ -887,7 +894,8 @@ rooms.push({
     ],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL,
-    unlocks:[{type:"enemy", subtype:"chocolate-cake"}]
+    unlocks:[{type:"enemy", subtype:"chocolate-cake"}],
+    notForInfiniteStart : true
 });
 
 //对远程兵种的生存2 room23
@@ -997,7 +1005,8 @@ rooms.push({
         { type:"archer", positions: [{x:6,y:6}] }
     ],
     initHero: STANDARD_HERO,
-    choicePool:STANDARD_CHOICE_POOL
+    choicePool:STANDARD_CHOICE_POOL,
+    notForInfiniteStart : true
 });
 
 //room27 A shape stronger enemy, want high level, danger
@@ -1155,7 +1164,8 @@ rooms.push({
     ],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:3,y:5}]}),
     choicePool:STANDARD_CHOICE_POOL,
-    unlocks:[{type:"enemy", subtype:"donut"}]
+    unlocks:[{type:"enemy", subtype:"donut"}],
+    notForInfiniteStart : true
 });
 
 //room31 snake
@@ -1234,7 +1244,8 @@ rooms.push({
     ],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL,
-    unlocks:[{type:"enemy", subtype:"jelly"}]
+    unlocks:[{type:"enemy", subtype:"jelly"}],
+    notForInfiniteStart : true
 });
 
 //room33 danger
@@ -1528,7 +1539,8 @@ rooms.push({
     ],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:1,y:4}]}),
     choicePool:STANDARD_CHOICE_POOL,
-    unlocks:[{type:"enemy", subtype:"popcorn"}]
+    unlocks:[{type:"enemy", subtype:"popcorn"}],
+    notForInfiniteStart : true
 });
 
 //room43 timelimit+popcorn
@@ -1767,7 +1779,8 @@ rooms.push({
     ],
     initHero: STANDARD_HERO,
     choicePool:STANDARD_CHOICE_POOL,
-    unlocks: [{type:"enemy", subtype:"mushmellow"}]
+    unlocks: [{type:"enemy", subtype:"mushmellow"}],
+    notForInfiniteStart : true
 });
 
 //room51 belt 首次出现
@@ -2248,7 +2261,8 @@ rooms.push({
     initHand:[{type:"tail-slash"} ],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:2,y:3}]}),
     choicePool:STANDARD_CHOICE_POOL,
-    unlocks:[{type:"enemy", subtype:"lolipop"}]
+    unlocks:[{type:"enemy", subtype:"lolipop"}],
+    notForInfiniteStart : true
 });
 
 //room63 
@@ -2322,7 +2336,8 @@ rooms.push({
     initHero: _.extend(clone(STANDARD_HERO),{hp:30, positions: [{x:3,y:3}]}),
     initHand:[{type:"tornado"}],
     choicePool:STANDARD_CHOICE_POOL,
-    unlocks:[{type:"shop", subtype:"tornado"}]
+    unlocks:[{type:"shop", subtype:"tornado"}],
+    notForInfiniteStart : true
 });
 
 //room66
@@ -2476,7 +2491,8 @@ rooms.push({
     exits:[{x:1,y:7},{x:7,y:7},{x:4,y:1}],
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:4,y:3}]}),
     choicePool:STANDARD_CHOICE_POOL,
-    unlocks:[{type:"enemy", subtype:"eggroll"}]
+    unlocks:[{type:"enemy", subtype:"eggroll"}],
+    notForInfiniteStart : true
 });
 
 //room71 nail around
@@ -2555,7 +2571,8 @@ rooms.push({
     initHero: _.extend(clone(STANDARD_HERO),{positions: [{x:4,y:3}]}),
     choicePool:STANDARD_CHOICE_POOL,
     initHand:[{type:"meteor-shower"}],
-    unlocks:[{type:"shop", subtype:"meteor-shower"}]
+    unlocks:[{type:"shop", subtype:"meteor-shower"}],
+    notForInfiniteStart : true
 });
 
 //room73 3 type of range
