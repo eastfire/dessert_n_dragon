@@ -35,109 +35,109 @@ var texts_locale = {
 
             //enemy
             archer:{
-                name:"豌豆糕射手",
-                briefName:"豌豆糕",
-                desc:"远程攻击。\n攻击力很低。\n饱腹度一般。\n\n是的，他的前世绝对是射手，天敌是僵尸。"
+                name:"骷髅弓箭手",
+                briefName:"骷髅弓箭手",
+                desc:"远程攻击。\n攻击力很低。\n经验值一般。"
             },
             baozi: {
-                name:"豆沙包封印师",
-                briefName:"豆沙包",
-                desc:"击中造成封魔效果（使你无法摸牌）（等级越高持续时间越长）。\n攻击力较低。\n饱腹度一般。"
+                name:"封魔师",
+                briefName:"封魔师",
+                desc:"击中造成封魔效果（使你无法摸牌）（等级越高持续时间越长）。\n攻击力较低。\n经验值一般。"
             },
             "cake-roll":{
-                name:"蛋糕卷猎魔者",
-                briefName:"蛋糕卷",
-                desc:"你的魔法攻击对他无效，且会让他升级。\n攻击力很高。\n饱腹度很高。"
+                name:"猎魔者",
+                briefName:"猎魔者",
+                desc:"你的魔法攻击对他无效，且会让他升级。\n攻击力很高。\n经验值很高。"
             },
             candy: {
-                name:"奶糖咒术师",
-                briefName:"奶糖",
-                desc:"击中时有一定概率使你被诅咒（下一次恢复生命量减半）（等级越高概率越高）。\n攻击力较低。\n饱腹度一般。"
+                name:"咒术师",
+                briefName:"咒术师",
+                desc:"击中时有一定概率使你被诅咒（下一次恢复生命量减半）（等级越高概率越高）。\n攻击力较低。\n经验值一般。"
             },
             cane: {
-                name:"拐杖糖盗贼",
-                briefName:"拐杖糖",
-                desc:"场上道具道具越多，攻击力就越高。\n攻击力一般～很高。\n饱腹度一般。"
+                name:"鼠人",
+                briefName:"鼠人",
+                desc:"场上道具道具越多，攻击力就越高。\n攻击力一般～很高。\n经验值一般。"
             },
             catapult: {
-                name:"琥珀核桃投石车",
-                briefName:"琥珀核桃",
-                desc:"远程攻击，距离你越远攻击力越高。距离1～3格内不会攻击。\n攻击力很低～很高。\n饱腹度很高。"
+                name:"投石车",
+                briefName:"投石车",
+                desc:"远程攻击，距离你越远攻击力越高。距离1～3格内不会攻击。\n攻击力很低～很高。\n经验值很高。"
             },
             cherrycake: {
-                name: "纸杯蛋糕下士",
-                briefName:"纸杯蛋糕",
-                desc: "攻击力一般。\n饱腹度一般。"
+                name: "骷髅卫兵",
+                briefName:"骷髅卫兵",
+                desc: "攻击力一般。\n经验值一般。"
             },
             "chocolate-cake":{
-                name:"黑森林武士",
-                briefName:"黑森林",
-                desc:"\n攻击力高。\n饱腹度高。\n\n呼～～呼"
+                name:"食人魔",
+                briefName:"食人魔",
+                desc:"\n攻击力高。\n经验值高。\n\n呼～～呼"
             },
             creampuff: {
-                name:"奶油泡芙酋长",
-                briefName:"奶油泡芙",
-                desc:"合并时周围敌人变得愤怒（攻击力加倍）。\n攻击力一般。\n饱腹度一般。\n\n(Buff by Puff)"
+                name:"萨满",
+                briefName:"萨满",
+                desc:"合并时周围敌人变得愤怒（攻击力加倍）。\n攻击力一般。\n经验值一般。"
             },
             donut:{
-                name:"甜甜圈骑士",
-                briefName:"甜甜圈",
-                desc:"攻击力超高。\n饱腹度超高。\n\n别被他圆圆的外表欺骗"
+                name:"牛头人",
+                briefName:"牛头人",
+                desc:"攻击力超高。\n经验值超高。\n\n别被他圆圆的外表欺骗"
             },
             dumpling: {
-                name:"汤圆军团",
-                briefName:"汤圆",
-                desc:"场上的其他汤圆军团越多，攻击力就越高。\n攻击力较低～很高。\n饱腹度较高。"
+                name:"地精军团",
+                briefName:"地精军团",
+                desc:"场上的其他汤圆军团越多，攻击力就越高。\n攻击力较低～很高。\n经验值较高。"
             },
             eggroll:{
-                name:"蛋卷吹箭手",
-                briefName:"蛋卷",
-                desc:"远程攻击。仅当与你同一行或同一列时攻击。\n攻击力较高。\n饱腹度较高。"
+                name:"重弩机",
+                briefName:"重弩机",
+                desc:"远程攻击。仅当与你同一行或同一列时攻击。\n攻击力较高。\n经验值较高。"
             },
             icecream: {
-                name:"冰激凌法师",
-                briefName:"冰激凌",
-                desc:"合并或攻击时有一定概率冰冻周围角色（等级越高概率越高）。\n攻击力一般。\n饱腹度一般。\n\n他的法师帽戴反了吗？"
+                name:"美杜莎",
+                briefName:"美杜莎",
+                desc:"合并或攻击时有一定概率冻结周围角色（等级越高概率越高）。\n攻击力一般。\n经验值一般。"
             },
             jelly:{
-                name:"果冻侦察兵",
-                briefName:"果冻",
-                desc:"一定概率躲过近距离攻击（等级越高概率越高）。\n攻击力很低。\n饱腹度较低。"
+                name:"幽灵",
+                briefName:"幽灵",
+                desc:"一定概率躲过近距离攻击（等级越高概率越高）。\n攻击力很低。\n经验值较低。"
             },
             lolipop: {
-                name:"棒棒糖兄弟",
-                briefName:"棒棒糖",
-                desc:"攻击时有一定概率使你的卡牌等待时间延长（等级越高概率越高，效果越明显）。\n攻击力一般。\n饱腹度一般。\n\n这就是人棒合一的境界"
+                name:"狗头人",
+                briefName:"狗头人",
+                desc:"攻击时有一定概率使你的卡牌等待时间延长（等级越高概率越高，效果越明显）。\n攻击力一般。\n经验值一般。"
             },
             mushmellow:{
-                name:"棉花糖召唤师",
-                briefName:"棉花糖",
-                desc:"合并时召唤云朵遮挡视线（等级越高云朵越多）。\n攻击力较低。\n饱腹度较低。"
+                name:"召唤师",
+                briefName:"召唤师",
+                desc:"合并时召唤云朵遮挡视线（等级越高云朵越多）。\n攻击力较低。\n经验值较低。"
             },
             popcorn:{
-                name:"爆米花掷弹兵",
-                briefName:"爆米花",
-                desc:"远程攻击。攻击时有一定概率造成眩晕（等级越高概率越高）。\n攻击力一般。\n饱腹度较高。"
+                name:"巨魔",
+                briefName:"巨魔",
+                desc:"远程攻击。攻击时有一定概率造成眩晕（等级越高概率越高）。\n攻击力一般。\n经验值较高。"
             },
             pudding:{
-                name:"布丁巡逻兵",
-                briefName:"布丁核桃",
-                desc:"软绵无力的巡逻小兵。\n攻击力始终为1。\n饱腹度极低。"
+                name:"史莱姆",
+                briefName:"史莱姆",
+                desc:"\n攻击力始终为1。\n经验值极低。"
             },
             ricecake:{
                 name:"年糕守卫",
                 briefName:"年糕",
-                desc:"始终粘着不动。\n攻击力较高。\n饱腹度一般。"
+                desc:"始终粘着不动。\n攻击力较高。\n经验值一般。"
             },
             souffle: {
-                name:"蛋奶酥祭司",
-                briefName:"蛋奶酥",
-                desc:"合并时自己和周围敌人升级。\n攻击力一般。\n饱腹度一般。"
+                name:"兽人酋长",
+                briefName:"兽人酋长",
+                desc:"合并时自己和周围敌人升级。\n攻击力一般。\n经验值一般。"
             },
             "strawberry-pie":{
-                name:"草莓派将军",
-                briefName:"草莓派",
-                desc:"击中时自己升级1级。\攻击力超高。\n饱腹度超高。"
+                name:"吸血鬼",
+                briefName:"吸血鬼",
+                desc:"击中你时自己升1级。\攻击力超高。\n经验值超高。"
             }
         },
         card:{
@@ -152,9 +152,9 @@ var texts_locale = {
                 }
             },
             "tail-slash":{
-                name:"扫尾",
-                desc: "攻击尾部的一个敌人。",
-                levelUpDesc: "攻击尾部的一个敌人\n等待时间-1"
+                name:"拖刀计",
+                desc: "攻击身后的一个敌人。",
+                levelUpDesc: "攻击身后的一个敌人\n等待时间-1"
             },
             "vertical-fire":{
                 name:"纵向火焰",
@@ -172,12 +172,12 @@ var texts_locale = {
                 levelUpDesc: "用火焰攻击所在行和所在列所有的敌人\n等待时间-2"
             },
             "whirl-slash":{
-                name:"回旋扫尾",
+                name:"回旋斩",
                 desc: "攻击上下左右4个格子的所有的敌人",
                 levelUpDesc: "攻击上下左右4个格子的所有的敌人\n等待时间-1"
             },
             "big-whirl-slash":{
-                name:"大回旋扫尾",
+                name:"大回旋斩",
                 desc: "攻击周围8个格子的所有的敌人",
                 levelUpDesc: "攻击周围8个格子的所有的敌人\n等待时间-2"
             },
@@ -250,12 +250,12 @@ var texts_locale = {
                 }
             },
             cunning: {
-                name:"健身",
+                name:"聪明",
                 desc: function(level){
-                    return "被动：升级需要的饱腹度减少"+CARD_MODEL_MAP.cunning.getEffect(level)+"%\n当前"+currentRoom.getHero().get("cunning")+"%\n主动：获得"+CARD_MODEL_MAP.cunning.getUseEffect+"点饱腹度";
+                    return "被动：升级需要的经验值减少"+CARD_MODEL_MAP.cunning.getEffect(level)+"%\n当前"+currentRoom.getHero().get("cunning")+"%\n主动：获得"+CARD_MODEL_MAP.cunning.getUseEffect+"点经验值";
                 },
                 levelUpDesc: function(level){
-                    return "被动：升级需要的饱腹度减少"+CARD_MODEL_MAP.cunning.getEffect(level)+"%(↑"+CARD_MODEL_MAP.cunning.getEffectDiff(level)+"%)\n当前"+currentRoom.getHero().get("cunning")+"%\n主动：获得"+CARD_MODEL_MAP.cunning.getUseEffect+"点饱腹度";
+                    return "被动：升级需要的经验值减少"+CARD_MODEL_MAP.cunning.getEffect(level)+"%(↑"+CARD_MODEL_MAP.cunning.getEffectDiff(level)+"%)\n当前"+currentRoom.getHero().get("cunning")+"%\n主动：获得"+CARD_MODEL_MAP.cunning.getUseEffect+"点经验值";
                 }
             },
             dexterity: {
@@ -283,15 +283,6 @@ var texts_locale = {
                 },
                 levelUpDesc: function(level){
                     return "被动：道具掉落概率+"+CARD_MODEL_MAP.luck.getEffect(level)+"(↑"+1+"％)\n（当前"+currentRoom.getHero().get("luck")+"）\n主动：1回合内暂时提升道具掉落概率"+CARD_MODEL_MAP.luck.getUseEffect+"％";
-                }
-            },
-            recovery: {
-                name:"恢复",
-                desc: function(level){
-                    return "被动：升级时多恢复"+CARD_MODEL_MAP.recovery.getEffect(level)+"%生命 当前"+currentRoom.getHero().get("recovery")+"%\n主动：恢复"+CARD_MODEL_MAP.recovery.getUseEffect+"点生命";;
-                },
-                levelUpDesc: function(level){
-                    return "升级时再多恢复"+CARD_MODEL_MAP.recovery.getEffectDiff(level)+"%生命 当前"+currentRoom.getHero().get("recovery")+"%";
                 }
             }
         },
