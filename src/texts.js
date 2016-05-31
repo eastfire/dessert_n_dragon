@@ -40,13 +40,13 @@ var texts_locale = {
                 desc:"远程攻击。\n攻击力很低。\n经验值一般。"
             },
             baozi: {
-                name:"封魔师",
-                briefName:"封魔师",
+                name:"石像鬼",
+                briefName:"石像鬼",
                 desc:"击中造成封魔效果（使你无法摸牌）（等级越高持续时间越长）。\n攻击力较低。\n经验值一般。"
             },
             "cake-roll":{
-                name:"猎魔者",
-                briefName:"猎魔者",
+                name:"魔像",
+                briefName:"魔像",
                 desc:"你的魔法攻击对他无效，且会让他升级。\n攻击力很高。\n经验值很高。"
             },
             candy: {
@@ -85,9 +85,9 @@ var texts_locale = {
                 desc:"攻击力超高。\n经验值超高。\n\n别被他圆圆的外表欺骗"
             },
             dumpling: {
-                name:"地精军团",
-                briefName:"地精军团",
-                desc:"场上的其他汤圆军团越多，攻击力就越高。\n攻击力较低～很高。\n经验值较高。"
+                name:"地精小队",
+                briefName:"地精小队",
+                desc:"场上的其他地精小队越多，攻击力就越高。\n攻击力较低～很高。\n经验值较高。"
             },
             eggroll:{
                 name:"重弩机",
@@ -125,9 +125,9 @@ var texts_locale = {
                 desc:"\n攻击力始终为1。\n经验值极低。"
             },
             ricecake:{
-                name:"年糕守卫",
-                briefName:"年糕",
-                desc:"始终粘着不动。\n攻击力较高。\n经验值一般。"
+                name:"石卫兵",
+                briefName:"石卫兵",
+                desc:"始终站着不动。\n攻击力较高。\n经验值一般。"
             },
             souffle: {
                 name:"兽人酋长",
