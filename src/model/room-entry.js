@@ -2701,7 +2701,7 @@ rooms.push({
     loseAnyConditions:[
         "outOfTurn"
     ],
-    enemyPool:[{type:"snake"},{type:"candy"},{type:"lolipop"}],
+    enemyPool:[{type:"eggroll"},{type:"archer"},{type:"lolipop"}],
     enemyLevelPool:[1,2],
     itemPool:STANDARD_ITEM_POOL,
     initTiles:tiles7x6SplitAndPortal,

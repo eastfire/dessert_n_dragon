@@ -81,7 +81,7 @@ var EnemySprite = MovableSprite.extend({
     }
 });
 
-MOVABLE_SPRITE_MAP.archer = EnemySprite.extend({
+MOVABLE_SPRITE_MAP.prjector = EnemySprite.extend({
     attack:function(enemyModel, hero){
         var heroPosition = hero.getPosition()
         var point = this.model.getClosestPoint(heroPosition)
@@ -101,4 +101,49 @@ MOVABLE_SPRITE_MAP.archer = EnemySprite.extend({
     }
 });
 
-MOVABLE_SPRITE_MAP.catapult = MOVABLE_SPRITE_MAP.eggroll = MOVABLE_SPRITE_MAP.popcorn = MOVABLE_SPRITE_MAP.archer
+MOVABLE_SPRITE_MAP.eggroll = MOVABLE_SPRITE_MAP.archer = MOVABLE_SPRITE_MAP.prjector.extend({
+    attack:function(enemyModel, hero){
+        MOVABLE_SPRITE_MAP.prjector.prototype.attack.call(this,enemyModel,hero);
+        var heroPosition = hero.getPosition()
+        var point = this.model.getClosestPoint(heroPosition)
+        var targetSprite = currentRoomSprite.getChildByName(hero.cid)
+        var rotation = Math.atan2(-targetSprite.y+this.y,targetSprite.x-this.x) * 180/3.14159
+        effectIconMananger.fly(this, targetSprite , {
+            icon:"arrow",
+//            scaleX: 0.5,
+//            scaleY: 0.5,
+            rotation: rotation,
+            fromOffset:{
+                x: -23,
+                y: -23
+            },
+            toOffset:{
+                x: -23,
+                y: -23
+            },
+            time: times.enemyAttack*2
+        })
+    }
+});
+
+MOVABLE_SPRITE_MAP.popcorn = MOVABLE_SPRITE_MAP.catapult = MOVABLE_SPRITE_MAP.prjector.extend({
+    attack:function(enemyModel, hero){
+        MOVABLE_SPRITE_MAP.prjector.prototype.attack.call(this,enemyModel,hero);
+        var heroPosition = hero.getPosition()
+        var point = this.model.getClosestPoint(heroPosition)
+        effectIconMananger.fly(this, currentRoomSprite.getChildByName(hero.cid), {
+            icon:"stone",
+//            scaleX: 0.5,
+//            scaleY: 0.5,
+            fromOffset:{
+                x: -23,
+                y: -23
+            },
+            toOffset:{
+                x: -23,
+                y: -23
+            },
+            time: times.enemyAttack*2
+        })
+    }
+});

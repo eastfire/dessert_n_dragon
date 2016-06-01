@@ -350,7 +350,7 @@ var texts_locale = {
             },
             moreExpAbove12:{
                 name:"精英",
-                desc:"12级或以上的敌人\n提供的饱腹肚＋50%"
+                desc:"12级或以上的敌人\n提供的经验值＋50%"
             },
             forwardAfterKill:{
                 name:"莽撞",
@@ -396,7 +396,7 @@ var texts_locale = {
             },
             lessExpBelow6:{
                 name:"挑食",
-                desc:"6级或以下的敌人\n提供的饱腹肚－50%"
+                desc:"6级或以下的敌人\n提供的经验值－50%"
             },
             lessMaxLevel:{
                 name:"缺乏潜力",

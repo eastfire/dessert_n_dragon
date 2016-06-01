@@ -71,7 +71,7 @@ var TileSprite = BaseSprite.extend({
         this.model.on("destroy", this.onDestroy, this) //parent event
         this.initEvent();
 
-        this.setSpriteFrame(this.model.get("type")+"-"+this.model.get("subtype")+".png")
+        this.setSpriteFrame(this.model.get("type")+"-"+this.model.get("subtype")+".png") //FIXME shall change sprite
     },
     onDestroy:function(){
         if ( this.__cloudSprite ) {
