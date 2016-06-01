@@ -142,7 +142,14 @@ var texts_locale = {
             "strawberry-pie":{
                 name:"吸血鬼",
                 briefName:"吸血鬼",
-                desc:"击中你时自己升1级。\攻击力超高。\n经验值超高。"
+                desc:"击中你时自己升1级。攻击力超高。\n经验值超高。"
+            },
+
+            //boss
+            "boss-hydra":{
+                name:"BOSS九头蛇",
+                briefName:"九头蛇",
+                desc:"攻击力超高。\n经验值超高。"
             }
         },
         card:{

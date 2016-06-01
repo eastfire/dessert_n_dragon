@@ -23,12 +23,14 @@ var EnemySprite = MovableSprite.extend({
         this.attackLabel = new ccui.Text(this.model.getAttackPoint(), "Arial", dimens.levelLabel.fontSize );
         this.attackLabel.enableOutline(colors.levelLabel.outline, dimens.levelLabel.outlineWidth);
         this.attackLabel.setTextColor(colors.attackLabel.inside);
-        this.attackLabel.attr({
-            //color: colors.tableLabel,
+        this.attackLabel.attr(this.getAttackLabelPosition());
+        this.addChild(this.attackLabel);
+    },
+    getAttackLabelPosition:function(){
+        return {
             x: dimens.attackLabel.x,
             y: dimens.attackLabel.y
-        });
-        this.addChild(this.attackLabel);
+        }
     },
     onAttackChange:function(){
         this.renderAttack();
@@ -72,8 +74,18 @@ var EnemySprite = MovableSprite.extend({
         this.model.afterMiss(hero);
     },
     beHit:function(enemyModel, hero){
-        //TODO animation
-        this.model.afterBeHit(hero);
+        var heroPosition = hero.getPosition()
+        var point = this.model.getClosestPoint(heroPosition)
+        var deltaX = dimens.tileSize.width*(Math.max(-1,Math.min(1,heroPosition.x - point.x)) )/4;
+        var deltaY = dimens.tileSize.height*(Math.max(-1,Math.min(1,heroPosition.y - point.y)) )/4
+
+        this.runAction(cc.sequence(
+            cc.moveBy(times.heroAttack, -deltaX, -deltaY ),
+            cc.callFunc(function(){
+                this.model.afterBeHit(hero);
+            },this),
+            cc.moveBy(times.heroAttack, deltaX, deltaY )
+        ))
     },
     die:function(enemyModel, hero){
         //TODO animation

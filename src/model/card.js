@@ -174,9 +174,11 @@ CARD_MODEL_MAP["vertical-fire"] = CardModel.extend({
         var hero = currentRoom.getHero();
         var heroPosition = hero.get("positions")[0];
 
+        var alreadyAttacked = {};
         for ( var i = 0; i < currentRoom.getHeight(); i++ ) {
             var movable = currentRoom.getMovableByPosition(heroPosition.x, i);
-            if (movable instanceof EnemyModel && movable.canBeAttack("magic")) {
+            if (movable instanceof EnemyModel && movable.canBeAttack("magic") && !alreadyAttacked[movable.cid]) {
+                alreadyAttacked[movable.cid] = true;
                 hero.attack(movable,{
                     attackType : ATTACK_TYPE_MAGIC,
                     attackAction: "fire",
@@ -211,9 +213,11 @@ CARD_MODEL_MAP["horizontal-fire"] = CardModel.extend({
         var hero = currentRoom.getHero();
         var heroPosition = hero.get("positions")[0];
 
+        var alreadyAttacked = {};
         for ( var i = 0; i < currentRoom.getWidth(); i++ ) {
             var movable = currentRoom.getMovableByPosition(i,heroPosition.y);
-            if (movable instanceof EnemyModel && movable.canBeAttack("magic")) {
+            if (movable instanceof EnemyModel && movable.canBeAttack("magic")&& !alreadyAttacked[movable.cid]) {
+                alreadyAttacked[movable.cid] = true;
                 hero.attack(movable,{
                     attackType : ATTACK_TYPE_MAGIC,
                     attackAction: "fire",
@@ -248,9 +252,11 @@ CARD_MODEL_MAP["cross-fire"] = CardModel.extend({
         var hero = currentRoom.getHero();
         var heroPosition = hero.get("positions")[0];
 
+        var alreadyAttacked = {};
         for ( var i = 0; i < currentRoom.getHeight(); i++ ) {
             var movable = currentRoom.getMovableByPosition(heroPosition.x, i);
-            if (movable instanceof EnemyModel && movable.canBeAttack("magic")) {
+            if (movable instanceof EnemyModel && movable.canBeAttack("magic") && !alreadyAttacked[movable.cid]) {
+                alreadyAttacked[movable.cid] = true;
                 hero.attack(movable,{
                     attackType : ATTACK_TYPE_MAGIC,
                     attackAction: "fire",
@@ -301,13 +307,15 @@ CARD_MODEL_MAP["whirl-slash"] = CardModel.extend({
     onUse:function(){
         var hero = currentRoom.getHero();
         var heroPosition = hero.get("positions")[0];
-        
+
+        var alreadyAttacked = true;
         _.each( [{ x:heroPosition.x-1, y:heroPosition.y},
                 { x:heroPosition.x+1, y:heroPosition.y},
                 { x:heroPosition.x, y:heroPosition.y-1},
                 { x:heroPosition.x, y:heroPosition.y+1}], function(position){
                     var movable = currentRoom.getMovableByPosition(position.x, position.y);
-                    if (movable instanceof EnemyModel && movable.canBeAttack("skill")) {
+                    if (movable instanceof EnemyModel && movable.canBeAttack("skill") && !alreadyAttacked[movable.cid]) {
+                        alreadyAttacked[movable.cid] = true;
                         hero.attack(movable, {
                             attackType: ATTACK_TYPE_MELEE,
                             attackAction: "whirl-slash",
@@ -342,10 +350,12 @@ CARD_MODEL_MAP["big-whirl-slash"] = CardModel.extend({
         var hero = currentRoom.getHero();
         var heroPosition = hero.get("positions")[0];
 
+        var alreadyAttacked = true;
         for ( var i = heroPosition.x-1; i < heroPosition.x+2; i++ ) {
             for ( var j = heroPosition.y-1; j < heroPosition.y+2; j++ ) {
                 var movable = currentRoom.getMovableByPosition(i, j);
-                if (movable instanceof EnemyModel && movable.canBeAttack("skill")) {
+                if (movable instanceof EnemyModel && movable.canBeAttack("skill")&&!alreadyAttacked[movable.cid]) {
+                    alreadyAttacked[movable.cid] = true;
                     hero.attack(movable, {
                         attackType: ATTACK_TYPE_MELEE,
                         attackAction: "big-whirl-slash",
@@ -614,7 +624,7 @@ CARD_MODEL_MAP.tornado = CardModel.extend({
     },
     onUse:function(){
         var candidates = currentRoom.filterMovable(function(movableModel){
-            return (movableModel instanceof EnemyModel || movableModel instanceof ItemModel)&&movableModel.getSize()===1;
+            return (movableModel instanceof EnemyModel || movableModel instanceof ItemModel)&&movableModel.isSinglePiece();
         },this)
         _.each(candidates,function(movableModel){
             movableModel.__removeOldMapping();
@@ -636,10 +646,6 @@ CARD_MODEL_MAP.tornado = CardModel.extend({
     }
 })
 CARD_MODEL_MAP.tornado.isActive = true
-
-//TODO dispel 驱散
-
-//TODO resurrection
 
 //TODO stealth 隐身
 
@@ -890,10 +896,3 @@ CARD_MODEL_MAP.luck.getEffectDiff = function(currentLevel, targetLevel){
     return 2;
 }
 CARD_MODEL_MAP.luck.getUseEffect = 3;
-
-
-//TODO regeneration
-
-//TODO wisdom
-
-//TODO get more score

@@ -241,6 +241,7 @@
                 <file name="src/model/enemy.js"/>
                 <file name="src/model/neutral-movable.js"/>
                 <file name="src/model/hero.js"/>
+                <file name="src/model/boss.js"/>
                 <file name="src/model/item.js"/>
                 <file name="src/model/tile.js"/>
                 <file name="src/model/condition.js"/>
@@ -259,6 +260,7 @@
                 <file name="src/view/enemy-sprite.js"/>
                 <file name="src/view/hero-sprite.js"/>
                 <file name="src/view/tile-sprite.js"/>
+                <file name="src/view/boss-sprite.js"/>
                 <file name="src/view/room-sprite.js"/>
                 <file name="src/view/card-sprite.js"/>
                 <file name="src/view/hand-sprite.js"/>

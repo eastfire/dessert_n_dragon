@@ -14,6 +14,7 @@ var NEGATIVE_EFFECTS = ["frozen","cursed","dizzy","forbidDraw","poison"]
 var AUTO_DECREASE_EFFECTS = ["dizzy","forbidDraw","dispel","poison"] //freeze is handle in Movable
 
 var HeroModel = MovableModel.extend({
+    isShowLevel:false,
     defaults:function(){
         return _.extend( MovableModel.prototype.defaults.call(this),{
             type: "normalHero",
@@ -39,7 +40,6 @@ var HeroModel = MovableModel.extend({
             
             maxHand: 2,
             drawEachTurn: 1,
-            isShowLevel:false,
             
             buff: {},
             debuff: {},
@@ -78,8 +78,8 @@ var HeroModel = MovableModel.extend({
     checkPoison:function(){
         if (this.get("poison")) {
             this.loseHp(this.getPoisonEffect(), {
-                category: "poison",
-                type:"poison"
+                category: "status",
+                type:"status-poison"
             });
         }
     },

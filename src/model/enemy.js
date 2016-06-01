@@ -24,10 +24,11 @@ var EnemyModel = MovableModel.extend({
     },
     onLevelChange:function(){
         var l = this.get("level");
-        this.set("exp",this.expOfLevel(l))
-        this.set("score", this.scoreOfLevel(l) );
+
         this.set("baseAttack", this.attackOfLevel(l) );
         this.set("dexterity", this.dexterityOfLevel(l) );
+        this.set("exp",this.expOfLevel(l))
+        this.set("score", this.scoreOfLevel(l) );
     },
     expOfLevel:function(l){
         return l*EXP_INFLATION_RATE

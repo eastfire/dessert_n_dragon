@@ -1,4 +1,5 @@
 var MovableModel = Backbone.Model.extend({
+    isShowLevel: true,
     defaults:function(){
         return {
             type: "",
@@ -14,8 +15,6 @@ var MovableModel = Backbone.Model.extend({
             ],
             face: DIRECTION_DOWN,
             level: 1,
-
-            isShowLevel: true,
 
             //status
             frozen: 0,

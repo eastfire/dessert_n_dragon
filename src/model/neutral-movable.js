@@ -7,21 +7,21 @@ var NeutralMovable = MovableModel.extend({
 });
 
 var PillarModel = NeutralMovable.extend({
+    isShowLevel: false,
     defaults:function(){
         return _.extend( NeutralMovable.prototype.defaults.call(this),{
             type: "pillar",
-            isMovable: false,
-            isShowLevel: false
+            isMovable: false
         } )
     }
 })
 MOVABLE_MODEL_MAP.pillar = PillarModel;
 
 var VerticalLog2Model = NeutralMovable.extend({
+    isShowLevel: false,
     defaults:function(){
         return _.extend( NeutralMovable.prototype.defaults.call(this),{
-            type: "vertical-log2",
-            isShowLevel: false
+            type: "vertical-log2"
         } )
     },
     isMovable:function(direction){
@@ -71,10 +71,10 @@ MOVABLE_MODEL_MAP["vertical-log7"] = VerticalLog2Model.extend({
 })
 
 var HorizontalLog2Model = NeutralMovable.extend({
+    isShowLevel: false,
     defaults:function(){
         return _.extend( NeutralMovable.prototype.defaults.call(this),{
-            type: "horizontal-log2",
-            isShowLevel: false
+            type: "horizontal-log2"
         } )
     },
     isMovable:function(direction){

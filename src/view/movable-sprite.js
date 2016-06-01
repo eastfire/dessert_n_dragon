@@ -146,7 +146,7 @@ var MovableSprite = BaseSprite.extend({
 //        });
     },
     renderLevel:function(){
-        if ( !this.model.get("isShowLevel") ) return;
+        if ( !this.model.isShowLevel ) return;
         if ( this.levelLabel ) this.levelLabel.removeFromParent(true);
         this.levelLabel = new ccui.Text(this.model.get("level"), "Arial", dimens.levelLabel.fontSize );
         this.levelLabel.enableOutline(colors.levelLabel.outline, dimens.levelLabel.outlineWidth);

@@ -2677,36 +2677,39 @@ rooms.push({
 });
 
 
-//room76 TODO
+//room76 boss hydra
 rooms.push({
     turnLimit:30,
     scoreCondition: [2100, 2400, 2800],
     winEveryConditions:[
         {
-            conditionType:"kill-max-level",
-            type:"cake-roll",
-            number: 7
-        },
-        {
-            conditionType:"kill-max-level",
-            type:"dumpling",
-            number: 7
-        },
-        {
-            conditionType:"kill-max-level",
-            type:"candy",
-            number: 7
+            conditionType:"kill-level",
+            type:"boss-hydra",
+            number: 1
         }
     ],
     loseAnyConditions:[
         "outOfTurn"
     ],
-    enemyPool:[{type:"eggroll"},{type:"archer"},{type:"lolipop"}],
+    enemyPool:[{type:"snake"},{type:"archer"},{type:"lolipop"}],
     enemyLevelPool:[1,2],
     itemPool:STANDARD_ITEM_POOL,
-    initTiles:tiles7x6SplitAndPortal,
+    initTiles:tiles6x6,
     exits:[{x:1,y:1},{x:6,y:5},{x:6,y:1},{x:1,y:5}],
+    initMovables:[
+        { type:"boss-hydra", positions: [{x:3,y:6},{x:4,y:6},{x:3,y:5},{x:4,y:5}] },
+        { type:"snake", positions: [{x:2,y:6}] },
+        { type:"snake", positions: [{x:1,y:5}] },
+        { type:"snake", positions: [{x:2,y:4}] },
+        { type:"snake", positions: [{x:3,y:4}] },
+        { type:"snake", positions: [{x:4,y:4}] },
+        { type:"snake", positions: [{x:5,y:4}] },
+        { type:"snake", positions: [{x:6,y:5}] },
+        { type:"snake", positions: [{x:5,y:6}] }
+    ],
     initHero: STANDARD_HERO,
-    initHand:[ {type:"dispel"} ],
-    choicePool:STANDARD_CHOICE_POOL
+    initHand:[ {type:"cross-fire"} ],
+    choicePool:STANDARD_CHOICE_POOL,
+    notForInfiniteStart : true,
+    isBossLevel:true
 });

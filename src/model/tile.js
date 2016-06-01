@@ -69,7 +69,7 @@ TILE_MODEL_MAP.portal = RoomTileModel.extend({
         RoomTileModel.prototype.onTurnStart.call(this);
         //if has movable
         var movableModel = currentRoom.getMovableByTile(this);
-        if ( movableModel &&
+        if ( movableModel && movableModel.isSinglePiece() &&
             movableModel.__teleportTurn !== currentRoom.get("turnNumber") && //防止反复传送
             movableModel.isSinglePiece() ) {
             //find another same subtype
