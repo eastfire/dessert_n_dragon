@@ -13,6 +13,7 @@ var EnemySprite = MovableSprite.extend({
         this.model.on("beHit", this.beHit, this)
         this.model.on("die", this.die, this)
         this.model.on("change:baseAttack", this.onAttackChange,this)
+        this.model.on("change:angry", this.onAttackChange,this)
         this.renderAttack();
     },
     initLabel:function(){
