@@ -81,11 +81,11 @@ var EnemySprite = MovableSprite.extend({
         var deltaY = dimens.tileSize.height*(Math.max(-1,Math.min(1,heroPosition.y - point.y)) )/4
 
         this.runAction(cc.sequence(
-            cc.moveBy(times.heroAttack, -deltaX, -deltaY ),
+            cc.moveBy(times.heroAttack-0.05, -deltaX, -deltaY ),
             cc.callFunc(function(){
                 this.model.afterBeHit(hero);
             },this),
-            cc.moveBy(times.heroAttack, deltaX, deltaY )
+            cc.moveBy(times.heroAttack-0.05, deltaX, deltaY )
         ))
     },
     die:function(enemyModel, hero){
