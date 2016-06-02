@@ -114,3 +114,22 @@ MOVABLE_MODEL_MAP["horizontal-log6"] = HorizontalLog2Model.extend({
         } )
     }
 })
+
+MOVABLE_MODEL_MAP.bomb = NeutralMovable.extend({
+    defaults:function(){
+        return _.extend( NeutralMovable.prototype.defaults.call(this),{
+            type: "bomb",
+            countDown: 3
+        } )
+    },
+    onTurnStart:function(){
+        this.set("countDown",this.get("countDown") - 1)
+        if ( this.get("countDown") === 0) {
+            this.explode();
+        }
+    },
+    explode:function(){
+        var myPosition = this.get("positions")[0];
+        //TODO
+    }
+})
