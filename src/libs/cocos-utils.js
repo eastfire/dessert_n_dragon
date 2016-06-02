@@ -204,8 +204,10 @@ var EffectIconManager = Backbone.Model.extend({
     _popEffect:function(sprite){
         if ( !this._isIconRunning(sprite) ) {
             var entry = this.queueMap[sprite.__instanceId].shift();
-            if ( entry === undefined )
+            if ( entry === undefined ) {
+                delete this.queueMap[sprite.__instanceId];
                 return;
+            }
             this.iconMap[sprite.__instanceId] = new IconSprite({
                 text: entry.text,
                 image: cc.spriteFrameCache.getSpriteFrame(entry.icon+".png")
