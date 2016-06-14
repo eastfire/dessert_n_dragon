@@ -115,7 +115,7 @@ cc.game.onStart = function(){
 
         cc.spriteFrameCache.addSpriteFrames(res.game_plist);
         cc.spriteFrameCache.addSpriteFrames(res.card_plist);
-
+        initAnimation();
         cc.director.runScene(new IntroScene());
     }, this);
 };

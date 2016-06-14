@@ -11,7 +11,7 @@ var CONSTITUTION_EFFECT = ORIGIN_CONSTITUTION_EFFECT;
 var NEGATIVE_EFFECT_TIME_ADJUST = 0;
 
 var NEGATIVE_EFFECTS = ["frozen","cursed","dizzy","forbidDraw","poison"]
-var AUTO_DECREASE_EFFECTS = ["dizzy","forbidDraw","dispel","poison"] //freeze is handle in Movable
+var AUTO_DECREASE_EFFECTS = ["dizzy","forbidDraw","dispel","poison","forwardSlash"] //freeze is handle in Movable
 
 var HeroModel = MovableModel.extend({
     isShowLevel:false,
@@ -48,7 +48,9 @@ var HeroModel = MovableModel.extend({
             dizzy: 0,
             forbidDraw: 0,
             cursed: 0,
-            poison: 0
+            poison: 0,
+
+            forwardSlash: 0
         } )
     },
     initialize:function(){
@@ -205,6 +207,23 @@ var HeroModel = MovableModel.extend({
             context: this
         }
         this.attack(enemy, options);
+        if ( this.get("forwardSlash") ) {
+            var newEnemy = currentRoom.getMovableByPosition(getIncrementPosition(enemy.get("positions")[0], this.get("face")));
+            if (newEnemy instanceof EnemyModel && newEnemy.canBeAttack("skill")) {
+                var options = {
+                    attackType : ATTACK_TYPE_MELEE,
+                    attackAction: "slash",
+                    onHit: function(enemy, opt){
+                        enemy.beHit(this, options);
+                    },
+                    onMiss: function(enemy, opt){
+                        enemy.dodgeAttack(this, options);
+                    },
+                    context: this
+                }
+                this.attack(newEnemy, options);
+            }
+        }
     },
     hitOrMiss:function(enemy, options){ //called by view
         if ( enemy.checkHit(this, options) ) {

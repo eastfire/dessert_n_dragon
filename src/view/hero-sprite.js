@@ -1,3 +1,23 @@
+var ANIMATION_MAP = {};
+var initAnimation= function(){
+    ANIMATION_MAP["normalHero"] = [];
+
+    _.each(DIRECTIONS,function(direction){
+        var frames = [];
+        for (var i = 0; i < 4; i++) {
+            var frame = cc.spriteFrameCache.getSpriteFrame("normalHero" + direction + "attack"+i+".png");
+            frames.push(frame);
+        }
+        for (var i = 3; i >= 0; i--) {
+            var frame = cc.spriteFrameCache.getSpriteFrame("normalHero" + direction + "attack"+i+".png");
+            frames.push(frame);
+        }
+        ANIMATION_MAP["normalHero"][direction] = {};
+        ANIMATION_MAP["normalHero"][direction]["attack"] = new cc.Animate(new cc.Animation(frames, times.heroAttack*2/8));
+        ANIMATION_MAP["normalHero"][direction]["attack"].retain();
+    });
+}
+
 var HeroSprite = MovableSprite.extend({
     ctor: function (options) {
         this._super(options);
@@ -26,13 +46,19 @@ var HeroSprite = MovableSprite.extend({
                 var increment = INCREMENTS[this.model.get("face")]
                 var deltaX = dimens.tileSize.width*increment.x/2;
                 var deltaY = dimens.tileSize.height*increment.y/2
-                //TODO animation
+                this.runAction(ANIMATION_MAP["normalHero"][this.model.get("face")]["attack"])
                 this.runAction(cc.sequence(
                     cc.moveBy(times.heroAttack, deltaX, deltaY ),
                     cc.callFunc(function(){
                         this.model.hitOrMiss(enemyModel, options)
                     },this)
                 ))
+                break;
+            case "slash":
+                var self = this;
+                this.scheduleOnce(function(){
+                    self.model.hitOrMiss(enemyModel, options)
+                },times.heroAttack)
                 break;
             case "tail-slash":
                 var increment = DECREMENTS[this.model.get("face")]

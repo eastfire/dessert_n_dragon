@@ -163,6 +163,11 @@ var texts_locale = {
                     return "恢复"+CARD_MODEL_MAP.heal.getEffect(level)+"(↑"+5+")点生命\n但等待时间+1"
                 }
             },
+            "slash":{
+                name:"顺势劈",
+                desc: "下次普通攻击时同时攻击敌人身后的１个敌人。",
+                levelUpDesc: "下次普通攻击时同时攻击敌人身后的１个敌人\n等待时间-1"
+            },
             "tail-slash":{
                 name:"拖刀计",
                 desc: "攻击身后的一个敌人。",

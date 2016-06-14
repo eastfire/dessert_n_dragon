@@ -127,6 +127,26 @@ CARD_MODEL_MAP.heal.getEffect = function(level){
 }
 CARD_MODEL_MAP.heal.isActive = true;
 
+CARD_MODEL_MAP["slash"] = CardModel.extend({
+    defaults: function () {
+        return _.extend(CardModel.prototype.defaults.call(this),{
+            type: "slash",
+            maxLevel: 3
+        })
+    },
+    waitTurnOfLevel:function(level){
+        return 4-level;
+    },
+    onUse:function(){
+        var hero = currentRoom.getHero();
+        hero.set("forwardSlash",1);
+    },
+    onLevelUp:function(){
+        this.reduceWait(1);
+    }
+})
+CARD_MODEL_MAP["slash"].isActive = true;
+
 CARD_MODEL_MAP["tail-slash"] = CardModel.extend({
     defaults: function () {
         return _.extend(CardModel.prototype.defaults.call(this),{

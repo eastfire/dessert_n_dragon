@@ -274,7 +274,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-tail-slash.png</key>
+            <key>card-slash.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -289,7 +289,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-teleport.png</key>
+            <key>card-tail-slash.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -304,7 +304,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-tornado.png</key>
+            <key>card-teleport.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -319,7 +319,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-vertical-fire.png</key>
+            <key>card-tornado.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -334,7 +334,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>card-whirl-slash.png</key>
+            <key>card-vertical-fire.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -349,6 +349,21 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>card-whirl-slash.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{120,168}</string>
+                <key>spriteSourceSize</key>
+                <string>{120,168}</string>
+                <key>textureRect</key>
+                <string>{{124,1872},{120,168}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>
@@ -359,7 +374,7 @@
             <key>size</key>
             <string>{246,2042}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:bf5926e852b91ae6574cb2bd67044052:c82c6bf10fb21c974fdeb488fa87d456:ac15c2787776c146127be3982bd2a622$</string>
+            <string>$TexturePacker:SmartUpdate:9c6f8f7145437b2af27ab1da3c0d8b86:6a6341960703a69afb44b3f56e688d13:ac15c2787776c146127be3982bd2a622$</string>
             <key>textureFileName</key>
             <string>card.png</string>
         </dict>

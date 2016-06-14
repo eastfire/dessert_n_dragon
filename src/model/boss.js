@@ -17,11 +17,11 @@ MOVABLE_MODEL_MAP["boss-hydra"] = BossModel.extend({
     attackOfLevel:function(l){
         return 15*l;
     },
-    expOfLevel:function(l){ //一般
-        return this.get("baseAttack")*EXP_INFLATION_RATE*2;
+    expOfLevel:function(l){
+        return this.get("baseAttack")*EXP_INFLATION_RATE*3;
     },
     scoreOfLevel:function(l){
-        return this.get("baseAttack")*SCORE_INFLATION_RATE*2;
+        return this.get("baseAttack")*SCORE_INFLATION_RATE*3;
     },
     afterBeHit:function(hero){  //called by view
         this.afterBeAttacked(hero);

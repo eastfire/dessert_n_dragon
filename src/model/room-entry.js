@@ -5,6 +5,8 @@ var STANDARD_CHOICE_POOL = [
     { type:"getRandomTime", opt:{ from:10, to:20} },
     { type:"getCard", opt:{type:"heal"}},
     { type:"levelUpCard", opt:{type:"heal"}},
+    { type:"getCard", opt:{type:"slash"}},
+    { type:"levelUpCard", opt:{type:"slash"}},
     { type:"getCard", opt:{type:"tail-slash"}},
     { type:"levelUpCard", opt:{type:"tail-slash"}},
     { type:"reduceRandomWait", opt:{ from:4, to:6}},
@@ -2712,4 +2714,39 @@ rooms.push({
     choicePool:STANDARD_CHOICE_POOL,
     notForInfiniteStart : true,
     isBossLevel:true
+});
+
+
+//room75 test
+rooms.push({
+    turnLimit:30,
+    scoreCondition: [2100, 2400, 2800],
+    winEveryConditions:[
+        {
+            conditionType:"kill-level",
+            type:"baozi",
+            number: 10
+        },
+        {
+            conditionType:"kill-level",
+            type:"eggroll",
+            number: 10
+        },
+        {
+            conditionType:"kill-level",
+            type:"chocolate-cake",
+            number: 10
+        }
+    ],
+    loseAnyConditions:[
+        "outOfTurn"
+    ],
+    enemyPool:[{type:"baozi"},{type:"eggroll"},{type:"chocolate-cake"}],
+    enemyLevelPool:[1,2],
+    itemPool:STANDARD_ITEM_POOL,
+    initTiles: tiles5x5,
+    initHand:[{type:"slash"},{type:"slash"} ],
+    exits:[{x:1,y:1},{x:5,y:5},{x:5,y:1},{x:1,y:5}],
+    initHero: STANDARD_HERO,
+    choicePool:STANDARD_CHOICE_POOL
 });
