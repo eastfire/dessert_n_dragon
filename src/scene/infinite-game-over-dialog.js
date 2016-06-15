@@ -233,7 +233,7 @@ var InfiniteGameOverDialog = cc.Scale9Sprite.extend({
         this.scrollView.x = 0;
         this.scrollView.y = 90;
 
-        var stepY = 40;
+        var stepY = 60;
         var needExtraScoreEntry = false;
         if (this.currentScoreObject) {
             needExtraScoreEntry = _.every(scores,function(score){
@@ -241,7 +241,7 @@ var InfiniteGameOverDialog = cc.Scale9Sprite.extend({
             },this);
         }
 
-        this.scrollView.setInnerContainerSize(cc.size(this.scrollView.width, Math.max(this.scrollView.height,
+        this.scrollView.setInnerContainerSize(cc.size(this.scrollView.width, 20+Math.max(this.scrollView.height,
                 ( needExtraScoreEntry ? TOP_SCORE_NUMBER + 2 : TOP_SCORE_NUMBER ) * stepY)));
         this.currentY = this.scrollView.getInnerContainerSize().height - stepY/2;
 
@@ -283,32 +283,45 @@ var InfiniteGameOverDialog = cc.Scale9Sprite.extend({
         });
         this.scrollView.addChild(descLabel);
 
-        cc.log(score)
+
         var killedBy = score.get("killedBy");
         if ( killedBy ) {
             var killerImageName;
+            var killedByStr = "死于";
             if ( killedBy.category === "enemy" ) {
-                var killedByLevel = new cc.LabelTTF("lv" + killedBy.level, null, 16);
-                killedByLevel.attr({
-                    color: labelColor,
-                    x: 375,
-                    y: this.currentY,
-                    anchorX: 1,
-                    anchorY: 0.5
-                });
+                killedByStr += "lv" + killedBy.level
             }
+            var killedByLevel = new cc.LabelTTF(killedByStr, null, 16);
+            killedByLevel.attr({
+                color: labelColor,
+                x: 325,
+                y: this.currentY-25,
+                anchorX: 1,
+                anchorY: 0.5
+            });
             killerImageName = killedBy.type+(killedBy.subtype?("-"+killedBy.subtype):"")+".png";
             var killerImage = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame( killerImageName ))
             killerImage.attr({
-                x: 390,
-                y: this.currentY,
+                x: 340,
+                y: this.currentY-25,
                 scaleX: 0.25,
                 scaleY: 0.25
             })
             this.scrollView.addChild(killedByLevel);
             this.scrollView.addChild(killerImage);
 
-            //TODO render perks
+            var x = 50;
+            _.each ( score.get("perks"), function(perkName){
+                var icon = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("perk-"+perkName+".png"))
+                icon.attr({
+                    x: x,
+                    y: this.currentY-25,
+                    scaleY:0.8,
+                    scaleX: 0.8
+                })
+                this.scrollView.addChild(icon);
+                x+= 35;
+            },this )
         }
     },
     appear:function(){

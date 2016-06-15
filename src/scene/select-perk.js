@@ -59,7 +59,15 @@ var SelectPerkLayer = cc.Layer.extend({
                 scaleY:0.8
             })
             this.scrollView.addChild(bg);
-            //TODO icon
+
+            var icon = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("perk-"+perkName+".png"))
+            icon.attr({
+                x: 60,
+                y: currentY,
+                scaleY:1.2,
+                scaleX: 1.2
+            })
+            this.scrollView.addChild(icon);
 
             var descLabel = new cc.LabelTTF(texts.perk[perkName].desc, null, 20 );
             descLabel.attr({
