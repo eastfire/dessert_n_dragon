@@ -1,4 +1,4 @@
-var LONG_CLICK_THRESHOLD = 1200;
+var LONG_CLICK_THRESHOLD = 1;
 
 var CardSprite = BaseSprite.extend({
     ctor: function (options) {
@@ -20,6 +20,31 @@ var CardSprite = BaseSprite.extend({
         this.closeEvent();
         this._super();
     },
+    showCardDetail:function(){
+        this.__showingDetail = true;
+        var layer = new ModalDialogLayer({
+            maskColor:cc.color.WHITE,
+            clickSideCancel: true
+        });
+        mainLayer.addChild(layer,250);
+
+        currentRoom.blockInput();
+        currentRoomSprite.stopClock();
+
+        var self = this;
+        var dialog = new CardInfoDialog({
+            model: new CARD_MODEL_MAP[this.model.get("type")](this.model.toJSON()),
+            modalLayer: layer,
+            callback:function(){
+                self.__showingDetail = false;
+                currentRoom.unblockInput();
+                currentRoomSprite.startClock();
+            }
+        })
+        layer.setDialogSprite(dialog);
+        layer.addChild(dialog);
+        dialog.appear();
+    },
     initEvent:function(){
         this.model.on("change:waitTurn",this.renderWait, this);
         this.model.on("change:level",this.renderLevel,this);
@@ -40,7 +65,7 @@ var CardSprite = BaseSprite.extend({
                 }
                 if (currentRoom.isAcceptInput()) {
                     if (cc.rectContainsPoint(rect, locationInNode)) {
-                        self.__clickTime = new Date().getTime();
+                        self.scheduleOnce(self.showCardDetail, LONG_CLICK_THRESHOLD)
                         return true;
                     }
                 }
@@ -68,33 +93,10 @@ var CardSprite = BaseSprite.extend({
                     layer.addChild(dialog);
                     dialog.appear();
                 } else {
-                    var currentTime = new Date().getTime();
-                    if ( currentTime - self.__clickTime > LONG_CLICK_THRESHOLD ) {
-                        //TODO
-                       /* var layer = new ModalDialogLayer({
-                            maskColor:cc.color.WHITE,
-                            clickSideCancel: true
-                        });
-                        mainLayer.addChild(layer,250);
-
-                        currentRoom.blockInput();
-                        currentRoomSprite.stopClock();
-
-                        var dialog = new CardInfoDialog({
-                            model: new CARD_MODEL_MAP[choice.cardType](self.model.toJSON()),
-                            modalLayer: layer,
-                            callback:function(){
-                                currentRoom.unblockInput();
-                                currentRoomSprite.startClock();
-                            }
-                        })
-                        layer.setDialogSprite(dialog);
-                        layer.addChild(dialog);
-                        dialog.appear();*/
-                    } else {
-                        if (target.model.canUse()) {
-                            target.model.use();
-                        }
+                    self.unschedule(self.showCardDetail);
+                    if ( self.__showingDetail ) return;
+                    if (target.model.canUse()) {
+                        target.model.use();
                     }
                 }
             }
