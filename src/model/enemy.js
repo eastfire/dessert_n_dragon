@@ -535,6 +535,33 @@ MOVABLE_MODEL_MAP.eggroll = EnemyModel.extend({
     }
 })
 
+MOVABLE_MODEL_MAP["fire-element"] = EnemyModel.extend({
+    defaults:function(){
+        return _.extend( EnemyModel.prototype.defaults.call(this),{
+            type: "fire-element"
+        } )
+    },
+    afterHit:function(heroModel){
+        this.checkBlind(heroModel);
+    },
+    expOfLevel:function(l){ //较高
+        return (l*3-1)*EXP_INFLATION_RATE;
+    },
+    attackOfLevel:function(l){ //较高
+        return l*3-2;
+    },
+    getBlindRate:function(heroModel){
+        var level = this.get("level");
+//        return 1;
+        return level/10;
+    },
+    checkBlind:function(model){
+        if (this.getBlindRate(model) > Math.random() ){
+            model.getNegativeEffect("blind",3); //make sure not effect by perk
+        }
+    }
+})
+
 MOVABLE_MODEL_MAP.icecream = EnemyModel.extend({
     defaults:function(){
         return _.extend( EnemyModel.prototype.defaults.call(this),{

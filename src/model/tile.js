@@ -111,6 +111,35 @@ TILE_MODEL_MAP["room-portal"] = RoomTileModel.extend({
     }
 })
 
+TILE_MODEL_MAP["wall-door"] = RoomTileModel.extend({
+    defaults:function(){
+        return _.extend(RoomTileModel.prototype.defaults.apply(this),{
+            type: "wall-door",
+            subtype: "close",
+            isCapture: true,
+            canGenEnemy: false
+        });
+    },
+    isPassable:function(){
+        return this.get("subtype") === "open";
+    },
+    onTurnStart:function(){
+        RoomTileModel.prototype.onTurnStart.call(this);
+        var movableModel = currentRoom.getMovableByTile(this);
+        if ( movableModel && movableModel instanceof HeroModel ){
+            currentRoom.trigger("to-next-room", this.get("position"));
+            return true;
+        }
+        return false;
+    },
+    open:function(){
+        this.set("subtype", "open");
+    },
+    close:function(){
+        this.set("subtype", "close");
+    }
+})
+
 TILE_MODEL_MAP.pit = RoomTileModel.extend({
     defaults:function(){
         return _.extend(RoomTileModel.prototype.defaults.apply(this),{

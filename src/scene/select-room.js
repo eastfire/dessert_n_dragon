@@ -85,11 +85,18 @@ var SelectRoomLayer = cc.Layer.extend({
                         },
                         //Process the touch end event
                         onTouchEnded: function (touch, event) {
+                            var target = event.getCurrentTarget();
+                            target.runAction(
+                                cc.sequence(
+                                    ANIMATION_MAP["open-door"],
+                                    cc.callFunc(function(){
+                                        cc.director.runScene(new RoomScene({
+                                            roomEntry: clone(roomEntry),
+                                            maxScore: roomScore
+                                        }));
+                                    },target)
+                                ));
                             window.prevSelectRoom = roomEntry.stageNumber;
-                            cc.director.runScene(new RoomScene({
-                                roomEntry: clone(roomEntry),
-                                maxScore: roomScore
-                            }));
                         }
                     }, sprite);
                 })( roomEntry);
@@ -179,13 +186,30 @@ var SelectRoomLayer = cc.Layer.extend({
             cc.spriteFrameCache.getSpriteFrame("palace-infinity.png"),
             cc.spriteFrameCache.getSpriteFrame("palace-infinity.png"),
             function () {
+                var animateSprite = new cc.Sprite();
+                animateSprite.attr({
+                    x: infiniteItem.x-17,
+                    anchorX: 0.5,
+                    y: infiniteItem.y+infiniteItem.height/2
+                })
+                infiniteItem.addChild(animateSprite);
+                animateSprite.runAction(cc.sequence(
+                    ANIMATION_MAP["open-door"],
+                    cc.callFunc(function(){
+                        cc.director.runScene(new RoomScene({
+                            roomEntry: clone(infiniteRoom),
+                            maxScore: score[0]
+                        }));
+                    }),
+                    cc.removeSelf()
+                ));
                 /*if ( !unlockedStatus.isUnlocked("infinite") ) {
                     toast("通过第21关后解锁",{parent:this})
                 } else {*/
-                    cc.director.runScene(new RoomScene({
-                        roomEntry: clone(infiniteRoom),
-                        maxScore: score[0]
-                    }));
+//                    cc.director.runScene(new RoomScene({
+//                        roomEntry: clone(infiniteRoom),
+//                        maxScore: score[0]
+//                    }));
                 //}
             }, this);
 

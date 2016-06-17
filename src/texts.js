@@ -364,6 +364,10 @@ var texts_locale = {
                 name:"精英",
                 desc:"12级或以上的敌人\n提供的经验值＋50%"
             },
+            regeneration1:{
+                name:"再生",
+                desc:"每回合开始＋１生命"
+            },
             forwardAfterKill:{
                 name:"莽撞",
                 desc:"杀死普通敌人后前进\n而不是退回原地"

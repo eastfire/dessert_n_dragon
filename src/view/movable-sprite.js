@@ -77,7 +77,7 @@ var MovableSprite = BaseSprite.extend({
             x :dimens.statusIcon.width/2,
             y : dimens.tileSize.height - dimens.statusIcon.height/2
         };
-        _.each(["frozen","angry","dizzy","cursed","poison"],function(effect){
+        _.each(["frozen","angry","dizzy","cursed","poison","blind"],function(effect){
             this.renderOneStatus(effect, position)
         },this)
     },

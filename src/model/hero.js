@@ -10,8 +10,8 @@ var CONSTITUTION_EFFECT = ORIGIN_CONSTITUTION_EFFECT;
 
 var NEGATIVE_EFFECT_TIME_ADJUST = 0;
 
-var NEGATIVE_EFFECTS = ["frozen","cursed","dizzy","forbidDraw","poison"]
-var AUTO_DECREASE_EFFECTS = ["dizzy","forbidDraw","dispel","poison","forwardSlash"] //freeze is handle in Movable
+var NEGATIVE_EFFECTS = ["frozen","cursed","dizzy","forbidDraw","poison","blind"]
+var AUTO_DECREASE_EFFECTS = ["dizzy","forbidDraw","dispel","poison","blind","forwardSlash"] //freeze is handle in Movable
 
 var HeroModel = MovableModel.extend({
     isShowLevel:false,
@@ -37,6 +37,7 @@ var HeroModel = MovableModel.extend({
             maxRecovery: 100,
             collector: 0,
             maxCollector: 10,
+            regeneration: 0,
             
             maxHand: 2,
             drawEachTurn: 1,
@@ -73,6 +74,7 @@ var HeroModel = MovableModel.extend({
         _.each(AUTO_DECREASE_EFFECTS,function(effect){
             this.set(effect, Math.max(0, this.get(effect) - 1 ))
         },this);
+        this.set("hp", Math.min(this.get("maxHp"),this.get("hp") + this.get("regeneration")) );
     },
     getPoisonEffect:function(){
         return 1;

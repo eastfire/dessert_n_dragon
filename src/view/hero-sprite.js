@@ -16,6 +16,14 @@ var initAnimation= function(){
         ANIMATION_MAP["normalHero"][direction]["attack"] = new cc.Animate(new cc.Animation(frames, times.heroAttack*2/8));
         ANIMATION_MAP["normalHero"][direction]["attack"].retain();
     });
+
+    var frames = []
+    for (var i = 1; i <= 4; i++) {
+        var frame = cc.spriteFrameCache.getSpriteFrame("door" + i+".png");
+        frames.push(frame);
+    }
+    ANIMATION_MAP["open-door"] = new cc.Animate(new cc.Animation(frames, 0.15));
+    ANIMATION_MAP["open-door"].retain();
 }
 
 var HeroSprite = MovableSprite.extend({
@@ -34,7 +42,7 @@ var HeroSprite = MovableSprite.extend({
         this.model.on("change:hp", this.onChangeHp, this)
         
         //status
-        _.each(["dizzy","cursed","poison"],function(status){
+        _.each(["dizzy","cursed","poison","blind"],function(status){
             this.model.on("change:"+status,this.renderStatus,this);
         },this)
         

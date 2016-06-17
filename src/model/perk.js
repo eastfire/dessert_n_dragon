@@ -2,7 +2,7 @@ var PERK_MAP = {};
 
 var hookManager = new Backbone.Model();
 
-var PERK_LIST = ["halfHpMore", "moreChoice", "draw2","moreExpAbove12","moreMaxLevel","passRoomRecovery","moreItemLevel","lessNegativeTime","lessCardWait","moreCardBuyable",
+var PERK_LIST = ["halfHpMore", "moreChoice", "draw2","moreExpAbove12","moreMaxLevel","passRoomRecovery","moreItemLevel","lessNegativeTime","lessCardWait","moreCardBuyable","regeneration1",
     "forwardAfterKill",
     "halfHpLess","initHp5","lessChoice","lessExpBelow6","lessMaxLevel","lessItemLevel","moreNegativeTime","moreCardWait","poisonPotion"];
 //advantage
@@ -116,6 +116,21 @@ PERK_MAP.moreExpAbove12 = Backbone.Model.extend({
     }
 })
 PERK_MAP.moreExpAbove12.value = 2;
+
+PERK_MAP.regeneration1 = Backbone.Model.extend({
+    initialize:function(){
+        hookManager.on("before-game-start",this.effect, this)
+    },
+    effect:function(params, extraParams){
+        var hero = currentRoom.getHero()
+        hero.set("regeneration", 1);
+    },
+    destroy:function(){
+        hookManager.off("before-game-start",this.effect, this)
+        Backbone.Model.prototype.destroy.call(this)
+    }
+})
+PERK_MAP.regeneration1.value = 3;
 
 PERK_MAP.forwardAfterKill = Backbone.Model.extend({
     initialize:function(){
