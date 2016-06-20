@@ -31,7 +31,7 @@ TILE_MODEL_MAP.wall = RoomTileModel.extend({
     defaults:function(){
         return _.extend(RoomTileModel.prototype.defaults.apply(this),{
             type: "wall",
-            subtype:"up",
+            subtype:"s",
             isPassable: false,
             canGenEnemy: false
         });
@@ -115,13 +115,13 @@ TILE_MODEL_MAP["wall-door"] = RoomTileModel.extend({
     defaults:function(){
         return _.extend(RoomTileModel.prototype.defaults.apply(this),{
             type: "wall-door",
-            subtype: "close",
+            subtype: "cs",
             isCapture: true,
             canGenEnemy: false
         });
     },
     isPassable:function(){
-        return this.get("subtype") === "open";
+        return this.get("subtype").startsWith("o");
     },
     onTurnStart:function(){
         RoomTileModel.prototype.onTurnStart.call(this);
@@ -133,9 +133,11 @@ TILE_MODEL_MAP["wall-door"] = RoomTileModel.extend({
         return false;
     },
     open:function(){
-        this.set("subtype", "open");
+        //TODO
+        this.set("subtype", this.get("subtype").chop());
     },
     close:function(){
+        //TODO
         this.set("subtype", "close");
     }
 })
